@@ -1,14 +1,50 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Seias</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>SEIAS</title>
+  <link rel="stylesheet" href="css/structure.css" type="text/css"/>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
 </head>
 <body>
+    <div id="HEADER">
+        #HEADER
+    </div><!-- HEADER -->
 
-<%= yield %>
+    <div id="STRUCTURE">
 
+        <div id="HEADER_IN">
+            #HEADER_IN
+        </div><!-- HEADER_IN -->
+
+        <div id="CONTENT">
+
+            <div id="SIDEBAR_LEFT">
+                #SIDEBAR_LEFT
+            </div><!-- SIDEBAR_LEFT -->
+
+            <div id="CONTENT_BODY">
+                <%= yield %>
+            </div><!-- CONTENT_BODY -->
+
+            <div id="SIDEBAR_RIGHT">
+                #SIDEBAR_RIGHT
+            </div><!-- SIDEBAR_RIGHT -->
+
+        </div><!-- CONTENT -->
+
+        <div id="FOOTER_IN">
+            #FOOTER_IN
+        </div><!-- FOOTER_IN -->
+
+    </div><!-- STRUCTURE -->
+
+    <div id="FOOTER">
+        #FOOTER
+    </div><!-- FOOTER -->
 </body>
 </html>
