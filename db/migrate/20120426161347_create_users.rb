@@ -3,6 +3,9 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string    :name,                :null => false
       t.string    :email,               :null => false, :length => 320
+      t.string    :login,               :null => false
+      t.string    :last_name
+      t.string    :second_last_name
 
       t.string    :crypted_password,    :null => false
       t.string    :password_salt,       :null => false
@@ -17,6 +20,9 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime  :last_login_at
       t.string    :current_login_ip
       t.string    :last_login_ip
+
+      #Users need to be active
+      t.boolean   :active, :default => false, :null => false
 
       t.timestamps
     end
