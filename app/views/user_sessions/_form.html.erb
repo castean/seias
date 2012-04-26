@@ -1,0 +1,32 @@
+<%= form_for(@user_session, :html => {:class => "form-stacked"}) do |f| %>
+  <% if @user_session.errors.any? %>
+    <div id="error_explanation" class="error">
+      <h2>Imposible iniciar sesion, datos incorrectos</h2>
+
+      <ul>
+      <% @user_session.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+<fieldset class="inputs">
+  <div class="clearfix">
+    <%= f.label :login,"Usuario" %>
+    <div class="input">
+      <%= f.text_field :login %>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :password, "Contraseña" %>
+    <div class="input">
+      <%= f.password_field :password %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Iniciar sesion' , :class => "btn primary"%>
+  </div>
+</fieldset>
+<% end %>
