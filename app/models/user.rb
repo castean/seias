@@ -6,5 +6,7 @@ class User < ActiveRecord::Base
     config.logged_in_timeout = 1.day
   end
 
+  has_many :critical_success_factors
+
   attr_accessible :login, :email, :name, :last_name, :second_last_name
 end

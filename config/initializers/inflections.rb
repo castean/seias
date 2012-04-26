@@ -1,4 +1,7 @@
 # Be sure to restart your server when you modify this file.
+ActiveSupport::Inflector.inflections do |inflect|
+  inflect.irregular "unit_of_measurement","units_of_measurement"
+end
 
 # Add new inflection rules using the following format
 # (all these examples are active by default):
