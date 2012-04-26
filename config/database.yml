@@ -17,8 +17,10 @@ development:
   encoding: unicode
   database: seias_development
   pool: 5
-  username: seias
-  password:
+  host: labs.ti.uach.mx
+  port: 5432
+  username: seias_web
+  password: 20qfyhgtv12
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
