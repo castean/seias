@@ -11,7 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120426162248) do
+ActiveRecord::Schema.define(:version => 20120504162701) do
+
+  create_table "critical_success_factor_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "critical_success_factors", :force => true do |t|
+    t.integer  "critical_success_factor_type_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description",                                                                        :null => false
+    t.decimal  "percentage",                        :precision => 10, :scale => 5
+    t.string   "objective_minimum"
+    t.string   "objective_satisfying"
+    t.string   "objective_excelent"
+    t.integer  "unit_of_measurement_id",                                                             :null => false
+    t.string   "unit_of_measurement_description",                                                    :null => false
+    t.boolean  "confidential",                                                                       :null => false
+    t.boolean  "active",                                                           :default => true, :null => false
+    t.integer  "sexennial_state_plan_component_id"
+    t.datetime "created_at",                                                                         :null => false
+    t.datetime "updated_at",                                                                         :null => false
+  end
+
+  create_table "sexennial_state_plan_components", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "units_of_measurement", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "user_sessions", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -19,24 +56,25 @@ ActiveRecord::Schema.define(:version => 20120426162248) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name",                                  :null => false
-    t.string   "email",                                 :null => false
-    t.string   "login",                                 :null => false
+    t.string   "name",                                     :null => false
+    t.string   "email",                                    :null => false
+    t.string   "login",                                    :null => false
     t.string   "last_name"
     t.string   "second_last_name"
-    t.string   "crypted_password",                      :null => false
-    t.string   "password_salt",                         :null => false
-    t.string   "persistence_token",                     :null => false
-    t.integer  "login_count",        :default => 0,     :null => false
-    t.integer  "failed_login_count", :default => 0,     :null => false
+    t.string   "crypted_password",                         :null => false
+    t.string   "password_salt",                            :null => false
+    t.string   "persistence_token",                        :null => false
+    t.integer  "login_count",        :default => 0,        :null => false
+    t.integer  "failed_login_count", :default => 0,        :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.boolean  "active",             :default => false, :null => false
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.boolean  "active",             :default => false,    :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.string   "roles",              :default => "--- []"
   end
 
 end

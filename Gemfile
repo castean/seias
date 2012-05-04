@@ -22,8 +22,10 @@ end
 
 gem 'jquery-rails'
 
-#Authentication
+#Authentication & Authorization
 gem 'authlogic'
+gem 'easy_roles'
+gem 'cantango'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
