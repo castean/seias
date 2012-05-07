@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
 
   easy_roles :roles
 
-  tango_user
-
   has_many :critical_success_factors
 
   attr_accessible :login, :email, :name, :last_name, :second_last_name
