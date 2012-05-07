@@ -1,0 +1,21 @@
+<%= form_for(@critical_success_factor_type) do |f| %>
+  <% if @critical_success_factor_type.errors.any? %>
+    <div id="error_explanation">
+      <h2>Imposible registrar Tipo de Factor Crítico</h2>
+
+      <ul>
+      <% @critical_success_factor_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, "Nombre" %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,5 +1,7 @@
 Seias::Application.routes.draw do
 
+  resources :critical_success_factor_types
+
   resource :user_sessions
 
   resources :users

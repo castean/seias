@@ -1,0 +1,23 @@
+<h1>Tipos de Factores Críticos</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @critical_success_factor_types.each do |critical_success_factor_type| %>
+  <tr>
+    <td><%= critical_success_factor_type.name %></td>
+    <td><%= link_to 'Ver Detalles', critical_success_factor_type %></td>
+    <td><%= link_to 'Editar', edit_critical_success_factor_type_path(critical_success_factor_type) %></td>
+    <td><%= link_to 'Eliminar', critical_success_factor_type, confirm: '¿Está seguro?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Registrar Tipo de Factor Crítico', new_critical_success_factor_type_path %>
