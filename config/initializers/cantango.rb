@@ -4,5 +4,5 @@ CanTango.config do |config|
   #config.permits.disable :account, :special, :role_group
   # more configuration here...
   config.engine(:permission).set :off
-  config.engine(:cache).set :offgi
+  config.engine(:cache).set :off
 end
