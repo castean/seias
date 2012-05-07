@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user
 
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Acceso denegado"
+    redirect_to rool_path
+  end
+
   protected
   def current_user_session
     @current_user_session ||= UserSession.find
@@ -24,4 +30,5 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+
 end

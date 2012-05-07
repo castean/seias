@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  def index
 
+  load_and_authorize_resource
+
+  def index
+    render :text => "lista de usuarios"
   end
 end
