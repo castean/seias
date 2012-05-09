@@ -1,4 +1,7 @@
+#encoding:utf-8
 class CriticalSuccessFactorTypesController < ApplicationController
+  load_and_authorize_resource
+
   # GET /critical_success_factor_types
   # GET /critical_success_factor_types.json
   def index
@@ -44,7 +47,7 @@ class CriticalSuccessFactorTypesController < ApplicationController
 
     respond_to do |format|
       if @critical_success_factor_type.save
-        format.html { redirect_to @critical_success_factor_type, notice: 'Critical success factor type was successfully created.' }
+        format.html { redirect_to @critical_success_factor_type, notice: 'Tipo de Factor Crítico registrado correctamente.' }
         format.json { render json: @critical_success_factor_type, status: :created, location: @critical_success_factor_type }
       else
         format.html { render action: "new" }
@@ -60,7 +63,7 @@ class CriticalSuccessFactorTypesController < ApplicationController
 
     respond_to do |format|
       if @critical_success_factor_type.update_attributes(params[:critical_success_factor_type])
-        format.html { redirect_to @critical_success_factor_type, notice: 'Critical success factor type was successfully updated.' }
+        format.html { redirect_to @critical_success_factor_type, notice: 'Tipo de Factor Crítico actualizado correctamente' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

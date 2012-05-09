@@ -1,0 +1,25 @@
+<%= form_for(@sexennial_state_plan_component) do |f| %>
+  <% if @sexennial_state_plan_component.errors.any? %>
+    <div id="error_explanation">
+      <h2>Imposible guardar Componente de Plan Estatal Sexenal</h2>
+
+      <ul>
+      <% @sexennial_state_plan_component.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title,"Títutlo" %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description, "Descripción" %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

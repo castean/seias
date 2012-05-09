@@ -12,12 +12,21 @@
   <tr>
     <td><%= critical_success_factor_type.name %></td>
     <td><%= link_to 'Ver Detalles', critical_success_factor_type %></td>
-    <td><%= link_to 'Editar', edit_critical_success_factor_type_path(critical_success_factor_type) %></td>
-    <td><%= link_to 'Eliminar', critical_success_factor_type, confirm: '¿Está seguro?', method: :delete %></td>
+    <td>
+      <% if can? :update, critical_success_factor_type %>
+        <%= link_to 'Editar', edit_critical_success_factor_type_path(critical_success_factor_type) %>
+      <% end %>
+    </td>
+    <td>
+      <% if can? :destroy, critical_success_factor_type %>
+        <%= link_to 'Eliminar', critical_success_factor_type, confirm: '¿Está seguro?', method: :delete %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'Registrar Tipo de Factor Crítico', new_critical_success_factor_type_path %>
+<% if can? :create, CriticalSuccessFactorType %>
+  <%= link_to 'Registrar Tipo de Factor Crítico', new_critical_success_factor_type_path %>
+<% end %>

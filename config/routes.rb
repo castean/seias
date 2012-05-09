@@ -1,5 +1,7 @@
 Seias::Application.routes.draw do
 
+  resources :sexennial_state_plan_components
+
   resources :critical_success_factor_types
 
   resource :user_sessions
