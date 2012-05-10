@@ -1,4 +1,5 @@
 class CriticalSuccessFactorsController < ApplicationController
+  load_and_authorize_resource
   # GET /critical_success_factors
   # GET /critical_success_factors.json
   def index
@@ -41,6 +42,7 @@ class CriticalSuccessFactorsController < ApplicationController
   # POST /critical_success_factors.json
   def create
     @critical_success_factor = CriticalSuccessFactor.new(params[:critical_success_factor])
+    @critical_success_factor.user = current_user
 
     respond_to do |format|
       if @critical_success_factor.save
