@@ -1,0 +1,61 @@
+<%= form_for(@critical_success_factor) do |f| %>
+  <% if @critical_success_factor.errors.any? %>
+    <div id="error_explanation">
+      <h2>Imposible Guardar Factor Crítico</h2>
+      <ul>
+      <% @critical_success_factor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :critical_success_factor_type_id, "Tipo de Factor Crítico" %><br />
+    <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.all.collect{ |c| [c.name, c.id] }, {:include_blank => false} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sexennial_state_plan_component_id, "Plan Estatal Sexenal" %><br />
+    <%= f.select :sexennial_state_plan_component_id, SexennialStatePlanComponent.all.collect{ |s| [s.title, s.id] }, {:include_blank => false} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title, "Título" %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description, "Descripción" %><br />
+    <%= f.text_area :description %>
+  </div>
+
+  <b>Metas</b>
+  <div class="field">
+    <%= f.label :objective_minimum, "Minimo" %><br />
+    <%= f.text_field :objective_minimum %>
+  </div>
+  <div class="field">
+    <%= f.label :objective_satisfying, "Satisfactorio" %><br />
+    <%= f.text_field :objective_satisfying %>
+  </div>
+  <div class="field">
+    <%= f.label :objective_excelent, "Excelente" %><br />
+    <%= f.text_field :objective_excelent %>
+  </div>
+  <div class="field">
+    <%= f.label :percentage, "Porcentaje" %><br />
+    <%= f.text_field :percentage %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_of_measurement_id, "Unidad de Medida" %><br />
+    <%= f.select :unit_of_measurement_id, UnitOfMeasurement.all.collect{ |u| [u.name, u.id] }, {:include_blank => false} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :unit_of_measurement_description, "Descripción" %><br />
+    <%= f.text_field :unit_of_measurement_description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

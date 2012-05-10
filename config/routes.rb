@@ -1,5 +1,7 @@
 Seias::Application.routes.draw do
 
+  resources :critical_success_factors
+
   resources :sexennial_state_plan_components
 
   resources :critical_success_factor_types

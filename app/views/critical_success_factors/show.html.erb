@@ -1,0 +1,39 @@
+<p>Esta vista debe mostrar datos del factor critico y avances del mismo</p>
+<p>
+  <b>Title:</b>
+  <%= @critical_success_factor.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @critical_success_factor.description %>
+</p>
+
+<p>
+  <b>Objective excelent:</b>
+  <%= @critical_success_factor.objective_excelent %>
+</p>
+
+<p>
+  <b>Objective minimum:</b>
+  <%= @critical_success_factor.objective_minimum %>
+</p>
+
+<p>
+  <b>Objective satisfying:</b>
+  <%= @critical_success_factor.objective_satisfying %>
+</p>
+
+<p>
+  <b>Perfectage:</b>
+  <%= @critical_success_factor.perfectage %>
+</p>
+
+<p>
+  <b>Unit of measurement description:</b>
+  <%= @critical_success_factor.unit_of_measurement_description %>
+</p>
+
+
+<%= link_to 'Editar', edit_critical_success_factor_path(@critical_success_factor) %> |
+<%= link_to 'Regresar', critical_success_factors_path %>

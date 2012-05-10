@@ -1,0 +1,38 @@
+<h1>Factores Críticos</h1>
+
+<table>
+  <tr>
+    <th>Título</th>
+    <th>Descripción</th>
+    <th>Metas</th>
+    <th>Porcentaje</th>
+    <th>Unidad de Medida</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @critical_success_factors.each do |critical_success_factor| %>
+  <tr>
+    <td><%= critical_success_factor.title %></td>
+    <td><%= critical_success_factor.description %></td>
+    <td>
+      <span><%= critical_success_factor.objective_minimum %></span>
+      <span><%= critical_success_factor.objective_satisfying %></span>
+      <span><%= critical_success_factor.objective_excelent %></span>
+    </td>
+
+    <td></td>
+    <td></td>
+    <td><%= critical_success_factor.perfectage %></td>
+    <td><%= critical_success_factor.unit_of_measurement_description %></td>
+    <td><%= link_to 'Show', critical_success_factor %></td>
+    <td><%= link_to 'Edit', edit_critical_success_factor_path(critical_success_factor) %></td>
+    <td><%= link_to 'Destroy', critical_success_factor, confirm: '¿Está seguro?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Registrar Factor Crítico', new_critical_success_factor_path %>
