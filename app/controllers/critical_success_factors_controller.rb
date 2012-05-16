@@ -43,6 +43,7 @@ class CriticalSuccessFactorsController < ApplicationController
   def create
     @critical_success_factor = CriticalSuccessFactor.new(params[:critical_success_factor])
     @critical_success_factor.user = current_user
+    @critical_success_factor.confidential = false
 
     respond_to do |format|
       if @critical_success_factor.save
