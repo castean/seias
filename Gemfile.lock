@@ -32,6 +32,7 @@ GEM
     authlogic (3.1.0)
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
+    bootstrap-sass (2.0.3)
     builder (3.0.0)
     cancan (1.6.7)
     coffee-rails (3.2.2)
@@ -111,6 +112,7 @@ PLATFORMS
 
 DEPENDENCIES
   authlogic
+  bootstrap-sass (~> 2.0.3)
   cancan
   coffee-rails (~> 3.2.1)
   easy_roles
@@ -118,5 +120,5 @@ DEPENDENCIES
   pg
   quiet_assets
   rails (= 3.2.3)
-  sass-rails (~> 3.2.3)
+  sass-rails (~> 3.1)
   uglifier (>= 1.0.3)

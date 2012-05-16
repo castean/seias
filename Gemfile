@@ -12,7 +12,6 @@ gem 'quiet_assets', :group => :development
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -27,6 +26,10 @@ gem 'jquery-rails'
 gem 'authlogic'
 gem 'easy_roles'
 gem 'cancan'
+
+#Sass
+gem 'sass-rails', '~> 3.1'
+gem 'bootstrap-sass', '~> 2.0.3'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
