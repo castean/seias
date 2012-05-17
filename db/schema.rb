@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120504162701) do
+ActiveRecord::Schema.define(:version => 20120517191743) do
 
   create_table "critical_success_factor_types", :force => true do |t|
     t.string   "name"
@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(:version => 20120504162701) do
     t.datetime "created_at",                                                                         :null => false
     t.datetime "updated_at",                                                                         :null => false
   end
+
+  create_table "goals", :force => true do |t|
+    t.integer  "month"
+    t.integer  "year"
+    t.string   "minimum"
+    t.string   "satisfying"
+    t.string   "excelent"
+    t.integer  "critical_success_factor_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "goals", ["critical_success_factor_id"], :name => "index_goals_on_critical_success_factor_id"
 
   create_table "sexennial_state_plan_components", :force => true do |t|
     t.string   "title"

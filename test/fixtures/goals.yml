@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  month: 1
+  year: 1
+  minimum: MyString
+  satisfying: MyString
+  excelent: MyString
+  critical_success_factor: 
+
+two:
+  month: 1
+  year: 1
+  minimum: MyString
+  satisfying: MyString
+  excelent: MyString
+  critical_success_factor: 

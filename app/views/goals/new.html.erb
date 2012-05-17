@@ -1,0 +1,5 @@
+<h1>Nueva Meta para <%= @critical_success_factor.title %></h1>
+
+<%= render :partial => 'form', :locals => {:url => critical_success_factor_goals_path(@critical_success_factor), :method => :post} %>
+
+<%= link_to 'Regresar', critical_success_factor_path(@critical_success_factor) %>

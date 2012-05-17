@@ -18,24 +18,31 @@
   <b>Unidad de Médida:</b>
   <%= @critical_success_factor.unit_of_measurement.name %> - <%= @critical_success_factor.unit_of_measurement_description %>
 </p>
-
 <p>
-  <b>Minimo:</b>
-  <%= @critical_success_factor.objective_minimum %>
-</p>
 
-<p>
-  <b>Satisfactorio:</b>
-  <%= @critical_success_factor.objective_satisfying %>
-</p>
+  <b> Metas </b>
+  <table>
+  <tr>
+    <th>Meta</th>
+    <th>Minimo</th>
+    <th>Satisfactorio</th>
+    <th>Excelente</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>Predeterminado</td>
+    <td><%= @critical_success_factor.objective_minimum %></td>
+    <td><%= @critical_success_factor.objective_satisfying %></td>
+    <td><%= @critical_success_factor.objective_excelent %></td>
+  </tr>
+  </table>
 
-<p>
-  <b>Excelente:</b>
-  <%= @critical_success_factor.objective_excelent %>
+
 </p>
 
 
 
 
 <%= link_to 'Editar', edit_critical_success_factor_path(@critical_success_factor) %> |
+<%= link_to 'Agregar Meta', new_critical_success_factor_goal_path(@critical_success_factor) %> |
 <%= link_to 'Regresar', critical_success_factors_path %>

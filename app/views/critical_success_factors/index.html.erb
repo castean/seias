@@ -4,7 +4,6 @@
   <tr>
     <th>Título</th>
     <th>Descripción</th>
-    <th>Metas</th>
     <th>Porcentaje</th>
     <th>Unidad de Medida</th>
     <th></th>
@@ -16,19 +15,11 @@
   <tr>
     <td><%= critical_success_factor.title %></td>
     <td><%= critical_success_factor.description %></td>
-    <td>
-      <span><%= critical_success_factor.objective_minimum %></span>
-      <span><%= critical_success_factor.objective_satisfying %></span>
-      <span><%= critical_success_factor.objective_excelent %></span>
-    </td>
-
-    <td></td>
-    <td></td>
-    <td><%= critical_success_factor.perfectage %></td>
+    <td><%= critical_success_factor.percentage %></td>
     <td><%= critical_success_factor.unit_of_measurement_description %></td>
-    <td><%= link_to 'Show', critical_success_factor %></td>
-    <td><%= link_to 'Edit', edit_critical_success_factor_path(critical_success_factor) %></td>
-    <td><%= link_to 'Destroy', critical_success_factor, confirm: '¿Está seguro?', method: :delete %></td>
+    <td><%= link_to 'Ver detalles', critical_success_factor %></td>
+    <td><%= link_to 'Editar', edit_critical_success_factor_path(critical_success_factor) %></td>
+    <td><%= link_to 'Eliminar', critical_success_factor, confirm: '¿Está seguro?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

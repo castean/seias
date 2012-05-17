@@ -1,6 +1,8 @@
 Seias::Application.routes.draw do
 
-  resources :critical_success_factors
+  resources :critical_success_factors do
+    resources :goals
+  end
 
   resources :sexennial_state_plan_components
 

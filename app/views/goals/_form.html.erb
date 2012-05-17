@@ -1,0 +1,38 @@
+<%= form_for(@goal, :url => url, :method => method) do |f| %>
+  <% if @goal.errors.any? %>
+    <div id="error_explanation">
+      <h2>Imposible registrar meta</h2>
+
+      <ul>
+      <% @goal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :month, "Mes" %><br />
+    <%= f.number_field :month %>
+  </div>
+  <div class="field">
+    <%= f.label :year, "Año" %><br />
+    <%= f.number_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum, "Mínimo" %><br />
+    <%= f.text_field :minimum %>
+  </div>
+  <div class="field">
+    <%= f.label :satisfying, "Satisfactorio" %><br />
+    <%= f.text_field :satisfying %>
+  </div>
+  <div class="field">
+    <%= f.label :excelent, "Excelente" %><br />
+    <%= f.text_field :excelent %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

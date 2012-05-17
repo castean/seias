@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Month:</b>
+  <%= @goal.month %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @goal.year %>
+</p>
+
+<p>
+  <b>Minimum:</b>
+  <%= @goal.minimum %>
+</p>
+
+<p>
+  <b>Satisfying:</b>
+  <%= @goal.satisfying %>
+</p>
+
+<p>
+  <b>Excelent:</b>
+  <%= @goal.excelent %>
+</p>
+
+<p>
+  <b>Critical success factor:</b>
+  <%= @goal.critical_success_factor %>
+</p>
+
+
+<%= link_to 'Edit', edit_goal_path(@goal) %> |
+<%= link_to 'Back', goals_path %>
