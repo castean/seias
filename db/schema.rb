@@ -38,11 +38,11 @@ ActiveRecord::Schema.define(:version => 20120517191743) do
   end
 
   create_table "goals", :force => true do |t|
-    t.integer  "month"
-    t.integer  "year"
-    t.string   "minimum"
-    t.string   "satisfying"
-    t.string   "excelent"
+    t.integer  "month",                      :null => false
+    t.integer  "year",                       :null => false
+    t.string   "minimum",                    :null => false
+    t.string   "satisfying",                 :null => false
+    t.string   "excelent",                   :null => false
     t.integer  "critical_success_factor_id"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false

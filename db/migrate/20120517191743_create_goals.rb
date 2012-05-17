@@ -1,11 +1,11 @@
 class CreateGoals < ActiveRecord::Migration
   def change
     create_table :goals do |t|
-      t.integer :month
-      t.integer :year
-      t.string :minimum
-      t.string :satisfying
-      t.string :excelent
+      t.integer :month, :null => false
+      t.integer :year, :null => false
+      t.string :minimum, :null => false
+      t.string :satisfying, :null => false
+      t.string :excelent, :null => false
       t.references :critical_success_factor
 
       t.timestamps
