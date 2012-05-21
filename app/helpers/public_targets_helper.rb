@@ -1,0 +1,2 @@
+module PublicTargetsHelper
+end
