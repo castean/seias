@@ -1,5 +1,7 @@
 Seias::Application.routes.draw do
 
+  resources :programs
+
   resources :critical_success_factors do
     resources :goals
   end
