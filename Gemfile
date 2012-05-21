@@ -21,7 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+gem 'therubyracer'
 #Authentication & Authorization
 gem 'authlogic'
 gem 'easy_roles'
