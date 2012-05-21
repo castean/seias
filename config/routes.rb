@@ -1,6 +1,10 @@
 Seias::Application.routes.draw do
 
+<<<<<<< HEAD
   resources :grupos
+=======
+  resources :programs
+>>>>>>> db02a124b0d1b695b1b2a0cf7ef674b69d59653c
 
   resources :critical_success_factors do
     resources :goals
