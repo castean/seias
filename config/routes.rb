@@ -1,11 +1,13 @@
 Seias::Application.routes.draw do
 
+  resources :activity_types
+
+  resources :activitygoals
 
   resources :public_targets
 
  
   resources :programs
-
 
   resources :critical_success_factors do
     resources :goals

@@ -1,0 +1,380 @@
+<%= form_for(@activitygoal) do |f| %>
+  <% if @activitygoal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activitygoal.errors.count, "error") %> prohibited this activitygoal from being saved:</h2>
+
+      <ul>
+      <% @activitygoal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!--<div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>-->
+  <div class="field">
+    <%= f.label :name, "Actividad" %><br />
+    <%= f.select :name, Activity.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione una Actividad --"} %>
+  </div>
+  <div class="field">
+    <%= f.label :presentation_advances %><br />
+    <%= f.text_field :presentation_advances %>
+  </div>
+  <div class="field">
+    <%= f.label :kind_goal_capture %><br />
+    <%= f.text_field :kind_goal_capture %>
+  </div>
+  <div class="field">
+    <%= f.label :goal_year %><br />
+    <%= f.date_select :goal_year, {:discard_day => true, :discard_month => true, :start_year => 2010}, :prompt => {:year => 'Selecione Año' } %>
+  </div>
+  <div class="field">
+    <%= f.label :create_year %><br />
+    <%= f.date_select :create_year, {:discard_day => true, :discard_month => true, :start_year => 2010}, :prompt => {:year => 'Selecione Año' } %>
+  </div>
+  
+  <table>
+  	<tbody>
+  		<thead>
+		    <tr>
+		      <th>Periodo</th>
+		      <th>Mínimo</th>
+		      <th>Satisfactorio</th>
+		      <th>Excelente</th>
+		      <th>Estatus</th>
+		    </tr>
+		</thead>
+  		<tr>
+  			<td>
+  				Anual
+  			</td>
+  			<td>	
+			  <div class="field">
+			    <%= f.text_field :annualm, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :annuals, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :annuale, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :annualstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+ 		<tr>
+ 			<td>
+  				Enero
+  			</td>
+ 			<td>
+			  <div class="field">
+			    <%= f.text_field :janm, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :jans, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :jane, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :janstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+  				Febrero
+  			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :febm, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :febs, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :febe, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :febstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+  				Marzo
+  			</td>
+			<td> 
+			  <div class="field">
+			    <%= f.text_field :marm, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :mars, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :mare, :size=>"15" %>
+			  </div>
+			</td>  
+			<td>
+			  <div class="field">
+			    <%= f.text_field :marstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+  				Abril
+  			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :aprm, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :aprs, :size=>"15" %>
+			  </div>
+			</td>  
+			<td>   
+			  <div class="field">
+			    <%= f.text_field :apre, :size=>"15" %>
+			  </div>
+			</td>  
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :aprstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+  				Mayo
+  			</td>
+			<td>	
+			  <div class="field">
+			    <%= f.text_field :maym, :size=>"15" %>
+			  </div>
+			</td>  
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :mays, :size=>"15" %>
+			  </div>
+			</td>  
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :maye, :size=>"15" %>
+			  </div>
+			</td>  
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :maystatus, :size=>"15" %>
+			  </div>
+			</td>  
+		</tr>
+			<td>
+  				Junio
+  			</td>
+			<td>	  
+			  <div class="field">
+			    <%= f.text_field :junm, :size=>"15" %>
+			  </div>
+			</td>  
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :juns, :size=>"15" %>
+			  </div>
+			</td> 
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :june, :size=>"15" %>
+			  </div>
+			</td>  
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :junstatus, :size=>"15" %>
+			  </div>
+			</td>  
+		</tr>
+		<tr>
+			<td>
+  				Julio
+  			</td>
+			<td>	  
+			  <div class="field">
+			    <%= f.text_field :julm, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :juls , :size=>"15"%>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :jule, :size=>"15" %>
+			  </div>
+			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :julstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+  				Agosto
+  			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :augm, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :augs, :size=>"15" %>
+			  </div>
+			</td>  
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :auge, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :augstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+  				Septiembre
+  			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :sepm, :size=>"15" %>
+			  </div>
+			</td>  
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :seps, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :sepe, :size=>"15" %>
+			  </div>		  
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :sepstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+  				Octubre
+  			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :octm, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :octs, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :octe, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :octstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+  				Noviembre
+  			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :novm, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :novs, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :nove, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :novstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+  				Diciembre
+  			</td>
+			<td>
+			  <div class="field">
+			    <%= f.text_field :decm, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :decs, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :dece, :size=>"15" %>
+			  </div>
+			</td>
+			<td>  
+			  <div class="field">
+			    <%= f.text_field :decstatus, :size=>"15" %>
+			  </div>
+			</td>
+		</tr>
+	</tbody>
+  </table>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+<%= form_for(@activity_type) do |f| %>
+  <% if @activity_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity_type.errors.count, "error") %> prohibited this activity_type from being saved:</h2>
+
+      <ul>
+      <% @activity_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, "Nombre de la Actividad" %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description, "Descripción" %><br />
+    <%= f.text_area :description, :size=>"100x5" %>
+  </div>
+  <div class="field">
+    <%= f.label :measurement_id, "Unidad de Medida" %><br />
+    <%= f.select :measurement_id, UnitOfMeasurement.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione una Medición --"} %>
+  </div>
+  <div class="field">
+    <%= f.label :measurement_description, "Descripción. Que vamos a medir?" %><br />
+    <%= f.text_area :measurement_description, :size=>"100x5" %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
