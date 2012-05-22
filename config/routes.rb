@@ -1,5 +1,9 @@
 Seias::Application.routes.draw do
 
+  resources :activity_types
+
+  resources :activitygoals
+
   resources :critical_success_factors do
     resources :goals
   end

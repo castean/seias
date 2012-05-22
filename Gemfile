@@ -26,6 +26,7 @@ gem 'jquery-rails'
 gem 'authlogic'
 gem 'easy_roles'
 gem 'cancan'
+gem 'therubyracer'
 
 #Sass
 gem 'sass-rails', '~> 3.1'

@@ -1,0 +1,39 @@
+<h1>Listing activitygoals</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Presentation advances</th>
+    <th>Kind goal capture</th>
+    <th>Goal year</th>
+    <th>Create year</th>
+    <th>Annualm</th>
+    <th>Annuals</th>
+    <th>Annuale</th>
+    <th>Annualstatus</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @activitygoals.each do |activitygoal| %>
+  <tr>
+    <td><%= activitygoal.name %></td>
+    <td><%= activitygoal.presentation_advances %></td>
+    <td><%= activitygoal.kind_goal_capture %></td>
+    <td><%= activitygoal.goal_year %></td>
+    <td><%= activitygoal.create_year %></td>
+    <td><%= activitygoal.annualm %></td>
+    <td><%= activitygoal.annuals %></td>
+    <td><%= activitygoal.annuale %></td>
+    <td><%= activitygoal.annualstatus %></td>
+    <td><%= link_to 'Show', activitygoal %></td>
+    <td><%= link_to 'Edit', edit_activitygoal_path(activitygoal) %></td>
+    <td><%= link_to 'Destroy', activitygoal, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Activitygoal', new_activitygoal_path %>
