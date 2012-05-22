@@ -3,8 +3,7 @@ Seias::Application.routes.draw do
 
   resources :public_targets
 
-  resources :grupos
-
+ 
   resources :programs
 
 
