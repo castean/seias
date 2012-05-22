@@ -11,6 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+ActiveRecord::Schema.define(:version => 20120522171255) do
+
   create_table "activity_types", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -18,6 +20,7 @@
     t.text     "measurement_description"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+    t.integer  "measurement_id"
   end
 
   create_table "activitygoals", :force => true do |t|
@@ -104,6 +107,7 @@
     t.integer  "sexennial_state_plan_component_id"
     t.datetime "created_at",                                                                         :null => false
     t.datetime "updated_at",                                                                         :null => false
+    t.integer  "program_id"
   end
 
   create_table "goals", :force => true do |t|
@@ -119,6 +123,22 @@
 
   add_index "goals", ["critical_success_factor_id"], :name => "index_goals_on_critical_success_factor_id"
 
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "vulnerable"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "grupos", :force => true do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.boolean  "vulnerable"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "programs", :force => true do |t|
     t.string   "name"
     t.string   "description"
@@ -126,6 +146,20 @@
     t.integer  "responsable_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "public_targets", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "publico_objetivos", :force => true do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "sexennial_state_plan_components", :force => true do |t|

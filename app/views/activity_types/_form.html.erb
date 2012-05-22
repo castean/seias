@@ -17,15 +17,15 @@
   </div>
   <div class="field">
     <%= f.label :description, "Descripción" %><br />
-    <%= f.text_area :description, :size=>"70x5" %>
+    <%= f.text_area :description, :size=>"100x5" %>
   </div>
   <div class="field">
-    <%= f.label :measurement, "Unidad de Medida" %><br />
-    <%= f.select :measurement, UnitOfMeasurement.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione una Medición --"} %>
+    <%= f.label :measurement_id, "Unidad de Medida" %><br />
+    <%= f.select :measurement_id, UnitOfMeasurement.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione una Medición --"} %>
   </div>
   <div class="field">
     <%= f.label :measurement_description, "Descripción. Que vamos a medir?" %><br />
-    <%= f.text_area :measurement_description, :size=>"70x5" %>
+    <%= f.text_area :measurement_description, :size=>"100x5" %>
   <div class="actions">
     <%= f.submit %>
   </div>
