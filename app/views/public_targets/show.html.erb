@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @public_target.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @public_target.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_public_target_path(@public_target) %> |
+<%= link_to 'Back', public_targets_path %>

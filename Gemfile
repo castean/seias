@@ -21,7 +21,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
 #Authentication & Authorization
 gem 'authlogic'
 gem 'easy_roles'
@@ -32,6 +31,8 @@ gem 'therubyracer'
 gem 'sass-rails', '~> 3.1'
 gem 'bootstrap-sass', '~> 2.0.3'
 
+#java
+gem 'therubyracer'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

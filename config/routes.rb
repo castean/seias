@@ -4,6 +4,12 @@ Seias::Application.routes.draw do
 
   resources :activitygoals
 
+  resources :public_targets
+
+  resources :grupos
+
+  resources :programs
+
   resources :critical_success_factors do
     resources :goals
   end
