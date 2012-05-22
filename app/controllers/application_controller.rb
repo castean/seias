@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "Acceso denegado"
-    redirect_to rool_path
+    redirect_to root_path
   end
 
   protected
