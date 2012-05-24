@@ -1,5 +1,7 @@
 Seias::Application.routes.draw do
 
+  resources :groups
+
   resources :activity_types
 
   resources :activitygoals
