@@ -29,7 +29,7 @@ gem 'therubyracer'
 
 #Sass
 gem 'sass-rails', '~> 3.1'
-gem 'bootstrap-sass', '~> 2.0.3'
+gem 'bootstrap-sass', '2.0.3' , :path => "vendor/bootstrap-sass-2.0.3"
 
 #java
 gem 'therubyracer'
