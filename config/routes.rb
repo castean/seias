@@ -1,12 +1,17 @@
 Seias::Application.routes.draw do
+  resources :directions
 
+  match '/departments/for_directionid/:id' => 'departments#for_directionid'
+  resources :departments
+
+  resources :activity_types
+
+  resources :activitygoals
 
   resources :public_targets
 
-  resources :grupos
-
+ 
   resources :programs
-
 
   resources :critical_success_factors do
     resources :goals

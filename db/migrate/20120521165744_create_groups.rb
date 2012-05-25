@@ -8,5 +8,4 @@ class CreateGroups < ActiveRecord::Migration
 
       t.timestamps
     end
-    end
   end

@@ -1,0 +1,31 @@
+<h1>Listado de tipo de Actividades</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Medidas</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @activity_types.each do |activity_type| %>
+<% um = UnitOfMeasurement.find(activity_type.measurement_id)%>
+  <tr>
+    <td><%= activity_type.name %></td>
+    <td><%= activity_type.description %></td>
+    <!--<td><%= activity_type.measurement_id %></td>-->
+    <td><%= um.name + " " + activity_type.measurement_description%></td>
+    
+    <td><%= link_to 'Mostrar', activity_type %></td>
+    <td><%= link_to 'Editar', edit_activity_type_path(activity_type) %></td>
+    <td><%= link_to 'Borrar', activity_type, confirm: 'Esta usted seguro?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Crear un Tipo de Actividad', new_activity_type_path %>

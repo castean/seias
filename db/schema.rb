@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522164406) do
+ActiveRecord::Schema.define(:version => 20120525165846) do
 
   create_table "activity_types", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "measurement"
     t.text     "measurement_description"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "measurement_id"
+    t.integer  "critical_success_factor_id"
   end
 
   create_table "activitygoals", :force => true do |t|
@@ -84,6 +85,20 @@ ActiveRecord::Schema.define(:version => 20120522164406) do
     t.datetime "updated_at",            :null => false
   end
 
+  create_table "counties", :force => true do |t|
+    t.integer  "cve_mun"
+    t.string   "name"
+    t.integer  "state_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "critical_success_factor_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -109,6 +124,19 @@ ActiveRecord::Schema.define(:version => 20120522164406) do
     t.integer  "program_id"
   end
 
+  create_table "departments", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "directions_id"
+  end
+
+  create_table "directions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "goals", :force => true do |t|
     t.integer  "month",                      :null => false
     t.integer  "year",                       :null => false
@@ -130,14 +158,6 @@ ActiveRecord::Schema.define(:version => 20120522164406) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "grupos", :force => true do |t|
-    t.string   "nombre"
-    t.string   "descripcion"
-    t.boolean  "vulnerable"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "programs", :force => true do |t|
     t.string   "name"
     t.string   "description"
@@ -145,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20120522164406) do
     t.integer  "responsable_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "direction_id"
   end
 
   create_table "public_targets", :force => true do |t|
@@ -154,16 +175,32 @@ ActiveRecord::Schema.define(:version => 20120522164406) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "publico_objetivos", :force => true do |t|
-    t.string   "nombre"
-    t.string   "descripcion"
+  create_table "sexennial_state_plan_components", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "sexennial_state_plan_components", :force => true do |t|
-    t.string   "title"
-    t.text     "description"
+  create_table "states", :force => true do |t|
+    t.integer  "cve_ent"
+    t.string   "name"
+    t.integer  "country_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "towns", :force => true do |t|
+    t.integer  "cve_loc"
+    t.string   "name"
+    t.integer  "county_id"
+    t.string   "environment"
+    t.string   "latitude"
+    t.string   "length"
+    t.float    "lat_dec"
+    t.float    "leng_dec"
+    t.integer  "altitude"
+    t.string   "cve_carta"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
