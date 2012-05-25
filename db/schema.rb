@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525165846) do
+ActiveRecord::Schema.define(:version => 20120525175724) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "value"
+    t.text     "description"
+    t.datetime "activity_date"
+    t.integer  "town_id"
+    t.integer  "group_id"
+    t.integer  "public_target_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "activity_type_id"
+  end
+
+  add_index "activities", ["group_id"], :name => "index_activities_on_group_id"
+  add_index "activities", ["public_target_id"], :name => "index_activities_on_public_target_id"
+  add_index "activities", ["town_id"], :name => "index_activities_on_town_id"
 
   create_table "activity_types", :force => true do |t|
     t.string   "name"

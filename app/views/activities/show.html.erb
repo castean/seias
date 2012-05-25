@@ -1,35 +1,38 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <b>Tipo de Actividad:</b>
+  <%= @activity.activity_type %>
+</p>
 
 <p>
-  <b>Value:</b>
+  <b>Valor:</b>
   <%= @activity.value %>
 </p>
 
 <p>
-  <b>Description:</b>
+  <b>Descripción:</b>
   <%= @activity.description %>
 </p>
 
 <p>
-  <b>Activity date:</b>
+  <b>Fecha:</b>
   <%= @activity.activity_date %>
 </p>
 
 <p>
-  <b>Town:</b>
+  <b>Localidad:</b>
   <%= @activity.town %>
 </p>
 
 <p>
-  <b>Group:</b>
+  <b>Grupo:</b>
   <%= @activity.group %>
 </p>
 
 <p>
-  <b>Public target:</b>
+  <b>Público Objetivo:</b>
   <%= @activity.public_target %>
 </p>
 
 
-<%= link_to 'Edit', edit_activity_path(@activity) %> |
-<%= link_to 'Back', activities_path %>
+<%= link_to 'Editar', edit_activity_path(@activity) %> |
+<%= link_to 'Regresar', activities_path %>
