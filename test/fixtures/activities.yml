@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  value: MyString
+  description: MyText
+  activity_date: 2012-05-25 11:16:35
+  town: 
+  group: 
+  public_target: 
+
+two:
+  value: MyString
+  description: MyText
+  activity_date: 2012-05-25 11:16:35
+  town: 
+  group: 
+  public_target: 

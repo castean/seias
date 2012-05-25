@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Value:</b>
+  <%= @activity.value %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @activity.description %>
+</p>
+
+<p>
+  <b>Activity date:</b>
+  <%= @activity.activity_date %>
+</p>
+
+<p>
+  <b>Town:</b>
+  <%= @activity.town %>
+</p>
+
+<p>
+  <b>Group:</b>
+  <%= @activity.group %>
+</p>
+
+<p>
+  <b>Public target:</b>
+  <%= @activity.public_target %>
+</p>
+
+
+<%= link_to 'Edit', edit_activity_path(@activity) %> |
+<%= link_to 'Back', activities_path %>
