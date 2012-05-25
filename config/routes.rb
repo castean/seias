@@ -4,6 +4,8 @@ Seias::Application.routes.draw do
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
   resources :departments
 
+  resources :groups
+
   resources :activity_types
 
   resources :activitygoals

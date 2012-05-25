@@ -27,6 +27,10 @@
     <%= f.label :measurement_description, "Descripción. Que vamos a medir?" %><br />
     <%= f.text_area :measurement_description, :size=>"100x5" %>
   <div class="actions">
+  <div class="field">
+    <%= f.label :critical_success_factor_id, "Factor Critico" %><br />
+    <%= f.select :critical_success_factor_id, CriticalSuccessFactor.all.collect{ |c| [c.title, c.id] }, {:include_blank => "-- Seleccione una Medición --"} %>
+  </div>
     <%= f.submit %>
   </div>
 <% end %>
