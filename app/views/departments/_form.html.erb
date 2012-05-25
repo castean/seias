@@ -10,7 +10,14 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= f.label :name, "Nombre" %><br />
+    <%= f.number_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :direction_id, "Direccion" %><br />
+    <%= f.collection_select :direction_id,  Direction.all, :id, :name, options ={:prompt => "-- Selecciona la Direccion --"}%>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

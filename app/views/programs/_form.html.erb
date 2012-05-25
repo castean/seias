@@ -19,7 +19,7 @@
     <%= f.label :description, "Descripcion" %><br />
     <%= f.text_field :description %>
   </div>
-    <div class="field">
+  <div class="field">
     <%= f.label :direction_id, "Direccion" %><br />
     <%= f.collection_select :direction_id,  Direction.all, :id, :name, options ={:prompt => "-- Selecciona la Direccion --"}%>
   </div>

@@ -1,7 +1,8 @@
-<h1>Listing directions</h1>
+<h1>Listado de  Direcciones</h1>
 
 <table>
   <tr>
+  	<th>Nombre</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,13 +10,14 @@
 
 <% @directions.each do |direction| %>
   <tr>
-    <td><%= link_to 'Show', direction %></td>
-    <td><%= link_to 'Edit', edit_direction_path(direction) %></td>
-    <td><%= link_to 'Destroy', direction, confirm: 'Are you sure?', method: :delete %></td>
+  	<td><%= direction.name %></td>
+    <td><%= link_to 'Mostrar', direction %></td>
+    <td><%= link_to 'Editar', edit_direction_path(direction) %></td>
+    <td><%= link_to 'Destruir', direction, confirm: '¿Esta Seguro?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Direction', new_direction_path %>
+<%= link_to 'Nueva Direccion', new_direction_path %>
