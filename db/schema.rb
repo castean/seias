@@ -11,10 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20120524214042) do
-=======
-ActiveRecord::Schema.define(:version => 20120525175724) do
+ActiveRecord::Schema.define(:version => 20120528183010) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -26,12 +23,12 @@ ActiveRecord::Schema.define(:version => 20120525175724) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "activity_type_id"
+    t.integer  "county_id"
   end
 
   add_index "activities", ["group_id"], :name => "index_activities_on_group_id"
   add_index "activities", ["public_target_id"], :name => "index_activities_on_public_target_id"
   add_index "activities", ["town_id"], :name => "index_activities_on_town_id"
->>>>>>> c50a54a775b2706ae1506b9fa5ad290dc6ab079c
 
   create_table "activity_types", :force => true do |t|
     t.string   "name"
@@ -223,6 +220,8 @@ ActiveRecord::Schema.define(:version => 20120525175724) do
     t.string   "cve_carta"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "state_id"
+    t.integer  "country_id"
   end
 
   create_table "units_of_measurement", :force => true do |t|
