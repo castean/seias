@@ -1,25 +1,35 @@
-<h1>Componentes del Plan Estatal Sexenal</h1>
+<h3>Componentes del Plan Estatal Sexenal</h3>
 
-<table>
-  <tr>
-    <th>Titulo</th>
-    <th>Descripcion</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="table table-striped">
+  <thead>
+      <tr>
+        <th>Titulo</th>
+        <th>Descripcion</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+  </thead>
 
 <% @sexennial_state_plan_components.each do |sexennial_state_plan_component| %>
   <tr>
     <td><%= sexennial_state_plan_component.title %></td>
-    <td><%= sexennial_state_plan_component.description %></td>
-    <td><%= link_to 'Ver Detalles', sexennial_state_plan_component %></td>
-    <td><%= link_to 'Editar', edit_sexennial_state_plan_component_path(sexennial_state_plan_component) %></td>
-    <td><%= link_to 'Eliminar', sexennial_state_plan_component, confirm: '¿Esta seguro?', method: :delete %></td>
+    <td><%= truncate(sexennial_state_plan_component.description, :length => 50) %></td>
+    <td><%= link_to 'Detalles', sexennial_state_plan_component %></td>
+    <td>
+        <%= link_to(edit_sexennial_state_plan_component_path(sexennial_state_plan_component)) do %>
+            <%= image_tag("edit.png") %>
+        <% end %>
+    </td>
+    <td>
+        <%= link_to(sexennial_state_plan_component, :confirm => '¿Esta seguro?', :method => :delete,:remote =>true) do %>
+            <%= image_tag("delete.png") %>
+        <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'Nuevo Componente del Plan Estatal Sexenal', new_sexennial_state_plan_component_path %>
+<%= link_to 'Nuevo Componente', new_sexennial_state_plan_component_path, :class => "btn primary"%>

@@ -1,13 +1,14 @@
 <p>
-  <b>Titulo:</b>
-  <%= @sexennial_state_plan_component.title %>
+  <h3><%= @sexennial_state_plan_component.title %></h3>
+  
 </p>
-
+<br />
 <p>
-  <b>Descripción:</b>
+  
   <%= @sexennial_state_plan_component.description %>
 </p>
-
-
-<%= link_to 'Editar', edit_sexennial_state_plan_component_path(@sexennial_state_plan_component) %> |
-<%= link_to 'Regresar', sexennial_state_plan_components_path %>
+<br /><br />
+<div class="btn-group">
+<%= link_to 'Editar', edit_sexennial_state_plan_component_path(@sexennial_state_plan_component), :class => "btn" %>
+<%= link_to 'Regresar', sexennial_state_plan_components_path, :class => "btn" %>
+</div>

@@ -2,5 +2,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Ver Detalles', @sexennial_state_plan_component %> |
-<%= link_to 'Regresar', sexennial_state_plan_components_path %>
+<div class="form-actions btn-group">
+<%= link_to 'Ver Detalles', @sexennial_state_plan_component, :class => "btn" %>
+<%= link_to 'Regresar', sexennial_state_plan_components_path, :class => "btn" %>
+</div>
