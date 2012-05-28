@@ -1,4 +1,12 @@
 Seias::Application.routes.draw do
+  resources :directions
+
+  match '/departments/for_directionid/:id' => 'departments#for_directionid'
+  resources :departments
+
+  resources :activities
+
+  resources :groups
 
   resources :countries
 

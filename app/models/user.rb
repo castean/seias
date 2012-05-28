@@ -10,8 +10,11 @@ class User < ActiveRecord::Base
 
   has_many :critical_success_factors
 
-  attr_accessible :login, :email, :name, :last_name, :second_last_name
+  attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation
 
+  def fullname
+    "#{name} #{last_name} #{second_last_name}"
+  end
 
   def roles_list
     roles_sym_list = []

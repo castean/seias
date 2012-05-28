@@ -28,7 +28,10 @@
     <%= f.label :description, "Descripción" %><br />
     <%= f.text_area :description %>
   </div>
-
+  <div class="field">
+    <%= f.label :program_id, "Programa" %><br />
+    <%= f.select :program_id, Program.all.collect{ |p| [p.name, p.id] }, {:include_blank => false} %>
+  </div>
   <b>Metas</b>
   <div class="field">
     <%= f.label :objective_minimum, "Minimo" %><br />

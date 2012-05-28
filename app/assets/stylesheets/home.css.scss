@@ -1,3 +1,56 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin menuli($tipo){
+    width:99%;
+    list-style-type: none;
+    display:inline-block;
+    margin: 0 0 0 -37px;
+  padding: 5px 5px 5px 45px;
+    background-image:url(http://0.0.0.0:3000/assets/#{$tipo}.png);
+    background-position: 20px 5px;;
+    background-repeat:no-repeat;
+    border-bottom:1px dashed #e9e9e9;    
+}
+
+li.plan {
+@include menuli(plan);
+    &:hover{
+        background-color: #f0f0f0;
+    }
+}
+li.factores {
+@include menuli(factores);
+&:hover{
+        background-color: #f0f0f0;
+    }
+}
+li.actividades {
+@include menuli(actividades);
+&:hover{
+        background-color: #f0f0f0;
+    }
+}
+
+#personal-info{
+    overflow:hidden;
+    margin-bottom:20px;
+}
+#personal-info img{
+    border:5px solid white;
+    display:inline;
+    float:left;
+    margin-top:5px;
+}
+#personal-info .nombre{
+    padding-top:5px;
+    display:list-item;
+    list-style-type: none;
+    margin:0 0 5px 70px;
+}
+#personal-info .depto{
+    width:150px;
+    margin:0 0 0 70px;
+    display:list-item;
+    list-style-type: none;
+}

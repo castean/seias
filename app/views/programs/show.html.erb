@@ -18,9 +18,9 @@
 <p>
   <b>Responsable:</b>
   <% u = User.find(@program.responsable_id) %>
-  <%= u.name.to_s + ' ' + u.last_name.to_s + ' ' + u.second_last_name.to_s %>
+  <%=  u.name.to_s + ' ' + u.last_name.to_s + ' ' + u.second_last_name.to_s %>
 </p>
 
 
-<%= link_to 'Edit', edit_program_path(@program) %> |
-<%= link_to 'Back', programs_path %>
+<%= link_to 'Editar', edit_program_path(@program) %> |
+<%= link_to 'Regresar', programs_path %>

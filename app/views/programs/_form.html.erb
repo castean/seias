@@ -20,9 +20,16 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :department_id, "Departamento" %><br />
-    <%= f.number_field :department_id %>
+    <%= f.label :direction_id, "Direccion" %><br />
+    <%= f.collection_select :direction_id,  Direction.all, :id, :name, options ={:prompt => "-- Selecciona la Direccion --"}%>
   </div>
+  
+  <div class="field">
+    <%= f.label :department_id, "Departamento" %><br />
+    <%= f.collection_select :department_id,  Department.find_all_by_direction_id(@program.direction_id), :id, :name, options ={:prompt => ""} %>
+  </div>
+
+
   <div class="field">
     <%= f.label :responsable_id, "Responsable" %><br />
     <%= f.select :responsable_id, User.all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Responsable --"} %>

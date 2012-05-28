@@ -1,0 +1,33 @@
+<h1>Actividades</h1>
+
+<table>
+  <tr>
+    <th>Valor</th>
+    <th>Descripción</th>
+    <th>Fecha</th>
+    <th>Localidad</th>
+    <th>Grupo</th>
+    <th>Público Objetivo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @activities.each do |activity| %>
+  <tr>
+    <td><%= activity.value %></td>
+    <td><%= activity.description %></td>
+    <td><%= activity.activity_date %></td>
+    <td><%= activity.town %></td>
+    <td><%= activity.group %></td>
+    <td><%= activity.public_target %></td>
+    <td><%= link_to 'Ver Detalles', activity %></td>
+    <td><%= link_to 'Editar', edit_activity_path(activity) %></td>
+    <td><%= link_to 'Eliminar', activity, confirm: '¿Está seguro?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Agregar Actividad', new_activity_path %>

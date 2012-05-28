@@ -1,0 +1,24 @@
+<%= form_for(@department) do |f| %>
+  <% if @department.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@department.errors.count, "error") %> prohibited this department from being saved:</h2>
+
+      <ul>
+      <% @department.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :name, "Nombre" %><br />
+    <%= f.number_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :direction_id, "Direccion" %><br />
+    <%= f.collection_select :direction_id,  Direction.all, :id, :name, options ={:prompt => "-- Selecciona la Direccion --"}%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

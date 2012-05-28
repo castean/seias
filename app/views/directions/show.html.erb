@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @direction.name %>
+</p>
+
+<%= link_to 'Editar', edit_direction_path(@direction) %> |
+<%= link_to 'Regresar', directions_path %>
