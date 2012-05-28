@@ -1,6 +1,7 @@
 <h1>Editar Factor Crítico</h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Ver Detalles', @critical_success_factor %> |
-<%= link_to 'Regresar', critical_success_factors_path %>
+<div class="form-actions btn-group">
+<%= link_to 'Ver Detalles', @critical_success_factor, :class => "btn" %>
+<%= link_to 'Regresar', critical_success_factors_path, :class => "btn" %>
+</div>

@@ -1,6 +1,7 @@
-<h1>Editar Tipo de Actividad</h1>
+<h2>Editar Tipo de Actividad</h2>
 
 <%= render 'form' %>
 
-<%= link_to 'Mostrar', @activity_type %> |
-<%= link_to 'Atras', activity_types_path %>
+<div class="form-actions btn-group">
+<%= link_to 'Mostrar', @activity_type , :class => "btn" %>
+<%= link_to 'Atras', activity_types_path, :class => "btn" %>

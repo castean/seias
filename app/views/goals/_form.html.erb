@@ -12,27 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :month, "Mes" %><br />
-    <%= f.number_field :month %>
+    <%= f.label :month, "Mes" %>
+    <%= f.number_field :month, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :year, "Año" %><br />
-    <%= f.number_field :year %>
+    <%= f.label :year, "Año" %>
+    <%= f.number_field :year, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :minimum, "Mínimo" %><br />
-    <%= f.text_field :minimum %>
+    <%= f.label :minimum, "Mínimo" %>
+    <%= f.text_field :minimum, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :satisfying, "Satisfactorio" %><br />
-    <%= f.text_field :satisfying %>
+    <%= f.label :satisfying, "Satisfactorio" %>
+    <%= f.text_field :satisfying, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :excelent, "Excelente" %><br />
-    <%= f.text_field :excelent %>
+    <%= f.label :excelent, "Excelente" %>
+    <%= f.text_field :excelent, :class => "span7" %>
   </div>
 
-  <div class="actions">
+  <div class="form-actions btn-group">
     <%= f.submit %>
+    <%= link_to 'Regresar', critical_success_factor_path(@critical_success_factor), :class => "btn" %>
   </div>
 <% end %>

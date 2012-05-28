@@ -1,18 +1,19 @@
-<h1>Actividades</h1>
+<h3>Actividades</h3>
 
-<table>
-  <tr>
-    <th>Valor</th>
-    <th>Descripción</th>
-    <th>Fecha</th>
-    <th>Localidad</th>
-    <th>Grupo</th>
-    <th>Público Objetivo</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<tableclass="table table-striped">
+  <thead>
+      <tr>
+        <th>Valor</th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+        <th>Localidad</th>
+        <th>Grupo</th>
+        <th>Público Objetivo</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+  </thead>
 <% @activities.each do |activity| %>
   <tr>
     <td><%= activity.value %></td>
@@ -30,4 +31,4 @@
 
 <br />
 
-<%= link_to 'Agregar Actividad', new_activity_path %>
+<%= link_to 'Agregar Actividad', new_activity_path, :class => "btn primary" %>
