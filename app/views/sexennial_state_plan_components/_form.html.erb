@@ -19,7 +19,8 @@
     <%= f.label :description, "Descripción" %>
     <%= f.text_area :description, :class => "span7", :rows => "9" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions btn-group">
+    <%= f.submit "Guardar", :class => "btn" %>
+    <%= link_to 'Regresar', sexennial_state_plan_components_path, :class => "btn" %>
   </div>
 <% end %>
