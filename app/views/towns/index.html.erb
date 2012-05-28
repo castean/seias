@@ -1,0 +1,56 @@
+<h1>Listing towns</h1>
+
+<table>
+  <tr>
+    <th>Cve loc</th>
+    <th>Name</th>
+    <th>County</th>
+    <th>Environment</th>
+    <th>Latitude</th>
+    <th>Length</th>
+    <th>Lat dec</th>
+    <th>Leng dec</th>
+    <th>Altitude</th>
+    <th>Cve carta</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @towns.each do |town| %>
+  <tr>
+    <td><%= town.cve_loc %></td>
+    <td><%= town.name %></td>
+    <td><%= town.county_id %></td>
+    <td><%= town.environment %></td>
+    <td><%= town.latitude %></td>
+    <td><%= town.length %></td>
+    <td><%= town.lat_dec %></td>
+    <td><%= town.leng_dec %></td>
+    <td><%= town.altitude %></td>
+    <td><%= town.cve_carta %></td>
+    <td><%= link_to 'Show', town %></td>
+    <td><%= link_to 'Edit', edit_town_path(town) %></td>
+    <td><%= link_to 'Destroy', town, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+
+<%= link_to 'New Town', new_town_path %>
+</br>
+<% form_for :dump, :url=>importarlocalidades_path, :html => { :multipart => true } do |f| -%>
+	<label for="dump_file">
+        Select a CSV File :
+    </label>
+    <%= f.file_field :file -%>
+   </br>
+    <%= submit_tag 'Importar Localidades' -%>
+<% end %>
+</br>
+
+<div class="pager">
+	<%= paginate @towns %>
+</div>
+
+

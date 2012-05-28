@@ -1,5 +1,13 @@
 Seias::Application.routes.draw do
 
+  resources :countries
+
+  resources :towns
+
+  resources :counties
+
+  resources :states
+
   resources :activity_types
 
   resources :activitygoals
@@ -26,7 +34,8 @@ Seias::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-
+  post '/states/import' => "states#states_import", :as => :importarestados  
+  post '/towns/import' => "towns#town_import", :as => :importarlocalidades
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)

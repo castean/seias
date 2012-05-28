@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cve_ent: 1
+  name: MyString
+  country_id: 1
+
+two:
+  cve_ent: 1
+  name: MyString
+  country_id: 1

@@ -1,0 +1,57 @@
+<%= form_for(@town) do |f| %>
+  <% if @town.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@town.errors.count, "error") %> prohibited this town from being saved:</h2>
+
+      <ul>
+      <% @town.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cve_loc %><br />
+    <%= f.number_field :cve_loc %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :county_id %><br />
+    <%= f.number_field :county_id %>
+  </div>
+  <div class="field">
+    <%= f.label :environment %><br />
+    <%= f.text_field :environment %>
+  </div>
+  <div class="field">
+    <%= f.label :latitude %><br />
+    <%= f.text_field :latitude %>
+  </div>
+  <div class="field">
+    <%= f.label :length %><br />
+    <%= f.text_field :length %>
+  </div>
+  <div class="field">
+    <%= f.label :lat_dec %><br />
+    <%= f.text_field :lat_dec %>
+  </div>
+  <div class="field">
+    <%= f.label :leng_dec %><br />
+    <%= f.text_field :leng_dec %>
+  </div>
+  <div class="field">
+    <%= f.label :altitude %><br />
+    <%= f.number_field :altitude %>
+  </div>
+  <div class="field">
+    <%= f.label :cve_carta %><br />
+    <%= f.text_field :cve_carta %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

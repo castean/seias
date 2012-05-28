@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cve mun:</b>
+  <%= @county.cve_mun %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @county.name %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @county.state_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_county_path(@county) %> |
+<%= link_to 'Back', counties_path %>

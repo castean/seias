@@ -25,7 +25,6 @@ gem 'jquery-rails'
 gem 'authlogic'
 gem 'easy_roles'
 gem 'cancan'
-gem 'therubyracer'
 
 #Sass
 gem 'sass-rails', '~> 3.1'
@@ -33,6 +32,10 @@ gem 'bootstrap-sass', '~> 2.0.3'
 
 #java
 gem 'therubyracer'
+
+#Function
+gem "kaminari" #pagination
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

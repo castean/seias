@@ -1,0 +1,42 @@
+<h1>Listing states</h1>
+
+<table>
+  <tr>
+    <th>Cve ent</th>
+    <th>Name</th>
+    <th>Country</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @states.each do |state| %>
+<% c = Country.find(state.country_id)%>
+  <tr>
+    <td><%= state.cve_ent %></td>
+    <td><%= state.name %></td>
+    <td><%= c.name %></td>
+    <td><%= link_to 'Show', state %></td>
+    <td><%= link_to 'Edit', edit_state_path(state) %></td>
+    <td><%= link_to 'Destroy', state, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New State', new_state_path %>
+</br>
+<% form_for :dump, :url=>importarestados_path, :html => { :multipart => true } do |f| -%>
+	<label for="dump_file">
+        Select a CSV File :
+    </label>
+    <%= f.file_field :file -%>
+   </br>
+    <%= submit_tag 'Importar Estados' -%>
+<% end %>
+</br>
+
+<div class="pager">
+	<%= paginate @states %>
+</div>

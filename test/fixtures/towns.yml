@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cve_loc: 1
+  name: MyString
+  county_id: 1
+  environment: MyString
+  latitude: MyString
+  length: MyString
+  lat_dec: 1.5
+  leng_dec: 1.5
+  altitude: 1
+  cve_carta: MyString
+
+two:
+  cve_loc: 1
+  name: MyString
+  county_id: 1
+  environment: MyString
+  latitude: MyString
+  length: MyString
+  lat_dec: 1.5
+  leng_dec: 1.5
+  altitude: 1
+  cve_carta: MyString

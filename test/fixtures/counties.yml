@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cve_mun: 1
+  name: MyString
+  state_id: 1
+
+two:
+  cve_mun: 1
+  name: MyString
+  state_id: 1
