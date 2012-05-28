@@ -1,14 +1,19 @@
+//Colors
+$red:       #ed1d25;
+$yellow:    #ffcb05;
+$green:     #348805;
+
 //Active Content elemnts
 $sidebar-left-onoff: true;
 $content-body-onoff: true;
 $sidebar-right-onoff: false;
 
 //Estructura
-$strucWidth:     1024px;
-$headerHeight:   53px;
+$strucWidth:     900px;
+$headerHeight:   40px;
 $headerWidth:    1024px;
 $footerHeight:   53px;
-$footerWidth:    1024px;
+$footerWidth:    900px;
 /*$contentBody:    $strucWidth/2 + 225;*/
 
 //Content elemnts width
@@ -74,15 +79,19 @@ $bgIn:            #f9f9f9;
       font-size:16px;
   }
 }
+
+
+
+//-----viejos
 @mixin borde($radius: 5px) {
     border-radius:$radius;
     -moz-border-radius:$radius;
     -webkit-border-radius:$radius;
 }
-@mixin sombra {
-    box-shadow: 0px 2px 5px $sombraBg;
-    -webkit-box-shadow:0px 2px 5px $sombraBg;
-    -moz-box-shadow:0px 2px 5px $sombraBg;
+@mixin sombra($x:0px, $y:2px, $z:5px) {
+    box-shadow: $x $y $z $sombraBg;
+    -webkit-box-shadow:$x $y $z $sombraBg;
+    -moz-box-shadow:$x $y $z $sombraBg;
 }
 @mixin pubGrales($ext:none){
     padding:0px 10px 20px 40px;

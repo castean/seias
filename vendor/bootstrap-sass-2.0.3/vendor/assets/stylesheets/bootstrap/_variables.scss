@@ -29,6 +29,12 @@ $orange:                #f89406 !default;
 $pink:                  #c3325f !default;
 $purple:                #7a43b6 !default;
 
+//DIF Colors
+//Colors
+$dif-red:       #ed1d25;
+$dif-yellow:    #ffcb05;
+$dif-green:     #348805;
+
 // Scaffolding
 // -------------------------
 $bodyBackground:        $white !default;
@@ -140,13 +146,17 @@ $hrBorder:                $grayLighter !default;
 $navbarHeight:                    40px !default;
 $navbarBackground:                $grayDarker !default;
 $navbarBackgroundHighlight:       $grayDark !default;
+$navbarDifBackground:             darken($dif-yellow, 6%) !default;
+$navbarDifBackgroundHighlight:    $dif-yellow !default;
+
 
 $navbarText:                      $grayLight !default;
 $navbarLinkColor:                 $grayLight !default;
 $navbarLinkColorHover:            $white !default;
 $navbarLinkColorActive:           $navbarLinkColorHover !default;
 $navbarLinkBackgroundHover:       transparent !default;
-$navbarLinkBackgroundActive:      $navbarBackground !default;
+//$navbarLinkBackgroundActive:      $navbarBackground !default;
+$navbarLinkBackgroundActive:      darken($dif-yellow, 30%) !default;
 
 $navbarSearchBackground:          lighten($navbarBackground, 25%) !default;
 $navbarSearchBackgroundFocus:     $white !default;
