@@ -3,7 +3,7 @@ class TownsController < ApplicationController
   # GET /towns
   # GET /towns.json
   def index
-    @towns = Town.order("name").page(params[:page]).per(50)
+    @towns = Town.order("state_id").page(params[:page]).per(50)
 
     respond_to do |format|
       format.html # index.html.erb
