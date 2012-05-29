@@ -107,4 +107,11 @@ class TownsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  # Ing. César Reyes - Esta Funcion es para del dropdownlist de ciudades y localidades
+    def for_countyid
+      @towns = County.find_all_by_county_id( params[:id]).sort_by{ |k| k['name'] }    
+      respond_to do |format|
+        format.json  { render :json => @towns }      
+      end
+    end
 end
