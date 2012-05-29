@@ -1,29 +1,39 @@
-<h1>Factores Críticos</h1>
+<h3>Factores Críticos</h3>
 
-<table>
-  <tr>
-    <th>Título</th>
-    <th>Descripción</th>
-    <th>Porcentaje</th>
-    <th>Unidad de Medida</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="table table-striped">
+  <thead>
+      <tr>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Porcentaje</th>
+       <!--  <th>Unidad de Medida</th> -->
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+  </thead>
 
 <% @critical_success_factors.each do |critical_success_factor| %>
   <tr>
     <td><%= critical_success_factor.title %></td>
     <td><%= critical_success_factor.description %></td>
     <td><%= critical_success_factor.percentage %></td>
-    <td><%= critical_success_factor.unit_of_measurement_description %></td>
-    <td><%= link_to 'Ver detalles', critical_success_factor %></td>
-    <td><%= link_to 'Editar', edit_critical_success_factor_path(critical_success_factor) %></td>
-    <td><%= link_to 'Eliminar', critical_success_factor, confirm: '¿Está seguro?', method: :delete %></td>
+    <!-- <td><%= critical_success_factor.unit_of_measurement_description %></td> -->
+    <td><%= link_to 'detalles', critical_success_factor %></td>
+    <td>
+        <%= link_to(edit_critical_success_factor_path(critical_success_factor)) do %>
+            <%= image_tag("edit.png") %>
+        <% end %>
+    </td>
+    <td>
+        <%= link_to(critical_success_factor, :confirm => '¿Esta seguro?', :method => :delete,:remote =>true) do %>
+            <%= image_tag("delete.png") %>
+        <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'Registrar Factor Crítico', new_critical_success_factor_path %>
+<%= link_to 'Registrar Factor Crítico', new_critical_success_factor_path, :class => "btn primary" %>

@@ -1,25 +1,26 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Nombre de la Actividad:</b>
+  <h4>Nombre de la Actividad:</h4>
   <%= @activity_type.name %>
 </p>
-
+<br />
 <p>
-  <b>Descripción:</b>
+  <h4>Descripción:</h4>
   <%= @activity_type.description %>
 </p>
-
+<br />
 <p>
-  <b>Measurement:</b>
+  <h4>Medidas:</h4>
   <%= @activity_type.measurement_id %>
 </p>
-
+<br />
 <p>
-  <b>Measurement description:</b>
+  <h4>Descripción de Medidas:</h4>
   <%= @activity_type.measurement_description %>
 </p>
-
-
-<%= link_to 'Editar', edit_activity_type_path(@activity_type) %> |
-<%= link_to 'Atras', activity_types_path %>
+<br />
+<div class="form-actions btn-group">
+<%= link_to 'Editar', edit_activity_type_path(@activity_type), :class => "btn" %>
+<%= link_to 'Atras', activity_types_path, :class => "btn" %>
+</div>

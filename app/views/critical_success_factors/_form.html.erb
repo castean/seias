@@ -11,54 +11,55 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :critical_success_factor_type_id, "Tipo de Factor Crítico" %><br />
-    <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.all.collect{ |c| [c.name, c.id] }, {:include_blank => false} %>
+    <%= f.label :critical_success_factor_type_id, "Tipo de Factor Crítico" %>
+    <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.all.collect{ |c| [c.name, c.id] }, {:include_blank => false}, :class => "span7" %>
   </div>
 
   <div class="field">
-    <%= f.label :sexennial_state_plan_component_id, "Plan Estatal Sexenal" %><br />
-    <%= f.select :sexennial_state_plan_component_id, SexennialStatePlanComponent.all.collect{ |s| [s.title, s.id] }, {:include_blank => false} %>
+    <%= f.label :sexennial_state_plan_component_id, "Plan Estatal Sexenal" %>
+    <%= f.select :sexennial_state_plan_component_id, SexennialStatePlanComponent.all.collect{ |s| [s.title, s.id] }, {:include_blank => false}, :class => "span7" %>
   </div>
 
   <div class="field">
-    <%= f.label :title, "Título" %><br />
-    <%= f.text_field :title %>
+    <%= f.label :title, "Título" %>
+    <%= f.text_field :title, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :description, "Descripción" %><br />
-    <%= f.text_area :description %>
+    <%= f.label :description, "Descripción" %>
+    <%= f.text_area :description, :class => "span7", :rows => "9"  %>
   </div>
   <div class="field">
-    <%= f.label :program_id, "Programa" %><br />
-    <%= f.select :program_id, Program.all.collect{ |p| [p.name, p.id] }, {:include_blank => false} %>
+    <%= f.label :program_id, "Programa" %>
+    <%= f.select :program_id, Program.all.collect{ |p| [p.name, p.id] }, {:include_blank => false}, :class => "span7" %>
   </div>
   <b>Metas</b>
   <div class="field">
-    <%= f.label :objective_minimum, "Minimo" %><br />
-    <%= f.text_field :objective_minimum %>
+    <%= f.label :objective_minimum, "Minimo" %>
+    <%= f.text_field :objective_minimum, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :objective_satisfying, "Satisfactorio" %><br />
-    <%= f.text_field :objective_satisfying %>
+    <%= f.label :objective_satisfying, "Satisfactorio" %>
+    <%= f.text_field :objective_satisfying, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :objective_excelent, "Excelente" %><br />
-    <%= f.text_field :objective_excelent %>
+    <%= f.label :objective_excelent, "Excelente" %>
+    <%= f.text_field :objective_excelent, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :percentage, "Porcentaje" %><br />
-    <%= f.text_field :percentage %>
+    <%= f.label :percentage, "Porcentaje" %>
+    <%= f.text_field :percentage, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :unit_of_measurement_id, "Unidad de Medida" %><br />
-    <%= f.select :unit_of_measurement_id, UnitOfMeasurement.all.collect{ |u| [u.name, u.id] }, {:include_blank => false} %>
+    <%= f.label :unit_of_measurement_id, "Unidad de Medida" %>
+    <%= f.select :unit_of_measurement_id, UnitOfMeasurement.all.collect{ |u| [u.name, u.id] }, {:include_blank => false}, :class => "span7" %>
   </div>
 
   <div class="field">
-    <%= f.label :unit_of_measurement_description, "Descripción" %><br />
-    <%= f.text_field :unit_of_measurement_description %>
+    <%= f.label :unit_of_measurement_description, "Descripción" %>
+    <%= f.text_field :unit_of_measurement_description, :class => "span7" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions btn-group">
+    <%= f.submit "Guardar", :class => "btn" %>
+    <%= link_to 'Regresar', critical_success_factors_path, :class => "btn" %>
   </div>
 <% end %>

@@ -12,25 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name, "Nombre de la Actividad" %><br />
-    <%= f.text_field :name %>
+    <%= f.label :name, "Nombre de la Actividad" %>
+    <%= f.text_field :name, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :description, "Descripción" %><br />
-    <%= f.text_area :description, :size=>"100x5" %>
+    <%= f.label :description, "Descripción" %>
+    <%= f.text_area :description, :size=>"100x5", :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :measurement_id, "Unidad de Medida" %><br />
-    <%= f.select :measurement_id, UnitOfMeasurement.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione una Medición --"} %>
+    <%= f.label :measurement_id, "Unidad de Medida" %>
+    <%= f.select :measurement_id, UnitOfMeasurement.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione una Medición --"}, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :measurement_description, "Descripción. Que vamos a medir?" %><br />
-    <%= f.text_area :measurement_description, :size=>"100x5" %>
+    <%= f.label :measurement_description, "Descripción. Que vamos a medir?" %>
+    <%= f.text_area :measurement_description, :size=>"100x5", :class => "span7" %>
   <div class="actions">
   <div class="field">
-    <%= f.label :critical_success_factor_id, "Factor Critico" %><br />
-    <%= f.select :critical_success_factor_id, CriticalSuccessFactor.all.collect{ |c| [c.title, c.id] }, {:include_blank => "-- Seleccione una Medición --"} %>
+    <%= f.label :critical_success_factor_id, "Factor Critico" %>
+    <%= f.select :critical_success_factor_id, CriticalSuccessFactor.all.collect{ |c| [c.title, c.id] }, {:include_blank => "-- Seleccione una Medición --"}, :class => "span7" %>
   </div>
-    <%= f.submit %>
   </div>
+        <div class="form-actions btn-group">
+        <%= f.submit "Crear Tipo de Actividad", :class => "btn" %>
+        <%= link_to 'Atras', activity_types_path, :class => "btn"  %>
+      </div>
 <% end %>

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120528171018) do
+=======
+ActiveRecord::Schema.define(:version => 20120528183010) do
+>>>>>>> 5da31ac04399acd058ed95c58ffcbb80e00ae57a
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -220,6 +224,8 @@ ActiveRecord::Schema.define(:version => 20120528171018) do
     t.string   "cve_carta"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "state_id"
+    t.integer  "country_id"
   end
 
   create_table "units_of_measurement", :force => true do |t|

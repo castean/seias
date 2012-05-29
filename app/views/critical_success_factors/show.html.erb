@@ -1,34 +1,34 @@
 <p>Esta vista debe mostrar datos del factor critico y avances del mismo</p>
 <p>
-  <b>Título:</b>
-  <%= @critical_success_factor.title %>
+  <h3><%= @critical_success_factor.title %></h3>
 </p>
-
+<br />
 <p>
-  <b>Descripción:</b>
+  <h4>Descripción:</h4>
   <%= @critical_success_factor.description %>
 </p>
-
+<br />
 <p>
-  <b>Porcentaje:</b>
+  <h4>Porcentaje:</h4>
   <%= @critical_success_factor.percentage %>
 </p>
-
+<br />
 <p>
-  <b>Unidad de Médida:</b>
+  <h4>Unidad de Médida:</h4>
   <%= @critical_success_factor.unit_of_measurement.name %> - <%= @critical_success_factor.unit_of_measurement_description %>
 </p>
-<p>
+<br />
 
-  <b> Metas </b>
-  <table>
-  <tr>
-    <th>Meta</th>
-    <th>Minimo</th>
-    <th>Satisfactorio</th>
-    <th>Excelente</th>
-    <th></th>
-  </tr>
+
+  <table class="table table-striped table-bordered table-condensed">
+  <thead>
+      <tr>
+        <th>Meta</th>
+        <th>Minimo</th>
+        <th>Satisfactorio</th>
+        <th>Excelente</th>
+      </tr>
+  </thead>
   <tr>
     <td>Predeterminado</td>
     <td><%= @critical_success_factor.objective_minimum %></td>
@@ -38,11 +38,12 @@
   </table>
 
 
-</p>
 
 
+<div class="btn-group">
+<%= link_to 'Editar', edit_critical_success_factor_path(@critical_success_factor), :class => "btn" %>
+<%= link_to 'Agregar Meta', new_critical_success_factor_goal_path(@critical_success_factor), :class => "btn" %>
+<%= link_to 'Regresar', critical_success_factors_path, :class => "btn" %>
+</div>
 
 
-<%= link_to 'Editar', edit_critical_success_factor_path(@critical_success_factor) %> |
-<%= link_to 'Agregar Meta', new_critical_success_factor_goal_path(@critical_success_factor) %> |
-<%= link_to 'Regresar', critical_success_factors_path %>
