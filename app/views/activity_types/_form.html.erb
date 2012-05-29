@@ -31,6 +31,9 @@
     <%= f.label :critical_success_factor_id, "Factor Critico" %>
     <%= f.select :critical_success_factor_id, CriticalSuccessFactor.all.collect{ |c| [c.title, c.id] }, {:include_blank => "-- Seleccione una Medición --"}, :class => "span7" %>
   </div>
-    <%= f.submit %>
   </div>
+        <div class="form-actions btn-group">
+        <%= f.submit "Crear Tipo de Actividad", :class => "btn" %>
+        <%= link_to 'Atras', activity_types_path, :class => "btn"  %>
+      </div>
 <% end %>
