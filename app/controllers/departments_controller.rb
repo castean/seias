@@ -87,4 +87,12 @@ class DepartmentsController < ApplicationController
         format.json  { render :json => @departments }      
       end
      end
+     
+  def for_countyid
+      #@towns = Town.find_all_by_county_id( params[:id]).sort_by{ |k| k['name'] }
+      @towns = Town.where(:county_id => params[:id], :state_id => 8).order("name")
+      respond_to do |format|
+        format.json  { render :json => @towns }      
+      end
+    end
 end

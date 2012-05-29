@@ -16,7 +16,11 @@
 //
 // Loads all Bootstrap javascripts
 //= require bootstrap
+
+// Ing. César Reyes // Esta Funcion es para el manejo de los dropdownlist
+
 $(document).ready(function(){
+	// Ing. César Reyes // direccion - departamento
         $("select#program_direction_id").change(function(){
             var id_value_string = $(this).val();
             if (id_value_string == "") {
@@ -48,6 +52,46 @@ $(document).ready(function(){
                         $.each(data, function(i, j){
                         	row = "<option value=\"" + j.id + "\">" + j.name + "</option>";  
                             $(row).appendTo("select#program_department_id");                    
+                        });            
+                     }
+                });
+            };
+                });
+
+     // Ing. César Reyes // ciudades y localidades
+
+
+        $("select#activity_county_id").change(function(){
+            var id_value_string = $(this).val();
+            if (id_value_string == "") {
+                // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
+                $("select#activity_town_id option").remove();
+                var row = "<option value=\"" + "" + "\">" + "" + "</option>";
+                $(row).appendTo("select#activity_town_id");
+                //alert("Failed to submit : Vacio  c");
+            }
+            else {
+                // Send the request and update sub category dropdown
+                
+                $.ajax({
+                    dataType: "json",
+                    cache: false,
+                    url: '/departments/for_countyid/' + id_value_string,
+                    timeout: 2000,
+                    error: function(XMLHttpRequest, errorTextStatus, error){
+                        alert("Failed to submit : "+ errorTextStatus+" ;"+error);
+                    },
+                    success: function(data){   
+          
+                        // Clear all options from sub category select
+                        $("select#activity_town_id option").remove();
+                        //put in a empty default line
+                        var row = "<option value=\"" + "0" + "\">" + "-- Seleciona la Localidad --" + "</option>";
+                        $(row).appendTo("select#activity_town_id");                        
+                        // Fill sub category select
+                        $.each(data, function(i, j){
+                        	row = "<option value=\"" + j.id + "\">" + j.name + "</option>";  
+                            $(row).appendTo("select#activity_town_id");                    
                         });            
                      }
                 });

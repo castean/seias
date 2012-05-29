@@ -1,7 +1,10 @@
 Seias::Application.routes.draw do
-  resources :directions
-
+ 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
+  match '/departments/for_countyid/:id' => 'departments#for_countyid'
+  
+   resources :directions
+  
   resources :departments
 
   resources :activities
