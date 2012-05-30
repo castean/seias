@@ -1,7 +1,11 @@
 class Town < ActiveRecord::Base
-  attr_accessible :altitude, :county_id, :cve_carta, :cve_loc, :environment, :lat_dec, :latitude, :leng_dec, :length, :name
+  attr_accessible :altitude, :county_id, :cve_carta, :cve_loc, :environment, :lat, :latitude, :lon, :longitude, :name
 
   belongs_to :counties, :foreign_key => "cve_mun"
 
-
+  acts_as_gmappable
+  
+  def gmaps4rails_address
+    name 
+  end
 end

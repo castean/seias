@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20120528171018) do
-=======
-ActiveRecord::Schema.define(:version => 20120528183010) do
->>>>>>> 5da31ac04399acd058ed95c58ffcbb80e00ae57a
+ActiveRecord::Schema.define(:version => 20120530192022) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -216,16 +212,17 @@ ActiveRecord::Schema.define(:version => 20120528183010) do
     t.string   "name"
     t.integer  "county_id"
     t.string   "environment"
-    t.string   "latitude"
-    t.string   "length"
-    t.float    "lat_dec"
-    t.float    "leng_dec"
+    t.string   "lat"
+    t.string   "lon"
+    t.float    "latitude"
+    t.float    "longitude"
     t.integer  "altitude"
     t.string   "cve_carta"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "state_id"
     t.integer  "country_id"
+    t.string   "gmaps",       :default => "t"
   end
 
   create_table "units_of_measurement", :force => true do |t|

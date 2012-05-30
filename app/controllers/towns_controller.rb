@@ -4,7 +4,7 @@ class TownsController < ApplicationController
   # GET /towns.json
   def index
     @towns = Town.order("state_id").page(params[:page]).per(50)
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @towns }
@@ -35,13 +35,22 @@ class TownsController < ApplicationController
       
     end
   end
+  
+  def maps
+    @town = Town.find_all_by_state_id_and_cve_loc(8,1)
+    @json = Town.find_all_by_state_id_and_cve_loc(8,1).to_gmaps4rails   
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @towns }
+    end
+  end
 #-------------------------------------------------------------
 
   # GET /towns/1
   # GET /towns/1.json
   def show
     @town = Town.find(params[:id])
-
+  
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @town }
