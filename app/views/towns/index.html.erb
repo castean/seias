@@ -15,13 +15,15 @@
 
 <% @towns.each do |town| %>
 
-<% c = Town.find(:all, :conditions =>['select states.cve_ent, states.name, counties.name, towns.name from states, counties, towns where states.cve_ent = counties.state_id and towns.county_id = counties.cve_mun and towns.state_id = states.cve_ent']).id%>
+<% c = County.find_by_cve_mun_and_state_id(town.county_id,town.state_id) %>
+<% d = State.find_by_cve_ent_and_country_id(town.state_id,town.country_id) %>
+<% e = Country.find(town.country_id) %>
   <tr>
     <td><%= town.cve_loc %></td>
     <td><%= town.name %></td>
-    <td><%= c.(1) %></td>
-    <td><%= c.(2) %></td>
-    <td><%= c.(3) %></td>
+    <td><%= c.name %></td>
+    <td><%= d.name %></td>
+    <td><%= e.name %></td>
     <td><%= town.environment %></td>
     <td><%= link_to 'Show', town %></td>
     <td><%= link_to 'Edit', edit_town_path(town) %></td>
