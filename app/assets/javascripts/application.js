@@ -61,13 +61,13 @@ $(document).ready(function(){
      // Ing. César Reyes // ciudades y localidades
 
 
-        $("select#activity_county_id").change(function(){
+        $("#county_id").change(function(){
             var id_value_string = $(this).val();
             if (id_value_string == "") {
                 // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
-                $("select#activity_town_id option").remove();
+                $("#town_id option").remove();
                 var row = "<option value=\"" + "" + "\">" + "" + "</option>";
-                $(row).appendTo("select#activity_town_id");
+                $(row).appendTo("#town_id");
                 //alert("Failed to submit : Vacio  c");
             }
             else {
@@ -84,14 +84,14 @@ $(document).ready(function(){
                     success: function(data){   
           
                         // Clear all options from sub category select
-                        $("select#activity_town_id option").remove();
+                        $("#town_id option").remove();
                         //put in a empty default line
                         var row = "<option value=\"" + "0" + "\">" + "-- Seleciona la Localidad --" + "</option>";
-                        $(row).appendTo("select#activity_town_id");                        
+                        $(row).appendTo("#town_id");                        
                         // Fill sub category select
                         $.each(data, function(i, j){
                         	row = "<option value=\"" + j.id + "\">" + j.name + "</option>";  
-                            $(row).appendTo("select#activity_town_id");                    
+                            $(row).appendTo("#town_id");                    
                         });            
                      }
                 });

@@ -3,10 +3,11 @@ Seias::Application.routes.draw do
   resources :place_types
 
   post '/places/import' => "places#place_import", :as => :importarlugares
-  match '/places/for_countyid/:id' => 'places#for_countyid'
   resources :places
 
   resources :directions
+
+  resources :statistical_maps
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
   match '/departments/for_countyid/:id' => 'departments#for_countyid'
