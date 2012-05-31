@@ -80,6 +80,7 @@ class DepartmentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
   def for_directionid
       #@departments = SubSection.find( :all, :conditions => [" section_id = ?", params[:id]]  ).sort_by{ |k| k['name'] }
       @departments = Department.find_all_by_direction_id( params[:id]).sort_by{ |k| k['name'] }    

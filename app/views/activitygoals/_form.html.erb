@@ -15,10 +15,7 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>-->
-  <div class="field">
-    <%= f.label :name, "Actividad" %><br />
-    <%= f.select :name, Activity.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione una Actividad --"} %>
-  </div>
+ 
   <div class="field">
     <%= f.label :presentation_advances %><br />
     <%= f.text_field :presentation_advances %>

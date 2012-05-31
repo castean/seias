@@ -1,11 +1,15 @@
 Seias::Application.routes.draw do
  
+  resources :place_types
+
+  post '/places/import' => "places#place_import", :as => :importarlugares
+  match '/places/for_countyid/:id' => 'places#for_countyid'
+  resources :places
+
+  resources :directions
+
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
   match '/departments/for_countyid/:id' => 'departments#for_countyid'
-  
-  
-   resources :directions
-  
   resources :departments
 
   resources :activities
@@ -29,7 +33,6 @@ Seias::Application.routes.draw do
 
   resources :public_targets
 
- 
   resources :programs
 
   resources :critical_success_factors do

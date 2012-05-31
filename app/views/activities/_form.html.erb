@@ -35,7 +35,7 @@
   
   <div class="field">
     <%= f.label :town_id, "Localidad" %><br />
-    <%= f.collection_select :town_id,  Town.where(:county_id => @activity.county_id, :state_id => 8), :id, :name, options ={:prompt => ""} %>
+    <%= f.collection_select :town_id,  Town.where(:county_id => 19, :state_id => 8), :id, :name, options ={:prompt => ""} %>
   </div>
   
   <div class="field">

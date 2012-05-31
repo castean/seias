@@ -1,4 +1,4 @@
-require "CSV"
+require "csv"
 class TownsController < ApplicationController
   # GET /towns
   # GET /towns.json

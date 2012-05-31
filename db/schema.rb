@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530192022) do
+ActiveRecord::Schema.define(:version => 20120531174457) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -173,6 +173,27 @@ ActiveRecord::Schema.define(:version => 20120530192022) do
     t.boolean  "vulnerable"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "place_types", :force => true do |t|
+    t.string   "nick"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "places", :force => true do |t|
+    t.integer  "place_type"
+    t.string   "name"
+    t.string   "address"
+    t.integer  "town_id"
+    t.text     "info"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "programs", :force => true do |t|
