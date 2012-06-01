@@ -1,0 +1,2 @@
+module StatisticalMapsHelper
+end

@@ -23,9 +23,9 @@
           <a class="brand" href="/">SEIAS</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li class="active"><a href="#">Actividades</a></li>
+              <li><a href="#about">Asistencia Social</a></li>
+              <li><a href="#contact">Procuraduría</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -42,22 +42,24 @@
         <div id="CONTENT">
 
             <div id="SIDEBAR_LEFT">
+              <% if current_user %>
                 <div id="personal-info">
                     <%= image_tag("avatar.png") %>
-                    <span class="nombre">Carlos Fco. Garcia Vargas</span>
+                    <span class="nombre"><%= current_user.fullname %></span>
                     <span class="depto">Servicios Electrónicos</span>
                 </div>
                 <ul>
-                    <li class="plan"><span></span><%= link_to "Plan Sexenal", sexennial_state_plan_components_path %></li>
+                    <li class="plan"><span></span><%= link_to "Plan Estatal de Desarrollo", sexennial_state_plan_components_path %></li>
                     <li class="factores"><span></span><%= link_to "Factores Criticos", critical_success_factors_path %></li>
                     <li class="actividades"><span></span><%= link_to "Actividades", activities_path %></li>
                 </ul>
                 <h4>Favoritos</h4>
                 <ul>
-                    <li class="plan"><span></span><%= link_to "Plan Sexenal", sexennial_state_plan_components_path %></li>
+                    <li class="plan"><span></span><%= link_to "Plan Estatal de Desarrollo", sexennial_state_plan_components_path %></li>
                     <li class="factores"><span></span><%= link_to "Factores Criticos", critical_success_factors_path %></li>
                     <li class="actividades"><span></span><%= link_to "Actividades", activity_types_path %></li>
                 </ul>
+              <% end %>
             </div><!-- SIDEBAR_LEFT -->
 
             <div id="CONTENT_BODY">
