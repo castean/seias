@@ -33,7 +33,7 @@ es_MX:
     formats:
       default: ! '%d/%m/%Y'
       long: ! '%A, %d de %B de %Y'
-      short: ! '%d de %b'
+      short: ! '%d de %B'
     month_names:
     -
     - enero
@@ -167,7 +167,7 @@ es_MX:
         delimiter: ! ','
         precision: 3
         significant: true
-        strip_insignificant_zeros: true
+        strip_insignificant_zeros: trutimee
       storage_units:
         format: ! '%n %u'
         units:
