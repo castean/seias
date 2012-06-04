@@ -1,6 +1,11 @@
 set :application, "seias"
 set :repository,  "gitosis@labs.ti.uach.mx:seias.git"
 
+set :deploy_to, "/webapps/#{application}"
+set :use_sudo, false
+
+ssh_options[:forward_agent] = true
+
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
