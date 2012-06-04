@@ -1,12 +1,16 @@
 Seias::Application.routes.draw do
  
+  match "/maps/index" => "maps#index"
+  post '/maps/get_map' => "maps#get_map", :as => :reloadmapa
+  resources :maps
+  
   resources :place_types
 
   post '/places/import' => "places#place_import", :as => :importarlugares
   resources :places
 
   resources :directions
-
+  
   resources :statistical_maps
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'

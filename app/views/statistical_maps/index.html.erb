@@ -1,13 +1,4 @@
 <h1>Mapas Estadisticos</h1>
-
-
-  <div class="field">
-    <%= label :county_id, "Municipio" %><br />
-    <%= select :county_id, County.where(:state_id => 8).order("name").collect{ |c| [c.name, c.cve_mun] }, {:include_blank => "-- Seleccione una Categoria --"}, :id => "county_id" %>
-  </div>
-  
-  <div class="field">
-    <%= label :town_id, "Localidad" %><br />
- 
-  </div>
-  
+</br>
+  	
+  	<%= render 'get_map'%>
