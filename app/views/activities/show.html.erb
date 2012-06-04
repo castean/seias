@@ -1,6 +1,6 @@
 <p>
   <b>Tipo de Actividad:</b>
-  <%= @activity.activity_type %>
+  <%= @activity.activity_type.name %>
 </p>
 
 <p>
@@ -15,23 +15,25 @@
 
 <p>
   <b>Fecha:</b>
-  <%= @activity.activity_date %>
+  <%= l(@activity.activity_date.to_date, :format => :long) %>
 </p>
 
 <p>
   <b>Localidad:</b>
-  <%= @activity.town %>
+  <%= @activity.town.name %>
 </p>
 
 <p>
   <b>Grupo:</b>
-  <%= @activity.group %>
+  <%= @activity.group.name %>
 </p>
 
 <p>
   <b>Público Objetivo:</b>
-  <%= @activity.public_target %>
+  <%= @activity.public_target.name %>
 </p>
+
+<%= gmaps("map_options" =>{:auto_zoom => false, :zoom => 7},"markers" => {"data" => @json}) %>
 
 
 <%= link_to 'Editar', edit_activity_path(@activity) %> |
