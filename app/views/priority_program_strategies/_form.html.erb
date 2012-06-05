@@ -1,0 +1,37 @@
+<%= form_for(@priority_program_strategy) do |f| %>
+  <% if @priority_program_strategy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@priority_program_strategy.errors.count, "error") %> prohibited this priority_program_strategy from being saved:</h2>
+
+      <ul>
+      <% @priority_program_strategy.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :hierarchy %><br />
+    <%= f.number_field :hierarchy %>
+  </div>
+  <div class="field">
+    <%= f.label :priority_program_goal_id %><br />
+    <%= f.number_field :priority_program_goal_id %>
+  </div>
+  <div class="field">
+	<%= f.label :priority_program_goal_id, "Objetivo correspondiente en el Programa Prioritario" %><br />
+	<%= f.select :priority_program_goal_id, PriorityProgramGoal.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

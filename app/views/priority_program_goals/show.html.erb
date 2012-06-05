@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @priority_program_goal.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @priority_program_goal.description %>
+</p>
+
+<p>
+  <b>Hirarchy:</b>
+  <%= @priority_program_goal.hirarchy %>
+</p>
+
+<p>
+  <b>Priority program:</b>
+  <%= @priority_program_goal.priority_program_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_priority_program_goal_path(@priority_program_goal) %> |
+<%= link_to 'Back', priority_program_goals_path %>

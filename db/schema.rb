@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120531174457) do
+ActiveRecord::Schema.define(:version => 20120605190458) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -175,6 +175,42 @@ ActiveRecord::Schema.define(:version => 20120531174457) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "ped_action_lines", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "hirarchy"
+    t.integer  "ped_strategy_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "ped_goals", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "hirarchy"
+    t.integer  "ped_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "ped_strategies", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "hirarchy"
+    t.integer  "ped_goal_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "peds", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "date_start"
+    t.date     "date_end"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "place_types", :force => true do |t|
     t.string   "nick"
     t.string   "name"
@@ -189,11 +225,48 @@ ActiveRecord::Schema.define(:version => 20120531174457) do
     t.string   "address"
     t.integer  "town_id"
     t.text     "info"
-    t.float    "latitude"
     t.float    "longitude"
+    t.float    "latitude"
     t.boolean  "gmaps"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "priority_program_action_lines", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "hierarchy"
+    t.integer  "priority_program_strategy_id"
+    t.integer  "ped_action_line_id"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  create_table "priority_program_goals", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "hirarchy"
+    t.integer  "priority_program_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  create_table "priority_program_strategies", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "hierarchy"
+    t.integer  "priority_program_goal_id"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  create_table "priority_programs", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "date_start"
+    t.date     "date_end"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "programs", :force => true do |t|
@@ -224,6 +297,11 @@ ActiveRecord::Schema.define(:version => 20120531174457) do
     t.integer  "cve_ent"
     t.string   "name"
     t.integer  "country_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "statistical_maps", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

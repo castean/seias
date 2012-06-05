@@ -1,5 +1,21 @@
 Seias::Application.routes.draw do
  
+  resources :priority_program_action_lines
+
+  resources :priority_program_strategies
+
+  resources :priority_program_goals
+
+  resources :priority_programs
+
+  resources :ped_action_lines
+
+  resources :ped_strategies
+
+  resources :ped_goals
+
+  resources :peds
+
   match "/maps/index" => "maps#index"
   post '/maps/get_map' => "maps#get_map", :as => :reloadmapa
   resources :maps

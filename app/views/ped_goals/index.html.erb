@@ -1,0 +1,29 @@
+<h1>Listing ped_goals</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Hirarchy</th>
+    <th>Ped</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ped_goals.each do |ped_goal| %>
+  <tr>
+    <td><%= ped_goal.name %></td>
+    <td><%= ped_goal.description %></td>
+    <td><%= ped_goal.hirarchy %></td>
+    <td><%= ped_goal.ped_id %></td>
+    <td><%= link_to 'Show', ped_goal %></td>
+    <td><%= link_to 'Edit', edit_ped_goal_path(ped_goal) %></td>
+    <td><%= link_to 'Destroy', ped_goal, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ped goal', new_ped_goal_path %>

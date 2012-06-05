@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ped.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @ped.description %>
+</p>
+
+<p>
+  <b>Date start:</b>
+  <%= @ped.date_start %>
+</p>
+
+<p>
+  <b>Date end:</b>
+  <%= @ped.date_end %>
+</p>
+
+
+<%= link_to 'Edit', edit_ped_path(@ped) %> |
+<%= link_to 'Back', peds_path %>

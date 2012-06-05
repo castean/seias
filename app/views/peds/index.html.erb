@@ -1,0 +1,29 @@
+<h1>Listing peds</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Date start</th>
+    <th>Date end</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @peds.each do |ped| %>
+  <tr>
+    <td><%= ped.name %></td>
+    <td><%= ped.description %></td>
+    <td><%= ped.date_start %></td>
+    <td><%= ped.date_end %></td>
+    <td><%= link_to 'Show', ped %></td>
+    <td><%= link_to 'Edit', edit_ped_path(ped) %></td>
+    <td><%= link_to 'Destroy', ped, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ped', new_ped_path %>

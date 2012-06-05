@@ -1,0 +1,29 @@
+<h1>Listing ped_action_lines</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Hirarchy</th>
+    <th>Ped strategy</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ped_action_lines.each do |ped_action_line| %>
+  <tr>
+    <td><%= ped_action_line.name %></td>
+    <td><%= ped_action_line.description %></td>
+    <td><%= ped_action_line.hirarchy %></td>
+    <td><%= ped_action_line.ped_strategy_id %></td>
+    <td><%= link_to 'Show', ped_action_line %></td>
+    <td><%= link_to 'Edit', edit_ped_action_line_path(ped_action_line) %></td>
+    <td><%= link_to 'Destroy', ped_action_line, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ped action line', new_ped_action_line_path %>
