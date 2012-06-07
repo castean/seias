@@ -26,8 +26,6 @@ Seias::Application.routes.draw do
   resources :places
 
   resources :directions
-  
-  resources :statistical_maps
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
   match '/departments/for_countyid/:id' => 'departments#for_countyid'

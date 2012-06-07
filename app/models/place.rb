@@ -6,7 +6,7 @@ class Place < ActiveRecord::Base
   
   acts_as_gmappable
   def gmaps4rails_address
-    name 
+    address 
   end
   def gmaps4rails_infowindow
       "<b>#{name}</b></br>#{info}</br>#{latitude}</br>#{longitude}"# add here whatever html content you desire, it will be displayed when users clicks on the marker

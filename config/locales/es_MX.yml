@@ -219,5 +219,12 @@ es_MX:
       town: Localidad
       user: Usuario
       user_session: Sesión
+      ped_action_line: Linea de acción del PED
+      ped_goal: Objetivo del PED
+      ped_strategy: Estrategia del PED
+      priority_program_action_line: Linea del Acción del Programa Prioritario
+      priority_program_goal: Objetivo del Programa Prioritario
+      priority_program_strategy: Estrategia del Programa Prioritario
+      priority_program: Programa Prioritario
     errors:
       <<: *errors
