@@ -1,7 +1,7 @@
 class Place < ActiveRecord::Base
   belongs_to :place_type
   belongs_to :towns
-  attr_accessible :address, :gmaps, :info, :latitude, :longitude, :name, :place_type, :town_id
+  attr_accessible :address, :gmaps, :info, :latitude, :longitude, :name, :place_type_id, :town_id,:county_id, :state_id, :country_id
   attr_accessor :county_id, :state_id, :country_id
   
   acts_as_gmappable

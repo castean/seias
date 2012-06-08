@@ -24,8 +24,8 @@ class MapsController < ApplicationController
     
     #@map = Town.find_all_by_state_id_and_county_id(@state,@county)
     #@json = Town.find_all_by_state_id_and_county_id(@state,@county).to_gmaps4rails
-    @map = Place.find_all_by_town_id_and_place_type(@town,@placetype)
-    @json = Place.find_all_by_town_id_and_place_type(@town,@placetype).to_gmaps4rails
+    @map = Place.find_all_by_town_id_and_place_type_id(@town,@placetype)
+    @json = Place.find_all_by_town_id_and_place_type_id(@town,@placetype).to_gmaps4rails
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @map }

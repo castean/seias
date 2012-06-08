@@ -13,8 +13,8 @@
 
 
   <div class="field">
-    <%= f.label :place_type, "Identificador tipo" %><br />
-    <%= f.select :place_type, PlaceType.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
+    <%= f.label :place_type_id, "Identificador tipo" %><br />
+    <%= f.select :place_type_id, PlaceType.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
   </div>
   <div class="field">
     <%= f.label :name, "Nombre" %><br />
