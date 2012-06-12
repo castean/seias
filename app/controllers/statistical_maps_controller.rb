@@ -2,6 +2,29 @@ class StatisticalMapsController < ApplicationController
   # GET /statistical_maps
   # GET /statistical_maps.json
   def index
+    @statistical_map = StatisticalMap.new
+    @json = Town.find_all_by_state_id_and_cve_loc(8,1).to_gmaps4rails   
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @statistical_map }
+    end
+  end
+
+  def get_maps_by_town
+    @json = Town.where(:county_id => params[:id], :state_id => 8).to_gmaps4rails 
+    @statistical_map = StatisticalMap.new()
+    
+      
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @statistical_map }
+    end
+  end
+
+    
+  # GET /statistical_maps/1
+  # GET /statistical_maps/1.json
+  def show
     #@state = 8
     #@cveloc = 1
     
