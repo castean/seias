@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612181534) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -190,8 +189,9 @@ ActiveRecord::Schema.define(:version => 20120612181534) do
     t.text     "description"
     t.integer  "hierarchy"
     t.integer  "ped_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "ped_sub_theme_id"
   end
 
   create_table "ped_strategies", :force => true do |t|
@@ -365,4 +365,4 @@ ActiveRecord::Schema.define(:version => 20120612181534) do
     t.string   "roles",              :default => "--- []"
   end
 
-end
+
