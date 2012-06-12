@@ -43,7 +43,7 @@ Seias::Application.routes.draw do
 
   resources :countries
      
-  post '/towns/import' => "towns#town_import", :as => :importarlocalidades
+  #post '/towns/import' => "towns#town_import", :as => :importarlocalidades
   get '/towns/maps' => 'towns#maps'
   resources :towns
 
