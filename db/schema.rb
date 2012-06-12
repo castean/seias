@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120605190458) do
+ActiveRecord::Schema.define(:version => 20120612183735) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120605190458) do
     t.datetime "updated_at",       :null => false
     t.integer  "activity_type_id"
     t.integer  "county_id"
+    t.integer  "user_id"
   end
 
   add_index "activities", ["group_id"], :name => "index_activities_on_group_id"
@@ -178,7 +179,7 @@ ActiveRecord::Schema.define(:version => 20120605190458) do
   create_table "ped_action_lines", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "hirarchy"
+    t.integer  "hierarchy"
     t.integer  "ped_strategy_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
@@ -187,17 +188,25 @@ ActiveRecord::Schema.define(:version => 20120605190458) do
   create_table "ped_goals", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "hirarchy"
+    t.integer  "hierarchy"
     t.integer  "ped_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "ped_sub_theme_id"
   end
 
   create_table "ped_strategies", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "hirarchy"
+    t.integer  "hierarchy"
     t.integer  "ped_goal_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "ped_sub_themes", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -220,7 +229,7 @@ ActiveRecord::Schema.define(:version => 20120605190458) do
   end
 
   create_table "places", :force => true do |t|
-    t.integer  "place_type"
+    t.integer  "place_type_id"
     t.string   "name"
     t.string   "address"
     t.integer  "town_id"
@@ -228,8 +237,8 @@ ActiveRecord::Schema.define(:version => 20120605190458) do
     t.float    "longitude"
     t.float    "latitude"
     t.boolean  "gmaps"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "priority_program_action_lines", :force => true do |t|

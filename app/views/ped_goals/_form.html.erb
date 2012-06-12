@@ -24,6 +24,10 @@
     <%= f.number_field :hierarchy %>
   </div>
   <div class="field">
+	<%= f.label :ped_sub_theme_id, "Sub Tema PED al que pertenece" %><br />
+	<%= f.select :ped_sub_theme_id, PedSubTheme.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
+  </div>
+  <div class="field">
 	<%= f.label :ped_id, "PED al que pertenece" %><br />
 	<%= f.select :ped_id, Ped.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
   </div>

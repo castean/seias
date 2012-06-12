@@ -2,10 +2,10 @@
 
 <table>
   <tr>
+  	<th>Ped</th>
+    <th>Ped Sub Tema</th>
     <th>Name</th>
     <th>Description</th>
-    <th>Hirarchy</th>
-    <th>Ped</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,10 +13,10 @@
 
 <% @ped_goals.each do |ped_goal| %>
   <tr>
+    <td><%= ped_goal.ped_id %></td>
+    <td><%= ped_goal.ped_sub_theme_id %></td>
     <td><%= ped_goal.name %></td>
     <td><%= ped_goal.description %></td>
-    <td><%= ped_goal.hierarchy %></td>
-    <td><%= ped_goal.ped_id %></td>
     <td><%= link_to 'Show', ped_goal %></td>
     <td><%= link_to 'Edit', edit_ped_goal_path(ped_goal) %></td>
     <td><%= link_to 'Destroy', ped_goal, confirm: 'Are you sure?', method: :delete %></td>

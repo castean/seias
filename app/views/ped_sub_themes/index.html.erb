@@ -1,0 +1,25 @@
+<h1>Listing ped_sub_themes</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ped_sub_themes.each do |ped_sub_theme| %>
+  <tr>
+    <td><%= ped_sub_theme.name %></td>
+    <td><%= ped_sub_theme.description %></td>
+    <td><%= link_to 'Show', ped_sub_theme %></td>
+    <td><%= link_to 'Edit', edit_ped_sub_theme_path(ped_sub_theme) %></td>
+    <td><%= link_to 'Destroy', ped_sub_theme, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ped sub theme', new_ped_sub_theme_path %>
