@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612162058) do
+ActiveRecord::Schema.define(:version => 20120612181534) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -199,6 +199,13 @@ ActiveRecord::Schema.define(:version => 20120612162058) do
     t.text     "description"
     t.integer  "hierarchy"
     t.integer  "ped_goal_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "ped_sub_themes", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

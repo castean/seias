@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ped_strategy.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @ped_strategy.description %>
+</p>
+
+<p>
+  <b>Hirarchy:</b>
+  <%= @ped_strategy.hierarchy %>
+</p>
+
+<p>
+  <b>Ped goal:</b>
+  <%= @ped_strategy.ped_goal_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_ped_strategy_path(@ped_strategy) %> |
+<%= link_to 'Back', ped_strategies_path %>

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @priority_program_action_line.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @priority_program_action_line.description %>
+</p>
+
+<p>
+  <b>Hierarchy:</b>
+  <%= @priority_program_action_line.hierarchy %>
+</p>
+
+<p>
+  <b>Priority program strategy:</b>
+  <%= @priority_program_action_line.priority_program_strategy_id %>
+</p>
+
+<p>
+  <b>Ped action line:</b>
+  <%= @priority_program_action_line.ped_action_line_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_priority_program_action_line_path(@priority_program_action_line) %> |
+<%= link_to 'Back', priority_program_action_lines_path %>

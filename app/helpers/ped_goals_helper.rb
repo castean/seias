@@ -1,0 +1,2 @@
+module PedGoalsHelper
+end

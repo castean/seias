@@ -19,6 +19,7 @@ load_and_authorize_resource
   # GET /activities/1.json
   def show
     @activity = Activity.find(params[:id])
+    @json = Town.find(@activity.town).to_gmaps4rails
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,14 +1,4 @@
-<h1>Localidades de Mexico</h1>
-
-<% @towns.each do |town| %>
-  <tr>
-    <td><% town.cve_loc %></td>
-    <td><% town.name %></td>
-    <td><% town.longitude %></td>
-    <td><% town.latitude %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-<%= gmaps4rails(@json) %>
+<h1>Mapas Estadisticos</h1>
+</br>
+  	<%= render 'form' %>
+  	

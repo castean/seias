@@ -1,0 +1,21 @@
+
+  
+  <%= form_for :formulario, :url=>reloadmapa_path do |f|%>
+	  <div class="field">
+	    <%= f.label :county_id, "Municipio" %><br />
+	    <%= f.collection_select :county_id,  County.where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
+	  </div>
+	  
+	  <div class="field">
+	    <%= f.label :town_id, "Localidad" %><br />
+	    <%= f.collection_select :town_id,  Town.where(:county_id => 19, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "town_id" %>
+	  </div>
+	  
+	  <div class="field">
+	    <%= f.label :institution_type_id, "Identificador tipo" %><br />
+	    <%= f.select :institution_type_id, PlaceType.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
+	  </div>
+	  </br>
+	  <%= submit_tag 'Cargar Mapa' -%>
+  <% end %>
+  

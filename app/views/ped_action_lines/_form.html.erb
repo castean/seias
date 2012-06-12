@@ -1,0 +1,33 @@
+<%= form_for(@ped_action_line) do |f| %>
+  <% if @ped_action_line.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ped_action_line.errors.count, "error") %> prohibited this ped_action_line from being saved:</h2>
+
+      <ul>
+      <% @ped_action_line.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :hierarchy %><br />
+    <%= f.number_field :hierarchy %>
+  </div>
+  <div class="field">
+	<%= f.label :ped_strategy_id, "Estrategia del PED relacionada" %><br />
+	<%= f.select :ped_strategy_id, PedStrategy.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

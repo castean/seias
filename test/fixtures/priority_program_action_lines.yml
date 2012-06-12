@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  hierarchy: 1
+  priority_program_strategy_id: 1
+  ped_action_line_id: 1
+
+two:
+  name: MyString
+  description: MyText
+  hierarchy: 1
+  priority_program_strategy_id: 1
+  ped_action_line_id: 1

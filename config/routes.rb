@@ -1,5 +1,25 @@
 Seias::Application.routes.draw do
  
+  resources :priority_program_action_lines
+
+  resources :priority_program_strategies
+
+  resources :priority_program_goals
+
+  resources :priority_programs
+
+  resources :ped_action_lines
+
+  resources :ped_strategies
+
+  resources :ped_goals
+
+  resources :peds
+
+  match "/maps/index" => "maps#index"
+  post '/maps/get_map' => "maps#get_map", :as => :reloadmapa
+  resources :maps
+  
   resources :place_types
 
   post '/places/import' => "places#place_import", :as => :importarlugares
@@ -9,6 +29,7 @@ Seias::Application.routes.draw do
   
   match '/statistical_maps/get_maps_by_town/:id' => 'statistical_maps#get_maps_by_town', :as => :mapa_por_localidad
   resources :statistical_maps
+
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
   match '/departments/for_countyid/:id' => 'departments#for_countyid'

@@ -25,71 +25,61 @@ class StatisticalMapsController < ApplicationController
   # GET /statistical_maps/1
   # GET /statistical_maps/1.json
   def show
-    @statistical_map = StatisticalMap.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @statistical_map }
-    end
-  end
-
-  # GET /statistical_maps/new
-  # GET /statistical_maps/new.json
-  def new
-    @statistical_map = StatisticalMap.new
-    @json = Town.find_all_by_state_id_and_cve_loc(8,1).to_gmaps4rails   
+    #@state = 8
+    #@cveloc = 1
+    
+      @county=8
+      @town=1
+      @placetype=1
+    
+    @statistical_map = StatisticalMap.first
+    @json = Town.find_all_by_state_id_and_cve_loc(@county,@town).to_gmaps4rails
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @statistical_map }
+    end   
+  end
+
+  def get_map
+    @state = 8
+    @cveloc = 1
+    if params[:county_id]== ""
+      @county=8
+      @town=0
+      @placetype=1
+    else
+      @county=params[:county_id]
+      @town=params[:town_id]
+      @placetype=params[:institution_type_id]
     end
-  end
-
-  # GET /statistical_maps/1/edit
-  def edit
-    @statistical_map = StatisticalMap.find(params[:id])
-  end
-
-  # POST /statistical_maps
-  # POST /statistical_maps.json
-  def create
-    @statistical_map = StatisticalMap.new(params[:statistical_map])
-
+    
+    @statistical_map = StatisticalMap.first
+    @json = Town.find_all_by_state_id_and_cve_loc(@state,@cveloc).to_gmaps4rails
     respond_to do |format|
-      if @statistical_map.save
-        format.html { redirect_to @statistical_map, notice: 'Statistical map was successfully created.' }
-        format.json { render json: @statistical_map, status: :created, location: @statistical_map }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @statistical_map.errors, status: :unprocessable_entity }
-      end
-    end
+      format.html # new.html.erb
+      format.json { render json: @statistical_map }
+    end 
   end
 
-  # PUT /statistical_maps/1
-  # PUT /statistical_maps/1.json
   def update
-    @statistical_map = StatisticalMap.find(params[:id])
-
-    respond_to do |format|
-      if @statistical_map.update_attributes(params[:statistical_map])
-        format.html { redirect_to @statistical_map, notice: 'Statistical map was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @statistical_map.errors, status: :unprocessable_entity }
-      end
+    #@state = 8
+    #@cveloc = 1
+    if params[:county_id]== ""
+      @county=8
+      @town=0
+      @placetype=1
+    else
+      @county=params[:county_id]
+      @town=params[:town_id]
+      @placetype=params[:institution_type_id]
     end
-  end
-
-  # DELETE /statistical_maps/1
-  # DELETE /statistical_maps/1.json
-  def destroy
-    @statistical_map = StatisticalMap.find(params[:id])
-    @statistical_map.destroy
-
+    
+    @statistical_map = StatisticalMap.first
+    @json = Town.find_all_by_state_id_and_cve_loc(@county,@town).to_gmaps4rails
     respond_to do |format|
-      format.html { redirect_to statistical_maps_url }
-      format.json { head :no_content }
-    end
+      format.html # new.html.erb
+      format.json { render json: @statistical_map }
+    end 
+    
   end
 end

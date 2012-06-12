@@ -33,7 +33,7 @@ es_MX:
     formats:
       default: ! '%d/%m/%Y'
       long: ! '%A, %d de %B de %Y'
-      short: ! '%d de %b'
+      short: ! '%d de %B'
     month_names:
     -
     - enero
@@ -167,7 +167,7 @@ es_MX:
         delimiter: ! ','
         precision: 3
         significant: true
-        strip_insignificant_zeros: true
+        strip_insignificant_zeros: trutimee
       storage_units:
         format: ! '%n %u'
         units:
@@ -219,5 +219,12 @@ es_MX:
       town: Localidad
       user: Usuario
       user_session: Sesión
+      ped_action_line: Linea de acción del PED
+      ped_goal: Objetivo del PED
+      ped_strategy: Estrategia del PED
+      priority_program_action_line: Linea del Acción del Programa Prioritario
+      priority_program_goal: Objetivo del Programa Prioritario
+      priority_program_strategy: Estrategia del Programa Prioritario
+      priority_program: Programa Prioritario
     errors:
       <<: *errors
