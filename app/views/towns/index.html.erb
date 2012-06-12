@@ -35,15 +35,7 @@
 
 <%= link_to 'New Town', new_town_path %>
 </br>
-<% form_for :dump, :url=>importarlocalidades_path, :html => { :multipart => true } do |f| -%>
-	<label for="dump_file">
-        Select a CSV File :
-    </label>
-    <%= f.file_field :file -%>
-   </br>
-    <%= submit_tag 'Importar Localidades' -%>
-<% end %>
-</br>
+
 
 <div class="pager">
 	<%= paginate @towns %>

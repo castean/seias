@@ -1,4 +1,4 @@
-require "csv"
+#require "csv"
 class PlacesController < ApplicationController
   # GET /places
   # GET /places.json
@@ -12,24 +12,24 @@ class PlacesController < ApplicationController
   end
 
 #-----------------------------------CSV Code-------------------------
-  def place_import
-    data = params[:dump][:file].read
-    @place=CSV.parse(data)
-    n=0
-    @place.each do |row|
-      c=Place.new
-        c.name = row[2]
-        c.info = row[3]
-        c.latitude = row[0]
-        c.longitude = row[1]
-        c.gmaps  = true
-      if c.save
-        n=n+1
-        GC.start if n%50==0
-      end
-      
-    end
-  end
+#  def place_import
+#    data = params[:dump][:file].read
+#    @place=CSV.parse(data)
+#    n=0
+#    @place.each do |row|
+#      c=Place.new
+#        c.name = row[2]
+#        c.info = row[3]
+#        c.latitude = row[0]
+#        c.longitude = row[1]
+#        c.gmaps  = true
+#      if c.save
+#        n=n+1
+#        GC.start if n%50==0
+#      end
+#      
+#    end
+#  end
   
 #-------------------------------------------------------------  
   
