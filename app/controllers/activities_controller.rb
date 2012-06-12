@@ -1,9 +1,14 @@
 class ActivitiesController < ApplicationController
+load_and_authorize_resource
   # GET /activities
   # GET /activities.json
   def index
-    @activities = Activity.all
-
+    #current_user = UserSession.find
+    #id = current_user && current_user.record.id
+    #@activities = Activity.where("user_id = #{ id }")
+    
+    @activities = Activity.find_all_by_user_id(current_user)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @activities }
@@ -24,7 +29,9 @@ class ActivitiesController < ApplicationController
   # GET /activities/new
   # GET /activities/new.json
   def new
-    @activity = Activity.new
+    current_user = UserSession.find
+    id = current_user && current_user.record.id
+    @activity = Activity.new(:user_id => id)
 
     respond_to do |format|
       format.html # new.html.erb

@@ -6,7 +6,8 @@ Seias::Application.routes.draw do
   resources :places
 
   resources :directions
-
+  
+  match '/statistical_maps/get_maps_by_town/:id' => 'statistical_maps#get_maps_by_town', :as => :mapa_por_localidad
   resources :statistical_maps
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
@@ -43,7 +44,7 @@ Seias::Application.routes.draw do
   resources :sexennial_state_plan_components
 
   resources :critical_success_factor_types
-
+  match 'logout', :controller => 'user_sessions', :action => 'destroy'
   resource :user_sessions
 
   resources :users

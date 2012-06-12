@@ -72,7 +72,7 @@ $(document).ready(function(){
             }
             else {
                 // Send the request and update sub category dropdown
-                
+               // window.location = "../get_maps_by_town/" + id_value_string
                 $.ajax({
                     dataType: "json",
                     cache: false,

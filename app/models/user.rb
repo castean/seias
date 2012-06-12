@@ -7,18 +7,21 @@ class User < ActiveRecord::Base
   end
 
   easy_roles :roles
-
+ 
   has_many :critical_success_factors
-
-  attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation
+  has_many :activities
+  attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :initial_role, :roles
+  attr_accessor :initial_role
+  
+  ROLES = %w[admin moderator user final_user]
+  
 
   def fullname
     "#{name} #{last_name} #{second_last_name}"
   end
-
   def roles_list
     roles_sym_list = []
-    self.roles.each do |role|
+    ROLES.each do |role|
       roles_sym_list << role.to_sym
     end
     roles_sym_list

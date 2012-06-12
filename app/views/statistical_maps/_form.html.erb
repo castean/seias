@@ -2,7 +2,6 @@
   <% if @statistical_map.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@statistical_map.errors.count, "error") %> prohibited this statistical_map from being saved:</h2>
-
       <ul>
       <% @statistical_map.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -13,16 +12,18 @@
   
   <div class="field">
     <%= f.label :county_id, "Municipio" %><br />
-    <%= f.collection_select :county_id,  County.where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
+    <%= f.collection_select :county_id,  County.where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Todos --"}, :id => "county_id" %>
   </div>
   
   <div class="field">
     <%= f.label :town_id, "Localidad" %><br />
-    <%= f.collection_select :town_id,  Town.where(:county_id => @statistical_map.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "town_id" %>
+    <%= f.collection_select :town_id,  Town.where(:county_id => @statistical_map.county_id, :state_id => 8), :id, :name, options ={:prompt => "-- Todos --"}, :id => "town_id" %>
   </div>
   
-  <%content_for :scripts do %>
-  <%= gmaps4rails(@json) %>
-  <% end %>
+  <div class="field">
+    <%= f.label :institution_type_id, "Instituciones" %><br />
+    <%= f.collection_select :institution_type_id,  PlaceType.all, :id, :name, options ={:prompt => "-- Selecciona --"}, :id => "institution_type_id" %>
+  </div>
+  
   
 <% end %>

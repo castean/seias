@@ -40,8 +40,10 @@
     <%= f.label :password_confirmation, "Confirmar Contraseña" %><br />
     <%= f.password_field :password_confirmation %>
   </div>
-
-
+  <div class="field">
+    <%= f.label :initial_role, "Rol" %><br />
+    <%= f.collection_select :initial_role, User::ROLES, :to_s, :humanize %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

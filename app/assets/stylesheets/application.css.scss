@@ -12,3 +12,11 @@
  *= require_tree .
 */
 @import "bootstrap";
+
+#user_nav {
+  float: right;
+  font-size: 12px;
+  padding-top: 10px;
+  padding-right:30px;
+  font-weight:bold;
+}
