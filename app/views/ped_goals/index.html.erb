@@ -12,9 +12,11 @@
   </tr>
 
 <% @ped_goals.each do |ped_goal| %>
+<% c = Ped.find(ped_goal.ped_id)%>
+<% d = PedSubTheme.find(ped_goal.ped_sub_theme_id)%>
   <tr>
-    <td><%= ped_goal.ped_id %></td>
-    <td><%= ped_goal.ped_sub_theme_id %></td>
+    <td><%= c.name %></td>
+    <td><%= d.name %></td>
     <td><%= ped_goal.name %></td>
     <td><%= ped_goal.description %></td>
     <td><%= link_to 'Show', ped_goal %></td>
