@@ -1,4 +1,4 @@
-require "csv"
+#require "csv"
 class TownsController < ApplicationController
   # GET /towns
   # GET /towns.json
@@ -12,29 +12,29 @@ class TownsController < ApplicationController
   end
 
 #-----------------------------------CSV Code-------------------------
-  def town_import
-    data = params[:dump][:file].read
-    @town=CSV.parse(data)
-    n=0
-    @town.each do |row|
-      c=Town.new
-        c.cve_loc = row[4]
-        c.name = row[5]
-        c.county_id = row[2]
-        c.environment  = row[6]
-        c.latitude = row[7]
-        c.length = row[8]
-        c.lat_dec  = row[9]
-        c.leng_dec  = row[10]
-        c.altitud  = row[11]
-        c.cve_carta = row[12]
-      if c.save
-        n=n+1
-        GC.start if n%50==0
-      end
-      
-    end
-  end
+#  def town_import
+#    data = params[:dump][:file].read
+#    @town=CSV.parse(data)
+#    n=0
+#    @town.each do |row|
+#      c=Town.new
+#        c.cve_loc = row[4]
+#        c.name = row[5]
+#        c.county_id = row[2]
+#        c.environment  = row[6]
+#        c.latitude = row[7]
+#        c.length = row[8]
+#        c.lat_dec  = row[9]
+#        c.leng_dec  = row[10]
+#        c.altitud  = row[11]
+#        c.cve_carta = row[12]
+#      if c.save
+#        n=n+1
+#        GC.start if n%50==0
+#      end
+#      
+#    end
+#  end
   
   def maps
     @town = Town.find_all_by_state_id_and_cve_loc(8,1)

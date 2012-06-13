@@ -26,16 +26,6 @@
 <br />
 
 <%= link_to 'New State', new_state_path %>
-</br>
-<% form_for :dump, :url=>importarestados_path, :html => { :multipart => true } do |f| -%>
-	<label for="dump_file">
-        Select a CSV File :
-    </label>
-    <%= f.file_field :file -%>
-   </br>
-    <%= submit_tag 'Importar Estados' -%>
-<% end %>
-</br>
 
 <div class="pager">
 	<%= paginate @states %>
