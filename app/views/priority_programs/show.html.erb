@@ -10,16 +10,20 @@
   <%= @priority_program.description %>
 </p>
 
+<br/>
 <p>
-  <b>Date start:</b>
-  <%= @priority_program.date_start %>
+  <b>Objetivos:</b>
 </p>
 
-<p>
-  <b>Date end:</b>
-  <%= @priority_program.date_end %>
-</p>
 
+<% @priority_program.priority_program_goals.each do |goal| %>
+	<ul>
+		<li>
+			<%= link_to goal.name, priority_program_goal_path(goal.id)%>: <%= goal.description%>
+		</li>
+	</ul>
+<%end%>
+</br>
 
 <%= link_to 'Edit', edit_priority_program_path(@priority_program) %> |
 <%= link_to 'Back', priority_programs_path %>

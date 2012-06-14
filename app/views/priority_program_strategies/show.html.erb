@@ -1,24 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @priority_program_strategy.name %>
+  <b>Estrategias:</b></br>
+  <%= @priority_program_strategy.name %>: <%= @priority_program_strategy.description %>
 </p>
 
+<br/>
 <p>
-  <b>Description:</b>
-  <%= @priority_program_strategy.description %>
+  <b>Lineas de Acción:</b>
 </p>
-
-<p>
-  <b>Hierarchy:</b>
-  <%= @priority_program_strategy.hierarchy %>
-</p>
-
-<p>
-  <b>Priority program goal:</b>
-  <%= @priority_program_strategy.priority_program_goal_id %>
-</p>
+<% @priority_program_strategy.priority_program_action_line.each do |actionline| %>
+	<ul>
+		<li>
+			<%= actionline.name %>: <%= actionline.description%>
+		</li>
+	</ul>
+<%end%>
+</br>
 
 
 <%= link_to 'Edit', edit_priority_program_strategy_path(@priority_program_strategy) %> |
