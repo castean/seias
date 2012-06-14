@@ -3,7 +3,7 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.json
   def index
-    @places = Place.all
+    @places = Place.order("place_type_id").order("town_id").order("name").page(params[:page]).per(30)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,24 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @ped_action_line.name %>
+  <b>Name:</b></br>
+  <%= @ped_action_line.name %>: <%= @ped_action_line.description %>
 </p>
 
-<p>
-  <b>Description:</b>
-  <%= @ped_action_line.description %>
-</p>
 
-<p>
-  <b>Hirarchy:</b>
-  <%= @ped_action_line.hierarchy %>
-</p>
 
-<p>
-  <b>Ped strategy:</b>
-  <%= @ped_action_line.ped_strategy_id %>
-</p>
 
 
 <%= link_to 'Edit', edit_ped_action_line_path(@ped_action_line) %> |

@@ -24,10 +24,6 @@
     <%= f.number_field :hierarchy %>
   </div>
   <div class="field">
-    <%= f.label :priority_program_goal_id %><br />
-    <%= f.number_field :priority_program_goal_id %>
-  </div>
-  <div class="field">
 	<%= f.label :priority_program_goal_id, "Objetivo correspondiente en el Programa Prioritario" %><br />
 	<%= f.select :priority_program_goal_id, PriorityProgramGoal.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
   </div>

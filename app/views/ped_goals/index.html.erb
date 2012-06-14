@@ -4,22 +4,19 @@
   <tr>
   	<th>Ped</th>
     <th>Ped Sub Tema</th>
-    <th>Name</th>
-    <th>Description</th>
+    <th>Objetivos</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @ped_goals.each do |ped_goal| %>
-<% c = Ped.find(ped_goal.ped_id)%>
-<% d = PedSubTheme.find(ped_goal.ped_sub_theme_id)%>
+
   <tr>
-    <td><%= c.name %></td>
-    <td><%= d.name %></td>
-    <td><%= ped_goal.name %></td>
-    <td><%= ped_goal.description %></td>
-    <td><%= link_to 'Show', ped_goal %></td>
+    <td><%= ped_goal.ped.name %></td>
+    <td><%= ped_goal.ped_sub_theme.name %></td>
+    <td><%= ped_goal.name %>: <%= ped_goal.description %></td>
+    <td><%= link_to 'Ir a estrategias', ped_goal %></td>
     <td><%= link_to 'Edit', edit_ped_goal_path(ped_goal) %></td>
     <td><%= link_to 'Destroy', ped_goal, confirm: 'Are you sure?', method: :delete %></td>
   </tr>

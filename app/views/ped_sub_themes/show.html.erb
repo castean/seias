@@ -1,15 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Name:</b></br>
   <%= @ped_sub_theme.name %>
 </p>
 
+<br/>
 <p>
-  <b>Description:</b>
-  <%= @ped_sub_theme.description %>
+  <b>Objetivos:</b>
 </p>
 
+
+<% @ped_sub_theme.ped_goals.each do |goal| %>
+	<ul>
+		<li>
+			<%= link_to goal.name, ped_goal_path(goal.id)%>: <%= goal.description%>
+		</li>
+	</ul>
+<%end%>
+</br>
 
 <%= link_to 'Edit', edit_ped_sub_theme_path(@ped_sub_theme) %> |
 <%= link_to 'Back', ped_sub_themes_path %>

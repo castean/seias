@@ -1,25 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @ped.name %>
-</p>
-
-<p>
-  <b>Description:</b>
+  <b>Description:</b></br>
   <%= @ped.description %>
 </p>
-
+<br/>
 <p>
-  <b>Date start:</b>
-  <%= @ped.date_start %>
-</p>
-
-<p>
-  <b>Date end:</b>
-  <%= @ped.date_end %>
+  <b>Subtemas:</b>
 </p>
 
 
+<% @ped.ped_sub_themes.each do |subtheme| %>
+	<ul>
+		<li>
+			<%= link_to subtheme.name, ped_sub_theme_path(subtheme.id) %>
+		</li>
+	</ul>
+<%end%>
+</br>
 <%= link_to 'Edit', edit_ped_path(@ped) %> |
 <%= link_to 'Back', peds_path %>
