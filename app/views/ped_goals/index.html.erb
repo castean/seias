@@ -1,15 +1,17 @@
-<h1>Listing ped_goals</h1>
+<h3>Listing ped_goals</h3>
 
-<table>
-  <tr>
-  	<th>Ped</th>
-    <th>Ped Sub Tema</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="table table-striped">
+  <thead>
+      <tr>
+      	<th>Ped</th>
+        <th>Ped Sub Tema</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+  </thead>
 
 <% @ped_goals.each do |ped_goal| %>
   <tr>
@@ -26,4 +28,4 @@
 
 <br />
 
-<%= link_to 'New Ped goal', new_ped_goal_path %>
+<%= link_to 'New Ped goal', new_ped_goal_path, :class => "btn primary" %>
