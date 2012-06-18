@@ -14,8 +14,13 @@
 </p>
 
 <p>
-  <b>Fecha:</b>
-  <%= l(@activity.activity_date.to_date, :format => :long) %>
+  <b>Fecha Inicio:</b>
+  <%= l(@activity.activity_date_start.to_date, :format => :long) %>
+</p>
+
+<p>
+  <b>Fecha Fin:</b>
+  <%= l(@activity.activity_date_end.to_date, :format => :long) %>
 </p>
 
 <p>

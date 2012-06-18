@@ -11,20 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120614182616) do
+ActiveRecord::Schema.define(:version => 20120618160451) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
     t.text     "description"
-    t.datetime "activity_date"
     t.integer  "town_id"
     t.integer  "group_id"
     t.integer  "public_target_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "activity_type_id"
     t.integer  "county_id"
     t.integer  "user_id"
+    t.datetime "activity_date_start"
+    t.datetime "activity_date_end"
   end
 
   add_index "activities", ["group_id"], :name => "index_activities_on_group_id"
@@ -39,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20120614182616) do
     t.datetime "updated_at",                 :null => false
     t.integer  "measurement_id"
     t.integer  "critical_success_factor_id"
+    t.integer  "priority"
+    t.integer  "user_id"
   end
 
   create_table "activitygoals", :force => true do |t|
@@ -255,7 +258,7 @@ ActiveRecord::Schema.define(:version => 20120614182616) do
   create_table "priority_program_goals", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "hirarchy"
+    t.integer  "hierarchy"
     t.integer  "priority_program_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false

@@ -14,6 +14,7 @@ class ActivityTypesController < ApplicationController
   # GET /activity_types/1
   # GET /activity_types/1.json
   def show
+    
     @activity_type = ActivityType.find(params[:id])
 
     respond_to do |format|
@@ -25,7 +26,9 @@ class ActivityTypesController < ApplicationController
   # GET /activity_types/new
   # GET /activity_types/new.json
   def new
-    @activity_type = ActivityType.new
+    current_user = UserSession.find
+    id = current_user && current_user.record.id
+    @activity_type = ActivityType.new(:user_id => id)
 
     respond_to do |format|
       format.html # new.html.erb

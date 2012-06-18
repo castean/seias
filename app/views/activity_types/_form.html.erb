@@ -10,7 +10,12 @@
       </ul>
     </div>
   <% end %>
-
+  <%= f.hidden_field :user_id %>
+  <br />
+  <div class="field">
+    <%= f.label :priority,"Prioridad" %>
+    <%= f.number_field :priority %>
+  </div>
   <div class="field">
     <%= f.label :name, "Nombre de la Actividad" %>
     <%= f.text_field :name, :class => "span7" %>
