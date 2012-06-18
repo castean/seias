@@ -25,12 +25,16 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
+  	
     <%= f.label :activity_date_start, "Fecha Inicio de Actividad" %>
-    <%= f.date_select :activity_date_start %>
+    <%= f.datepicker :activity_date_start, :dateFormat => "dd-mm-yy" %>
+    <!-- <%= f.date_select :activity_date_start %> -->
   </div>
   <div class="field">
+  	
     <%= f.label :activity_date_end, "Fecha Fin de Actividad" %>
-    <%= f.date_select :activity_date_end %>
+    <%= f.datepicker :activity_date_end, :dateFormat => "dd-mm-yy" %>
+    <!--<%= f.date_select :activity_date_end %>-->
   </div> 
   <div class="field">
     <%= f.label :county_id, "Municipio" %>
