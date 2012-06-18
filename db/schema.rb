@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120618160451) do
+ActiveRecord::Schema.define(:version => 20120618180719) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20120618160451) do
     t.integer  "user_id"
     t.datetime "activity_date_start"
     t.datetime "activity_date_end"
+    t.integer  "qty_men"
+    t.integer  "qty_women"
   end
 
   add_index "activities", ["group_id"], :name => "index_activities_on_group_id"

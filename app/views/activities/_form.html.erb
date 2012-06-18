@@ -20,6 +20,20 @@
     <%= f.label :value, "Valor" %>
     <%= f.text_field :value %>
   </div>
+  <a href="#" class="show_hide">Capturar Detalle de Hombres y Mujeres</a>
+  <div class="slidingDiv">
+	
+		  <div class="field">
+		    <%= f.label :qty_men, "Cantidad de Hombres" %>
+		    <%= f.text_field :qty_men %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :qty_women, "Cantidad de Mujeres" %>
+		    <%= f.text_field :qty_women %>
+		  </div>
+		  <a href="#" class="show_hide">Ocultar</a></br>
+  </div>
+  </br>	
   <div class="field">
     <%= f.label :description, "Descripción" %>
     <%= f.text_area :description %>
