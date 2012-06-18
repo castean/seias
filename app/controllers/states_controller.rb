@@ -1,4 +1,4 @@
-require "CSV"
+#require "CSV"
 class StatesController < ApplicationController
   # GET /states
   # GET /states.json
@@ -12,22 +12,21 @@ class StatesController < ApplicationController
   end
 
 #-----------------------------------CSV Code-------------------------
-  def states_import
-    data = params[:dump][:file].read
-    @state=CSV.parse(data)
-    n=0
-    @state.each do |row|
-      c=State.new
-        c.cve_ent = row[0]
-        c.name = row[1]
-        c.country_id = row[2]
-      if c.save
-        n=n+1
-        GC.start if n%50==0
-      end
-      
-    end
-  end
+#  def states_import
+#    data = params[:dump][:file].read
+#    @state=CSV.parse(data)
+#    n=0
+#    @state.each do |row|
+#      c=State.new
+#        c.cve_ent = row[0]
+#        c.name = row[1]
+#        c.country_id = row[2]
+#      if c.save
+#        n=n+1
+#        GC.start if n%50==0
+#      end      
+#    end
+#  end
 #-------------------------------------------------------------
 
   # GET /states/1
