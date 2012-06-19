@@ -5,4 +5,5 @@ class ActivityType < ActiveRecord::Base
   validates :name, :presence => true
   validates :measurement_id, :presence => true
   validates :critical_success_factor_id, :presence => true
+  has_many :activities
 end

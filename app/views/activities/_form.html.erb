@@ -14,11 +14,15 @@
   <br />
   <div class="field">
     <%= f.label :activity_type_id, "Tipo de Actividad" %>
-    <%= f.collection_select :activity_type_id, ActivityType.all, :id, :name, options ={:prompt => "-- Selecciona un Tipo --"}%>
+    <%= f.collection_select :activity_type_id, ActivityType.all, :id, :name, options ={:prompt => "-- Selecciona un Tipo --"} %>
+    
   </div>
+ 
   <div class="field">
-    <%= f.label :value, "Valor" %>
+  	
+  	<%= f.label :value, "Valor ",{:id=>"typess"} %>
     <%= f.text_field :value %>
+    
   </div>
   <div class="field">
     <%= f.label :description, "Descripción" %>
@@ -50,7 +54,7 @@
     <%= f.label :public_target_id, "Público Objetivo" %>
     <%= f.collection_select :public_target_id, PublicTarget.all, :id, :name, options ={:prompt => "-- Selecciona la Poblacion Objetivo --"}%>
   </div>
-
+	
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -88,4 +88,11 @@ load_and_authorize_resource
       format.json { head :no_content }
     end
   end
+  
+  def for_activitytypeid
+    @activity_types = ActivityType.where(:id => params[:id])
+    respond_to do |format|
+      format.json  { render :json => @activity_types }      
+    end
+  end
 end
