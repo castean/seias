@@ -1,4 +1,5 @@
 class PriorityProgramActionLinesController < ApplicationController
+  load_and_authorize_resource
   # GET /priority_program_action_lines
   # GET /priority_program_action_lines.json
   def index

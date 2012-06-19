@@ -1,5 +1,6 @@
 #require "csv"
 class TownsController < ApplicationController
+  load_and_authorize_resource
   # GET /towns
   # GET /towns.json
   def index

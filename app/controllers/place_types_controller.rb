@@ -1,4 +1,5 @@
 class PlaceTypesController < ApplicationController
+  load_and_authorize_resource
   # GET /place_types
   # GET /place_types.json
   def index

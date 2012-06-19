@@ -1,4 +1,5 @@
 class DirectionsController < ApplicationController
+  load_and_authorize_resource
   # GET /directions
   # GET /directions.json
   def index

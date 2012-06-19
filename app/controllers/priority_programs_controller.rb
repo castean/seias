@@ -1,4 +1,5 @@
 class PriorityProgramsController < ApplicationController
+  load_and_authorize_resource
   # GET /priority_programs
   # GET /priority_programs.json
   def index

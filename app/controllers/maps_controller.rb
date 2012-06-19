@@ -1,4 +1,5 @@
 class MapsController < ApplicationController
+  load_and_authorize_resource
   def index
     #@state = 8
     #@cveloc = 1
