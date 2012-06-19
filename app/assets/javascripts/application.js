@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//
+//= require jquery-ui
 // Loads all Bootstrap javascripts
 //= require bootstrap
 
@@ -98,3 +98,5 @@ $(document).ready(function(){
             };
                 });
     });
+
+

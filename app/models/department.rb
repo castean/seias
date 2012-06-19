@@ -1,4 +1,5 @@
 class Department < ActiveRecord::Base
   belongs_to :direction
-   attr_accessible :name, :direction_id
+  has_many :users
+  attr_accessible :name, :direction_id
 end

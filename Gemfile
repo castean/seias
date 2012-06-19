@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery_datepicker'
 #Authentication & Authorization
 gem 'authlogic'
 gem 'easy_roles'

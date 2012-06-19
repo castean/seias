@@ -1,8 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Nombre:</b>
+  <b>Dirección:</b></br>
   <%= @direction.name %>
+</p>
+</br>
+<p>
+  <b>Departamentos:</b></br>
+	<% @direction.departments.each do |department| %>
+		<ul>
+			<li>
+				<%= link_to department.name, department_path(department.id) %>
+			</li>
+		</ul>
+	<%end%>
 </p>
 
 <%= link_to 'Editar', edit_direction_path(@direction) %> |

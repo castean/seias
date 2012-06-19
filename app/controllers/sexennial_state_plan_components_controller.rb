@@ -1,5 +1,4 @@
 class SexennialStatePlanComponentsController < ApplicationController
-
   load_and_authorize_resource
 
   # GET /sexennial_state_plan_components

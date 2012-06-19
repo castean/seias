@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120618160451) do
+ActiveRecord::Schema.define(:version => 20120619184302) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20120618160451) do
     t.integer  "user_id"
     t.datetime "activity_date_start"
     t.datetime "activity_date_end"
+    t.integer  "qty_men"
+    t.integer  "qty_women"
   end
 
   add_index "activities", ["group_id"], :name => "index_activities_on_group_id"
@@ -130,18 +132,17 @@ ActiveRecord::Schema.define(:version => 20120618160451) do
     t.integer  "critical_success_factor_type_id"
     t.integer  "user_id"
     t.string   "title"
-    t.text     "description",                                                                        :null => false
-    t.decimal  "percentage",                        :precision => 10, :scale => 5
+    t.text     "description",                                                                      :null => false
+    t.decimal  "percentage",                      :precision => 10, :scale => 5
     t.string   "objective_minimum"
     t.string   "objective_satisfying"
     t.string   "objective_excelent"
-    t.integer  "unit_of_measurement_id",                                                             :null => false
-    t.string   "unit_of_measurement_description",                                                    :null => false
-    t.boolean  "confidential",                                                                       :null => false
-    t.boolean  "active",                                                           :default => true, :null => false
-    t.integer  "sexennial_state_plan_component_id"
-    t.datetime "created_at",                                                                         :null => false
-    t.datetime "updated_at",                                                                         :null => false
+    t.integer  "unit_of_measurement_id",                                                           :null => false
+    t.string   "unit_of_measurement_description",                                                  :null => false
+    t.boolean  "confidential",                                                                     :null => false
+    t.boolean  "active",                                                         :default => true, :null => false
+    t.datetime "created_at",                                                                       :null => false
+    t.datetime "updated_at",                                                                       :null => false
     t.integer  "program_id"
   end
 
@@ -369,6 +370,7 @@ ActiveRecord::Schema.define(:version => 20120618160451) do
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
     t.string   "roles",              :default => "--- []"
+    t.integer  "department_id"
   end
 
 end

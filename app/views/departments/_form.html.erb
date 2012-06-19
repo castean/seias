@@ -9,14 +9,14 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+  <% end %></br>
   <div class="field">
-    <%= f.label :name, "Nombre" %><br />
+    <%= f.label :name, "Nombre" %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :direction_id, "Direccion" %><br />
-    <%= f.collection_select :direction_id,  Direction.all, :id, :name, options ={:prompt => "-- Selecciona la Direccion --"}%>
+    <%= f.label :direction_id, "Dirección" %>
+    <%= f.collection_select :direction_id,  Direction.order("id").all, :id, :name, options ={:prompt => "-- Selecciona la Direccion --"}%>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,4 +1,5 @@
 class ActivitygoalsController < ApplicationController
+  load_and_authorize_resource
   # GET /activitygoals
   # GET /activitygoals.json
   def index

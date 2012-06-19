@@ -1,4 +1,5 @@
 class PedSubThemesController < ApplicationController
+  load_and_authorize_resource
   # GET /ped_sub_themes
   # GET /ped_sub_themes.json
   def index

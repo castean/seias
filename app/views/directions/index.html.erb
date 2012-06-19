@@ -11,7 +11,7 @@
 <% @directions.each do |direction| %>
   <tr>
   	<td><%= direction.name %></td>
-    <td><%= link_to 'Mostrar', direction %></td>
+    <td><%= link_to 'Ir a Departamentos', direction %></td>
     <td><%= link_to 'Editar', edit_direction_path(direction) %></td>
     <td><%= link_to 'Destruir', direction, confirm: '¿Esta Seguro?', method: :delete %></td>
   </tr>

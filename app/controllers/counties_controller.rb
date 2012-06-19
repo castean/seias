@@ -1,4 +1,5 @@
 class CountiesController < ApplicationController
+  load_and_authorize_resource
   # GET /counties
   # GET /counties.json
   def index

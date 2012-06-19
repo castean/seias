@@ -1,4 +1,5 @@
 class GruposController < ApplicationController
+  load_and_authorize_resource
   # GET /grupos
   # GET /grupos.json
   def index

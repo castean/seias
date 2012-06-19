@@ -1,4 +1,5 @@
 class StatisticalMapsController < ApplicationController
+  load_and_authorize_resource
   # GET /statistical_maps
   # GET /statistical_maps.json
   def index

@@ -1,4 +1,5 @@
 class GoalsController < ApplicationController
+  load_and_authorize_resource
   before_filter :find_critical_success_factor
   # GET /goals
   # GET /goals.json
