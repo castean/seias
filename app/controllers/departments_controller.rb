@@ -2,7 +2,7 @@ class DepartmentsController < ApplicationController
   # GET /departments
   # GET /departments.json
   def index
-    @departments = Department.all
+    @departments = Department.order("direction_id","name").all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -16,11 +16,6 @@
   </div>
 
   <div class="field">
-    <%= f.label :sexennial_state_plan_component_id, "Plan Estatal Sexenal" %>
-    <%= f.select :sexennial_state_plan_component_id, SexennialStatePlanComponent.all.collect{ |s| [s.title, s.id] }, {:include_blank => false}, :class => "span7" %>
-  </div>
-
-  <div class="field">
     <%= f.label :title, "Título" %>
     <%= f.text_field :title, :class => "span7" %>
   </div>

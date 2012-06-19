@@ -1,17 +1,21 @@
 <h1>Lista de Departamentos</h1>
-
+</br>
 <table>
   <tr>
-  	<th>Nombre</th>
+  	<th>Dirección</th>
+  	<th>Departamento</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
+<%= link_to 'Nuevo Departamento', new_department_path %>
+</br>
+</br>
 <% @departments.each do |department| %>
   <tr>
+  	<td><%= department.direction.name %></td>
   	<td><%= department.name %></td>
-    <td><%= link_to 'Mostrar', department %></td>
+    <td><%= link_to 'Mostrar Empleados', department %></td>
     <td><%= link_to 'Editar', edit_department_path(department) %></td>
     <td><%= link_to 'Destruir', department, confirm: '¿Esta Seguro?', method: :delete %></td>
   </tr>

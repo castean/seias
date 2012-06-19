@@ -1,14 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Nombre:</b>
-  <%= @department.name %>
-</p>
-
-<p>
-  <b>Direccion:</b>
+  <b>Dirección:</b></br>
   <%= Direction.find(@department.direction_id).name %>
 </p>
+</br>
+<p>
+  <b>Departamento:</b></br>
+  <%= @department.name %>
+</p>
+</br>
+  <b>Usuarios:</b>
+</p>
+<% @department.users.each do |user| %>
+	<ul>
+		<li>
+			<%= user.name %> <%= user.last_name%>
+		</li>
+	</ul>
+<%end%>
+
+</br>
+
 
 <%= link_to 'Editar', edit_department_path(@department) %> |
 <%= link_to 'Regresar', departments_path %>

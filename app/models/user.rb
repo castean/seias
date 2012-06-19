@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
  
   has_many :critical_success_factors
   has_many :activities
-  attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :initial_role, :roles
+  belongs_to :department
+  attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :initial_role, :roles, :department_id
   attr_accessor :initial_role
   
   ROLES = %w[admin moderator user final_user]

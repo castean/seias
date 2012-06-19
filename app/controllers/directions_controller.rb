@@ -2,7 +2,7 @@ class DirectionsController < ApplicationController
   # GET /directions
   # GET /directions.json
   def index
-    @directions = Direction.all
+    @directions = Direction.order("id").all
 
     respond_to do |format|
       format.html # index.html.erb
