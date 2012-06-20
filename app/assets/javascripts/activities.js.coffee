@@ -16,5 +16,5 @@ $(document).ready ->
         error: (XMLHttpRequest, errorTextStatus, error) ->
           alert "Failed to submit : " + errorTextStatus + " ;" + error
         success: (data) ->
-          $.each data, (i, j) ->
-            $("#typess").text("Capturar " + j.name);
+          $.each data, (i,j) ->
+            $("#typess").text(j.measurement_description + "  " + j.unit_of_measurement.name);

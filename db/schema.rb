@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120619184302) do
+ActiveRecord::Schema.define(:version => 20120620160705) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -40,10 +40,10 @@ ActiveRecord::Schema.define(:version => 20120619184302) do
     t.text     "measurement_description"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
-    t.integer  "measurement_id"
     t.integer  "critical_success_factor_id"
     t.integer  "priority"
     t.integer  "user_id"
+    t.integer  "unit_of_measurement_id"
   end
 
   create_table "activitygoals", :force => true do |t|
