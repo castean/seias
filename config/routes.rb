@@ -37,6 +37,7 @@ Seias::Application.routes.draw do
   match '/departments/for_countyid/:id' => 'departments#for_countyid'
   resources :departments
 
+  match '/activities/for_activitytypeid/:activity_type_id' => 'activities#for_activitytypeid'
   resources :activities
 
   resources :groups
@@ -52,8 +53,10 @@ Seias::Application.routes.draw do
   post '/states/import' => "states#states_import", :as => :importarestados
   resources :states
 
-  resources :activity_types
-
+  resources :activity_types do
+    resource :unit_of_measurements
+  end
+  
   resources :activitygoals
 
   resources :public_targets

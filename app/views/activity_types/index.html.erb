@@ -14,11 +14,11 @@
   </thead>
 
 <% @activity_types.each do |activity_type| %>
-<% um = UnitOfMeasurement.find(activity_type.measurement_id)%>
+<% um = UnitOfMeasurement.find(activity_type.unit_of_measurement_id)%>
   <tr>
     <td><%= activity_type.name %></td>
     <td><%= activity_type.description %></td>
-    <!--<td><%= activity_type.measurement_id %></td>-->
+    <!--<td><%= activity_type.unit_of_measurement_id %></td>-->
     <td><%= um.name + " " + activity_type.measurement_description%></td>
     
     <td><%= link_to 'Mostrar', activity_type %></td>

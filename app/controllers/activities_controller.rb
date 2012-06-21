@@ -88,4 +88,12 @@ class ActivitiesController < ApplicationController
       format.json { head :no_content }
     end
   end
-end
+  # ISC Christian Ivan Alderete Garcia funcion para cambiar valores con CoffeScript y json
+  def for_activitytypeid
+    @activity_types = ActivityType.includes(:unit_of_measurement).where(:id => params[:activity_type_id])
+    
+    respond_to do |format|
+      format.json  { render :json => @activity_types.to_json(:include => :unit_of_measurement)}      
+    end
+  end
+end 
