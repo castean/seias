@@ -23,7 +23,7 @@
     <td><%= activity.group.name %></td>
     <td><%= activity.public_target.name %></td>
     <td><%= link_to 'Ver Detalles', activity %></td>
-    <td><%= link_to 'Editar', edit_activity_path(activity) %></td>
+
     <td><%= link_to 'Eliminar', activity, confirm: '¿Está seguro?', method: :delete %></td>
   </tr>
 <% end %>
