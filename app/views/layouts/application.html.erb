@@ -53,12 +53,22 @@
                     <span class="nombre"><%= current_user.fullname %></span>
                     <span class="depto">Dif Estatal Chihuahua</span>
                 </div>
+                <h4>Programa Prioritario</h4>
                 <ul>
                     <li class="plan"><span></span><%= link_to "Programa Prioritario 2011 - 2016", priority_programs_path %></li>
+                    <li class="plan"><span></span><%= link_to "Objetivos Programa Prioritario", priority_program_goals_path %></li>
+                    <li class="plan"><span></span><%= link_to "Estrategias Programa Prioritario", priority_program_strategies_path %></li>
+                    <li class="plan"><span></span><%= link_to "Lineas de Acción Programa Prioritario", priority_program_action_lines_path %></li>
+                </ul>
+                <h4>Profesionalización</h4>
+                <ul>    
+                    <li class="factores"><span></span><%= link_to "Programas", programs_path %></li>
                     <li class="factores"><span></span><%= link_to "Factores Criticos", critical_success_factors_path %></li>
+                </ul>
+                <h4>Actividades</h4>
+                <ul>    
                     <li class="actividades"><span></span><%= link_to "Tipo de Actividades", activity_types_path %></li>
-                    <li class="actividades"><span></span><%= link_to "Actividades", activities_path %></li>
-                    
+                    <li class="actividades"><span></span><%= link_to "Actividades", activities_path %></li> 
                 </ul>
                 <h4>Favoritos</h4>
                 <ul>

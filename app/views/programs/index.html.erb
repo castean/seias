@@ -1,15 +1,17 @@
-<h1>Lista de Programas</h1>
+<h3>Lista de Programas</h3>
 
-<table>
-  <tr>
-    <th>Nombre</th>
-    <th>Descripcion</th>
-    <th>Departmento</th>
-    <th>Responsable</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	    <th>Nombre</th>
+	    <th>Descripción</th>
+	    <th>Departmento</th>
+	    <th>Responsable</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+	</thead>
 
 <% @programs.each do |program| %>
   <% u = User.find(program.responsable_id) %>
@@ -20,11 +22,11 @@
     <td><%= u.name.to_s + ' ' + u.last_name.to_s + ' ' + u.second_last_name.to_s %></td>
     <td><%= link_to 'Mostrar', program %></td>
     <td><%= link_to 'Editar', edit_program_path(program) %></td>
-    <td><%= link_to 'Destruir', program, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Borrar', program, confirm: '¿Esta usted seguro?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'Nuevo Programa', new_program_path %>
+<%= link_to 'Nuevo Programa', new_program_path, :class => "btn primary" %>

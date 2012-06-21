@@ -1,31 +1,30 @@
-<h1>Listing priority_program_action_lines</h1>
+<h3>Lineas de Acción Programa Prioritario</h3>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Hierarchy</th>
-    <th>Priority program strategy</th>
-    <th>Ped action line</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	  	<th>Objetivo</th>
+	  	<th>Estrategia</th>
+	    <th>Nombre</th>
+	    <th>Descripción</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+	</thead>
 <% @priority_program_action_lines.each do |priority_program_action_line| %>
   <tr>
+  	<td><%= priority_program_action_line.priority_program_strategy.priority_program_goal.name %></td>
+  	<td><%= priority_program_action_line.priority_program_strategy.name %></td>
     <td><%= priority_program_action_line.name %></td>
     <td><%= priority_program_action_line.description %></td>
-    <td><%= priority_program_action_line.hierarchy %></td>
-    <td><%= priority_program_action_line.priority_program_strategy_id %></td>
-    <td><%= priority_program_action_line.ped_action_line_id %></td>
-    <td><%= link_to 'Show', priority_program_action_line %></td>
-    <td><%= link_to 'Edit', edit_priority_program_action_line_path(priority_program_action_line) %></td>
-    <td><%= link_to 'Destroy', priority_program_action_line, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Mostrar', priority_program_action_line %></td>
+    <td><%= link_to 'Editar', edit_priority_program_action_line_path(priority_program_action_line) %></td>
+    <td><%= link_to 'Borrar', priority_program_action_line, confirm: '¿Esta usted seguro?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Priority program action line', new_priority_program_action_line_path %>
+<%= link_to 'Agregar Línea de Acción', new_priority_program_action_line_path, :class => "btn primary" %>
