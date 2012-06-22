@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
  
   has_many :critical_success_factors
   has_many :activities
+  has_many :programs
   belongs_to :department
   attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_con
 

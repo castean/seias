@@ -3,9 +3,9 @@
 <table class="table table-striped">
   <thead>
 	  <tr>
-	    <th>Nombre</th>
+	  	<th>Departmento</th>
+	    <th>Programa</th>
 	    <th>Descripción</th>
-	    <th>Departmento</th>
 	    <th>Responsable</th>
 	    <th></th>
 	    <th></th>
@@ -16,13 +16,19 @@
 <% @programs.each do |program| %>
   <% u = User.find(program.responsable_id) %>
   <tr>
+  	<td><%= Department.find(program.department_id).name %></td>
     <td><%= program.name %></td>
     <td><%= program.description %></td>
-    <td><%= Department.find(program.department_id).name %></td>
     <td><%= u.name.to_s + ' ' + u.last_name.to_s + ' ' + u.second_last_name.to_s %></td>
-    <td><%= link_to 'Mostrar', program %></td>
-    <td><%= link_to 'Editar', edit_program_path(program) %></td>
-    <td><%= link_to 'Borrar', program, confirm: '¿Esta usted seguro?', method: :delete %></td>
+    <td><%= link_to 'Detalles', program %></td>
+    <td><%= link_to(edit_program_path(program)) do %>
+    		<%= image_tag("edit.png") %>
+    	<%end%>
+    </td>
+    <td><%= link_to(program, :confirm => '¿Esta usted seguro?', :method => :delete, :remote =>true) do %>
+    		<%= image_tag("delete.png") %>
+    	<%end%>
+    </td>
   </tr>
 <% end %>
 </table>

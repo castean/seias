@@ -2,14 +2,29 @@
 <p>
   <h3><%= @critical_success_factor.title %></h3>
 </p>
-<br />
+</br>
 <p>
   <h4>Descripción:</h4>
   <%= @critical_success_factor.description %>
 </p>
 <br />
 <p>
-  <h4>Porcentaje:</h4>
+  <h4>Departamento:</h4>
+  <%= @critical_success_factor.program.department.name %>
+</p>
+<br />
+<p>
+  <h4>Programa:</h4>
+  <%= @critical_success_factor.program.name %>
+</p>
+<br />
+<p>
+  <h4>Responsable:</h4>
+   
+</p>
+<br />
+<p>
+  <h4>Peso %:</h4>
   <%= @critical_success_factor.percentage %>
 </p>
 <br />

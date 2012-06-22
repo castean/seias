@@ -5,7 +5,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>SEIAS</title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= stylesheet_link_tag    "/assets/css/custom-theme/jquery-ui-1.8.20.custom.css", "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield :head %>
@@ -82,7 +82,7 @@
             <div id="CONTENT_BODY">
                 <%= yield %>
                 <%= yield :scripts %>
-                <%= debug(params) if Rails.env.development? %>
+                <!-- <%= debug(params) if Rails.env.development? %> -->
             </div><!-- CONTENT_BODY -->
 
             <div id="SIDEBAR_RIGHT">

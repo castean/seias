@@ -5,7 +5,7 @@
 	  <tr>
 	  	<th>Objetivo</th>
 	  	<th>Estrategia</th>
-	    <th>Nombre</th>
+	    <th>Linea de Acción</th>
 	    <th>Descripción</th>
 	    <th></th>
 	    <th></th>
@@ -18,9 +18,15 @@
   	<td><%= priority_program_action_line.priority_program_strategy.name %></td>
     <td><%= priority_program_action_line.name %></td>
     <td><%= priority_program_action_line.description %></td>
-    <td><%= link_to 'Mostrar', priority_program_action_line %></td>
-    <td><%= link_to 'Editar', edit_priority_program_action_line_path(priority_program_action_line) %></td>
-    <td><%= link_to 'Borrar', priority_program_action_line, confirm: '¿Esta usted seguro?', method: :delete %></td>
+    <td><%= link_to 'Detalles', priority_program_action_line %></td>
+    <td><%= link_to (edit_priority_program_action_line_path(priority_program_action_line)) do %>
+    		<%= image_tag("edit.png") %>
+    	<%end%>
+    </td>
+    <td><%= link_to(priority_program_action_line, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => true) do %>
+    		<%= image_tag("delete.png")%>
+    	<%end%>
+    </td>
   </tr>
 <% end %>
 </table>

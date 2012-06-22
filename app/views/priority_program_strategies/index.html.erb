@@ -3,8 +3,8 @@
 <table class="table table-striped">
   <thead>
 	  <tr>
-	  	<th>Objetivo del Programa Prioritario</th>
-	    <th>Nombre</th>
+	  	<th>Objetivo</th>
+	    <th>Estrategia</th>
 	    <th>Descripción</th>
 	    <th></th>
 	    <th></th>
@@ -18,8 +18,14 @@
     <td><%= priority_program_strategy.name %></td>
     <td><%= priority_program_strategy.description %></td>
     <td><%= link_to 'Ir a Lineas de Acción', priority_program_strategy %></td>
-    <td><%= link_to 'Editar', edit_priority_program_strategy_path(priority_program_strategy) %></td>
-    <td><%= link_to 'Borrar', priority_program_strategy, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to(edit_priority_program_strategy_path(priority_program_strategy)) do %>
+    		<%= image_tag("edit.png")%>
+    	<%end%>
+    </td>
+    <td><%= link_to(priority_program_strategy, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => true) do%>
+    		<%= image_tag("delete.png")%>
+    	<%end%>
+    </td>
   </tr>
 <% end %>
 </table>
