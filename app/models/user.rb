@@ -35,8 +35,7 @@ class User < ActiveRecord::Base
   end
 
   protected
-   def valid_ldap_credentials?(password)
+    def valid_ldap_credentials?(password)
       Ldap.valid?(self.login, password)
-   end
-
+    end
 end

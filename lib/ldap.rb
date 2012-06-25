@@ -2,7 +2,7 @@ require 'net/ldap'
 
 class Ldap
 
-  LDAP_SERVER_IP = 'buzon.uach.mx'
+   LDAP_SERVER_IP = 'buzon.uach.mx'
   #LDAP_USERNAME = 'ldap_username'
   #LDAP_PASSWORD = 'ldap_password'
 
@@ -18,4 +18,5 @@ class Ldap
     @ldap.host = LDAP_SERVER_IP
     @ldap.auth username, password
   end
+  
 end

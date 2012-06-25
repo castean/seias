@@ -35,5 +35,5 @@ Seias::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.ldap_auth = true
+  config.ldap_auth = false
 end

@@ -5,7 +5,9 @@ class UserSession < Authlogic::Session::Base
     [session_key]
   end
 
-  if Seias::Application.config.ldap_auth
+
+   if Seias::Application.config.ldap_auth
     verify_password_method :valid_ldap_credentials?
   end
+ 
 end
