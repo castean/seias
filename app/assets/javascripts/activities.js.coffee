@@ -5,7 +5,6 @@
 $(document).ready ->
   $("select#activity_activity_type_id").change ->
     id_value_string = $(this).val()
-    name_value_string = $(this).value
     if id_value_string > "0"
       $.ajax
         method: "put"
@@ -18,3 +17,9 @@ $(document).ready ->
         success: (data) ->
           $.each data, (i,j) ->
             $("#typess").text(j.unit_of_measurement.name + "  " + j.measurement_description);
+            
+$(document).ready ->
+  $(".slidingDiv").hide()
+  $(".show_hide").show()
+  $(".show_hide").click ->
+    $(".slidingDiv").slideToggle();
