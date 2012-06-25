@@ -34,15 +34,10 @@ class User < ActiveRecord::Base
   def has_role? role
     roles_list.include? role.to_sym
   end
-<<<<<<< HEAD
 
   protected
    def valid_ldap_credentials?(password)
       Ldap.valid?(self.login, password)
    end
-=======
-  def role?(role)
-    roles.include? role.to_s
-  end
->>>>>>> 1a5092917541a7aa9084feb5961c7950c36d81fc
+
 end
