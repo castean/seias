@@ -31,15 +31,16 @@
     <%= f.label :email, "Correo Electrónico" %><br />
     <%= f.text_field :email %>
   </div>
-
-  <div class="field">
-    <%= f.label :password, "Contraseña" %><br />
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirmar Contraseña" %><br />
-    <%= f.password_field :password_confirmation %>
-  </div>
+  <% unless Seias::Application.config.ldap_auth %>
+    <div class="field">
+      <%= f.label :password, "Contraseña" %><br />
+      <%= f.password_field :password %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation, "Confirmar Contraseña" %><br />
+      <%= f.password_field :password_confirmation %>
+    </div>
+   <% end %>
 
   <div class="field">
     <%= f.label :department_id, "Departamento" %>
