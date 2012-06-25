@@ -5,10 +5,19 @@ class Ability
     if user.nil?
       can :read, :all
       can :create, UserSession
+      #puts "Usuario Nulo"
     else
-      if user.has_role? :admin
+      if user.role? :admin
         can :manage, :all
-      elsif user.has_role? :user
+        #for i in 0..10
+           #puts "Entro al Admin"
+        #end        
+      elsif user.role? :user
+        #for i in 0..10
+           #puts "Entro al User"
+        #end     
+        can :destroy, UserSession     
+        can :read, Home
         can :read, Activity
         can :create, Activity
         can :update, Activity do |acti|

@@ -1,15 +1,17 @@
-<h3>Listing ped_goals</h3>
+<h3>Objetivos del Programa Estatal de Desarrollo</h3>
 
-<table>
-  <tr>
-  	<th>Ped</th>
-    <th>Ped Sub Tema</th>
-    <th>Objetivos</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	  	<th>Ped</th>
+	    <th>Ped Sub Tema</th>
+	    <th>Objetivos</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+  </thead>
+</br>
 
 <% @ped_goals.each do |ped_goal| %>
 
@@ -17,13 +19,19 @@
     <td><%= ped_goal.ped.name %></td>
     <td><%= ped_goal.ped_sub_theme.name %></td>
     <td><%= ped_goal.name %>: <%= ped_goal.description %></td>
-    <td><%= link_to 'Ir a estrategias', ped_goal %></td>
-    <td><%= link_to 'Edit', edit_ped_goal_path(ped_goal) %></td>
-    <td><%= link_to 'Destroy', ped_goal, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Estrategias', ped_goal %></td>
+    <td><%= link_to(edit_ped_goal_path(ped_goal)) do %>
+    		<%= image_tag("edit.png") %>
+    	<%end%>
+    </td>
+    <td><%= link_to(ped_goal, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => true) do %>
+    		<%= image_tag("delete.png") %>
+    	<%end%>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Ped goal', new_ped_goal_path, :class => "btn primary" %>
+<%= link_to 'Agregar Objetivo', new_ped_goal_path, :class => "btn primary" %>

@@ -31,17 +31,21 @@
     <%= f.label :email, "Correo Electrónico" %><br />
     <%= f.text_field :email %>
   </div>
-  <% unless Seias::Application.config.ldap_auth %>
-    <div class="field">
-      <%= f.label :password, "Contraseña" %><br />
-      <%= f.password_field :password %>
-    </div>
-    <div class="field">
-      <%= f.label :password_confirmation, "Confirmar Contraseña" %><br />
-      <%= f.password_field :password_confirmation %>
-    </div>
-   <% end %>
 
+ <% unless Seias::Application.config.ldap_auth %>
+  <div class="field">
+    <%= f.label :password, "Contraseña" %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "Confirmar Contraseña" %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+<% end %>
+  <div class="field">
+    <%= f.label :roles, "Rol" %><br />
+    <%= f.collection_select :roles, User::ROLES, :to_s, :titleize %>
+  </div>
   <div class="field">
     <%= f.label :department_id, "Departamento" %>
     <%= f.collection_select :department_id,  Department.order("id").all, :id, :name, options ={:prompt => "-- Selecciona el Departamento --"}%>

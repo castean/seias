@@ -1,26 +1,37 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Nombre:</b>
+  <b>Nombre:</b></br>
   <%= @program.name %>
 </p>
-
+</br>
 <p>
-  <b>Descripcion:</b>
+  <b>Descripcion:</b></br>
   <%= @program.description %>
 </p>
-
+</br>
 <p>
-  <b>Departmento:</b>
+  <b>Departmento:</b></br>
   <%= @program.department.name %>
 </p>
-
+</br>
 <p>
-  <b>Responsable:</b>
+  <b>Responsable:</b></br>
   <% u = User.find(@program.responsable_id) %>
   <%=  u.name.to_s + ' ' + u.last_name.to_s + ' ' + u.second_last_name.to_s %>
 </p>
+</br>
+<p>
+  <b>Factores Criticos Asociados:</b>
+</p>
+<% @program.critical_success_factors.each do |csf| %>
+	<ul>
+		<li>
+			<%= link_to csf.title, critical_success_factor_path(csf.id)%>: <%= csf.description%>
+		</li>
+	</ul>
+<%end%>
 
-
+</br>
 <%= link_to 'Editar', edit_program_path(@program) %> |
-<%= link_to 'Regresar', programs_path %>
+<%= link_to 'Programas', programs_path %>
