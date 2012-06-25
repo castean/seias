@@ -1,26 +1,35 @@
-<h1>Listing peds</h1>
+<h3>Programas Estatales de Desarrollo Dispobibles</h3>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	    <th>Nombre</th>
+	    <th>Descripción</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+  </thead>
+</br>
 
 <% @peds.each do |ped| %>
   <tr>
     <td><%= ped.name %></td>
     <td><%= ped.description %></td>
-    <td><%= link_to 'Ir a Subtemas', ped %></td>
-    <td><%= link_to 'Edit', edit_ped_path(ped) %></td>
-    <td><%= link_to 'Destroy', ped, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Subtemas', ped %></td>
+    <td><%= link_to(edit_ped_path(ped)) do %>
+    		<%= image_tag("edit.png") %>
+    	<%end%>
+    </td>
+    <td><%= link_to(ped, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => :true) do %>
+    		<%= image_tag("delete.png") %>
+    	<%end%>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Ped', new_ped_path %>
+<%= link_to 'Agregar Nuevo PED', new_ped_path, :class => "btn primary" %>
