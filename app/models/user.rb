@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
 
   attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :department_id, :roles 
 
-
   ROLES = %w[admin moderator user]
  
   serialize :roles
