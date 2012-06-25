@@ -12,9 +12,11 @@ class User < ActiveRecord::Base
   has_many :activities
   has_many :programs
   belongs_to :department
-  attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_con
+  attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :department_id, :roles 
 
   ROLES = %w[admin moderator user]
+ 
+  serialize :roles
  
   def fullname
     "#{name} #{last_name} #{second_last_name}"
@@ -30,5 +32,7 @@ class User < ActiveRecord::Base
   def has_role? role
     roles_list.include? role.to_sym
   end
-
+  def role?(role)
+    roles.include? role.to_s
+  end
 end

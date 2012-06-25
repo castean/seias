@@ -51,8 +51,16 @@
                 <div id="personal-info">
                     <%= image_tag("avatar.png") %>
                     <span class="nombre"><%= current_user.fullname %></span>
-                    <span class="depto">Dif Estatal Chihuahua</span>
+                    <span class="depto">DIF Estatal Chihuahua</span>
                 </div>
+                <h4>PED</h4>
+                <ul>
+                    <li class="plan"><span></span><%= link_to "PED 2011 - 2016", peds_path %></li>
+                    <li class="plan"><span></span><%= link_to "Sub Temas PED", ped_sub_themes_path %></li>
+                    <li class="plan"><span></span><%= link_to "Objetivos PED", ped_goals_path %></li>                    
+                    <li class="plan"><span></span><%= link_to "Estrategias PED", ped_strategies_path %></li>
+                    <li class="plan"><span></span><%= link_to "Lineas de Acción PED", ped_action_lines_path %></li>
+                </ul>
                 <h4>Programa Prioritario</h4>
                 <ul>
                     <li class="plan"><span></span><%= link_to "Programa Prioritario 2011 - 2016", priority_programs_path %></li>
