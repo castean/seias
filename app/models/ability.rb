@@ -15,7 +15,9 @@ class Ability
       elsif user.role? :user
         #for i in 0..10
            #puts "Entro al User"
-        #end          
+        #end     
+        can :destroy, UserSession     
+        can :read, Home
         can :read, Activity
         can :create, Activity
         can :update, Activity do |acti|

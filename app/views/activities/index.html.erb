@@ -22,9 +22,16 @@
     <td><%= activity.town.name %></td>
     <td><%= activity.group.name %></td>
     <td><%= activity.public_target.name %></td>
-    <td><%= link_to 'Ver Detalles', activity %></td>
-
-    <td><%= link_to 'Eliminar', activity, confirm: '¿Está seguro?', method: :delete %></td>
+    <td><%= link_to 'Detalles', activity %></td>
+	<td>
+        <%= link_to(edit_activity_path(activity)) do %>
+            <%= image_tag("edit.png") %>
+        <% end %>
+    </td>
+    <td><%= link_to(activity, :confirm => '¿Está seguro?', :method => :delete, :remote => :true) do %>
+    		<%= image_tag("delete.png") %>
+    	<%end%>
+    </td>
   </tr>
 <% end %>
 </table>
@@ -32,3 +39,5 @@
 <br />
 
 <%= link_to 'Agregar Actividad', new_activity_path, :class => "btn primary" %>
+
+

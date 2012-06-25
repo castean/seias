@@ -1,29 +1,35 @@
-<h1>Listing priority_program_strategies</h1>
+<h3>Lista de Estrategias del Programa Prioritario</h3>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Hierarchy</th>
-    <th>Priority program goal</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	  	<th>Objetivo</th>
+	    <th>Estrategia</th>
+	    <th>Descripción</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+	</thead>
 
 <% @priority_program_strategies.each do |priority_program_strategy| %>
   <tr>
+  	<td><%= priority_program_strategy.priority_program_goal.name %></td>
     <td><%= priority_program_strategy.name %></td>
     <td><%= priority_program_strategy.description %></td>
-    <td><%= priority_program_strategy.hierarchy %></td>
-    <td><%= priority_program_strategy.priority_program_goal_id %></td>
-    <td><%= link_to 'Show', priority_program_strategy %></td>
-    <td><%= link_to 'Edit', edit_priority_program_strategy_path(priority_program_strategy) %></td>
-    <td><%= link_to 'Destroy', priority_program_strategy, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Ir a Lineas de Acción', priority_program_strategy %></td>
+    <td><%= link_to(edit_priority_program_strategy_path(priority_program_strategy)) do %>
+    		<%= image_tag("edit.png")%>
+    	<%end%>
+    </td>
+    <td><%= link_to(priority_program_strategy, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => true) do%>
+    		<%= image_tag("delete.png")%>
+    	<%end%>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Priority program strategy', new_priority_program_strategy_path %>
+<%= link_to 'Agregar Estrategia', new_priority_program_strategy_path, :class => "btn primary" %>

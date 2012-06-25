@@ -3,9 +3,10 @@
 <table class="table table-striped">
   <thead>
       <tr>
-        <th>Título</th>
+      	<th>Departamento</th>
+        <th>Factor Crítico</th>
         <th>Descripción</th>
-        <th>Porcentaje</th>
+        <th>Peso %</th>
        <!--  <th>Unidad de Medida</th> -->
         <th></th>
         <th></th>
@@ -15,11 +16,12 @@
 
 <% @critical_success_factors.each do |critical_success_factor| %>
   <tr>
+  	<td><%= critical_success_factor.program.department.name %></td>
     <td><%= critical_success_factor.title %></td>
     <td><%= critical_success_factor.description %></td>
     <td><%= critical_success_factor.percentage %></td>
     <!-- <td><%= critical_success_factor.unit_of_measurement_description %></td> -->
-    <td><%= link_to 'detalles', critical_success_factor %></td>
+    <td><%= link_to 'Detalles', critical_success_factor %></td>
     <td>
         <%= link_to(edit_critical_success_factor_path(critical_success_factor)) do %>
             <%= image_tag("edit.png") %>

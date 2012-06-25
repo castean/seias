@@ -17,4 +17,4 @@ $(document).ready ->
           alert "Failed to submit : " + errorTextStatus + " ;" + error
         success: (data) ->
           $.each data, (i,j) ->
-            $("#typess").text(j.measurement_description + "  " + j.unit_of_measurement.name);
+            $("#typess").text(j.unit_of_measurement.name + "  " + j.measurement_description);
