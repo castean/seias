@@ -10,22 +10,22 @@
       </ul>
     </div>
   <% end %>
-
+  <br />
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name, "Nombre" %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label :description, "Descripción" %>
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :date_start %><br />
-    <%= f.date_select :date_start %>
+    <%= f.label :date_start, "Fecha de Inicio" %>
+    <%= f.datepicker :date_start %>
   </div>
   <div class="field">
-    <%= f.label :date_end %><br />
-    <%= f.date_select :date_end %>
+    <%= f.label :date_end, "Fecha de Termino" %>
+    <%= f.datepicker :date_end %>
   </div>
   <div class="actions">
     <%= f.submit %>
