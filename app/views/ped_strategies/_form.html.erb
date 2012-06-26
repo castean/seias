@@ -10,23 +10,23 @@
       </ul>
     </div>
   <% end %>
-
+<br />
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name, "Nombre" %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label :description, "Descripción" %>
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :hierarchy %><br />
+    <%= f.label :hierarchy, "Gerarquía" %>
     <%= f.number_field :hierarchy %>
   </div>
   <div class="field">
-	<%= f.label :ped_goal_id, "Objetivo correspondiente en el PED" %><br />
+	<%= f.label :ped_goal_id, "Objetivo correspondiente en el PED" %>
 	<%= f.select :ped_goal_id, PedGoal.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
-  </div>
+  </div></br>
   <div class="actions">
     <%= f.submit %>
   </div>

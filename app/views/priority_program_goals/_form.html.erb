@@ -10,23 +10,23 @@
       </ul>
     </div>
   <% end %>
-
+  <br />
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name, "Nombre" %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label :description, "Descripción" %>
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :hierarchy %><br />
+    <%= f.label :hierarchy, "Gerarquía" %>
     <%= f.number_field :hierarchy %>
   </div>
     <div class="field">
-	<%= f.label :priority_program_id, "Programa Prioritario al que pertenece" %><br />
+	<%= f.label :priority_program_id, "Programa Prioritario al que pertenece" %>
 	<%= f.select :priority_program_id, PriorityProgram.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
-  </div>
+  </div><br />
   <div class="actions">
     <%= f.submit %>
   </div>

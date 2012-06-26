@@ -11,14 +11,15 @@
 </p>
 <br />
 <p>
-  <h4>Medidas:</h4>
-  <%= @activity_type.unit_of_measurement_id %>
+  <b>Actividades:</b>
 </p>
-<br />
-<p>
-  <h4>Descripción de Medidas:</h4>
-  <%= @activity_type.measurement_description %>
-</p>
+<% @activity_type.activities.each do |actividades| %>
+	<ul>
+		<li>
+			<%= link_to actividades.description, activity_path(actividades.id)%>
+		</li>
+	</ul>
+<%end%>
 <br />
 <div class="form-actions btn-group">
 <%= link_to 'Editar', edit_activity_type_path(@activity_type), :class => "btn" %>

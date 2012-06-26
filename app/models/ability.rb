@@ -7,12 +7,12 @@ class Ability
       can :create, UserSession
       #puts "Usuario Nulo"
     else
-      if user.role? :admin
+      if user.has_role? :admin
         can :manage, :all
         #for i in 0..10
            #puts "Entro al Admin"
         #end        
-      elsif user.role? :user
+      elsif user.has_role? :user
         #for i in 0..10
            #puts "Entro al User"
         #end     

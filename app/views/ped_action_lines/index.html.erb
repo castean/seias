@@ -1,25 +1,34 @@
-<h1>Listing ped_action_lines</h1>
+<h3>Líneas de Acción del Programa Estatal de Desarrollo</h3>
 <br/>
-<table>
-  <tr>
-  	<th>Ped strategy</th>
-    <th>Linea de Acción</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	  	<th>Estrategia</th>
+	    <th>Linea de Acción</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+  </thead>
+</br>
 <% @ped_action_lines.each do |ped_action_line| %>
   <tr>
   	<td><%= ped_action_line.ped_strategy.name %>: <%= ped_action_line.ped_strategy.description %></td>
     <td><%= ped_action_line.name %>: <%= ped_action_line.description %></td>
-    <td><%= link_to 'Show', ped_action_line %></td>
-    <td><%= link_to 'Edit', edit_ped_action_line_path(ped_action_line) %></td>
-    <td><%= link_to 'Destroy', ped_action_line, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destalles', ped_action_line %></td>
+    <td><%= link_to(edit_ped_action_line_path(ped_action_line)) do %>
+    		<%= image_tag("edit.png") %>
+    	<%end%>
+    </td>
+    <td><%= link_to(ped_action_line, :confirm => 'Esta usted seguro?', :method => :delete, :remote => :true) do %>
+    		<%= image_tag("delete.png") %>
+    	<%end%>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Ped action line', new_ped_action_line_path %>
+<%= link_to 'Agregar Línea de Acción', new_ped_action_line_path, :class => "btn primary" %>

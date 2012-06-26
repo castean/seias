@@ -22,7 +22,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.active = true
-
+    if Seias::Application.config.ldap_auth
+      @user.password = "123pum"
+    end
     if @user.save
       redirect_to users_path, notice: 'Usuario registrado correctamente'
     else
