@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120620160705) do
+ActiveRecord::Schema.define(:version => 20120627165145) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -256,6 +256,13 @@ ActiveRecord::Schema.define(:version => 20120620160705) do
     t.datetime "updated_at",                   :null => false
   end
 
+  create_table "priority_program_action_lines_programs", :id => false, :force => true do |t|
+    t.integer  "priority_program_action_line_id"
+    t.integer  "program_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
   create_table "priority_program_goals", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -288,10 +295,9 @@ ActiveRecord::Schema.define(:version => 20120620160705) do
     t.string   "description"
     t.integer  "department_id"
     t.integer  "responsable_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "direction_id"
-    t.integer  "priority_program_action_line_id"
   end
 
   create_table "public_targets", :force => true do |t|
@@ -319,6 +325,7 @@ ActiveRecord::Schema.define(:version => 20120620160705) do
   create_table "statistical_maps", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "name"
   end
 
   create_table "towns", :force => true do |t|

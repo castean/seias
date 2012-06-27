@@ -3,7 +3,7 @@ class Program < ActiveRecord::Base
   belongs_to :direction
   belongs_to :department
   belongs_to :user
-  belongs_to :priority_program_action_line
+  has_and_belongs_to_many :priority_program_action_lines
   attr_accessible :department_id, :description, :name, :responsable_id, :direction_id, :priority_program_action_line_id
   validates :department_id, :description, :name, :responsable_id, :presence => true
 end

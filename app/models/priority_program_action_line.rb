@@ -2,7 +2,7 @@ class PriorityProgramActionLine < ActiveRecord::Base
   attr_accessible :description, :hierarchy, :name, :ped_action_line_id, :priority_program_strategy_id
   belongs_to :priority_program_strategy
   belongs_to :ped_action_line
-  has_many :programs
+  has_and_belongs_to_many :programs
   validates :name, :presence => true
   validates :description, :presence => true
   validates :hierarchy, :presence => true

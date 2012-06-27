@@ -32,11 +32,48 @@
     <%= f.label :responsable_id, "Responsable" %>
     <%= f.select :responsable_id, User.all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Responsable --"} %>
   </div>
-    <div class="field">
-    <%= f.label :priority_program_action_line_id, "Linea de Acción del Programa Prioritario a la que Aporta" %>
-    <%= f.select :priority_program_action_line_id, PriorityProgramActionLine.all.collect{ |c| [c.name.to_s, c.id] }, {:include_blank => "-- Selecciona una Linea de Acción --"} %>
-  </div>
+  </br>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<div>
+  <table border="0">
+     <tr>
+        <td colspan="2"><h4>Líneas de Acción Disponibles</h4></td>
+        <td colspan="2"><h4>Líneas de Acción Relacionadas al Programa</h4></td>
+     </tr>
+     <tr>
+         <td rowspan="3" align="right">
+            <label>
+                <%= select_tag("selectLeft",options_for_select(PriorityProgramActionLine.all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}), {:multiple=>true, :size => 6, :id=>'selectLeft'})%>
+            </label>
+        </td>
+        <td align="left">&nbsp;</td>
+         <td align="left">&nbsp;</td>
+        <td rowspan="3" align="left">
+          <label>
+            <%= select_tag("selectRight",{}, :size => 6,:multiple=>true, :id=>'selectRight') %>
+          </label>
+        </td>
+     </tr>
+     <tr>
+         <td align="left">&nbsp;</td>
+         <td align="left"><label>
+             <input name="btnRight" type="button" id="btnRight" value="&gt;&gt;" onClick="javascript:moveToRightOrLeft(1);">
+             </label>
+        </td> 
+    </tr>
+     <tr>
+         <td align="left">&nbsp;</td>
+         <td align="left"><label>
+             <input name="btnLeft" type="button" id="btnLeft" value="&lt;&lt;" onClick="javascript:moveToRightOrLeft(2);">
+             </label>
+        </td> 
+    </tr> 
+  </table> 
+ <div>
+
+</br>
+
