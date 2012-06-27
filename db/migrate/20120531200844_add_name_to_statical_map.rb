@@ -1,5 +1,5 @@
 class AddNameToStaticalMap < ActiveRecord::Migration
   def change
-    add_column :statical_maps, :name, :string
+    add_column :statistical_maps, :name, :string
   end
 end
