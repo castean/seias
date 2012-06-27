@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Nombre:</b></br>
   <%= @program.name %>
@@ -30,6 +28,19 @@
 			<%= link_to csf.title, critical_success_factor_path(csf.id)%>: <%= csf.description%>
 		</li>
 	</ul>
+<% end %>
+
+<br/>
+
+<p>
+  <b>Lineas de Acción:</b>
+</p>
+<% @program.priority_program_action_lines.order(:hierarchy).each do |line| %>
+    <ul>
+      <li>
+        <%= line.name %>:<%= line.description %>
+      </li>
+    </ul>
 <%end%>
 
 </br>

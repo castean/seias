@@ -33,47 +33,104 @@
     <%= f.select :responsable_id, User.all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Responsable --"} %>
   </div>
   </br>
+
+    <div>
+      <table border="0">
+         <tr>
+         <td colspan="2"><h4>Líneas de Acción Disponibles</h4></td>
+            <td colspan="2"><h4>Líneas de Acción Relacionadas al Programa</h4></td>
+         </tr>
+         <tr>
+         <td rowspan="3" align="right">
+        <label>
+          <%= f.select("selectLeft",options_for_select(PriorityProgramActionLine.all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{},{:multiple=>true, :size => 6, :id=>'selectLeft'})%>
+        </label>
+      </td>
+        <td align="left">&nbsp;</td>
+         <td align="left">&nbsp;</td>
+        <td rowspan="3" align="left">
+          <label>
+            <%= f.select("selectRight",{},{}, :size => 6,:multiple=>true, :id=>'selectRight') %>
+          </label>
+        </td>
+         </tr>
+         <tr>
+         <td align="left">&nbsp;</td>
+         <td align="left"><label>
+         <input name="btnRight" type="button" id="btnRight" value="&gt;&gt;" onClick="javascript:moveToRightOrLeft(1);">
+         </label>
+      </td> 
+      </tr>
+         <tr>
+         <td align="left">&nbsp;</td>
+         <td align="left"><label>
+         <input name="btnLeft" type="button" id="btnLeft" value="&lt;&lt;" onClick="javascript:moveToRightOrLeft(2);">
+             </label>
+      </td> 
+      </tr> 
+      </table> 
+     </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
 
-<div>
-  <table border="0">
-     <tr>
-        <td colspan="2"><h4>Líneas de Acción Disponibles</h4></td>
-        <td colspan="2"><h4>Líneas de Acción Relacionadas al Programa</h4></td>
-     </tr>
-     <tr>
-         <td rowspan="3" align="right">
-            <label>
-                <%= select_tag("selectLeft",options_for_select(PriorityProgramActionLine.all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}), {:multiple=>true, :size => 6, :id=>'selectLeft'})%>
-            </label>
-        </td>
-        <td align="left">&nbsp;</td>
-         <td align="left">&nbsp;</td>
-        <td rowspan="3" align="left">
-          <label>
-            <%= select_tag("selectRight",{}, :size => 6,:multiple=>true, :id=>'selectRight') %>
-          </label>
-        </td>
-     </tr>
-     <tr>
-         <td align="left">&nbsp;</td>
-         <td align="left"><label>
-             <input name="btnRight" type="button" id="btnRight" value="&gt;&gt;" onClick="javascript:moveToRightOrLeft(1);">
-             </label>
-        </td> 
-    </tr>
-     <tr>
-         <td align="left">&nbsp;</td>
-         <td align="left"><label>
-             <input name="btnLeft" type="button" id="btnLeft" value="&lt;&lt;" onClick="javascript:moveToRightOrLeft(2);">
-             </label>
-        </td> 
-    </tr> 
-  </table> 
- <div>
 
 </br>
+
+<script type="text/javascript">
+ function moveToRightOrLeft(side){
+     var listLeft=document.getElementById('selectLeft');
+     var listRight=document.getElementById('selectRight');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las líneas de acción a la derecha');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+ function move(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+ } 
+
+$(document).ready(function(){
+    $('#new_program').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+        $("#selectRight").val(options);
+    });
+
+    $('form[id*=edit_program]').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+        $("#selectRight").val(options);
+    });
+});
+
+</script>
 

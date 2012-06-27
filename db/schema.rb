@@ -257,10 +257,8 @@ ActiveRecord::Schema.define(:version => 20120627165145) do
   end
 
   create_table "priority_program_action_lines_programs", :id => false, :force => true do |t|
-    t.integer  "priority_program_action_line_id"
-    t.integer  "program_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.integer "priority_program_action_line_id"
+    t.integer "program_id"
   end
 
   create_table "priority_program_goals", :force => true do |t|
