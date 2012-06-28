@@ -19,6 +19,8 @@ class Activity < ActiveRecord::Base
   validates :activity_type_id, :presence => true
   validates :county_id, :presence => true
   validate :validate_captured_day
+  validate :validate_activity_sdate
+  validate :validate_sdate_fdate
 
   before_save :validar_nulos
   
@@ -41,6 +43,17 @@ class Activity < ActiveRecord::Base
     end
   end
 
+  def validate_activity_sdate
+    limite = Date.today + 7
+    if self.activity_date_start > limite
+      errors.add(:activity_date_start, "No se pueden capturar actividades con fecha de inicio mayor a 7 dias a partir del día de hoy")
+    end
+  end
 
-
+  def validate_sdate_fdate
+    if self.activity_date_end < self.activity_date_start
+      errors.add(:activity_date_end, "La fecha de termino de la actividad debe ser mayor o igual a la fecha de inicio")
+    end
+    
+  end
 end
