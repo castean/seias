@@ -10,7 +10,7 @@ worker_processes (rails_env == 'production' ? 4 : 6)
 preload_app true
 
 # Restart any workers that haven't responded in 30 seconds
-timeout 120
+timeout 300
 
 # Listen on a Unix data socket
 #listen_socket = rails_env == 'production' ? '/webapps/uniq/current/tmp/unicorn.sock' : RAILS_ROOT+'tmp/unicorn.sock'
