@@ -1,3 +1,4 @@
+#encoding:utf-8
 class CountiesController < ApplicationController
   load_and_authorize_resource
   # GET /counties

@@ -1,3 +1,4 @@
+#encoding:utf-8
 class ProgramsController < ApplicationController
   load_and_authorize_resource
   # GET /programs

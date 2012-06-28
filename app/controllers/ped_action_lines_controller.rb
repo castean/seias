@@ -1,3 +1,4 @@
+#encoding:utf-8
 class PedActionLinesController < ApplicationController
   load_and_authorize_resource
   # GET /ped_action_lines

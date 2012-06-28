@@ -1,3 +1,4 @@
+#encoding:utf-8
 class PriorityProgramActionLinesController < ApplicationController
   load_and_authorize_resource
   # GET /priority_program_action_lines

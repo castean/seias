@@ -1,10 +1,14 @@
+#encoding:utf-8
 class Program < ActiveRecord::Base
-  has_many :critical_success_factors
+  DAYS = (1..31)
+  
   belongs_to :direction
   belongs_to :department
   belongs_to :user
+  has_many :critical_success_factors
   has_and_belongs_to_many :priority_program_action_lines
-  attr_accessible :department_id, :description, :name, :responsable_id, :direction_id, :priority_program_action_line_id,
+  
+  attr_accessible :department_id, :description, :name, :responsable_id, :direction_id, :priority_program_action_line_id, :cut_day,
   #Para seleccionar multiples lineas de accion antes de crear un Programa
   :selectRight, :selectLeft
   attr_accessor :selectRight, :selectLeft

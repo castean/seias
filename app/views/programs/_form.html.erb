@@ -32,7 +32,10 @@
     <%= f.label :responsable_id, "Responsable" %>
     <%= f.select :responsable_id, User.all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Responsable --"} %>
   </div>
-  </br>
+  <div class="field">
+    <%= f.label :cut_day, "Día Corte de Captura" %>
+    <%= f.select :cut_day, Program::DAYS, {:include_blank => "-- Selecciona un Día --"} %>
+  </div>
 
     <div>
       <table border="0">

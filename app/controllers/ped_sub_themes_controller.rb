@@ -1,3 +1,4 @@
+#encoding:utf-8
 class PedSubThemesController < ApplicationController
   load_and_authorize_resource
   # GET /ped_sub_themes

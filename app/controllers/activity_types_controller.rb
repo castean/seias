@@ -1,3 +1,4 @@
+#encoding:utf-8
 class ActivityTypesController < ApplicationController
   load_and_authorize_resource
   # GET /activity_types

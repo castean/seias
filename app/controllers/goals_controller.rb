@@ -1,3 +1,4 @@
+#encoding:utf-8
 class GoalsController < ApplicationController
   load_and_authorize_resource
   before_filter :find_critical_success_factor
