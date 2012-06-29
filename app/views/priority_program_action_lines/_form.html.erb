@@ -25,11 +25,11 @@
   </div>
   <div class="field">
 	<%= f.label :priority_program_strategy_id, "Estrategia relacionada del Programa Prioritario" %>
-	<%= f.select :priority_program_strategy_id, PriorityProgramStrategy.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
+	<%= f.select :priority_program_strategy_id, PriorityProgramStrategy.order("name").all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
   </div>
   <div class="field">
 	<%= f.label :ped_action_line_id, "Linea de Accion del PED para enlace" %>
-	<%= f.select :ped_action_line_id, PedActionLine.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
+	<%= f.select :ped_action_line_id, PedActionLine.order("name").all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
   </div><br />
   <div class="actions">
     <%= f.submit %>

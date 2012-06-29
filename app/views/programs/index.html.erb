@@ -3,9 +3,10 @@
 <table class="table table-striped">
   <thead>
 	  <tr>
-	  	<th>Departmento</th>
+	  	
 	    <th>Programa</th>
 	    <th>Descripción</th>
+	    <th>Departmento</th>
 	    <th>Responsable</th>
 	    <th></th>
 	    <th></th>
@@ -16,9 +17,10 @@
 <% @programs.each do |program| %>
   <% u = User.find(program.responsable_id) %>
   <tr>
-  	<td><%= Department.find(program.department_id).name %></td>
+  	
     <td><%= program.name %></td>
     <td><%= program.description %></td>
+    <td><%= Department.find(program.department_id).name %></td>
     <td><%= u.name.to_s + ' ' + u.last_name.to_s + ' ' + u.second_last_name.to_s %></td>
     <td><%= link_to 'Factores', program %></td>
     <% if can? :update, program %>

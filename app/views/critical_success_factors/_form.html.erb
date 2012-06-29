@@ -12,7 +12,7 @@
 	</br>
   <div class="field">
     <%= f.label :critical_success_factor_type_id, "Tipo" %>
-    <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Tipo --"}, :class => "span7" %>
+    <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.order("name").all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Tipo --"}, :class => "span7" %>
   </div>
   <div class="field">
     <%= f.label :title, "Título" %>
@@ -24,7 +24,7 @@
   </div>
   <div class="field">
     <%= f.label :program_id, "Programa" %>
-    <%= f.select :program_id, Program.all.collect{ |p| [p.name, p.id] }, {:include_blank => false}, :class => "span7" %>
+    <%= f.select :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }, {:include_blank => false}, :class => "span7" %>
   </div>
   <b>Metas</b>
   <div class="field">

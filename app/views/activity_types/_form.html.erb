@@ -34,7 +34,7 @@
   <div class="actions">
   <div class="field">
     <%= f.label :critical_success_factor_id, "Factor Critico / Indicador" %>
-    <%= f.select :critical_success_factor_id, CriticalSuccessFactor.all.collect{ |c| [c.title, c.id] }, {:include_blank => "-- Seleccione una Medición --"}, :class => "span7" %>
+    <%= f.select :critical_success_factor_id, CriticalSuccessFactor.order("title").all.collect{ |c| [c.title, c.id] }, {:include_blank => "-- Seleccione una Medición --"}, :class => "span7" %>
   </div>
   </div>
         <div class="form-actions btn-group">
