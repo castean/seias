@@ -9,7 +9,7 @@
 <p>
   <b>Lineas de Acción:</b>
 </p>
-<% @priority_program_strategy.priority_program_action_line.each do |actionline| %>
+<% @priority_program_strategy.priority_program_action_lines.each do |actionline| %>
 	<ul>
 		<li>
 			<%= actionline.name %>: <%= actionline.description%>

@@ -21,7 +21,7 @@
   </div>
     <div class="field">
 	<%= f.label :ped_id, "PED al que pertenece" %>
-	<%= f.select :ped_id, Ped.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
+	<%= f.select :ped_id, Ped.order("name").all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
   </div>
   <div class="actions">
     <%= f.submit %>
