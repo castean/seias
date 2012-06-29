@@ -22,18 +22,10 @@ class User < ActiveRecord::Base
   def fullname
     "#{name} #{last_name} #{second_last_name}"
   end
-  def roles_list
-    roles_sym_list = []
-    ROLES.each do |role|
-      roles_sym_list << role.to_sym
-    end
-    roles_sym_list
-  end
 
-  def has_role? role
-    roles_list.include? role.to_sym
+  def role? role
+    roles.include?(role.to_s)
   end
-
   protected
     def valid_ldap_credentials?(password)
       Ldap.valid?(self.login, password)

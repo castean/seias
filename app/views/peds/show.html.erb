@@ -18,5 +18,7 @@
 	</ul>
 <%end%>
 </br>
-<%= link_to 'Edit', edit_ped_path(@ped) %> |
+<% if can? :update, @ped %>
+	<%= link_to 'Edit', edit_ped_path(@ped) %> |
+<% end %>
 <%= link_to 'Back', peds_path %>
