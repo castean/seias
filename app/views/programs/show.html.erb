@@ -44,5 +44,7 @@
 <%end%>
 
 </br>
-<%= link_to 'Editar', edit_program_path(@program) %> |
+<% if can? :update, @program %>
+	<%= link_to 'Editar', edit_program_path(@program) %> |
+<% end %>
 <%= link_to 'Programas', programs_path %>

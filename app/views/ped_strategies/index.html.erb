@@ -18,18 +18,23 @@
   	<td><%= ped_strategy.ped_goal.name%>: <%= ped_strategy.ped_goal.description%></td>
     <td><%= ped_strategy.name %>: <%= ped_strategy.description %></td>
     <td><%= link_to 'Lineas de Acción', ped_strategy %></td>
-    <td><%= link_to(edit_ped_strategy_path(ped_strategy)) do %>
-    		<%= image_tag("edit.png") %>
-    	<%end%>
-    </td>
-    <td><%= link_to(ped_strategy, :confirm => 'Esta usted seguro?', :method => :delete, :remote => :true) do %>
-    		<%= image_tag("delete.png") %>
-    	<%end%>
-    </td>
+    <% if can? :update, ped_strategy %>
+	    <td><%= link_to(edit_ped_strategy_path(ped_strategy)) do %>
+	    		<%= image_tag("edit.png") %>
+	    	<%end%>
+	    </td>
+    <%end%>
+    <% if can? :destroy, ped_strategy %>
+	    <td><%= link_to(ped_strategy, :confirm => 'Esta usted seguro?', :method => :delete, :remote => :true) do %>
+	    		<%= image_tag("delete.png") %>
+	    	<%end%>
+	    </td>
+    <%end%>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'Agregar Estrategia', new_ped_strategy_path, :class => "btn primary" %>
+<% if can? :create, @ped_strategies %>
+	<%= link_to 'Agregar Estrategia', new_ped_strategy_path, :class => "btn primary" %>
+<% end %>

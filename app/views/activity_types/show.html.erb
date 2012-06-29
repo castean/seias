@@ -22,6 +22,8 @@
 <%end%>
 <br />
 <div class="form-actions btn-group">
-<%= link_to 'Editar', edit_activity_type_path(@activity_type), :class => "btn" %>
+	<% if can? :update, @activity_type %>
+		<%= link_to 'Editar', edit_activity_type_path(@activity_type), :class => "btn" %>
+	<%end%>
 <%= link_to 'Atras', activity_types_path, :class => "btn" %>
 </div>

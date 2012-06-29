@@ -22,6 +22,7 @@
 	</ul>
 <%end%>
 </br>
-
-<%= link_to 'Editar Programa Prioritario', edit_priority_program_path(@priority_program) %> |
+<% if can? :update, @priority_program %>
+	<%= link_to 'Editar Programa Prioritario', edit_priority_program_path(@priority_program) %> |
+<% end %>
 <%= link_to 'Programa Prioritario', priority_programs_path %>
