@@ -22,20 +22,25 @@
     <td><%= critical_success_factor.percentage %></td>
     <!-- <td><%= critical_success_factor.unit_of_measurement_description %></td> -->
     <td><%= link_to 'Detalles', critical_success_factor %></td>
+    <% if can? :update, critical_success_factor %>
     <td>
         <%= link_to(edit_critical_success_factor_path(critical_success_factor)) do %>
             <%= image_tag("edit.png") %>
         <% end %>
     </td>
+    <% end %>
+    <% if can? :destroy, critical_success_factor %>
     <td>
         <%= link_to(critical_success_factor, :confirm => '¿Esta seguro?', :method => :delete,:remote =>true) do %>
             <%= image_tag("delete.png") %>
         <% end %>
     </td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
-
+<% if can? :create, @critical_success_factors %>
 <%= link_to 'Registrar Factor Crítico', new_critical_success_factor_path, :class => "btn primary" %>
+<% end %>

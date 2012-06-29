@@ -23,22 +23,27 @@
     <td><%= activity.group.name %></td>
     <td><%= activity.public_target.name %></td>
     <td><%= link_to 'Detalles', activity %></td>
-	<td>
-        <%= link_to(edit_activity_path(activity)) do %>
-            <%= image_tag("edit.png") %>
-        <% end %>
-    </td>
-    <td><%= link_to(activity, :confirm => '¿Está seguro?', :method => :delete, :remote => :true) do %>
-    		<%= image_tag("delete.png") %>
-    	<%end%>
-    </td>
+    <% if can? :update, activity %>
+			<td>
+	        <%= link_to(edit_activity_path(activity)) do %>
+	            <%= image_tag("edit.png") %>
+	        <% end %>
+	    </td>
+     <% end %>
+     <% if can? :destroy, activity %>
+	    <td><%= link_to(activity, :confirm => '¿Está seguro?', :method => :delete, :remote => :true) do %>
+	    		<%= image_tag("delete.png") %>
+	    	<%end%>
+	    </td>
+     <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'Agregar Actividad', new_activity_path, :class => "btn primary" %>
+<% if can? :create, Activity %>
+	<%= link_to 'Agregar Actividad', new_activity_path, :class => "btn primary" %>
+<% end %>
 </br>
 <div class="pager">
 	<%= paginate @activities %>

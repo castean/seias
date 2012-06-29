@@ -56,7 +56,9 @@
 
 
 <div class="btn-group">
-<%= link_to 'Editar', edit_critical_success_factor_path(@critical_success_factor), :class => "btn" %>
+<% if can? :update, @critical_success_factor %>
+	<%= link_to 'Editar', edit_critical_success_factor_path(@critical_success_factor), :class => "btn" %>
+<% end %>
 <%= link_to 'Agregar Meta', new_critical_success_factor_goal_path(@critical_success_factor), :class => "btn" %>
 <%= link_to 'Regresar', critical_success_factors_path, :class => "btn" %>
 </div>

@@ -17,18 +17,22 @@
   	<td><%= ped_action_line.ped_strategy.name %>: <%= ped_action_line.ped_strategy.description %></td>
     <td><%= ped_action_line.name %>: <%= ped_action_line.description %></td>
     <td><%= link_to 'Destalles', ped_action_line %></td>
-    <td><%= link_to(edit_ped_action_line_path(ped_action_line)) do %>
-    		<%= image_tag("edit.png") %>
-    	<%end%>
-    </td>
-    <td><%= link_to(ped_action_line, :confirm => 'Esta usted seguro?', :method => :delete, :remote => :true) do %>
-    		<%= image_tag("delete.png") %>
-    	<%end%>
-    </td>
+    <% if can? :update, ped_action_line %>
+	    <td><%= link_to(edit_ped_action_line_path(ped_action_line)) do %>
+	    		<%= image_tag("edit.png") %>
+	    	<%end%>
+	    </td>
+    <%end%>
+    <% if can? :destroy, ped_action_line %>
+	    <td><%= link_to(ped_action_line, :confirm => 'Esta usted seguro?', :method => :delete, :remote => :true) do %>
+	    		<%= image_tag("delete.png") %>
+	    	<%end%>
+	    </td>
+    <%end%>
   </tr>
 <% end %>
 </table>
-
 <br />
-
-<%= link_to 'Agregar Línea de Acción', new_ped_action_line_path, :class => "btn primary" %>
+<% if can? :create, @ped_action_lines %>
+	<%= link_to 'Agregar Línea de Acción', new_ped_action_line_path, :class => "btn primary" %>
+<% end %>

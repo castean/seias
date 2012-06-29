@@ -16,18 +16,23 @@
     <td><%= priority_program.name %></td>
     <td><%= priority_program.description %></td>
     <td><%= link_to 'Objetivos', priority_program %></td>
-    <td><%= link_to(edit_priority_program_path(priority_program)) do %>
-    		<%= image_tag("edit.png") %>
-    	<%end%>
-    </td>
-    <td><%= link_to(priority_program, :confirm => '¿Esta usted seguro?', :method => :delete, :remote =>true) do %>
-    		<%= image_tag("delete.png") %>
-    	<%end%>
-    </td>
+    <% if can? :update, priority_program %>
+	    <td><%= link_to(edit_priority_program_path(priority_program)) do %>
+	    		<%= image_tag("edit.png") %>
+	    	<%end%>
+	    </td>
+    <%end%>
+    <% if can? :destroy, priority_program %>
+	    <td><%= link_to(priority_program, :confirm => '¿Esta usted seguro?', :method => :delete, :remote =>true) do %>
+	    		<%= image_tag("delete.png") %>
+	    	<%end%>
+	    </td>
+    <%end%>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'Agregar Programa Prioritario', new_priority_program_path, :class => "btn primary" %>
+<% if can? :create, @priority_programs %>
+	<%= link_to 'Agregar Programa Prioritario', new_priority_program_path, :class => "btn primary" %>
+<% end %>

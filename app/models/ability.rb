@@ -7,16 +7,21 @@ class Ability
       can :create, UserSession
       #puts "Usuario Nulo"
     else
-      if user.has_role? :admin
+      can :read, :all
+      can :for_countyid, Department
+      can :for_directionid, Department
+      can :for_activitytypeid, Activity
+      can :destroy, UserSession 
+      if user.role? :admin
         can :manage, :all
         #for i in 0..10
            #puts "Entro al Admin"
         #end        
-      elsif user.has_role? :user
+      elsif user.role? :user
         #for i in 0..10
            #puts "Entro al User"
         #end     
-        can :destroy, UserSession     
+         
         can :read, Home
         can :read, Activity
         can :create, Activity
