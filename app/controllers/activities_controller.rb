@@ -8,7 +8,7 @@ class ActivitiesController < ApplicationController
     #id = current_user && current_user.record.id
     #@activities = Activity.where("user_id = #{ id }")
     
-    @activities = Activity.find_all_by_user_id(current_user)
+    @activities = Activity.where(:user_id => current_user).page(params[:page]).per(30)
     
     respond_to do |format|
       format.html # index.html.erb

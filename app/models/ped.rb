@@ -6,4 +6,13 @@ class Ped < ActiveRecord::Base
   validates :description, :presence => true
   validates :date_end, :presence => true
   validates :date_start, :presence => true
+
+  before_destroy :check_for_dependencias
+  
+  def check_for_dependencias
+    if ped_sub_themes.count > 0
+      errors.add_to_base("No se pueden borrar mientras tenga dependencias")
+      return false
+    end
+  end
 end

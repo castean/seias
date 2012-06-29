@@ -6,4 +6,13 @@ class PedStrategy < ActiveRecord::Base
   validates :description, :presence => true
   validates :hierarchy, :presence => true
   validates :ped_goal_id, :presence => true
+
+  before_destroy :check_for_dependencias
+  
+  def check_for_dependencias
+    if ped_action_lines.count > 0
+      errors.add_to_base("No se pueden borrar mientras tenga dependencias")
+      return false
+    end
+  end
 end

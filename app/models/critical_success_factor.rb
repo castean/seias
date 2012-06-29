@@ -11,4 +11,13 @@ class CriticalSuccessFactor < ActiveRecord::Base
   attr_accessible :title, :description,:percentage, :objective_minimum,
                   :objective_satisfying, :objective_excelent, :critical_success_factor_type_id, :unit_of_measurement_id,
                   :unit_of_measurement_description, :confidential, :sexennial_state_plan_component_id, :program_id
+                  
+  before_destroy :check_for_dependencias
+  
+  def check_for_dependencias
+    if activity_types.count > 0
+      errors.add_to_base("No se pueden borrar mientras tenga dependencias")
+      return false
+    end
+  end
 end

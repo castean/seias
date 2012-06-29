@@ -12,6 +12,15 @@ class Program < ActiveRecord::Base
   #Para seleccionar multiples lineas de accion antes de crear un Programa
   :selectRight, :selectLeft
   attr_accessor :selectRight, :selectLeft
+  
+  before_destroy :check_for_dependencias
+  
+  def check_for_dependencias
+    if critical_success_factors.count > 0
+      errors.add_to_base("No se pueden borrar mientras tenga dependencias")
+      return false
+    end
+  end
 
   def selectRight=(options)
 
