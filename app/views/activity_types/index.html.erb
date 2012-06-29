@@ -40,3 +40,8 @@
 <br />
 
 <%= link_to 'Crear un Tipo de Actividad', new_activity_type_path, :class => "btn primary" %>
+
+</br>
+<div class="pager">
+	<%= paginate @activity_types %>
+</div>

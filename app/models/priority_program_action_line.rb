@@ -8,4 +8,13 @@ class PriorityProgramActionLine < ActiveRecord::Base
   validates :hierarchy, :presence => true
   validates :ped_action_line_id, :presence => true
   validates :priority_program_strategy_id, :presence => true
+  
+  before_destroy :check_for_dependencias
+  
+  def check_for_dependencias
+    if programs.count > 0
+      errors.add_to_base("No se pueden borrar mientras tenga dependencias")
+      return false
+    end
+  end
 end

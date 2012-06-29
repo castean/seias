@@ -11,4 +11,15 @@ class ActivityType < ActiveRecord::Base
   validates :unit_of_measurement_id, :presence => true
   validates :critical_success_factor_id, :presence => true
   
+  before_destroy :check_for_activities
+  
+  def check_for_activities
+    if activities.count > 0
+      errors.add_to_base("No se pueden borrar acciones mientras tenga actividades dependientes")
+      return false
+    end
+  end
+  
+  
+  
 end

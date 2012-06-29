@@ -21,8 +21,7 @@ class Activity < ActiveRecord::Base
   validate :validate_captured_day
   validate :validate_activity_sdate
   validate :validate_sdate_fdate
-
-  before_save :validar_nulos
+  validate :validar_nulos
   
   def validar_nulos
     if self.qty_men.nil?
