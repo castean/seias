@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628171407) do
+ActiveRecord::Schema.define(:version => 20120629203958) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -297,6 +297,7 @@ ActiveRecord::Schema.define(:version => 20120628171407) do
     t.datetime "updated_at",     :null => false
     t.integer  "direction_id"
     t.integer  "cut_day"
+    t.datetime "start_date"
   end
 
   create_table "public_targets", :force => true do |t|

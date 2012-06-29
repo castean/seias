@@ -8,7 +8,7 @@ class Program < ActiveRecord::Base
   has_many :critical_success_factors
   has_and_belongs_to_many :priority_program_action_lines
   
-  attr_accessible :department_id, :description, :name, :responsable_id, :direction_id, :priority_program_action_line_id, :cut_day,
+  attr_accessible :department_id, :description, :name, :responsable_id, :direction_id, :priority_program_action_line_id, :cut_day, :start_date,
   #Para seleccionar multiples lineas de accion antes de crear un Programa
   :selectRight, :selectLeft
   attr_accessor :selectRight, :selectLeft

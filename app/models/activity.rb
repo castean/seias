@@ -22,6 +22,7 @@ class Activity < ActiveRecord::Base
   validate :validate_activity_sdate
   validate :validate_sdate_fdate
   validate :validar_nulos
+  validate :validar_program_start_date
   
   def validar_nulos
     if self.qty_men.nil?
@@ -39,6 +40,13 @@ class Activity < ActiveRecord::Base
       if diahoy > self.activity_type.critical_success_factor.program.cut_day
         errors.add(:activity_date_start, "La fecha límite para captura de esa actividad ya termino")
       end
+    end
+  end
+  
+  def validar_program_start_date
+    hoy = Date.today
+    if hoy < self.activity_type.critical_success_factor.program.start_date.to_date
+        errors.add(:activity_date_start, "El Programa al que esta ligada esta actividad aun no a empezado")
     end
   end
 
