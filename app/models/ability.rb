@@ -7,25 +7,18 @@ class Ability
       can :create, UserSession
       #puts "Usuario Nulo"
     else
-      can :read, Home
+      #can :read, Home
       can :read, :all
       can :for_countyid, Department
       can :for_directionid, Department
       can :for_activitytypeid, Activity
       can :destroy, UserSession 
-      can :read, Activity
-      can :create, Activity
-      can :update, Activity do |acti|
-        acti.try(:user) == user 
-      end  
-      can :destroy, Activity do |acti|
-        acti.try(:user) == user 
-      end
+
       
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
-      role = user.roles.to_s      
-      case role 
+           
+      case user.roles.to_s 
       when "admin" then
         can :manage, :all
       when "planeacion" then
@@ -41,12 +34,24 @@ class Ability
         can :manage, Program
         can :manage, CriticalSuccessFactor
         can :manage, CriticalSuccessFactorType
-        can :manage, CriticalSuccessFactorType
         can :manage, ActivityType
+        can :create, Activity
+        can :update, Activity do |acti|
+          acti.try(:user) == user 
+        end  
+        can :destroy, Activity do |acti|
+          acti.try(:user) == user 
+        end
         
 
       when "user" then
-        
+        can :create, Activity
+        can :update, Activity do |acti|
+          acti.try(:user) == user 
+        end  
+        can :destroy, Activity do |acti|
+          acti.try(:user) == user 
+        end
       end
 
       # If you assigned 'variable =' before the case,
