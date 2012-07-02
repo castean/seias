@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  ROLES = %w[admin moderator user]
+  ROLES = %w[admin moderator user planeacion]
  
   serialize :roles
  
