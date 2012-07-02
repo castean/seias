@@ -13,13 +13,11 @@ class Ability
       can :for_directionid, Department
       can :for_activitytypeid, Activity
       can :destroy, UserSession 
-
-      
       
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
-      role = user.roles.to_s      
-      case role 
+           
+      case user.roles.to_s 
       when "admin" then
         can :manage, :all
       when "planeacion" then
@@ -36,6 +34,13 @@ class Ability
         can :manage, CriticalSuccessFactor
         can :manage, CriticalSuccessFactorType
         can :manage, ActivityType
+        can :create, Activity
+        can :update, Activity do |acti|
+          acti.try(:user) == user 
+        end  
+        can :destroy, Activity do |acti|
+          acti.try(:user) == user 
+        end
         
 
       when "user" then
