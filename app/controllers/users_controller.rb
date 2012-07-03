@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   #GET
   def index
-    @users = User.all
+    @users = User.order("name").order("last_name").order("second_last_name").page(params[:page]).per(20)
   end
 
   def new
