@@ -36,4 +36,6 @@ Seias::Application.configure do
   config.assets.debug = true
 
   config.ldap_auth = false
+
+  config.authorization_method = :password #One of :password, :ldap, etc
 end

@@ -35,7 +35,7 @@
     <%= f.label :email, "Correo Electrónico" %>
     <%= f.text_field :email %>
   </div>
-  <% unless Seias::Application.config.ldap_auth %>
+  <% if authentication_method_requires_password? %>
 	  <div class="field">
 	    <%= f.label :password, "Contraseña" %>
 	    <%= f.password_field :password %>
