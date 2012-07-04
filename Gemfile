@@ -37,6 +37,7 @@ gem 'therubyracer'
 #Function
 gem "kaminari" #pagination
 gem 'gmaps4rails'
+gem "paperclip", "~> 3.0.3"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

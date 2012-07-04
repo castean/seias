@@ -7,15 +7,15 @@ class User < ActiveRecord::Base
   end
 
   easy_roles :roles
+  has_attached_file :avatar, :styles => { :medium => "100x100>", :thumb => "52x52>" }
  
   has_many :critical_success_factors
   has_many :activities
   has_many :programs
   belongs_to :department
 
-  attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :department_id, :roles 
-  
-  
+  attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :department_id, :roles, :avatar 
+    
   before_destroy :check_for_dependencias
   
   def check_for_dependencias
