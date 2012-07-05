@@ -6,14 +6,23 @@
 </p>
 <br/>
 <p>
-  <b>Subtemas:</b>
+  <b>Dependencia:</b></br>
+  Desarrollo Integral de la Familia del Estado de Chihuahua
+</p>
+<br/>
+<p>
+  <b>Programa Presupuestario:</b></br>
+  <%= @ped.ped_program %>
+</p>
+<br/>
+<p>
+  <b>Definición de Programas:</b>
 </p>
 
-
-<% @ped.ped_sub_themes.each do |subtheme| %>
+<% @ped.ped_program_definitions.each do |program| %>
 	<ul>
 		<li>
-			<%= link_to subtheme.name, ped_sub_theme_path(subtheme.id) %>
+			<%= link_to program.description, ped_program_definition_path(program.id) %>
 		</li>
 	</ul>
 <%end%>

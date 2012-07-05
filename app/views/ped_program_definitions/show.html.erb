@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ped:</b></br>
+  <%= @ped_program_definition.ped.name %>
+</p>
+</br>
+<p>
+  <b>Programa Presupuestario:</b></br>
+  <%= @ped_program_definition.ped.ped_program %>
+</p>
+</br>
+<p>
+  <b>Descripción:</b></br>
+  <%= @ped_program_definition.description %>
+</p>
+</br>
+<p>
+  <b>Eje de Desarrollo:</b>
+</p>
+<% @ped_program_definition.ped.ped_axis_developments.each do |axis| %>
+	<ul>
+		<li>
+			<%= link_to axis.name, ped_axis_development_path(axis.id)%>
+		</li>
+	</ul>
+<%end%>
+</br>
+
+<%= link_to 'Editar', edit_ped_program_definition_path(@ped_program_definition) %> |
+<%= link_to 'Definiciones', ped_program_definitions_path %>

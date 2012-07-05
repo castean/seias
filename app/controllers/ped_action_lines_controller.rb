@@ -4,7 +4,7 @@ class PedActionLinesController < ApplicationController
   # GET /ped_action_lines
   # GET /ped_action_lines.json
   def index
-    @ped_action_lines = PedActionLine.all
+    @ped_action_lines = PedActionLine.order("hierarchy").all
 
     respond_to do |format|
       format.html # index.html.erb

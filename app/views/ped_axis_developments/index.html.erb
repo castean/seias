@@ -1,0 +1,33 @@
+<h3>Ejes de Desarrollo</h3>
+
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	    <th>Programa Estatal de Desarrollo</th>
+	    <th>Description</th>
+		<th>Temas PED</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+  </thead>
+<% @ped_axis_developments.each do |ped_axis_development| %>
+  <tr>
+    <td><%= ped_axis_development.ped.name %></td>
+    <td><%= ped_axis_development.description %></td>
+    <td><%= link_to 'Temas PED', ped_axis_development %></td>
+    <td><%= link_to(edit_ped_axis_development_path(ped_axis_development)) do %>
+    	<%= image_tag("edit.png") %>
+    	<%end%>
+    </td>
+    <td><%= link_to(ped_axis_development, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => true) do %>
+    	<%= image_tag("delete.png") %>
+    	<%end%>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Eje de Desarrollo', new_ped_axis_development_path, :class => "btn primary"  %>

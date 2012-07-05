@@ -1,0 +1,36 @@
+<h3>Definicion de Programas Presupuestario del PED</h3>
+
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	    <th>Ped</th>
+	    <th>Programa</th>
+	    <th>Definición</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+  </thead>
+</br>
+<% @ped_program_definitions.each do |ped_program_definition| %>
+  <tr>
+    <td><%= ped_program_definition.ped.name %></td>
+    <td><%= ped_program_definition.ped.ped_program %></td>
+    <td><%= ped_program_definition.description %></td>
+    <td><%= link_to 'Eje Desarrollo', ped_program_definition %></td>
+    <td><%= link_to(edit_ped_program_definition_path(ped_program_definition)) do %>
+    		<%= image_tag("edit.png") %>
+	    <%end%>
+    </td>
+    <td><%= link_to(ped_program_definition, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => :true) do %>
+    		<%= image_tag("delete.png") %>
+    	<%end%>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nueva Definicion de Programa', new_ped_program_definition_path, :class => "btn primary" %>

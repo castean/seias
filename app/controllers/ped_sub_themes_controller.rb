@@ -4,7 +4,7 @@ class PedSubThemesController < ApplicationController
   # GET /ped_sub_themes
   # GET /ped_sub_themes.json
   def index
-    @ped_sub_themes = PedSubTheme.all
+    @ped_sub_themes = PedSubTheme.order("hierarchy").all
 
     respond_to do |format|
       format.html # index.html.erb
