@@ -17,7 +17,7 @@
   <tr>
     <td><%= ped.name %></td>
     <td><%= ped.description %></td>
-    <td><%= link_to 'Subtemas', ped %></td>
+    <td><%= link_to 'Programas Definidos', ped %></td>
     <% if can? :update, ped %>
 	    <td><%= link_to(edit_ped_path(ped)) do %>
 	    		<%= image_tag("edit.png") %>
