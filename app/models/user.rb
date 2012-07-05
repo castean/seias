@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   acts_as_authentic do |config|
     config.crypto_provider = Authlogic::CryptoProviders::MD5
-    config.validate_password_field = false if Seias::Application.config.ldap_auth
+    config.validate_password_field = false if [:ldap].include?(Seias::Application.config.authorization_method)
     config.logged_in_timeout = 1.day
   end
 
