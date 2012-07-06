@@ -1,3 +1,4 @@
+#encoding:utf-8
 class User < ActiveRecord::Base
 
   acts_as_authentic do |config|
@@ -18,6 +19,8 @@ class User < ActiveRecord::Base
     
   before_destroy :check_for_dependencias
   
+
+
   def check_for_dependencias
     if activity.count > 0 and critical_success_factors.count > 0 and programs.count > 0
       errors.add_to_base("No se pueden borrar mientras tenga dependencias")
@@ -40,4 +43,5 @@ class User < ActiveRecord::Base
     def valid_ldap_credentials?(password)
       Ldap.valid?(self.login, password)
     end
+    
 end

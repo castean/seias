@@ -41,7 +41,13 @@
     <div id="STRUCTURE">
 
         <div id="HEADER_IN">
-            #HEADER_IN
+            <% if flash[:notice] %>
+					    <p class="notice"><%= flash[:notice] %></p>
+					  	</br>
+					  <% end %>
+					  <% if flash[:error] %>
+					    <p class="error"><%= flash[:error] %></p>
+					  <% end %>
         </div><!-- HEADER_IN -->
 
         <div id="CONTENT">
@@ -53,6 +59,7 @@
                     <span class="nombre"><%= current_user.fullname %></span>
                     <span class="depto">DIF Estatal Chihuahua</span>
                     <span class="depto"><%= link_to "Información", user_path(current_user) %></span>    
+
                 </div>
                 <h4>Plan Estatal de Desarrollo</h4>
                 <ul>

@@ -1,6 +1,26 @@
 #encoding:utf-8
 class UsersController < ApplicationController
   load_and_authorize_resource
+  
+  def change_password
+
+    @user = current_user
+
+    if request.post?
+      if @user.valid_password? params[:password][:old_password]
+        @user.password = params[:password][:new_password]
+        @user.password_confirmation = params[:password][:new_password_confirmation]
+        if @user.save
+          UserSession.create(:login => @user.login, :password => @user.password)
+          redirect_to root_path , :notice => "Cambio de Contraseña Correcto"
+        else
+          flash[:error] = 'Verifique la Contraseña Nueva'
+        end
+      else
+        flash[:error] = 'Contraseña Actual Invalida'
+      end
+    end
+  end
 
   #GET
   def index

@@ -21,6 +21,18 @@
 	</ul>
 <%end%>
 <br />
+
+<p>
+  <b>Factores criticos que Afecta:</b>
+</p>
+<% @activity_type.critical_success_factors.order(:title).each do |fce| %>
+    <ul>
+      <li>
+        <b><%= fce.title %>:</b><%= fce.description %>
+      </li>
+    </ul>
+<%end%>
+
 <div class="form-actions btn-group">
 	<% if can? :update, @activity_type %>
 		<%= link_to 'Editar', edit_activity_type_path(@activity_type), :class => "btn" %>
