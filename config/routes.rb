@@ -72,7 +72,7 @@ Seias::Application.routes.draw do
   resources :critical_success_factor_types
   match 'logout', :controller => 'user_sessions', :action => 'destroy'
   resource :user_sessions
-
+  match '/users/change_password' => 'users#change_password'
   resources :users
   # The priority is based upon order of creation:
   # first created -> highest priority.

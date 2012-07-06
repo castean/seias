@@ -13,7 +13,7 @@ class Ability
       can :for_directionid, Department
       can :for_activitytypeid, Activity
       can :destroy, UserSession 
-
+      can :change_password, User
       
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
