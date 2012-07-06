@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   end
 
   easy_roles :roles
-  has_attached_file :avatar, :styles => { :medium => "100x100>", :thumb => "52x52>" }
+  has_attached_file :avatar, :styles => { :medium => "100x100>", :thumb => "52x52>" }, :default_url => ActionController::Base.helpers.asset_path("avatar.png")
  
   has_many :critical_success_factors
   has_many :activities
