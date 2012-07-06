@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120629203958) do
+ActiveRecord::Schema.define(:version => 20120705184705) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -189,6 +189,14 @@ ActiveRecord::Schema.define(:version => 20120629203958) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "ped_axis_developments", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "ped_id"
+  end
+
   create_table "ped_goals", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -197,6 +205,14 @@ ActiveRecord::Schema.define(:version => 20120629203958) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "ped_sub_theme_id"
+  end
+
+  create_table "ped_program_definitions", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "ped_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "ped_strategies", :force => true do |t|
@@ -211,9 +227,18 @@ ActiveRecord::Schema.define(:version => 20120629203958) do
   create_table "ped_sub_themes", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "ped_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "ped_theme_id"
+    t.integer  "hierarchy"
+  end
+
+  create_table "ped_themes", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "ped_axis_development_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "peds", :force => true do |t|
@@ -223,6 +248,7 @@ ActiveRecord::Schema.define(:version => 20120629203958) do
     t.date     "date_end"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "ped_program"
   end
 
   create_table "place_types", :force => true do |t|
@@ -358,26 +384,30 @@ ActiveRecord::Schema.define(:version => 20120629203958) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name",                                     :null => false
-    t.string   "email",                                    :null => false
-    t.string   "login",                                    :null => false
+    t.string   "name",                                      :null => false
+    t.string   "email",                                     :null => false
+    t.string   "login",                                     :null => false
     t.string   "last_name"
     t.string   "second_last_name"
-    t.string   "crypted_password",                         :null => false
-    t.string   "password_salt",                            :null => false
-    t.string   "persistence_token",                        :null => false
-    t.integer  "login_count",        :default => 0,        :null => false
-    t.integer  "failed_login_count", :default => 0,        :null => false
+    t.string   "crypted_password",                          :null => false
+    t.string   "password_salt",                             :null => false
+    t.string   "persistence_token",                         :null => false
+    t.integer  "login_count",         :default => 0,        :null => false
+    t.integer  "failed_login_count",  :default => 0,        :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.boolean  "active",             :default => false,    :null => false
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
-    t.string   "roles",              :default => "--- []"
+    t.boolean  "active",              :default => false,    :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "roles",               :default => "--- []"
     t.integer  "department_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
 end

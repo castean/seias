@@ -1,9 +1,18 @@
 <div class="show">
-  <span><%= @user.login %></span>
-  <span><%= @user.name %></span>
-  <span><%= @user.last_name %></span>
-  <span><%= @user.second_last_name %></span>
-  <span><%= @user.email %></span>
-  <span><%= link_to 'Editar', edit_user_path(@user) %></span>
-  <span><%= link_to 'Eliminar', @user, confirm: '¿Esta seguro?', method: :delete %></span>
-</div>
+
+  <%= image_tag @user.avatar.url(:medium) %></br></br>
+<p>
+  <b>Nombre:</b></br>
+  	<%= @user.fullname%>
+</p>
+</br>
+<p>
+  <b>Correo Electronico:</b></br>
+  	<%= @user.email %>
+</p>
+</br>
+<p>
+  <b>Departamento:</b> </br> 
+  	<%= @user.department.name %>
+</p>
+</br>

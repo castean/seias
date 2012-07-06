@@ -1,5 +1,11 @@
 Seias::Application.routes.draw do
  
+  resources :ped_program_definitions
+
+  resources :ped_axis_developments
+
+  resources :ped_themes
+
   resources :ped_sub_themes
 
   resources :priority_program_action_lines

@@ -1,0 +1,30 @@
+<%= form_for(@ped_theme) do |f| %>
+  <% if @ped_theme.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ped_theme.errors.count, "error") %> prohibited this ped_theme from being saved:</h2>
+
+      <ul>
+      <% @ped_theme.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br />
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :ped_axis_development_id %>
+    <%= f.select :ped_axis_development_id, PedAxisDevelopment.order("name").all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
+  </div>
+  <br />
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

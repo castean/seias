@@ -37,4 +37,6 @@ Seias::Application.configure do
 
   #Extras
   config.ldap_auth = false
+
+  config.authorization_method = :password #One of :password, :ldap, etc
 end

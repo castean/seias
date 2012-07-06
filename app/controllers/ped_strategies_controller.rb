@@ -4,7 +4,7 @@ class PedStrategiesController < ApplicationController
   # GET /ped_strategies
   # GET /ped_strategies.json
   def index
-    @ped_strategies = PedStrategy.all
+    @ped_strategies = PedStrategy.order("hierarchy").all
 
     respond_to do |format|
       format.html # index.html.erb

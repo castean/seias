@@ -15,3 +15,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignorar archivos de paperclip
+/public/system

@@ -55,10 +55,14 @@
             <div id="SIDEBAR_LEFT">
               <% if current_user %>
                 <div id="personal-info">
-                    <%= image_tag("avatar.png") %>
+                	<%= image_tag current_user.avatar.url(:thumb) %>           
                     <span class="nombre"><%= current_user.fullname %></span>
                     <span class="depto">DIF Estatal Chihuahua</span>
+<<<<<<< HEAD
                     <span class="Cambio"><%= link_to "Cambio de Contraseña", users_change_password_path %></span>
+=======
+                    <span class="depto"><%= link_to "Información", user_path(current_user) %></span>    
+>>>>>>> 4c8e6a260a2255a4a860f8981a770711d76731a2
                 </div>
                 <h4>Plan Estatal de Desarrollo</h4>
                 <ul>

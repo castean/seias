@@ -7,7 +7,7 @@ class Ability
       can :create, UserSession
       #puts "Usuario Nulo"
     else
-      #can :read, Home
+
       can :read, :all
       can :for_countyid, Department
       can :for_directionid, Department
