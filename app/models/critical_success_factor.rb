@@ -6,7 +6,7 @@ class CriticalSuccessFactor < ActiveRecord::Base
   belongs_to :user
   belongs_to :program
   belongs_to :department
-  has_many :activity_types
+  has_and_belongs_to_many :activity_types
 
   attr_accessible :title, :description,:percentage, :objective_minimum,
                   :objective_satisfying, :objective_excelent, :critical_success_factor_type_id, :unit_of_measurement_id,
