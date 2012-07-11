@@ -18,11 +18,11 @@ class Activity < ActiveRecord::Base
   validates :public_target_id, :presence => true
   validates :activity_type_id, :presence => true
   validates :county_id, :presence => true
-  validate :validate_captured_day
-  validate :validate_activity_sdate
-  validate :validate_sdate_fdate
+  validate :validate_captured_day, :unless => Proc.new{ |activity| activity.activity_date_start.nil? || activity.activity_type.nil? || activity.activity_type.critical_success_factor.nil?}
+  validate :validate_activity_sdate, :unless => Proc.new{ |activity| activity.activity_date_start.nil?}
+  validate :validate_sdate_fdate, :unless => Proc.new{ |activity| activity.activity_date_end.nil? || activity.activity_date_start.nil?}
   validate :validar_nulos
-  validate :validar_program_start_date
+  validate :validar_program_start_date , :unless => Proc.new{ |activity| activity.activity_type.nil? || activity.activity_type.critical_success_factor.nil? }
   
   def validar_nulos
     if self.qty_men.nil?
