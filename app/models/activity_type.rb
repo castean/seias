@@ -2,7 +2,7 @@
 class ActivityType < ActiveRecord::Base
   
   belongs_to :unit_of_measurement
-  has_many :activities
+  has_many :activities, :order => 'activity_date_start DESC'
   has_and_belongs_to_many :critical_success_factors
   
   attr_accessible :description, :unit_of_measurement_id, :measurement_description, :name, :priority, :user_id,

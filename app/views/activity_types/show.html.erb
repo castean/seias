@@ -11,27 +11,29 @@
 </p>
 <br />
 <p>
-  <b>Actividades:</b>
-</p>
-<% @activity_type.activities.each do |actividades| %>
-	<ul>
-		<li>
-			<%= link_to actividades.description, activity_path(actividades.id)%>
-		</li>
-	</ul>
-<%end%>
-<br />
-
-<p>
   <b>Factores criticos que Afecta:</b>
 </p>
 <% @activity_type.critical_success_factors.order(:title).each do |fce| %>
     <ul>
       <li>
-        <b><%= fce.title %>:</b><%= fce.description %>
+        <b><%= fce.title %>:</b>
       </li>
     </ul>
 <%end%>
+</br>
+<p>
+  <b>Actividades:</b>
+</p>
+
+<% @activity_type.activities.limit(200).each do |actividades| %>
+	<ul id="items">
+		<li>
+			<%= link_to actividades.description, activity_path(actividades.id)%>
+		</li>
+	</ul>
+<%end%>
+
+<br />
 
 <div class="form-actions btn-group">
 	<% if can? :update, @activity_type %>
@@ -39,3 +41,4 @@
 	<%end%>
 <%= link_to 'Atras', activity_types_path, :class => "btn" %>
 </div>
+</br>

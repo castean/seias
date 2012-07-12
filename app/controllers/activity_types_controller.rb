@@ -17,6 +17,7 @@ class ActivityTypesController < ApplicationController
   def show
     
     @activity_type = ActivityType.find(params[:id])
+    #@activities = @activity_type.activities
 
     respond_to do |format|
       format.html # show.html.erb
