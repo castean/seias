@@ -10,7 +10,6 @@
   <%= @activity_type.description %>
 </p>
 <br />
-<p>
   <b>Factores criticos que Afecta:</b>
 </p>
 <% @activity_type.critical_success_factors.order(:title).each do |fce| %>
@@ -21,19 +20,37 @@
     </ul>
 <%end%>
 </br>
+
 <p>
   <b>Actividades:</b>
 </p>
 
-<% @activity_type.activities.limit(200).each do |actividades| %>
-	<ul id="items">
+<% x = params[:page]  #ISC Christian Alderete 
+						#subpaginate for acitivies into activity_types
+   w = 0
+   y = 20
+   
+	if x.nil?
+      w = 1
+   	  y = 20
+   	else
+   	  y = y.to_i * x.to_i
+   	  w = y.to_i - 19  
+   	end
+   	@activity_type.activities[w..y].each do |actividades|
+%>
+	<ul>	
 		<li>
 			<%= link_to actividades.description, activity_path(actividades.id)%>
 		</li>
 	</ul>
 <%end%>
-
 <br />
+
+<div class="pager">
+	<%= paginate @activitypage %>
+</div>
+
 
 <div class="form-actions btn-group">
 	<% if can? :update, @activity_type %>
