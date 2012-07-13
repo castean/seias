@@ -3,7 +3,7 @@ class UnitOfMeasurement < ActiveRecord::Base
   has_many :activity_types
   attr_accessible :name
   
-    before_destroy :check_for_dependencias
+  before_destroy :check_for_dependencias
   
   def check_for_dependencias
     if activity_types.count > 0 and critical_success_factors.count > 0

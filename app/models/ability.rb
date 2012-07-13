@@ -42,8 +42,6 @@ class Ability
         can :destroy, Activity do |acti|
           acti.try(:user) == user 
         end
-        
-
       when "user" then
         can :create, Activity
         can :update, Activity do |acti|
