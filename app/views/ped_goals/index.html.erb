@@ -16,7 +16,7 @@
 <% @ped_goals.each do |ped_goal| %>
 
   <tr>
-    <td><%= ped_goal.ped.name %></td>
+    <td><%= ped_goal.ped_sub_theme.ped_theme.ped_axis_development.ped.name %></td>
     <td><%= ped_goal.ped_sub_theme.name %></td>
     <td><%= ped_goal.name %>: <%= ped_goal.description %></td>
     <td><%= link_to 'Estrategias', ped_goal %></td>

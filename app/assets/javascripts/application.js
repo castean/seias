@@ -17,6 +17,7 @@
 // Loads all Bootstrap javascripts
 //= require bootstrap
 
+
 // Ing. César Reyes // Esta Funcion es para el manejo de los dropdownlist
 
 $(document).ready(function(){
@@ -100,3 +101,6 @@ $(document).ready(function(){
     });
 
 //
+
+
+

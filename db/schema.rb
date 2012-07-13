@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120705184705) do
+ActiveRecord::Schema.define(:version => 20120713191715) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -38,12 +38,16 @@ ActiveRecord::Schema.define(:version => 20120705184705) do
     t.string   "name"
     t.text     "description"
     t.text     "measurement_description"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.integer  "critical_success_factor_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.integer  "priority"
     t.integer  "user_id"
     t.integer  "unit_of_measurement_id"
+  end
+
+  create_table "activity_types_critical_success_factors", :id => false, :force => true do |t|
+    t.integer "activity_type_id"
+    t.integer "critical_success_factor_id"
   end
 
   create_table "activitygoals", :force => true do |t|
@@ -116,6 +120,16 @@ ActiveRecord::Schema.define(:version => 20120705184705) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "counties_judical_districts", :id => false, :force => true do |t|
+    t.integer "county_id"
+    t.integer "judical_district_id"
+  end
+
+  create_table "counties_regions", :id => false, :force => true do |t|
+    t.integer "county_id"
+    t.integer "region_id"
+  end
+
   create_table "countries", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -178,6 +192,12 @@ ActiveRecord::Schema.define(:version => 20120705184705) do
     t.boolean  "vulnerable"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "judicial_districts", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "ped_action_lines", :force => true do |t|
@@ -331,6 +351,12 @@ ActiveRecord::Schema.define(:version => 20120705184705) do
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "regions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "sexennial_state_plan_components", :force => true do |t|
