@@ -1,12 +1,11 @@
-class UnitOfMeasurement < ActiveRecord::Base
-  has_many :critical_success_factors
-  has_many :activity_types
+class Region < ActiveRecord::Base
   attr_accessible :name
-  
+  has_and_belongs_to_many :counties
+  validates :name, :presence => true
   before_destroy :check_for_dependencias
   
   def check_for_dependencias
-    if activity_types.count > 0 and critical_success_factors.count > 0
+    if counties.count > 0
       errors.add_to_base("No se pueden borrar mientras tenga dependencias")
       return false
     end

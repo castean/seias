@@ -5,16 +5,46 @@
   <%= @activity_type.name %>
 </p>
 <br />
+<%obtenervalores%>
 <p>
-  <h4>Descripción:</h4>
-  <%= @activity_type.description %>
+  <h4>Unidad de Medida:</h4>
+  <%= @activity_type.unit_of_measurement.name %> de <%= @activity_type.measurement_description %></br> 	
+  	</br>
+  	<b><i>Cantidad del Mes de <%= @mes %> : </i></b><%= @suma %> personas</br>
+  	<b><i>Acumulado Anual <%= @annio %> : </i></b><%= @acumulado %> personas</br>
 </p>
 <br />
+
+
+  <b>Factores criticos que Afecta:</b>
+</p>
+<% @activity_type.critical_success_factors.order(:title).each do |fce| %>
+    <ul>
+      <li>
+        <b><%= fce.title %>:</b>
+      </li>
+    </ul>
+<%end%>
+</br>
+
 <p>
   <b>Actividades:</b>
 </p>
-<% @activity_type.activities.each do |actividades| %>
-	<ul>
+<% x = params[:page]  #ISC Christian Alderete 
+						#subpaginate for acitivies into activity_types
+   w = 0
+   y = 20
+   
+	if x.nil?
+      w = 0
+   	  y = 19
+   	else
+   	  y = y.to_i * x.to_i
+   	  w = y.to_i - 19  
+   	end
+   	@activity_type.activities[w..y].each do |actividades|
+%>
+	<ul>	
 		<li>
 			<%= link_to actividades.description, activity_path(actividades.id)%>
 		</li>
@@ -22,16 +52,10 @@
 <%end%>
 <br />
 
-<p>
-  <b>Factores criticos que Afecta:</b>
-</p>
-<% @activity_type.critical_success_factors.order(:title).each do |fce| %>
-    <ul>
-      <li>
-        <b><%= fce.title %>:</b><%= fce.description %>
-      </li>
-    </ul>
-<%end%>
+<div class="pager">
+	<%= paginate @activitypage %>
+</div>
+
 
 <div class="form-actions btn-group">
 	<% if can? :update, @activity_type %>
@@ -39,3 +63,4 @@
 	<%end%>
 <%= link_to 'Atras', activity_types_path, :class => "btn" %>
 </div>
+</br>

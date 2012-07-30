@@ -3,6 +3,9 @@ class PedProgramDefinition < ActiveRecord::Base
   belongs_to :ped
   has_many :ped_axis_developments
   before_destroy :check_for_dependencias
+  validates :name, :presence => true
+  validates :description, :presence => true
+  validates :ped_id, :presence => true
   
   def check_for_dependencias
     if ped_axis_developments.count > 0
