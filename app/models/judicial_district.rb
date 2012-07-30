@@ -1,5 +1,5 @@
 class JudicialDistrict < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :circunscription
   has_and_belongs_to_many :counties
   validates :name, :presence => true
   before_destroy :check_for_dependencias
