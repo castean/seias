@@ -35,6 +35,6 @@
 </table>
 
 <br />
-<% if can? :create, @peds %>
+<% if can? :create, Ped %>
 	<%= link_to 'Agregar Nuevo PED', new_ped_path, :class => "btn primary" %>
 <% end %>

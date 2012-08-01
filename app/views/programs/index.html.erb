@@ -40,6 +40,6 @@
 </table>
 
 <br />
-<% if can? :create, @programs %>
+<% if can? :create, Program %>
 	<%= link_to 'Nuevo Programa', new_program_path, :class => "btn primary" %>
 <%end%>

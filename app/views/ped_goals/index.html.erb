@@ -37,6 +37,6 @@
 </table>
 
 <br />
-<% if can? :create, @ped_goals %>
+<% if can? :create, PedGoal %>
 	<%= link_to 'Agregar Objetivo', new_ped_goal_path, :class => "btn primary" %>
 <%end%>

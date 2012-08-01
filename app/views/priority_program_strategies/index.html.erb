@@ -35,6 +35,6 @@
 </table>
 
 <br />
-<% if can? :create, @priority_program_strategies %>
+<% if can? :create, PriorityProgramStrategy %>
 	<%= link_to 'Agregar Estrategia', new_priority_program_strategy_path, :class => "btn primary" %>
 <%end%>

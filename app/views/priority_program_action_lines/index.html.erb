@@ -36,6 +36,6 @@
 </table>
 
 <br />
-<% if can? :create, @priority_program_action_lines %>
+<% if can? :create, PriorityProgramActionLine %>
 	<%= link_to 'Agregar Línea de Acción', new_priority_program_action_line_path, :class => "btn primary" %>
 <%end%>

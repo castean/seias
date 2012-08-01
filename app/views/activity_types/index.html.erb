@@ -42,7 +42,7 @@
 </table>
 
 <br />
-<% if can? :create, @activity_types %>
+<% if can? :create, ActivityType %>
 	<%= link_to 'Crear un Tipo de Actividad', new_activity_type_path, :class => "btn primary" %>
 <% end %>
 </br>
