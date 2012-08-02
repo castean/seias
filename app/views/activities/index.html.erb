@@ -3,25 +3,18 @@
 <table class="table table-striped">
   <thead>
       <tr>
-        <th>Valor</th>
         <th>Descripción</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
         <th>Localidad</th>
-        <th>Grupo</th>
-        <th>Público Objetivo</th>
-
       </tr>
   </thead>
 <% @activities.each do |activity| %>
   <tr>
-    <td><%= activity.value %></td>
     <td><%= activity.description %></td>
     <td><%= l activity.activity_date_start.to_date, :format => :short %></td>
     <td><%= l activity.activity_date_end.to_date, :format => :short %></td>
     <td><%= activity.town.name %></td>
-    <td><%= activity.group.name %></td>
-    <td><%= activity.public_target.name %></td>
     <td><%= link_to 'Detalles', activity %></td>
     <% if can? :update, activity %>
 			<td>
