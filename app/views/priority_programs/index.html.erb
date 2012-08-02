@@ -33,6 +33,6 @@
 </table>
 
 <br />
-<% if can? :create, @priority_programs %>
+<% if can? :create, PriorityProgram %>
 	<%= link_to 'Agregar Programa Prioritario', new_priority_program_path, :class => "btn primary" %>
 <% end %>

@@ -33,6 +33,6 @@
 <% end %>
 </table>
 <br />
-<% if can? :create, @ped_action_lines %>
+<% if can? :create, PedActionLine %>
 	<%= link_to 'Agregar Línea de Acción', new_ped_action_line_path, :class => "btn primary" %>
 <% end %>

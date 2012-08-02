@@ -41,6 +41,6 @@
 </table>
 
 <br />
-<% if can? :create, @critical_success_factors %>
+<% if can? :create, CriticalSuccessFactor %>
 <%= link_to 'Registrar Factor Crítico', new_critical_success_factor_path, :class => "btn primary" %>
 <% end %>
