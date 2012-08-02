@@ -50,9 +50,23 @@ Seias::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :address              => "salida2.uach.mx",
+      :port                 => 25,
+      :domain               => 'uach.mx',
+      :user_name            => 'uniq',
+      :password             => 'cgtisei',
+      :authentication       => 'plain',
+      :enable_starttls_auto => false
+  }
 
   # Enable threaded mode
   # config.threadsafe!
+  config.middleware.use ExceptionNotifier,
+                        :email_prefix => "SEIAS Error",
+                        :sender_address => %{"SEIAS" <seias@difchihuahua.gob.mx>},
+                        :exception_recipients => %w{rgonzalez@uach.mx rivazquez@uach.mx cfgarcia@uach.mx cdelrazo@uach.mx dif.acastellanos@gmail.com dif.creyes@gmail.com dif.ialderete@gmail.com}
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
