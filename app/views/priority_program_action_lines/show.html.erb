@@ -1,29 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Objetivo del Programa Prioritario:</b></br>
+  <%= @priority_program_action_line.priority_program_strategy.priority_program_goal.name %>
+</p>
+</br>
+<p>
+  <b>Estrategia del Programa Prioritario:</b></br>
+  <%= @priority_program_action_line.priority_program_strategy.name %>
+</p>
+</br>
+<p>
+  <b>Linea de Acción:</b></br>
   <%= @priority_program_action_line.name %>
 </p>
-
+</br>
 <p>
-  <b>Description:</b>
+  <b>Descripción:</b></br>
   <%= @priority_program_action_line.description %>
 </p>
+</br>
 
-<p>
-  <b>Hierarchy:</b>
-  <%= @priority_program_action_line.hierarchy %>
-</p>
 
-<p>
-  <b>Priority program strategy:</b>
-  <%= @priority_program_action_line.priority_program_strategy_id %>
-</p>
-
-<p>
-  <b>Ped action line:</b>
-  <%= @priority_program_action_line.ped_action_line_id %>
-</p>
 
 <% if can? :update, @priority_program_action_line %>
 	<%= link_to 'Edit', edit_priority_program_action_line_path(@priority_program_action_line) %> |
