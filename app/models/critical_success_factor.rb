@@ -22,8 +22,8 @@ class CriticalSuccessFactor < ActiveRecord::Base
   validates :critical_success_factor_type_id, :presence => true
   validates :unit_of_measurement_id, :presence => true
   validates :unit_of_measurement_description, :presence => true
-  validates :confidential, :presence => true
-  validates :sexennial_state_plan_component_id, :presence => true
+  #validates :confidential, :presence => true
+  #validates :sexennial_state_plan_component_id, :presence => true
   validates :program_id, :presence => true
   
   
