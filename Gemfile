@@ -55,3 +55,6 @@ gem 'capistrano-ext'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem "net-ldap"
+
+#Correo al tener un error en production.
+gem 'exception_notification'
