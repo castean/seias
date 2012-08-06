@@ -74,8 +74,13 @@
   </div>
 	
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Guardar Actividad" %>
   </div>
+ <% if params[:continuos] == '1' %>	
+   <div class="actions">
+     <%= link_to 'Finalizar', activities_path, :class => "btn primary" %>
+   </div>
+  <% end %>
 <% end %>
 
 

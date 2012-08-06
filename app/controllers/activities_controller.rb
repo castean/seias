@@ -35,11 +35,22 @@ class ActivitiesController < ApplicationController
     current_user = UserSession.find
     id = current_user && current_user.record.id
     @activity = Activity.new(:user_id => id)
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @activity }
-    end
+    
+    if params[:continuos] == '1' 
+      
+      @activity = Activity.where(:user_id => id).last.clone
+      
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @activity }
+        
+      end
+    else
+     respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @activity }
+      end   
+    end    
   end
 
   # GET /activities/1/edit
@@ -50,12 +61,19 @@ class ActivitiesController < ApplicationController
   # POST /activities
   # POST /activities.json
   def create
+  
     @activity = Activity.new(params[:activity])
 
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
-        format.json { render json: @activity, status: :created, location: @activity }
+        
+        #format.html { redirect_to @activity, notice: 'Activity was successfully created.' }new_activity_path
+        #format.json { render json: @activity, status: :created, location: @activity }
+            
+        flash[:notice] = 'La actividad se dio de alta satisfactoriamente.' #+ current_user.id.to_s
+         
+        format.html { redirect_to(:action => 'new', :continuos => 1 ) }
+     
       else
         format.html { render action: "new" }
         format.json { render json: @activity.errors, status: :unprocessable_entity }
