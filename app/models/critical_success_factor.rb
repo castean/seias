@@ -2,7 +2,7 @@
 class CriticalSuccessFactor < ActiveRecord::Base
   belongs_to :critical_success_factor_type
   belongs_to :unit_of_measurement
-  belongs_to :sexennial_state_plan_component
+  #belongs_to :sexennial_state_plan_component
   belongs_to :user
   belongs_to :program
   belongs_to :department
@@ -10,7 +10,7 @@ class CriticalSuccessFactor < ActiveRecord::Base
 
   attr_accessible :title, :description,:percentage, :objective_minimum,
                   :objective_satisfying, :objective_excelent, :critical_success_factor_type_id, :unit_of_measurement_id,
-                  :unit_of_measurement_description, :confidential, :sexennial_state_plan_component_id, :program_id
+                  :unit_of_measurement_description, :confidential, :program_id
                   
   
   validates :title, :presence => true
@@ -23,7 +23,7 @@ class CriticalSuccessFactor < ActiveRecord::Base
   validates :unit_of_measurement_id, :presence => true
   validates :unit_of_measurement_description, :presence => true
   validates :confidential, :presence => true
-  validates :sexennial_state_plan_component_id, :presence => true
+  #validates :sexennial_state_plan_component_id, :presence => true
   validates :program_id, :presence => true
   
   
