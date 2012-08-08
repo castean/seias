@@ -1,7 +1,7 @@
 set :stages, %w(staging production)
 set :default_stage, "production"
 require 'capistrano/ext/multistage'
-require "bundler/capistrano"
+#require "bundler/capistrano"
 
 
 set :application, "seias"
@@ -32,10 +32,10 @@ role(:db, :primary => true) { domain }
 
 
 #Configurar bundler
-set :bundle_gemfile,  "Gemfile"
-set :bundle_dir,      File.join(fetch(:shared_path), 'bundle')
-set :bundle_flags,    ""
-set :bundle_without,  []
+#set :bundle_gemfile,  "Gemfile"
+#set :bundle_dir,      File.join(fetch(:shared_path), 'bundle')
+#set :bundle_flags,    ""
+#set :bundle_without,  []
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
