@@ -17,7 +17,7 @@ class Program < ActiveRecord::Base
   validates :name, :presence => true
   validates :responsable_id, :presence => true
   validates :direction_id, :presence => true
-  #validates :priority_program_action_line_id, :presence => true
+
   validates :cut_day, :presence => true
   validates :start_date, :presence => true
   #validates :selectRight, :presence => true
