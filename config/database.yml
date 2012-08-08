@@ -48,6 +48,16 @@ test:
   username: seias
   password:
 
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: seias_development
+  pool: 5
+  host: labs.ti.uach.mx
+  port: 5432
+  username: seias_web
+  password: 20qfyhgtv12
+
 production:
   adapter: postgresql
   encoding: unicode
