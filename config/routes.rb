@@ -1,4 +1,6 @@
 Seias::Application.routes.draw do
+  
+  match "home/download_manual" => "home#download_manual", :as => :manual
  
   resources :ped_program_definitions
 
