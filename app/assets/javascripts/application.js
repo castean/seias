@@ -38,7 +38,7 @@ $(document).ready(function(){
                     dataType: "json",
                     cache: false,
                     url: '/departments/for_directionid/' + id_value_string,
-                    timeout: 2000,
+                    timeout: 20000,
                     error: function(XMLHttpRequest, errorTextStatus, error){
                         alert("Failed to submit : "+ errorTextStatus+" ;"+error);
                     },
@@ -78,7 +78,7 @@ $(document).ready(function(){
                     dataType: "json",
                     cache: false,
                     url: '/departments/for_countyid/' + id_value_string,
-                    timeout: 2000,
+                    timeout: 20000,
                     error: function(XMLHttpRequest, errorTextStatus, error){
                         alert("Failed to submit : "+ errorTextStatus+" ;"+error);
                     },

@@ -14,7 +14,7 @@ class Ability
       can :for_activitytypeid, Activity
       can :destroy, UserSession 
       can :change_password, User
-      
+      can :download_manual, Home
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            

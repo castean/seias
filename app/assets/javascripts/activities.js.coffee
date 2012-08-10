@@ -11,7 +11,7 @@ $(document).ready ->
         dataType: "json"
         cache: false
         url: "/activities/for_activitytypeid/" + id_value_string
-        timeout: 2000
+        timeout: 20000
         error: (XMLHttpRequest, errorTextStatus, error) ->
           alert "Failed to submit : " + errorTextStatus + " ;" + error
         success: (data) ->
