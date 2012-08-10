@@ -32,8 +32,6 @@
   <div class="field">
     <%= f.label :measurement_description, "Descripción. Que vamos a medir?" %>
     <%= f.text_area :measurement_description, :size=>"100x5", :class => "span7" %>
-
-
   <div>
       <table border="0">
          <tr>
@@ -43,14 +41,14 @@
          <tr>
            <td rowspan="3" align="right">
             <label>
-              <%= f.select("selectLeft",options_for_select(CriticalSuccessFactor.order("title").all.collect { |cat| [cat.title, cat.id] }, @activity_type.name { |cat| cat.id}),{},{:multiple=>true, :size => 6, :id=>'selectLeft'})%>
+              <%= fillrightleftselectionactivity(f)%>
             </label>
           </td>
             <td align="left">&nbsp;</td>
              <td align="left">&nbsp;</td>
             <td rowspan="3" align="left">
               <label>
-                <%= f.select("selectRightActivity",{},{}, :size => 6,:multiple=>true, :id=>'selectRightActivity') %>
+                <%= f.select("selectRightActivity",options_for_select(@activity_type.critical_success_factors.order("title").all.collect { |cat| [cat.title, cat.id] }, @activity_type.name { |cat| cat.id}),{}, :size => 6,:multiple=>true, :id=>'selectRightActivity') %>
               </label>
             </td>
           </td>
