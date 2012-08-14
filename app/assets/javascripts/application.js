@@ -37,7 +37,7 @@ $(document).ready(function(){
                 $.ajax({
                     dataType: "json",
                     cache: false,
-                    url: '/departments/for_directionid/' + id_value_string,
+                    url: application_root_path() + '/departments/for_directionid/' + id_value_string,
                     timeout: 20000,
                     error: function(XMLHttpRequest, errorTextStatus, error){
                         alert("Failed to submit : "+ errorTextStatus+" ;"+error);
@@ -77,7 +77,7 @@ $(document).ready(function(){
                 $.ajax({
                     dataType: "json",
                     cache: false,
-                    url: '/departments/for_countyid/' + id_value_string,
+                    url: application_root_path() + '/departments/for_countyid/' + id_value_string,
                     timeout: 20000,
                     error: function(XMLHttpRequest, errorTextStatus, error){
                         alert("Failed to submit : "+ errorTextStatus+" ;"+error);
