@@ -10,7 +10,8 @@ class CriticalSuccessFactor < ActiveRecord::Base
 
   attr_accessible :title, :description,:percentage, :objective_minimum,
                   :objective_satisfying, :objective_excelent, :critical_success_factor_type_id, :unit_of_measurement_id,
-                  :unit_of_measurement_description, :confidential, :program_id
+                  :unit_of_measurement_description, :confidential, :program_id, :selectLeft
+  attr_accessor :selectLeft
                   
   
   validates :title, :presence => true

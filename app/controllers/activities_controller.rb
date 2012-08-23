@@ -38,7 +38,7 @@ class ActivitiesController < ApplicationController
     
     if params[:continuos] == '1' 
       
-      @activity = Activity.where(:user_id => id).last.clone
+      @activity = Activity.where(:user_id => id).last.dup
       
       respond_to do |format|
         format.html # new.html.erb
@@ -65,19 +65,19 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(params[:activity])
 
     respond_to do |format|
-      if @activity.save
+        if @activity.save
         
-        #format.html { redirect_to @activity, notice: 'Activity was successfully created.' }new_activity_path
-        #format.json { render json: @activity, status: :created, location: @activity }
+            #format.html { redirect_to @activity, notice: 'Activity was successfully created.' }new_activity_path
+            #format.json { render json: @activity, status: :created, location: @activity }
             
-        flash[:notice] = 'La actividad se dio de alta satisfactoriamente.' #+ current_user.id.to_s
+            flash[:notice] = 'La actividad se dio de alta satisfactoriamente.' #+ current_user.id.to_s
          
-        format.html { redirect_to(:action => 'new', :continuos => 1 ) }
-     
-      else
-        format.html { render action: "new" }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
-      end
+            format.html { redirect_to(:action => 'new', :continuos => 1 ) }
+          else
+            format.html { render action: "new" }
+            format.json { render json: @activity.errors, status: :unprocessable_entity }
+          end
+
     end
   end
 

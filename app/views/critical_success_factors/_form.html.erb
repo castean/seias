@@ -24,8 +24,18 @@
   </div>
   <div class="field">
     <%= f.label :program_id, "Programa" %>
-    <%= f.select :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }, {:include_blank => false}, :class => "span7" %>
+    <%= f.select :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }, {:include_blank => false}, :class => "span7", :id => "program_id" %>
   </div>
+  <div class="field">
+  	<% sql = "SELECT priority_program_action_lines.name, priority_program_action_lines.id  FROM priority_program_action_lines INNER JOIN priority_program_action_lines_programs ON priority_program_action_lines.id = priority_program_action_lines_programs.priority_program_action_line_id WHERE priority_program_action_lines_programs.program_id = 1"%>
+
+    <% ppal = ActiveRecord::Base.connection.select_rows(sql)%>
+    <% ppal.map{|name,id|} %>
+    
+    <%= f.label :selectLeft, "Linea" %>
+		<%= f.select("selectLeft",ppal,{},{:multiple=>true, :size => 6, :id=>'selectLeft'}) %>
+  </div>
+
   <b>Metas</b>
   <div class="field">
     <%= f.label :objective_minimum, "Minimo" %>

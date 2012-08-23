@@ -98,4 +98,18 @@ class DepartmentsController < ApplicationController
         format.json  { render :json => @towns }      
       end
     end
+     def for_programid
+      #@towns = Town.find_all_by_county_id( params[:id]).sort_by{ |k| k['name'] }
+      @sql = "SELECT priority_program_action_lines.name, priority_program_action_lines.id  FROM priority_program_action_lines
+    INNER JOIN priority_program_action_lines_programs ON priority_program_action_lines.id = priority_program_action_lines_programs.priority_program_action_line_id
+    WHERE priority_program_action_lines_programs.program_id = " + params[:id]
+
+    @ppal = ActiveRecord::Base.connection.select_rows(@sql)
+    
+    @ppal.map{|name, id|}
+    #@ppal = PriorityProgramActionLines.where( :program_id => params[:id])   
+      respond_to do |format|
+        format.json  { render :json => @ppal }      
+      end
+    end
 end

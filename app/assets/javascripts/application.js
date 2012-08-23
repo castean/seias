@@ -37,7 +37,7 @@ $(document).ready(function(){
                 $.ajax({
                     dataType: "json",
                     cache: false,
-                    url: application_root_path() + '/departments/for_directionid/' + id_value_string,
+                    url:  '/departments/for_directionid/' + id_value_string,
                     timeout: 20000,
                     error: function(XMLHttpRequest, errorTextStatus, error){
                         alert("Failed to submit : "+ errorTextStatus+" ;"+error);
@@ -77,7 +77,7 @@ $(document).ready(function(){
                 $.ajax({
                     dataType: "json",
                     cache: false,
-                    url: application_root_path() + '/departments/for_countyid/' + id_value_string,
+                    url: '/departments/for_countyid/' + id_value_string,
                     timeout: 20000,
                     error: function(XMLHttpRequest, errorTextStatus, error){
                         alert("Failed to submit : "+ errorTextStatus+" ;"+error);
@@ -93,6 +93,45 @@ $(document).ready(function(){
                         $.each(data, function(i, j){
                         	row = "<option value=\"" + j.id + "\">" + j.name + "</option>";  
                             $(row).appendTo("#town_id");                    
+                        });            
+                     }
+                });
+            };
+                });
+                 // Ing. César Reyes // Programas - Lineas de Accion
+
+
+        $("#program_id").change(function(){
+            var id_value_string = $(this).val();
+            if (id_value_string == "") {
+                // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
+                $("#selectLeft option").remove();
+                var row = "<option value=\"" + "" + "\">" + "" + "</option>";
+                $(row).appendTo("#selectLeft");
+                //alert("Failed to submit : Vacio  c");
+            }
+            else {
+                // Send the request and update sub category dropdown
+               // window.location = "../get_maps_by_town/" + id_value_string
+                $.ajax({
+                    dataType: "json",
+                    cache: false,
+                    url:  '/departments/for_programid/' + id_value_string,
+                    timeout: 20000,
+                    error: function(XMLHttpRequest, errorTextStatus, error){
+                        alert("Failed to submit : " + id_value_string + errorTextStatus+" ;"+error );
+                    },
+                    success: function(data){   
+          
+                        // Clear all options from sub category select
+                        $("#selectLeft option").remove();
+                        //put in a empty default line
+                        var row = "";
+                        $(row).appendTo("#selectLeft");                        
+                        // Fill sub category select
+                        $.each(data, function(i, j){
+                        	row = "<option value=\"" + j[1] + "\">" + j[0] + "</option>";  
+                            $(row).appendTo("#selectLeft");                    
                         });            
                      }
                 });

@@ -17,4 +17,5 @@ class PriorityProgramActionLine < ActiveRecord::Base
       return false
     end
   end
+
 end
