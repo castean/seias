@@ -1,5 +1,7 @@
 Seias::Application.routes.draw do
   
+  resources :ped_programs
+
   match "home/download_manual" => "home#download_manual", :as => :manual
  
   resources :ped_program_definitions
@@ -10,6 +12,7 @@ Seias::Application.routes.draw do
 
   resources :ped_sub_themes
 
+  get '/priority_program_action_lines/report' => "priority_program_action_lines#report", :as => :report
   resources :priority_program_action_lines
 
   resources :priority_program_strategies
@@ -71,6 +74,7 @@ Seias::Application.routes.draw do
 
   resources :programs
 
+  match '/critical_success_factors/for_program_id/:id' => 'critical_success_factors#for_program_id'
   resources :critical_success_factors do
     resources :goals
   end

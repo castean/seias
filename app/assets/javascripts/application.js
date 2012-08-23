@@ -56,8 +56,8 @@ $(document).ready(function(){
                         });            
                      }
                 });
-            };
-                });
+            }
+        });
 
      // Ing. César Reyes // ciudades y localidades
 
@@ -96,8 +96,9 @@ $(document).ready(function(){
                         });            
                      }
                 });
-            };
-                });
+            }
+        });
+
     });
 
 //

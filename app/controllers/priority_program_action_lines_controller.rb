@@ -101,4 +101,16 @@ class PriorityProgramActionLinesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # GET /priority_program_action_lines
+  # GET /priority_program_action_lines.json
+  def report
+    @priority_program_action_lines = PriorityProgramActionLine.order("hierarchy").all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @priority_program_action_lines }
+    end
+  end
+
 end

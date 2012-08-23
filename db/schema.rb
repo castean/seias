@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713192653) do
+ActiveRecord::Schema.define(:version => 20120817185839) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -218,6 +218,11 @@ ActiveRecord::Schema.define(:version => 20120713192653) do
     t.integer  "ped_id"
   end
 
+  create_table "ped_axis_developments_ped_program_definitions", :id => false, :force => true do |t|
+    t.integer "ped_axis_development_id"
+    t.integer "ped_programs_definition_id"
+  end
+
   create_table "ped_goals", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -229,6 +234,14 @@ ActiveRecord::Schema.define(:version => 20120713192653) do
   end
 
   create_table "ped_program_definitions", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "ped_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "ped_programs", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "ped_id"

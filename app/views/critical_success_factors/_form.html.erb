@@ -1,7 +1,7 @@
 <%= form_for(@critical_success_factor) do |f| %>
   <% if @critical_success_factor.errors.any? %>
     <div id="error_explanation">
-      <h2>Imposible Guardar Factor Crítico</h2>
+      <h2>Imposible Guardar Acción</h2>
       <ul>
       <% @critical_success_factor.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -10,10 +10,7 @@
     </div>
   <% end %>
 	</br>
-  <div class="field">
-    <%= f.label :critical_success_factor_type_id, "Tipo" %>
-    <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.order("name").all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Tipo --"}, :class => "span7" %>
-  </div>
+
   <div class="field">
     <%= f.label :title, "Título" %>
     <%= f.text_field :title, :class => "span7" %>
@@ -23,22 +20,37 @@
     <%= f.text_area :description, :class => "span7", :rows => "9"  %>
   </div>
   <div class="field">
-    <%= f.label :program_id, "Programa" %>
-    <%= f.select :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }, {:include_blank => false}, :class => "span7" %>
+    <%= f.label :program_idbck, "Programa" %>
+    <%= f.select :program_idbck, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }, {:include_blank => false}, :class => "span7" %>
   </div>
-  <b>Metas</b>
+
   <div class="field">
-    <%= f.label :objective_minimum, "Minimo" %>
-    <%= f.text_field :objective_minimum, :class => "span7" %>
+      <%= f.label :program_id, "Municipio" %>
+      <%= f.collection_select :program_id,  Program.order("name"), :id, :description, options ={:prompt => "-- Selecciona --"}, :id => "program_id", :class => "span7"  %>
   </div>
-  <div class="field">
-    <%= f.label :objective_satisfying, "Satisfactorio" %>
-    <%= f.text_field :objective_satisfying, :class => "span7" %>
-  </div>
-  <div class="field">
-    <%= f.label :objective_excelent, "Excelente" %>
-    <%= f.text_field :objective_excelent, :class => "span7" %>
-  </div>
+
+    <div class="field">
+      <%= f.label :selectLeft, "Localidad" %>
+      <%=
+          if @critical_success_factor.new_record?
+            sql = "SELECT priority_program_action_lines.name, priority_program_action_lines.id  FROM priority_program_action_lines"
+
+            ppal = ActiveRecord::Base.connection.select_rows(sql)
+            ppal.map{|name,id|}
+
+            f.select("selectLeft",ppal,{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
+          else
+            @sql = "SELECT priority_program_action_lines.* FROM priority_program_action_lines
+            INNER JOIN priority_program_action_lines_programs ON priority_program_action_lines.id = priority_program_action_lines_programs.priority_program_action_line_id
+            WHERE priority_program_action_lines_programs.program_id = " + params[:id]
+
+            @t = ActiveRecord::Base.connection.select_rows(@sql)
+
+            f.select("selectLeft",options_for_select(@t),{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
+          end
+     %>
+    </div>
+
   <div class="field">
     <%= f.label :percentage, "Peso %" %>
     <%= f.text_field :percentage, :class => "span7" %>
@@ -58,3 +70,59 @@
     <%= link_to 'Regresar', critical_success_factors_path, :class => "btn" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+     function moveToRightOrLeft(side){
+     var listLeft=document.getElementById('selectLeft');
+     var listRight=document.getElementById('selectRight');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las líneas de acción a la derecha');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+     function move(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+ } 
+
+    $(document).ready(function(){
+        $('#new_ped_axis_definition').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRight").val(options);
+        });
+
+        $('form[id*=edit_ped_axis_definition]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRight").val(options);
+        });
+    });
+
+</script>

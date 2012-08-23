@@ -80,12 +80,12 @@
                 <h4>Planeación</h4>
                 <ul>    
                     <li class="factores"><span></span><%= link_to "Programas", programs_path %></li>
-                    <li class="factores"><span></span><%= link_to "Factores Criticos / Indicadores", critical_success_factors_path %></li>
+                    <li class="factores"><span></span><%= link_to "Acciones", critical_success_factors_path %></li>
                 </ul>
                 <h4>Acciones</h4>
                 <ul>    
-                    <li class="actividades"><span></span><%= link_to "Tipo de Acciones", activity_types_path %></li>
-                    <li class="actividades"><span></span><%= link_to "Actividades", activities_path %></li> 
+                    <li class="actividades"><span></span><%= link_to "Actividades", activity_types_path %></li>
+                    <li class="actividades"><span></span><%= link_to "Bitacora", activities_path %></li>
                 </ul>
                 <h4>Favoritos</h4>
                 <ul>
@@ -123,5 +123,10 @@
             var containerheight = $("#CONTENT").height();
             $("#SIDEBAR_LEFT").css("height",containerheight)
     });
+
+    function application_root_path(){
+        var root_path = "<%= root_path %>";
+        return root_path;
+    }
 </script>
 </html>
