@@ -20,36 +20,50 @@
     <%= f.text_area :description, :class => "span7", :rows => "9"  %>
   </div>
   <div class="field">
-    <%= f.label :program_idbck, "Programa" %>
-    <%= f.select :program_idbck, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }, {:include_blank => false}, :class => "span7" %>
+
+    <%= f.label :program_id, "Programa" %>
+    <%= f.select :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }, {:include_blank => false}, :class => "span7", :id => "program_id" %>
   </div>
 
   <div class="field">
-      <%= f.label :program_id, "Municipio" %>
-      <%= f.collection_select :program_id,  Program.order("name"), :id, :description, options ={:prompt => "-- Selecciona --"}, :id => "program_id", :class => "span7"  %>
-  </div>
-
-    <div class="field">
-      <%= f.label :selectLeft, "Localidad" %>
-      <%=
-          if @critical_success_factor.new_record?
-            sql = "SELECT priority_program_action_lines.name, priority_program_action_lines.id  FROM priority_program_action_lines"
-
-            ppal = ActiveRecord::Base.connection.select_rows(sql)
-            ppal.map{|name,id|}
-
-            f.select("selectLeft",ppal,{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
-          else
-            @sql = "SELECT priority_program_action_lines.* FROM priority_program_action_lines
-            INNER JOIN priority_program_action_lines_programs ON priority_program_action_lines.id = priority_program_action_lines_programs.priority_program_action_line_id
-            WHERE priority_program_action_lines_programs.program_id = " + params[:id]
-
-            @t = ActiveRecord::Base.connection.select_rows(@sql)
-
-            f.select("selectLeft",options_for_select(@t),{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
-          end
-     %>
-    </div>
+    <table border="0">
+       <tr>
+           <td colspan="2"><h4>Líneas de Acción Disponibles</h4></td>
+          <td></td>
+           <td colspan="2"><h4>Líneas Relacionadas a la Acción</h4></td>
+       </tr>
+       <tr>
+         <td rowspan="3" align="right">
+          <label>
+            <%= fillrightleftcriticalactionline(f) %>
+          </label>
+        </td>
+        <td align="left">&nbsp;</td>
+         <td align="left">&nbsp;</td>
+        <td rowspan="3" align="left">
+            <label>
+                <%= f.select("selectRight",options_for_select(@critical_success_factor.priority_program_action_lines.order("name").all.collect { |cat| [cat.name, cat.id] }, @critical_success_factor.title { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRight'}) %>
+            </label>
+        </td>
+       </tr>
+       <tr>
+         <td align="left">&nbsp;</td>
+         <td align="left">
+           <label>
+                <input name="btnRight" type="button" id="btnRight" value="&gt;&gt;" onClick="javascript:moveToRightOrLeft(1);">
+            </label>
+        </td> 
+      </tr>
+       <tr>
+         <td align="left">&nbsp;</td>
+         <td align="left">
+           <label>
+                <input name="btnLeft" type="button" id="btnLeft" value="&lt;&lt;" onClick="javascript:moveToRightOrLeft(2);">
+            </label>
+        </td> 
+      </tr> 
+    </table> 
+   </div>
 
   <div class="field">
     <%= f.label :percentage, "Peso %" %>
@@ -112,13 +126,13 @@
  } 
 
     $(document).ready(function(){
-        $('#new_ped_axis_definition').submit(function(){
+        $('#new_critical_success_factor').submit(function(){
             //SelectRight seleccionar
             var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
             $("#selectRight").val(options);
         });
 
-        $('form[id*=edit_ped_axis_definition]').submit(function(){
+        $('form[id*=edit_critical_success_factor]').submit(function(){
             //SelectRight seleccionar
             var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
             $("#selectRight").val(options);

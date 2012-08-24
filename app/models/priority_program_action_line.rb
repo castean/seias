@@ -3,7 +3,7 @@ class PriorityProgramActionLine < ActiveRecord::Base
   belongs_to :priority_program_strategy
   belongs_to :ped_action_line
   has_and_belongs_to_many :programs
-  has_many :critical_success_factors, :through => :programs, :source => :priority_program_action_lines
+  has_and_belongs_to_many :critical_success_factors
   validates :name, :presence => true
   validates :description, :presence => true
   validates :hierarchy, :presence => true
@@ -18,4 +18,5 @@ class PriorityProgramActionLine < ActiveRecord::Base
       return false
     end
   end
+
 end

@@ -10,7 +10,7 @@ $(document).ready ->
         method: "put"
         dataType: "json"
         cache: false
-        url: "/activities/for_activitytypeid/" + id_value_string
+        url: application_root_path() + "activities/for_activitytypeid/" + id_value_string
         timeout: 20000
         error: (XMLHttpRequest, errorTextStatus, error) ->
           alert "Failed to submit : " + errorTextStatus + " ;" + error

@@ -1,15 +1,25 @@
 module CriticalSuccessFactorsHelper
-  def fillrightleftselection(f)
+  def fillrightleftcriticalactionline(f)
     if @critical_success_factor.new_record?
-      f.select("selectLeft",options_for_select(PriorityProgramActionLine.order("name").all.collect { |cat| [cat.name, cat.id] }, @critical_success_factor.name { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectLeft'})
+      sql = "SELECT priority_program_action_lines.name, priority_program_action_lines.id  FROM priority_program_action_lines"
+
+      ppal = ActiveRecord::Base.connection.select_rows(sql)
+      ppal.map{|name,id|}
+
+      f.select("selectLeft",ppal,{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
+
     else
-      @sql = "Select name,id from critical_success_factors where id not in (SELECT priority_program_action_lines.id FROM priority_program_action_lines INNER JOIN priority_program_action_lines_programs
-              ON priority_program_action_lines.id = priority_program_action_lines_programs.priority_program_action_line_id
-              WHERE priority_program_action_lines_programs.program_id = " + @program.id.to_s + "ORDER BY name)"
+      @sql = "Select name,id from priority_program_action_lines WHERE id NOT IN
+	 (SELECT critical_success_factors_priority_program_action_lines.priority_program_action_line_id FROM critical_success_factors_priority_program_action_lines
+	 INNER JOIN priority_program_action_lines ON priority_program_action_lines.id = critical_success_factors_priority_program_action_lines.priority_program_action_line_id
+	 AND critical_success_factors_priority_program_action_lines.critical_success_factor_id = " + params[:id].to_s + ")
+   AND id IN (SELECT priority_program_action_lines_programs.priority_program_action_line_id FROM priority_program_action_lines_programs
+   WHERE priority_program_action_lines_programs.program_id =" + :program_id.to_s + ")"
 
-      @t = ActiveRecord::Base.connection.select_rows(@sql)
+      ppal = ActiveRecord::Base.connection.select_rows(@sql)
+      ppal.map{|name,id|}
 
-      f.select("selectLeft",options_for_select(@t),{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
+      f.select("selectLeft",ppal,{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
     end
   end
 end

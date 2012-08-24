@@ -7,12 +7,14 @@ class CriticalSuccessFactor < ActiveRecord::Base
   belongs_to :program
   belongs_to :department 
   has_and_belongs_to_many :activity_types
+  has_and_belongs_to_many :priority_program_action_lines
 
   attr_accessible :title, :description, :unit_of_measurement_id, :percentage,
-                  :unit_of_measurement_description, :program_id, :program_idbck,
+                  :unit_of_measurement_description, :program_id,
                   #Para seleccionar multiples lineas de accion a afectar antes de crear un factor critico
-                  :selectRight, :selectLeft  ,:selectLeftbck
-  attr_accessor :selectRight, :selectLeft  ,:selectLeftbck,:program_idbck
+                  :selectRight, :selectLeft
+  attr_accessor :selectRight, :selectLeft
+
   validates :title, :presence => true
   validates :description, :presence => true
   validates :percentage, :presence => true
@@ -30,6 +32,18 @@ class CriticalSuccessFactor < ActiveRecord::Base
     if activity_types.count > 0
       errors.add_to_base("No se pueden borrar mientras tenga dependencias")
       return false
+    end
+  end
+
+  def selectRight=(options)
+
+    self.priority_program_action_lines.clear
+
+    options.each do |option|
+      unless option.empty?
+        line = PriorityProgramActionLine.find(option)
+        self.priority_program_action_lines << line
+      end
     end
   end
 end
