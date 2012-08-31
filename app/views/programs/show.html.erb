@@ -20,7 +20,7 @@
 </p>
 </br>
 <p>
-  <b>Factores Criticos Asociados:</b>
+  <b>Acciones Asociadas:</b>
 </p>
 <% @program.critical_success_factors.each do |csf| %>
 	<ul>
@@ -33,7 +33,7 @@
 <br/>
 
 <p>
-  <b>Lineas de Acción:</b>
+  <b>Líneas de Acción TOTALES a las que afecta este Programa:</b>
 </p>
 <% @program.priority_program_action_lines.order(:hierarchy).each do |line| %>
     <ul>
