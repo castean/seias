@@ -1,5 +1,8 @@
 Seias::Application.routes.draw do
-  
+
+  match '/critical_factors/for_catalog_table_id/:table' => 'critical_factors#for_catalog_table_id'
+  resources :critical_factors
+
   resources :ped_programs
 
   match "home/download_manual" => "home#download_manual", :as => :manual

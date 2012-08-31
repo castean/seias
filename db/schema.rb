@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120820204833) do
+ActiveRecord::Schema.define(:version => 20120830185900) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -112,6 +112,20 @@ ActiveRecord::Schema.define(:version => 20120820204833) do
     t.datetime "updated_at",            :null => false
   end
 
+  create_table "catalog_tables", :force => true do |t|
+    t.string   "name",       :default => "t", :null => false
+    t.string   "model",      :default => "t", :null => false
+    t.string   "table",      :default => "t", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "catalog_tables_critical_factors", :id => false, :force => true do |t|
+    t.integer "catalog_table_id"
+    t.integer "critical_factor_id"
+    t.integer "table_select_field_id"
+  end
+
   create_table "counties", :force => true do |t|
     t.integer  "cve_mun"
     t.string   "name"
@@ -134,6 +148,29 @@ ActiveRecord::Schema.define(:version => 20120820204833) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "criterion_of_measurements", :force => true do |t|
+    t.string   "name",       :default => "t", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "critical_factors", :force => true do |t|
+    t.integer  "critical_success_factor_type_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description",                                                                      :null => false
+    t.decimal  "percentage",                      :precision => 10, :scale => 5
+    t.float    "objective_minimum"
+    t.float    "objective_satisfying"
+    t.float    "objective_excelent"
+    t.integer  "unit_of_measurement_id",                                                           :null => false
+    t.boolean  "confidential",                                                                     :null => false
+    t.boolean  "active",                                                         :default => true, :null => false
+    t.datetime "created_at",                                                                       :null => false
+    t.datetime "updated_at",                                                                       :null => false
+    t.integer  "criterion_of_measurement_id"
   end
 
   create_table "critical_success_factor_types", :force => true do |t|
