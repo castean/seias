@@ -14,14 +14,16 @@ class Ability
       can :for_activitytypeid, Activity
       can :destroy, UserSession 
       can :change_password, User
-      
+      can :download_manual, Home
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            
       case user.roles.to_s 
       when "admin" then
+        10.times { print "Hello admin" }
         can :manage, :all
       when "planeacion" then
+         10.times { print "Hello planeacion" }
         can :manage, PriorityProgram
         can :manage, PriorityProgramGoal
         can :manage, PriorityProgramStrategy

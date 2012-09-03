@@ -1,4 +1,5 @@
 <h3>Lineas de Acción Programa Prioritario</h3>
+<%=link_to 'Reporte',report_path%>
 
 <table class="table table-striped">
   <thead>
@@ -6,7 +7,7 @@
 	  	<th>Objetivo</th>
 	  	<th>Estrategia</th>
 	    <th>Linea de Acción</th>
-	    <th>Descripción</th>
+<!--	    <th>Descripción</th>-->
 	    <th></th>
 	    <th></th>
 	    <th></th>
@@ -17,7 +18,7 @@
   	<td><%= priority_program_action_line.priority_program_strategy.priority_program_goal.name %></td>
   	<td><%= priority_program_action_line.priority_program_strategy.name %></td>
     <td><%= priority_program_action_line.name %></td>
-    <td><%= priority_program_action_line.description %></td>
+<!--    <td><%= priority_program_action_line.description %></td>-->
     <td><%= link_to 'Detalles', priority_program_action_line %></td>
     <% if can? :update, priority_program_action_line %>
 	    <td><%= link_to (edit_priority_program_action_line_path(priority_program_action_line)) do %>
@@ -36,6 +37,6 @@
 </table>
 
 <br />
-<% if can? :create, @priority_program_action_lines %>
+<% if can? :create, PriorityProgramActionLine %>
 	<%= link_to 'Agregar Línea de Acción', new_priority_program_action_line_path, :class => "btn primary" %>
 <%end%>

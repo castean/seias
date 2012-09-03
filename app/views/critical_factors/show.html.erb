@@ -1,0 +1,20 @@
+<p id="notice" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+</br>
+<p>
+  <b>Tipo de Indicador:</b></br>
+  <%= @critical_factor.critical_success_factor_type.name %>
+</p>
+</br>
+<p>
+  <b>Nombre:</b></br>
+  <%= @critical_factor.name %>
+</p>
+</br>
+<p>
+  <b>Descripción:</b></br>
+  <%= @critical_factor.description %>
+</p>
+</br>
+
+<%= link_to 'Edit', edit_critical_factor_path(@critical_factor) %> |
+<%= link_to 'Back', critical_factors_path %>

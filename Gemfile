@@ -31,6 +31,7 @@ gem 'cancan'
 gem 'sass-rails', '~> 3.1'
 gem 'bootstrap-sass', '2.0.3' , :path => "vendor/bootstrap-sass-2.0.3"
 
+
 #java
 gem 'therubyracer'
 
@@ -51,7 +52,13 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'capistrano-ext'
 
+# Pedidos por servidor
+gem 'tilt','1.3.3'
+
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem "net-ldap"
+
+#Correo al tener un error en production.
+gem 'exception_notification'

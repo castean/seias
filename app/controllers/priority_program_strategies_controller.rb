@@ -43,12 +43,22 @@ class PriorityProgramStrategiesController < ApplicationController
   # POST /priority_program_strategies.json
   def create
     @priority_program_strategy = PriorityProgramStrategy.new(params[:priority_program_strategy])
-
+    #<rck> Ing. César Reyes  - Actualiza en Automatico la Jerarquia
+      sql = ActiveRecord::Base.connection()
+      sql.begin_db_transaction
+      hierarchy = "update priority_program_strategies
+                      set hierarchy = hierarchy + 1
+                    where hierarchy >= #{params[:priority_program_strategy][:hierarchy]}"
+       sql.update hierarchy        
+    #</rck>
+        
     respond_to do |format|
       if @priority_program_strategy.save
+        sql.commit_db_transaction
         format.html { redirect_to @priority_program_strategy, notice: 'Priority program strategy was successfully created.' }
         format.json { render json: @priority_program_strategy, status: :created, location: @priority_program_strategy }
       else
+        sql.rollback_db_transaction
         format.html { render action: "new" }
         format.json { render json: @priority_program_strategy.errors, status: :unprocessable_entity }
       end
@@ -75,6 +85,15 @@ class PriorityProgramStrategiesController < ApplicationController
   # DELETE /priority_program_strategies/1.json
   def destroy
     @priority_program_strategy = PriorityProgramStrategy.find(params[:id])
+    #<rck> Ing. César Reyes  - Actualiza en Automatico la Jerarquia
+      sql = ActiveRecord::Base.connection()
+      sql.begin_db_transaction
+      hierarchy = "update priority_program_strategies
+                      set hierarchy = hierarchy - 1
+                    where hierarchy > #{@priority_program_strategy.hierarchy}"
+       sql.update hierarchy
+       sql.commit_db_transaction        
+    #</rck>
     @priority_program_strategy.destroy
 
     respond_to do |format|

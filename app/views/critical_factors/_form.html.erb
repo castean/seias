@@ -1,0 +1,198 @@
+<%= form_for(@critical_factor) do |f| %>
+  <% if @critical_factor.errors.any? %>
+        <div id="error_explanation" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+             xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+             xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+      <h2><%= pluralize(@critical_factor.errors.count, "error") %> prohibited this critical_factor from being saved:</h2>
+
+      <ul>
+      <% @critical_factor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  </br>
+  <div class="field">
+    <%= f.label :critical_success_factor_type_id, "Tipo de Factor Crítico" %>
+    <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.all.collect{ |u| [u.name, u.id] }, {:include_blank => false}, :class => "span7" %>
+  </div>
+  <div class="field">
+    <%= f.label :name, "Nombre" %>
+    <%= f.text_field :name, :class => "span7" %>
+  </div>
+  <div class="field">
+    <%= f.label :description,"Descripción" %>
+    <%= f.text_area :description, :class => "span7", :rows => "5" %>
+  </div>
+  <div class="field">
+    <%= f.label :percentage, "Peso %" %>
+    <%= f.text_field :percentage, :class => "span7" %>
+  </div></br>
+
+  <div>
+  <b>Metas Anuales</b>
+      <table>
+        <tr>
+          <td><%= f.label :objective_minimum, "Minimo" %></td>
+          <td><%= f.label :objective_satisfying, "Satisfactorio" %></td>
+          <td><%= f.label :objective_excelent, "Excelente" %></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.text_field :objective_minimum, :class => "span2" %>
+            </div>
+          </td>
+          <td>
+            <div class="field">
+              <%= f.text_field :objective_satisfying, :class => "span2" %>
+            </div>
+          </td>
+          <td>
+            <div class="field">
+              <%= f.text_field :objective_excelent, :class => "span2" %>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="field">
+        <%= f.label :unit_of_measurement_id, "Unidad de Medida" %>
+        <%= f.select :unit_of_measurement_id, UnitOfMeasurement.all.collect{ |u| [u.name, u.id] }, {:include_blank=> "-- Selecciona Uno --"}, :class => "span7" %>
+      </div>
+  </div>
+  <div class="field">
+    <%= f.label :catalog_table_id, "Que Medir " %>
+    <%= f.select :catalog_table_id, CatalogTable.order("name").all.collect{ |u| [u.name, u.id] },
+                 {:include_blank => false}, :class => "span7", :id => "catalog_table_id"  %>
+  </div>
+
+  <div> </br>
+  <h4>Criterios de Reportería y de Medición</h4>
+    <%= f.label :criterion_of_measurement_id, "Tipo de datos a obtener?" %>
+    <%= f.select :criterion_of_measurement_id, options_for_select([["Personas", "1"], ["Cantidad del Tipo de Actividad ", "2"], ["Ambos", "3"]]) %>  </br> </br>
+
+  <!-- ------------------------------------ -->
+    <!-- <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div1', this)" /> --><h4>Numerador</h4>
+    <!-- <input type="checkbox" name="modtype"  value="value2" onclick="showMe('div2', this)" /> Numerador Capturado  </br> -->
+    <!-- <div id="div1" style="display:none">  -->
+    <div>
+      <div class="field">
+        <table border="0">
+           <tr>
+             <td colspan="2"><h5>Catálogo Disponibles</h5></td>
+            <td></td>
+             <td colspan="2"><h5>Catálogo Seleccionado</h5></td>
+           </tr>
+           <tr>
+             <td rowspan="3" align="right">
+                <label>
+                    <%= fillrightleftcatalogtable(f) %>
+                </label>
+            </td>
+            <td align="left">&nbsp;</td>
+             <td align="left">&nbsp;</td>
+            <td rowspan="3" align="left">
+                <label>
+                  <%= selectrightfill(f) %>
+                </label>
+            </td>
+           </tr>
+           <tr>
+             <td align="left">&nbsp;</td>
+             <td align="left">
+                <label>
+                    <input name="btnRight" type="button" id="btnRight" value="&gt;&gt;" onClick="javascript:moveToRightOrLeft(1);">
+                 </label>
+            </td> 
+          </tr>
+           <tr>
+             <td align="left">&nbsp;</td>
+             <td align="left">
+                <label>
+                    <input name="btnLeft" type="button" id="btnLeft" value="&lt;&lt;" onClick="javascript:moveToRightOrLeft(2);">
+                 </label>
+            </td> 
+          </tr> 
+        </table> 
+       </div>
+    </div>
+    <!-- <div id="div2" style="display:none">Show Div 2</div>   -->
+    </br>
+    <input type="checkbox" name="modtype"  value="value4" onclick="showMe('div3', this)" /> Denominador Compuesto
+    <input type="checkbox" name="modtype"  value="value5" onclick="showMe('div4', this)" /> Denominador Capturado  </br>
+
+    <div id="div3" style="display:none">Show Div 3</div>
+    <div id="div4" style="display:none">Show Div 4</div>
+
+  </div>
+
+    <div class="form-actions btn-group">
+      <%= f.submit "Guardar", :class => "btn" %>
+      <%= link_to 'Regresar', critical_factors_path, :class => "btn" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+    <!-- // Show - Hide Div con el combo-box
+    function showMe (it, box) {
+        var vis = (box.checked) ? "block" : "none";
+        document.getElementById(it).style.display = vis;
+    }
+    //-->
+    <!-- Para seleccionar campos de izquierda a derecha de una lista -->
+     function moveToRightOrLeft(side){
+     var listLeft=document.getElementById('selectLeft');
+     var listRight=document.getElementById('selectRight');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las líneas de acción a la derecha');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+     function move(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+ } 
+
+    $(document).ready(function(){
+        $('#new_critical_factor').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRight").val(options);
+        });
+
+        $('form[id*=edit_critical_factor]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRight").val(options);
+        });
+    });
+</script>
+
+

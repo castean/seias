@@ -14,7 +14,7 @@
   <br />
   <div class="field">
     <%= f.label :activity_type_id, "Tipo de Actividad" %>
-    <%= f.collection_select :activity_type_id, ActivityType.order("name").all, :id, :name, options ={:prompt => "-- Selecciona un Tipo --"} %>
+    <%= f.collection_select :activity_type_id, ActivityType.order('name'), :id, :name, options ={:prompt => "-- Selecciona un Tipo --"} %>
     
   </div>
  
@@ -52,7 +52,7 @@
   	
     <%= f.label :activity_date_end, "Fecha Fin de Actividad" %>
     <%= f.datepicker :activity_date_end, :dateFormat => "dd-mm-yy" %>
-    <!--<%= f.date_select :activity_date_end %>-->
+    <!--<%= f.date_select :activity_date_end %>-->                                                                                5
   </div> 
   <div class="field">
     <%= f.label :county_id, "Municipio" %>
@@ -74,8 +74,13 @@
   </div>
 	
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Guardar Actividad" %>
   </div>
+ <% if params[:continuos] == '1' %>	
+   <div class="actions">
+     <%= link_to 'Finalizar', activities_path, :class => "btn primary" %>
+   </div>
+  <% end %>
 <% end %>
 
 

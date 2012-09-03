@@ -1,4 +1,4 @@
-<h3>Factores Críticos / Indicadores</h3>
+<h3>Acciones</h3>
 
 <table class="table table-striped">
   <thead>
@@ -41,6 +41,6 @@
 </table>
 
 <br />
-<% if can? :create, @critical_success_factors %>
-<%= link_to 'Registrar Factor Crítico', new_critical_success_factor_path, :class => "btn primary" %>
+<% if can? :create, CriticalSuccessFactor %>
+<%= link_to 'Registrar Acción', new_critical_success_factor_path, :class => "btn primary" %>
 <% end %>

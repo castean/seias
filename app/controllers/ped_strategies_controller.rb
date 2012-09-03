@@ -43,12 +43,21 @@ class PedStrategiesController < ApplicationController
   # POST /ped_strategies.json
   def create
     @ped_strategy = PedStrategy.new(params[:ped_strategy])
-
+    #<rck> Ing. César Reyes  - Actualiza en Automatico la Jerarquia
+      sql = ActiveRecord::Base.connection()
+      sql.begin_db_transaction
+      hierarchy = "update ped_strategies
+                      set hierarchy = hierarchy + 1
+                    where hierarchy >= #{params[:ped_strategy][:hierarchy]}"
+       sql.update hierarchy        
+    #</rck>
     respond_to do |format|
       if @ped_strategy.save
+        sql.commit_db_transaction
         format.html { redirect_to @ped_strategy, notice: 'Ped strategy was successfully created.' }
         format.json { render json: @ped_strategy, status: :created, location: @ped_strategy }
       else
+        sql.rollback_db_transaction
         format.html { render action: "new" }
         format.json { render json: @ped_strategy.errors, status: :unprocessable_entity }
       end
@@ -75,6 +84,15 @@ class PedStrategiesController < ApplicationController
   # DELETE /ped_strategies/1.json
   def destroy
     @ped_strategy = PedStrategy.find(params[:id])
+    #<rck> Ing. César Reyes  - Actualiza en Automatico la Jerarquia
+      sql = ActiveRecord::Base.connection()
+      sql.begin_db_transaction
+      hierarchy = "update ped_strategies
+                      set hierarchy = hierarchy - 1
+                    where hierarchy > #{@ped_strategy.hierarchy}"
+       sql.update hierarchy
+       sql.commit_db_transaction        
+    #</rck>
     @ped_strategy.destroy
 
     respond_to do |format|

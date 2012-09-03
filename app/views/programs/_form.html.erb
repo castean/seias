@@ -50,14 +50,14 @@
          <tr>
          <td rowspan="3" align="right">
         <label>
-          <%= f.select("selectLeft",options_for_select(PriorityProgramActionLine.order("name").all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{},{:multiple=>true, :size => 6, :id=>'selectLeft'})%>
+          <%=fillrightleftselection(f)%>
         </label>
       </td>
         <td align="left">&nbsp;</td>
          <td align="left">&nbsp;</td>
         <td rowspan="3" align="left">
           <label>
-            <%= f.select("selectRight",{},{}, :size => 6,:multiple=>true, :id=>'selectRight') %>
+            <%= f.select("selectRight",options_for_select(@program.priority_program_action_lines.order("name").all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRight'}) %>
           </label>
         </td>
          </tr>

@@ -22,7 +22,7 @@
     <td><%= program.description %></td>
     <td><%= Department.find(program.department_id).name %></td>
     <td><%= u.name.to_s + ' ' + u.last_name.to_s + ' ' + u.second_last_name.to_s %></td>
-    <td><%= link_to 'Factores', program %></td>
+    <td><%= link_to 'Acciones', program %></td>
     <% if can? :update, program %>
 	    <td><%= link_to(edit_program_path(program)) do %>
 	    		<%= image_tag("edit.png") %>
@@ -40,6 +40,6 @@
 </table>
 
 <br />
-<% if can? :create, @programs %>
+<% if can? :create, Program %>
 	<%= link_to 'Nuevo Programa', new_program_path, :class => "btn primary" %>
 <%end%>

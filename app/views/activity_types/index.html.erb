@@ -1,4 +1,4 @@
-<h2>Listado de tipo de Acciones</h2>
+<h2>Listado de Tipo de Actividades</h2>
 
 <table class="table table-striped">
   <thead>
@@ -42,7 +42,7 @@
 </table>
 
 <br />
-<% if can? :create, @activity_types %>
+<% if can? :create, ActivityType %>
 	<%= link_to 'Crear un Tipo de Actividad', new_activity_type_path, :class => "btn primary" %>
 <% end %>
 </br>
