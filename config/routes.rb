@@ -1,5 +1,7 @@
 Seias::Application.routes.draw do
 
+  resources :period_times
+
   match '/critical_factors/for_catalog_table_id/:table' => 'critical_factors#for_catalog_table_id'
   resources :critical_factors
 

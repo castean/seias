@@ -2,7 +2,7 @@
   <% if @critical_factor.errors.any? %>
         <div id="error_explanation" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
              xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-             xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+             xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
       <h2><%= pluralize(@critical_factor.errors.count, "error") %> prohibited this critical_factor from being saved:</h2>
 
       <ul>
@@ -62,8 +62,8 @@
       </div>
   </div>
   <div class="field">
-    <%= f.label :catalog_table_id, "Que Medir " %>
-    <%= f.select :catalog_table_id, CatalogTable.order("name").all.collect{ |u| [u.name, u.id] },
+    <%= f.label :catalog_table_reference, "Que Medir " %>
+    <%= f.select :catalog_table_reference, CatalogTable.order("name").all.collect{ |u| [u.name, u.id] },
                  {:include_blank => false}, :class => "span7", :id => "catalog_table_id"  %>
   </div>
 
@@ -118,12 +118,16 @@
        </div>
     </div>
     <!-- <div id="div2" style="display:none">Show Div 2</div>   -->
-    </br>
-    <input type="checkbox" name="modtype"  value="value4" onclick="showMe('div3', this)" /> Denominador Compuesto
-    <input type="checkbox" name="modtype"  value="value5" onclick="showMe('div4', this)" /> Denominador Capturado  </br>
 
-    <div id="div3" style="display:none">Show Div 3</div>
-    <div id="div4" style="display:none">Show Div 4</div>
+    <!-- <input type="checkbox" name="modtype"  value="value4" onclick="showMe('div3', this)" /> Denominador Compuesto -->
+    <div class="field">
+      <h4>Denominador</h4></br>
+      <%= f.text_field :critical_factor_id, :class => "span4" %>
+    </div>
+    <div class="field">
+      <%= f.label :period_time_id, "Periodo de tiempo del reporte" %>
+      <%= f.select :period_time_id, PeriodTime.all.collect{ |u| [u.name, u.id] }, {:include_blank => false}, :class => "span7" %>
+    </div>
 
   </div>
 
