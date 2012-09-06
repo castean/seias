@@ -3,7 +3,9 @@ Seias::Application.routes.draw do
   resources :period_times
 
   match '/critical_factors/for_catalog_table_id/:table' => 'critical_factors#for_catalog_table_id'
-  resources :critical_factors
+  resources :critical_factors do
+    resources :goals
+  end
 
   resources :ped_programs
 
@@ -81,9 +83,7 @@ Seias::Application.routes.draw do
   resources :programs
 
   match '/critical_success_factors/for_program_id/:id' => 'critical_success_factors#for_program_id'
-  resources :critical_success_factors do
-    resources :goals
-  end
+  resources :critical_success_factors
 
   #resources :sexennial_state_plan_components
 

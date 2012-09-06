@@ -190,5 +190,66 @@ $(document).ready(function(){
 
 //
 
+// Ing. Antonio Castellanos // Cambio de izquierda a derecha
+
+<!-- // Show - Hide Div con el combo-box
+function showMe (it, box) {
+    var vis = (box.checked) ? "block" : "none";
+    document.getElementById(it).style.display = vis;
+}
+//-->
+<!-- Para seleccionar campos de izquierda a derecha de una lista -->
+ function moveToRightOrLeft(side){
+ var listLeft=document.getElementById('selectLeft');
+     var listRight=document.getElementById('selectRight');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las líneas de acción a la derecha');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+    }
+    else if(side==2){
+     if(listRight.options.length==0){
+         alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+        else{
+         var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+             listRight.options[0].selected=true;
+             } 
+        } 
+    } 
+} 
+ function move(listBoxTo,optionValue,optionDisplayText){
+ var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+ } 
+
+$(document).ready(function(){
+    $('#new_critical_factor').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+        $("#selectRight").val(options);
+    });
+
+    $('form[id*=edit_critical_factor]').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+        $("#selectRight").val(options);
+    });
+});
 
 
