@@ -22,6 +22,7 @@ class Activity < ActiveRecord::Base
   validate :validate_activity_sdate, :unless => Proc.new{ |activity| activity.activity_date_start.nil?}
   validate :validate_sdate_fdate, :unless => Proc.new{ |activity| activity.activity_date_end.nil? || activity.activity_date_start.nil?}
   validate :validar_nulos
+  validate :validar_town_id
   validate :validar_program_start_date , :unless => Proc.new{ |activity| activity.activity_type.nil? || activity.activity_type.critical_success_factors.nil? }
   
   def validar_nulos
@@ -30,6 +31,13 @@ class Activity < ActiveRecord::Base
     end
     if self.qty_women.nil?
       self.qty_women = 0
+    end
+  end
+
+  def validar_town_id
+    t = self.town_id
+    if t == 0
+      errors.add(:town_id, "Seleccione por favor una Localidad")
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830185900) do
+ActiveRecord::Schema.define(:version => 20120905205756) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -171,6 +171,10 @@ ActiveRecord::Schema.define(:version => 20120830185900) do
     t.datetime "created_at",                                                                       :null => false
     t.datetime "updated_at",                                                                       :null => false
     t.integer  "criterion_of_measurement_id"
+    t.integer  "catalog_table_id"
+    t.integer  "catalog_table_reference"
+    t.integer  "critical_factor_id"
+    t.integer  "period_time_id"
   end
 
   create_table "critical_success_factor_types", :force => true do |t|
@@ -325,6 +329,12 @@ ActiveRecord::Schema.define(:version => 20120830185900) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.text     "ped_program"
+  end
+
+  create_table "period_times", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "place_types", :force => true do |t|

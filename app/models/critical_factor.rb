@@ -5,13 +5,14 @@ class CriticalFactor < ActiveRecord::Base
   belongs_to :unit_of_measurement
   belongs_to :critical_success_factor_type
   belongs_to :user
+  belongs_to :period_time
   belongs_to :program
   belongs_to :department
   has_and_belongs_to_many :activity_types
   has_and_belongs_to_many :priority_program_action_lines
 
-  attr_accessible :critical_success_factor_type_id, :name, :description, :unit_of_measurement_id, :percentage, :criterion_of_measurement_id, :catalog_table_id,
-                  :program_id,:objective_minimum,:objective_satisfying,:objective_excelent,
+  attr_accessible :critical_success_factor_type_id, :name, :description, :unit_of_measurement_id, :percentage, :criterion_of_measurement_id, :catalog_table_id, :catalog_table_reference,
+                  :program_id,:objective_minimum,:objective_satisfying,:objective_excelent, :critical_factor_id, :period_time_id,
                   #Para seleccionar multiples opciones de tabla a afectar antes de crear un factor critico
                   :selectRight, :selectLeft
   attr_accessor :selectRight, :selectLeft, :catalog_table_id
