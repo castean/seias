@@ -53,6 +53,7 @@ Seias::Application.routes.draw do
   resources :departments
 
   match '/activities/for_activitytypeid/:activity_type_id' => 'activities#for_activitytypeid'
+  match '/activities/for_departmentid/:department_id' => 'activities#for_departmentid'
   resources :activities
 
   resources :groups

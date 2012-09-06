@@ -12,9 +12,33 @@
   
   <%= f.hidden_field :user_id %>
   <br />
+    <a href="#" class="show_hide_department">Cambiar de Departamento</a>
+    <div class="slidingDivDepartment">
+      <div class="field">
+        <%= f.label :department_id, "Departamento" %>
+        <%= f.collection_select :department_id, Department.find_all_by_direction_id( current_user.department.direction_id).sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona un Departamento --"} %>
+      </div>
+      <a href="#" class="show_hide_department">Ocultar</a></br>
+    </div>
   <div class="field">
+    <% if @activity.new_record? %>
+        <% #sql = "Select distinct activity_types.name, activity_types.id from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
+            #INNER JOIN critical_success_factors ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
+            #INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
+            #WHERE programs.department_id = #{current_user.department_id}"
+            sql = "Select activity_types.name, activity_types.id from activity_types"
+        %>
+    <% else %>
+        <% sql = "Select distinct activity_types.name, activity_types.id from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
+            INNER JOIN critical_success_factors ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
+            INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
+            WHERE programs.direction_id = #{current_user.department.direction_id}"
+        %>
+    <% end %>
     <%= f.label :activity_type_id, "Tipo de Actividad" %>
-    <%= f.collection_select :activity_type_id, ActivityType.order('name'), :id, :name, options ={:prompt => "-- Selecciona un Tipo --"} %>
+    <% filter_activity_types = ActiveRecord::Base.connection.select_rows(sql) %>
+    <% filter_activity_types.map{|name, id|}%>
+    <%= f.select :activity_type_id, filter_activity_types, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo"} %>
     
   </div>
  
@@ -52,7 +76,7 @@
   	
     <%= f.label :activity_date_end, "Fecha Fin de Actividad" %>
     <%= f.datepicker :activity_date_end, :dateFormat => "dd-mm-yy" %>
-    <!--<%= f.date_select :activity_date_end %>-->                                                                                5
+    <!--<%= f.date_select :activity_date_end %>-->
   </div> 
   <div class="field">
     <%= f.label :county_id, "Municipio" %>

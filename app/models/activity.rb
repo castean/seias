@@ -6,8 +6,8 @@ class Activity < ActiveRecord::Base
   belongs_to :activity_type
   belongs_to :user
   
-  attr_accessible :activity_date_start,:activity_date_end, :description, :value, :town_id, :group_id, :public_target_id, :activity_type_id, :county_id, :user_id, :qty_women, :qty_men
-  
+  attr_accessible :activity_date_start,:activity_date_end, :description, :value, :town_id, :group_id, :public_target_id, :activity_type_id, :county_id, :user_id, :qty_women, :qty_men, :department_id
+  attr_accessor :department_id
   validates_numericality_of :qty_men, :only_integer => true
   validates_numericality_of :qty_women, :only_integer => true
   validates :activity_date_start, :presence => true
