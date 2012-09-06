@@ -129,4 +129,4 @@ class ActivitiesController < ApplicationController
       format.json  { render :json => @filter_activity_types}
     end
   end
-end 
+end

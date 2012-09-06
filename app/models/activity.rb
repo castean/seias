@@ -76,6 +76,5 @@ class Activity < ActiveRecord::Base
     if self.activity_date_end < self.activity_date_start
       errors.add(:activity_date_end, "La fecha de termino de la actividad debe ser mayor o igual a la fecha de inicio")
     end
-    
   end
 end

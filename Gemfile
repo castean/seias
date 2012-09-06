@@ -62,3 +62,6 @@ gem "net-ldap"
 
 #Correo al tener un error en production.
 gem 'exception_notification'
+
+# Para Exportar a Excel
+gem 'acts_as_xlsx'
