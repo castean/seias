@@ -64,4 +64,4 @@ gem "net-ldap"
 gem 'exception_notification'
 
 # Para Exportar a Excel
-gem 'acts_as_xlsx'
+# gem 'acts_as_xlsx'
