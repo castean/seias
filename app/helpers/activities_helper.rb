@@ -8,11 +8,11 @@ module ActivitiesHelper
             sql = "Select activity_types.name, activity_types.id from activity_types"
 
       else
-            sql = "Select distinct activity_types.name, activity_types.id from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
-            INNER JOIN critical_success_factors ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
-            INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
-            WHERE programs.direction_id = #{current_user.department.direction_id}"
-
+            #sql = "Select distinct activity_types.name, activity_types.id from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
+            #INNER JOIN critical_success_factors ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
+            #INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
+            #WHERE programs.direction_id = #{current_user.department.direction_id}"
+            sql = "Select activity_types.name, activity_types.id from activity_types"
      end
 
      filter_activity_types = ActiveRecord::Base.connection.select_rows(sql)
