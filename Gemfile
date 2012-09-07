@@ -26,7 +26,11 @@ gem 'jquery_datepicker'
 gem 'authlogic'
 gem 'easy_roles'
 gem 'cancan'
-
+gem 'acts_as_xlsx' #to excel
+require 'csv'
+gem "spreadsheet"
+gem "to_xls"
+gem 'composite_primary_keys'
 #Sass
 gem 'sass-rails', '~> 3.1'
 gem 'bootstrap-sass', '2.0.3' , :path => "vendor/bootstrap-sass-2.0.3"

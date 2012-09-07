@@ -1,6 +1,5 @@
 #encoding:utf-8
 class ActivityType < ActiveRecord::Base
-  
   belongs_to :unit_of_measurement
   has_many :activities, :order => 'activity_date_start DESC'
   has_and_belongs_to_many :critical_success_factors
@@ -10,7 +9,7 @@ class ActivityType < ActiveRecord::Base
   :selectRightActivity, :selectLeft
   attr_accessor :selectRightActivity, :selectLeft
   
-  validates :name, :presence => true
+  validates :name, :presence => true  
   validates :unit_of_measurement_id, :presence => true
 
   

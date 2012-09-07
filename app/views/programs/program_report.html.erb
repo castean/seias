@@ -1,0 +1,46 @@
+<h3>Lista de Programas</h3>
+
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	  	
+	    <th>Programa</th>
+	    
+	  </tr>
+	</thead>
+
+  <tr>
+  	
+    <td><%= %></td>
+    
+  </tr>
+
+</table>
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	  	
+	    <th>Programa</th>
+	    <th>Tipo de Actividad</th>
+	    <th>Valor</th>
+	    <th>Hombres</th>
+	    <th>Mujeres</th>
+	    <th>Total Personas</th>
+	    <th><%=  %></th>
+	  </tr>
+	</thead>
+
+<% @program.each do |p| %>
+  
+  <tr>
+  	<td><%= p.description %></td>
+  	<td><%= p.nombre%></td>
+  	<td><%= p.totalv%></td>
+  	<td><%= p.hombre%></td>
+  	<td><%= p.mujer%></td>
+  	<td><%= p.totalp%></td>
+  </tr>
+<%end%>
+</table>
+<br/>
+<%= link_to 'Descargar en excel', url_for(:format=>"xls") %>
