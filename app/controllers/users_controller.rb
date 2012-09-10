@@ -25,6 +25,12 @@ class UsersController < ApplicationController
   #GET
   def index
     @users = User.order("name").order("last_name").order("second_last_name").page(params[:page]).per(20)
+
+    users = User.all(:joins => [:programs])
+    respond_to do |format|
+      format.html
+      format.xls { send_data users.to_xls, content_type: 'application/vnd.ms-excel', filename: 'users.xls' }
+    end
   end
 
   def new
