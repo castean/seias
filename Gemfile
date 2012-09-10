@@ -66,6 +66,6 @@ gem 'exception_notification'
 # Para Exportar a Excel
 # gem 'acts_as_xlsx'
 
-gem "spreadsheet", "0.7.1"
-gem "to_xls", :git => "https://github.com/dblock/to_xls.git", :branch => "merged"
+#gem "spreadsheet", "0.7.1"
+#gem "to_xls", :git => "https://github.com/dblock/to_xls.git", :branch => "merged"
 
