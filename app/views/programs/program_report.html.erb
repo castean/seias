@@ -3,25 +3,23 @@
 <table class="table table-striped">
   <thead>
 	  <tr>
-	  	
+
 	    <th>Programa</th>
-	    
+
 	  </tr>
 	</thead>
 
   <tr>
-  	
-    <td><%= %></td>
-    
+  	<% c = Program.find(params[:program_id][:program_id]) %>
+    <td><%= c.description %></td>
+
   </tr>
 
 </table>
 <table class="table table-striped">
   <thead>
 	  <tr>
-	  	
-	    <th>Programa</th>
-	    <th>Tipo de Actividad</th>
+	  	<th>Tipo de Actividad</th>
 	    <th>Valor</th>
 	    <th>Hombres</th>
 	    <th>Mujeres</th>
@@ -31,9 +29,8 @@
 	</thead>
 
 <% @program.each do |p| %>
-  
+
   <tr>
-  	<td><%= p.description %></td>
   	<td><%= p.nombre%></td>
   	<td><%= p.totalv%></td>
   	<td><%= p.hombre%></td>
@@ -43,4 +40,5 @@
 <%end%>
 </table>
 <br/>
-<%= link_to 'Descargar en excel', url_for(:format=>"xls") %>
+
+<%=  link_to 'Descargar en excel', request.parameters.merge({:format => :xls}), :controller => 'programs', :action => 'program_report' %>

@@ -84,4 +84,16 @@ class CriticalSuccessFactorsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def for_program_id
+    @sql = "SELECT priority_program_action_lines.* FROM priority_program_action_lines
+    INNER JOIN priority_program_action_lines_programs ON priority_program_action_lines.id = priority_program_action_lines_programs.priority_program_action_line_id
+    WHERE priority_program_action_lines_programs.program_id = " + params[:id]
+
+    @t = ActiveRecord::Base.connection.select_rows(@sql)
+
+    respond_to do |format|
+      format.json  { render :json => @t}
+    end
+  end
 end

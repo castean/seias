@@ -1,5 +1,12 @@
 Seias::Application.routes.draw do
-  
+
+  resources :period_times
+
+  match '/critical_factors/for_catalog_table_id/:table' => 'critical_factors#for_catalog_table_id'
+  resources :critical_factors
+
+  resources :ped_programs
+
   match "home/download_manual" => "home#download_manual", :as => :manual
  
   resources :ped_program_definitions
@@ -10,6 +17,7 @@ Seias::Application.routes.draw do
 
   resources :ped_sub_themes
 
+  get '/priority_program_action_lines/report' => "priority_program_action_lines#report", :as => :report
   resources :priority_program_action_lines
 
   resources :priority_program_strategies
@@ -43,9 +51,11 @@ Seias::Application.routes.draw do
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
   match '/departments/for_countyid/:id' => 'departments#for_countyid'
+  match '/departments/for_programid/:id' => 'departments#for_programid'
   resources :departments
 
   match '/activities/for_activitytypeid/:activity_type_id' => 'activities#for_activitytypeid'
+  match '/activities/for_departmentid/:department_id' => 'activities#for_departmentid'
   resources :activities
 
   resources :groups
@@ -68,10 +78,12 @@ Seias::Application.routes.draw do
   #resources :activitygoals
 
   resources :public_targets
+  match '/programs/report' => 'programs#program_search'
+  match '/programs/program_report' => 'programs#program_report'
 
-  match '/programs/:id/report' => 'programs#program_report'
   resources :programs
 
+  match '/critical_success_factors/for_program_id/:id' => 'critical_success_factors#for_program_id'
   resources :critical_success_factors do
     resources :goals
   end

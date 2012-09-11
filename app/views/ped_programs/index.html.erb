@@ -1,0 +1,27 @@
+<h1>Listing ped_programs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Ped</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ped_programs.each do |ped_program| %>
+  <tr>
+    <td><%= ped_program.name %></td>
+    <td><%= ped_program.description %></td>
+    <td><%= ped_program.ped_id %></td>
+    <td><%= link_to 'Show', ped_program %></td>
+    <td><%= link_to 'Edit', edit_ped_program_path(ped_program) %></td>
+    <td><%= link_to 'Destroy', ped_program, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ped program', new_ped_program_path %>

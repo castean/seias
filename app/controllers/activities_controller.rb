@@ -8,7 +8,7 @@ class ActivitiesController < ApplicationController
     #id = current_user && current_user.record.id
     #@activities = Activity.where("user_id = #{ id }")
     
-    @activities = Activity.where(:user_id => current_user).order("activity_date_start").page(params[:page]).per(25)
+    @activities = Activity.where(:user_id => current_user).order("activity_date_start DESC").page(params[:page]).per(25)
     #@activities = Activity.order("description").page(params[:page]).per(25)
     
     respond_to do |format|
@@ -35,10 +35,10 @@ class ActivitiesController < ApplicationController
     current_user = UserSession.find
     id = current_user && current_user.record.id
     @activity = Activity.new(:user_id => id)
-    
+
     if params[:continuos] == '1' 
       
-      @activity = Activity.where(:user_id => id).last.clone
+      @activity = Activity.where(:user_id => id).last.dup
       
       respond_to do |format|
         format.html # new.html.erb
@@ -65,19 +65,19 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(params[:activity])
 
     respond_to do |format|
-      if @activity.save
+        if @activity.save
         
-        #format.html { redirect_to @activity, notice: 'Activity was successfully created.' }new_activity_path
-        #format.json { render json: @activity, status: :created, location: @activity }
+            #format.html { redirect_to @activity, notice: 'Activity was successfully created.' }new_activity_path
+            #format.json { render json: @activity, status: :created, location: @activity }
             
-        flash[:notice] = 'La actividad se dio de alta satisfactoriamente.' #+ current_user.id.to_s
+            flash[:notice] = 'La actividad se dio de alta satisfactoriamente.' #+ current_user.id.to_s
          
-        format.html { redirect_to(:action => 'new', :continuos => 1 ) }
-     
-      else
-        format.html { render action: "new" }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
-      end
+            format.html { redirect_to(:action => 'new', :continuos => 1 ) }
+          else
+            format.html { render action: "new" }
+            format.json { render json: @activity.errors, status: :unprocessable_entity }
+          end
+
     end
   end
 
@@ -116,4 +116,17 @@ class ActivitiesController < ApplicationController
       format.json  { render :json => @activity_types.to_json(:include => :unit_of_measurement)}      
     end
   end
-end 
+  # Ing. César Reyes # Carga Valores de Activity_Types con CoffeScript y json
+  def for_departmentid
+
+    sql = "Select distinct activity_types.name, activity_types.id from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
+                      INNER JOIN critical_success_factors ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
+                      INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
+                      WHERE programs.department_id = #{params[:department_id]}"
+    @filter_activity_types = ActiveRecord::Base.connection.select_rows(sql)
+    @filter_activity_types.map{|name, id|}
+    respond_to do |format|
+      format.json  { render :json => @filter_activity_types}
+    end
+  end
+end

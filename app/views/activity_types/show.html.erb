@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <h4>Nombre de la Acción:</h4>
+  <h4>Nombre de la Actividad:</h4>
   <%= @activity_type.name %>
 </p>
 <br />
@@ -16,7 +16,7 @@
 <br />
 
 
-  <b>Factores criticos que Afecta:</b>
+  <b>Acciones a las que Afecta:</b>
 </p>
 <% @activity_type.critical_success_factors.order(:title).each do |fce| %>
     <ul>

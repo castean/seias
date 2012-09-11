@@ -7,8 +7,8 @@ class Activity < ActiveRecord::Base
   belongs_to :user
   has_many :activity_types_critical_success_factors
   
-  attr_accessible :activity_date_start,:activity_date_end, :description, :value, :town_id, :group_id, :public_target_id, :activity_type_id, :county_id, :user_id, :qty_women, :qty_men
-  
+  attr_accessible :activity_date_start,:activity_date_end, :description, :value, :town_id, :group_id, :public_target_id, :activity_type_id, :county_id, :user_id, :qty_women, :qty_men, :department_id
+  attr_accessor :department_id
   validates_numericality_of :qty_men, :only_integer => true
   validates_numericality_of :qty_women, :only_integer => true
   validates :activity_date_start, :presence => true
@@ -23,6 +23,7 @@ class Activity < ActiveRecord::Base
   validate :validate_activity_sdate, :unless => Proc.new{ |activity| activity.activity_date_start.nil?}
   validate :validate_sdate_fdate, :unless => Proc.new{ |activity| activity.activity_date_end.nil? || activity.activity_date_start.nil?}
   validate :validar_nulos
+  validate :validar_town_id
   validate :validar_program_start_date , :unless => Proc.new{ |activity| activity.activity_type.nil? || activity.activity_type.critical_success_factors.nil? }
   
   def validar_nulos
@@ -31,6 +32,13 @@ class Activity < ActiveRecord::Base
     end
     if self.qty_women.nil?
       self.qty_women = 0
+    end
+  end
+
+  def validar_town_id
+    t = self.town_id
+    if t == 0
+      errors.add(:town_id, "Seleccione por favor una Localidad")
     end
   end
 
@@ -69,6 +77,5 @@ class Activity < ActiveRecord::Base
     if self.activity_date_end < self.activity_date_start
       errors.add(:activity_date_end, "La fecha de termino de la actividad debe ser mayor o igual a la fecha de inicio")
     end
-    
   end
 end

@@ -1,7 +1,7 @@
 <%= form_for(@critical_success_factor) do |f| %>
   <% if @critical_success_factor.errors.any? %>
     <div id="error_explanation">
-      <h2>Imposible Guardar Factor Crítico</h2>
+      <h2>Imposible Guardar Acción</h2>
       <ul>
       <% @critical_success_factor.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -10,10 +10,7 @@
     </div>
   <% end %>
 	</br>
-  <div class="field">
-    <%= f.label :critical_success_factor_type_id, "Tipo" %>
-    <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.order("name").all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Tipo --"}, :class => "span7" %>
-  </div>
+
   <div class="field">
     <%= f.label :title, "Título" %>
     <%= f.text_field :title, :class => "span7" %>
@@ -23,22 +20,51 @@
     <%= f.text_area :description, :class => "span7", :rows => "9"  %>
   </div>
   <div class="field">
+
     <%= f.label :program_id, "Programa" %>
-    <%= f.select :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }, {:include_blank => false}, :class => "span7" %>
+    <%= f.select :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }, {:include_blank => false}, :class => "span7", :id => "program_id" %>
   </div>
-  <b>Metas</b>
+
   <div class="field">
-    <%= f.label :objective_minimum, "Minimo" %>
-    <%= f.text_field :objective_minimum, :class => "span7" %>
-  </div>
-  <div class="field">
-    <%= f.label :objective_satisfying, "Satisfactorio" %>
-    <%= f.text_field :objective_satisfying, :class => "span7" %>
-  </div>
-  <div class="field">
-    <%= f.label :objective_excelent, "Excelente" %>
-    <%= f.text_field :objective_excelent, :class => "span7" %>
-  </div>
+    <table border="0">
+       <tr>
+           <td colspan="2"><h4>Líneas de Acción Disponibles</h4></td>
+          <td></td>
+           <td colspan="2"><h4>Líneas Relacionadas a la Acción</h4></td>
+       </tr>
+       <tr>
+         <td rowspan="3" align="right">
+          <label>
+            <%= fillrightleftcriticalactionline(f) %>
+          </label>
+        </td>
+        <td align="left">&nbsp;</td>
+         <td align="left">&nbsp;</td>
+        <td rowspan="3" align="left">
+            <label>
+                <%= f.select("selectRight",options_for_select(@critical_success_factor.priority_program_action_lines.order("name").all.collect { |cat| [cat.name, cat.id] }, @critical_success_factor.title { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRight'}) %>
+            </label>
+        </td>
+       </tr>
+       <tr>
+         <td align="left">&nbsp;</td>
+         <td align="left">
+           <label>
+                <input name="btnRight" type="button" id="btnRight" value="&gt;&gt;" onClick="javascript:moveToRightOrLeft(1);">
+            </label>
+        </td> 
+      </tr>
+       <tr>
+         <td align="left">&nbsp;</td>
+         <td align="left">
+           <label>
+                <input name="btnLeft" type="button" id="btnLeft" value="&lt;&lt;" onClick="javascript:moveToRightOrLeft(2);">
+            </label>
+        </td> 
+      </tr> 
+    </table> 
+   </div>
+
   <div class="field">
     <%= f.label :percentage, "Peso %" %>
     <%= f.text_field :percentage, :class => "span7" %>
@@ -58,3 +84,59 @@
     <%= link_to 'Regresar', critical_success_factors_path, :class => "btn" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+     function moveToRightOrLeft(side){
+     var listLeft=document.getElementById('selectLeft');
+     var listRight=document.getElementById('selectRight');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las líneas de acción a la derecha');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+     function move(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+ } 
+
+    $(document).ready(function(){
+        $('#new_critical_success_factor').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRight").val(options);
+        });
+
+        $('form[id*=edit_critical_success_factor]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRight").val(options);
+        });
+    });
+
+</script>

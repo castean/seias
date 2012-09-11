@@ -1,5 +1,9 @@
 <h3>Actividades</h3>
-
+<% if can? :create, Activity %>
+	</br>
+	<%= link_to 'Agregar Actividad', new_activity_path, :class => "btn primary" %>
+<% end %>
+</br>
 <table class="table table-striped">
   <thead>
       <tr>
@@ -33,10 +37,6 @@
 <% end %>
 </table>
 
-<br />
-<% if can? :create, Activity %>
-	<%= link_to 'Agregar Actividad', new_activity_path, :class => "btn primary" %>
-<% end %>
 </br>
 <div class="pager">
 	<%= paginate @activities %>

@@ -80,19 +80,32 @@
                 <h4>Planeación</h4>
                 <ul>    
                     <li class="factores"><span></span><%= link_to "Programas", programs_path %></li>
-                    <li class="factores"><span></span><%= link_to "Factores Criticos / Indicadores", critical_success_factors_path %></li>
+                    <li class="factores"><span></span><%= link_to "Acciones", critical_success_factors_path %></li>
                 </ul>
-                <h4>Acciones</h4>
+                <h4>Actividades</h4>
                 <ul>    
-                    <li class="actividades"><span></span><%= link_to "Tipo de Acciones", activity_types_path %></li>
-                    <li class="actividades"><span></span><%= link_to "Actividades", activities_path %></li> 
+                    <li class="actividades"><span></span><%= link_to "Tipo de Actividades", activity_types_path %></li>
+                    <li class="actividades"><span></span><%= link_to "Captura de Actividades", activities_path %></li>
                 </ul>
-                <h4>Favoritos</h4>
+                <h4>Mediciones</h4>
+                <ul>
+                    <li class="factores"><span></span><%= link_to "Indicadores", critical_factors_path %></li>
+                </ul>
+                <% if can? :create, Direction %>
+                    <h4>Administrativo</h4>
+                      <ul>
+                        <li class="actividades"><span></span><%= link_to "Direcciones", directions_path %></li>
+                        <li class="actividades"><span></span><%= link_to "Departamentos", departments_path %></li>
+                        <li class="actividades"><span></span><%= link_to "Personal", users_path %></li>
+                      </ul>
+                <% end %>
+                <!-- <h4>Favoritos</h4>
                 <ul>
                     <li class="plan"><span></span><%= link_to "Programa Prioritario 2011 - 2016", priority_programs_path %></li>
                     <li class="factores"><span></span><%= link_to "Factores Criticos / Indicadores", critical_success_factors_path %></li>
-                    <li class="actividades"><span></span><%= link_to "Actividades", activity_types_path %></li>
-                </ul>
+                    <li class="actividades"><span></span><%= link_to "Actividades", activities_path %></li>
+                </ul>   -->
+
               <% end %>
             </div><!-- SIDEBAR_LEFT -->
 
@@ -103,13 +116,13 @@
             </div><!-- CONTENT_BODY -->
 
             <div id="SIDEBAR_RIGHT">
-                #SIDEBAR_RIGHT
+
             </div><!-- SIDEBAR_RIGHT -->
 
         </div><!-- CONTENT -->
 
         <div id="FOOTER_IN">
-            #FOOTER_IN
+
         </div><!-- FOOTER_IN -->
 
     </div><!-- STRUCTURE -->
@@ -123,9 +136,10 @@
             var containerheight = $("#CONTENT").height();
             $("#SIDEBAR_LEFT").css("height",containerheight)
     });
+
     function application_root_path(){
-    	var root_path = "<%= root_path %>";
-    	return root_path;
+        var root_path = "<%= root_path %>";
+        return root_path;
     }
 </script>
 </html>
