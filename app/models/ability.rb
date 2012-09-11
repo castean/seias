@@ -9,7 +9,7 @@ class Ability
     else
 
       can :read, :all
-      can :for_countyid, Department
+      can :for_countyid, Town
       can :for_directionid, Department
       can :for_activitytypeid, Activity
       can :for_departmentid, Activity

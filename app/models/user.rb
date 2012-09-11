@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
  
   has_many :critical_success_factors
   has_many :activities
-  has_many :programs
+  has_many :programs , :foreign_key => "responsable_id"
   belongs_to :department
 
   attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :department_id, :roles, :avatar 
@@ -39,9 +39,20 @@ class User < ActiveRecord::Base
   def role? role
     roles.include?(role.to_s)
   end
+  def as_xls(options = {})
+    {
+        "Id" => id.to_s,
+        "Nombre" => name
+    }
+  end
   protected
     def valid_ldap_credentials?(password)
       Ldap.valid?(self.login, password)
     end
-    
+
+
+
+
+
+
 end

@@ -1,4 +1,5 @@
 <h3>Usuarios</h3>
+<%= link_to 'Exportar a Excel', users_path(request.parameters.merge({:format => :xls}))%>
 <table class="table table-striped">
   <thead>
   	<tr>

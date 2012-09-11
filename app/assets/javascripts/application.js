@@ -37,7 +37,7 @@ $(document).ready(function(){
                 $.ajax({
                     dataType: "json",
                     cache: false,
-                    url:  '/departments/for_directionid/' + id_value_string,
+                    url:  application_root_path() + '/departments/for_directionid/' + id_value_string,
                     timeout: 20000,
                     error: function(XMLHttpRequest, errorTextStatus, error){
                         alert("Failed to submit : "+ errorTextStatus+" ;"+error);
@@ -77,7 +77,7 @@ $(document).ready(function(){
                 $.ajax({
                     dataType: "json",
                     cache: false,
-                    url: '/departments/for_countyid/' + id_value_string,
+                    url: application_root_path() + '/towns/for_countyid/' + id_value_string,
                     timeout: 20000,
                     error: function(XMLHttpRequest, errorTextStatus, error){
                         alert("Failed to submit : "+ errorTextStatus+" ;"+error);
@@ -120,7 +120,7 @@ $(document).ready(function(){
                 $.ajax({
                     dataType: "json",
                     cache: false,
-                    url:  '/departments/for_programid/' + id_value_string,
+                    url:  application_root_path() + '/departments/for_programid/' + id_value_string,
                     timeout: 20000,
                     error: function(XMLHttpRequest, errorTextStatus, error){
                         alert("Failed to submit : " + id_value_string + errorTextStatus+" ;"+error );
@@ -164,7 +164,7 @@ $(document).ready(function(){
             $.ajax({
                 dataType: "json",
                 cache: false,
-                url:  '/critical_factors/for_catalog_table_id/' + id_value_string,
+                url:  application_root_path() + '/critical_factors/for_catalog_table_id/' + id_value_string,
                 timeout: 20000,
                 error: function(XMLHttpRequest, errorTextStatus, error){
                     alert("Failed to submit : " + id_value_string + errorTextStatus+" ;"+error );

@@ -139,7 +139,16 @@
 
     function application_root_path(){
         var root_path = "<%= root_path %>";
-        return root_path;
+        if (root_path == "/" )
+        {
+            return "";
+        }
+        else
+        {
+            return root_path;
+        }
+
+
     }
 </script>
 </html>
