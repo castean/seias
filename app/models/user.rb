@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :medium => "100x100>", :thumb => "52x52>" }, :default_url => ActionController::Base.helpers.asset_path("avatar.png")
  
   has_many :critical_success_factors
+  has_many :critical_factors
   has_many :activities
   has_many :programs
   belongs_to :department

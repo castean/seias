@@ -2,6 +2,7 @@
 class CriticalFactor < ActiveRecord::Base
   belongs_to :criterion_of_measurement
   has_and_belongs_to_many :catalog_tables
+  has_many :goals
   belongs_to :unit_of_measurement
   belongs_to :critical_success_factor_type
   belongs_to :user

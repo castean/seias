@@ -1,7 +1,7 @@
 #encoding:utf-8
 class GoalsController < ApplicationController
   load_and_authorize_resource
-  before_filter :find_critical_success_factor
+  before_filter :find_critical_factor
   # GET /goals
   # GET /goals.json
   def index
@@ -44,11 +44,11 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     @goal = Goal.new(params[:goal])
-    @goal.critical_success_factor = @critical_success_factor
+    @goal.critical_factor_id = @critical_factor
 
     respond_to do |format|
       if @goal.save
-        format.html { redirect_to @critical_success_factor, notice: 'Meta registrada correctamente.' }
+        format.html { redirect_to @critical_factor, notice: 'Meta registrada correctamente.' }
         format.json { render json: @goal, status: :created, location: @goal }
       else
         format.html { render action: "new" }
@@ -61,7 +61,7 @@ class GoalsController < ApplicationController
   # PUT /goals/1.json
   def update
     @goal = Goal.find(params[:id])
-    params[:goal][:critical_success_factor_id] = params[:critical_success_factor_id]
+    params[:goal][:critical_factor_id] = params[:critical_factor_id]
 
     respond_to do |format|
       if @goal.update_attributes(params[:goal])
@@ -87,7 +87,7 @@ class GoalsController < ApplicationController
   end
 
   protected
-  def find_critical_success_factor
-    @critical_success_factor = CriticalSuccessFactor.find(params[:critical_success_factor_id])
+  def find_critical_factor
+    @critical_factor = CriticalFactor.find(params[:critical_factor_id])
   end
 end

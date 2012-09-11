@@ -23,7 +23,8 @@ Desarrollo Integral de la Familia del Estado de Chihuahua
     <th>Objetivo PP</th>
     <th>Estrategia PP</th>
     <th>Linea de Acción PP</th>
-    <th>Descripción</th>
+    <th>Programa</th>
+    <th>Acciones</th>
   </tr>
   </thead>
   <% @priority_program_action_lines.each do |priority_program_action_line| %>
@@ -37,7 +38,11 @@ Desarrollo Integral de la Familia del Estado de Chihuahua
         <td><%= priority_program_action_line.priority_program_strategy.priority_program_goal.name %></td>
         <td><%= priority_program_action_line.priority_program_strategy.name %></td>
         <td><%= priority_program_action_line.name %></td>
-        <td><%= priority_program_action_line.programs.name %></td>
+        <td><%= priority_program_action_line.programs do |p|
+                    p.programs.description
+            end%>
+        </td>
+
       </tr>
   <% end %>
 </table>
