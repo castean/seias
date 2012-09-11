@@ -5,6 +5,8 @@ class ActivityTypesController < ApplicationController
   # GET /activity_types.json
   def index
     @activity_types = ActivityType.order("name").page(params[:page]).per(30)
+    #@activity_types = ActivityType.search(params[:search]).page(params[:page]).per(30)
+
 
     respond_to do |format|
       format.html # index.html.erb

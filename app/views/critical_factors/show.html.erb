@@ -16,5 +16,10 @@
 </p>
 </br>
 
-<%= link_to 'Edit', edit_critical_factor_path(@critical_factor) %> |
-<%= link_to 'Back', critical_factors_path %>
+<div class="btn-group">
+  <% if can? :update, @critical_success_factor %>
+      <%= link_to 'Editar', edit_critical_factor_path(@critical_factor), :class => "btn" %>
+      <%= link_to 'Metas', new_critical_factor_goal_path(@critical_factor), :class => "btn" %>
+  <% end %>
+  <%= link_to 'Regresar', critical_factors_path, :class => "btn" %>
+</div>

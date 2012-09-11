@@ -4,8 +4,9 @@ class CriticalSuccessFactorsController < ApplicationController
   # GET /critical_success_factors
   # GET /critical_success_factors.json
   def index
+
     @critical_success_factors = CriticalSuccessFactor.all
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @critical_success_factors }

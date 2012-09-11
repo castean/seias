@@ -10,15 +10,15 @@ module ActivityTypesHelper
       dayofyear = Date.today.yday
       anioini = (fecha - (dayofyear-1)) 
       
-      sumah = @activity_type.activities.sum((:qty_men), :conditions => ['activity_date_start >= ?', fechaini] )  
-      acumuladoh = @activity_type.activities.sum((:qty_men), :conditions => ['activity_date_start >= ?', anioini] )
-      sumam = @activity_type.activities.sum((:qty_women), :conditions => ['activity_date_start >= ?', fechaini] )  
-      acumuladom = @activity_type.activities.sum((:qty_women), :conditions => ['activity_date_start >= ?', anioini] )
+      @sumah = @activity_type.activities.sum((:qty_men), :conditions => ['activity_date_start >= ?', fechaini] )
+      @acumuladoh = @activity_type.activities.sum((:qty_men), :conditions => ['activity_date_start >= ?', anioini] )
+      @sumam = @activity_type.activities.sum((:qty_women), :conditions => ['activity_date_start >= ?', fechaini] )
+      @acumuladom = @activity_type.activities.sum((:qty_women), :conditions => ['activity_date_start >= ?', anioini] )
       #sumav = @activity_type.activities.sum((:value), :conditions => ['activity_date_start >= ?', fechaini] )  
       #acumuladov = @activity_type.activities.sum((:value), :conditions => ['activity_date_start >= ?', anioini] )
       
-      @suma = sumah + sumam
-      @acumulado = acumuladoh + acumuladom
+      @suma = @sumah + @sumam
+      @acumulado = @acumuladoh + @acumuladom
      
   end
 

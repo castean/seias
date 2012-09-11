@@ -1,5 +1,5 @@
 class Goal < ActiveRecord::Base
-  belongs_to :critical_success_factor
+  belongs_to :critical_factors
   attr_accessible :excelent, :minimum, :month, :satisfying, :year
 
   validates :excelent, :presence => true

@@ -1,10 +1,15 @@
 <h3>Acciones</h3>
+</br>
+<% if can? :create, CriticalSuccessFactor %>
+    <%= link_to 'Registrar Acción', new_critical_success_factor_path, :class => "btn primary" %>
+<% end %>
 
 <table class="table table-striped">
   <thead>
       <tr>
       	<th>Departamento</th>
-        <th>Factor Crítico</th>
+        <th>Programa</th>
+        <th>Acción</th>
         <th>Descripción</th>
         <th>Peso %</th>
        <!--  <th>Unidad de Medida</th> -->
@@ -17,6 +22,7 @@
 <% @critical_success_factors.each do |critical_success_factor| %>
   <tr>
   	<td><%= critical_success_factor.program.department.name %></td>
+    <td><%= critical_success_factor.program.description %></td>
     <td><%= critical_success_factor.title %></td>
     <td><%= critical_success_factor.description %></td>
     <td><%= critical_success_factor.percentage %></td>
@@ -41,6 +47,3 @@
 </table>
 
 <br />
-<% if can? :create, CriticalSuccessFactor %>
-<%= link_to 'Registrar Acción', new_critical_success_factor_path, :class => "btn primary" %>
-<% end %>

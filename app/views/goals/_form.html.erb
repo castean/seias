@@ -19,21 +19,35 @@
     <%= f.label :year, "Año" %>
     <%= f.number_field :year, :class => "span7" %>
   </div>
-  <div class="field">
-    <%= f.label :minimum, "Mínimo" %>
-    <%= f.text_field :minimum, :class => "span7" %>
-  </div>
-  <div class="field">
-    <%= f.label :satisfying, "Satisfactorio" %>
-    <%= f.text_field :satisfying, :class => "span7" %>
-  </div>
-  <div class="field">
-    <%= f.label :excelent, "Excelente" %>
-    <%= f.text_field :excelent, :class => "span7" %>
-  </div>
+  <table>
+    <tr>
+        <td>
+          <%= f.label :minimum, "Mínimo" %>
+        </td>
+        <td>
+          <%= f.label :satisfying, "Satisfactorio" %>
+        </td>
+        <td>
+          <%= f.label :excelent, "Excelente" %>
+        </td>
+    </tr>
+        <td>
+          <%= f.text_field :minimum, :class => "span2" %>
+        </td>
+        <td>
+          <%= f.text_field :satisfying, :class => "span2" %>
+        </td>
+        <td>
+          <%= f.text_field :excelent, :class => "span2" %>
+        </td>
+    <tr>
+
+    </tr>
+  </table>
+
 
   <div class="form-actions btn-group">
     <%= f.submit "Crear Meta", :class => "btn" %>
-    <%= link_to 'Regresar', critical_success_factor_path(@critical_success_factor), :class => "btn" %>
+    <%= link_to 'Regresar', critical_factor_path(@critical_factor), :class => "btn" %>
   </div>
 <% end %>
