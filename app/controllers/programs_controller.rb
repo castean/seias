@@ -9,7 +9,7 @@ class ProgramsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @programs }
-    end
+      end
   end
 
   # GET /programs/1
@@ -82,4 +82,33 @@ class ProgramsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  #ISC Christian Ivan Alderete Garcia funcion para reportes
+
+  def program_search
+    @programs = Program.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @program }
+
+    end
+  end
+
+  def program_report
+    #@program = Program.find(params[:id])
+    
+    @program = Program.select('programs.*, activity_types.description as nombre,sum(cast(activities.value as int)) as totalv, sum(activities.qty_men) as hombre, 
+                sum(activities.qty_women) as mujer, sum(activities.qty_men) + sum(activities.qty_women) as totalp
+                ').joins(:critical_success_factors => {:activity_types => :activities }).group('activities.activity_type_id,programs.id,programs.description,programs.name,programs.department_id,programs.responsable_id,
+programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,programs.start_date,activity_types.description').where("
+                programs.id = :program_id and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date
+                ", {:program_id => params[:program_id][:program_id], :start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xls { send_data @program.to_xls, content_type: 'application/vnd.ms-excel', filename: 'programs.xls' }
+      
+      format.json { render json: @program }
+      
+    end
+  end  
 end

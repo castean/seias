@@ -80,7 +80,7 @@ Seias::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   #Extras
-  config.ldap_auth = false
+  config.ldap_auth = true
 
-  config.authorization_method = :password #One of :password, :ldap, etc
+  config.authorization_method = :ldap #One of :password, :ldap, etc
 end

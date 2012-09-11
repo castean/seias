@@ -1,0 +1,18 @@
+<%= form_tag  :action => 'program_report', :method => "post" do %>
+  <div class="field">
+    <%= label :program_id, "Programa" %>
+    <%= select(:program_id, :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }) %>
+  </div>
+  <div class="field">
+   <%= label :start_date, "Fecha Inicio de Actividad" %>
+    <%= datepicker :start_date, :start_date,  :dateFormat => "yy-mm-dd" %>
+
+  </div>
+  <div class="field">
+
+    <%= label :end_date, "Fecha Fin de Actividad" %>
+    <%= datepicker :end_date, :end_date, :dateFormat => "yy-mm-dd"  %>
+
+  </div>
+  <%= submit_tag("Buscar") %>
+<% end %>

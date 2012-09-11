@@ -9,9 +9,10 @@ class Ability
     else
 
       can :read, :all
-      can :for_countyid, Department
+      can :for_countyid, Town
       can :for_directionid, Department
       can :for_activitytypeid, Activity
+      can :for_departmentid, Activity
       can :destroy, UserSession 
       can :change_password, User
       can :download_manual, Home

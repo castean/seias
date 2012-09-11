@@ -11,6 +11,17 @@ class ActivityTypesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @activity_types }
+      format.xlsx {
+        xlsx_package = ActivityType.to_xlsx
+        begin 
+          temp = Tempfile.new("tipo_actividades.xlsx") 
+          xlsx_package.serialize temp.path
+          send_file temp.path, :filename => "tipo_actividades.xlsx", :type => "application/xlsx"
+        ensure
+          temp.close 
+          temp.unlink
+        end
+      }
     end
   end
 

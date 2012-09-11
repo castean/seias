@@ -52,11 +52,12 @@ Seias::Application.routes.draw do
 
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
-  match '/departments/for_countyid/:id' => 'departments#for_countyid'
+  match '/towns/for_countyid/:county_id' => 'towns#for_countyid'
   match '/departments/for_programid/:id' => 'departments#for_programid'
   resources :departments
 
   match '/activities/for_activitytypeid/:activity_type_id' => 'activities#for_activitytypeid'
+  match '/activities/for_departmentid/:department_id' => 'activities#for_departmentid'
   resources :activities
 
   resources :groups
@@ -79,7 +80,9 @@ Seias::Application.routes.draw do
   #resources :activitygoals
 
   resources :public_targets
-  
+  match '/programs/report' => 'programs#program_search'
+  match '/programs/program_report' => 'programs#program_report'
+
   resources :programs
 
   match '/critical_success_factors/for_program_id/:id' => 'critical_success_factors#for_program_id'
