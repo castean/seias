@@ -23,8 +23,7 @@ Desarrollo Integral de la Familia del Estado de Chihuahua
     <th>Objetivo PP</th>
     <th>Estrategia PP</th>
     <th>Linea de Acción PP</th>
-    <th>Programa</th>
-    <th>Acciones</th>
+    <th>Programa &nbsp;&nbsp;&nbsp; Acciones &nbsp;&nbsp;&nbsp;&nbsp; Tipo de Actividad</th>
   </tr>
   </thead>
   <% @priority_program_action_lines.each do |priority_program_action_line| %>
@@ -38,15 +37,39 @@ Desarrollo Integral de la Familia del Estado de Chihuahua
         <td><%= priority_program_action_line.priority_program_strategy.priority_program_goal.name %></td>
         <td><%= priority_program_action_line.priority_program_strategy.name %></td>
         <td><%= priority_program_action_line.name %></td>
-        <td><% PriorityProgramActionLine.select('priority_program_action_lines.id, programs.description as nombre').joins(:programs).where(:id => priority_program_action_line).each do |a| %>
+        <td><% PriorityProgramActionLine.select('priority_program_action_lines.id, programs.id as programid, programs.description as nombre' ).joins(:programs).where(:id => priority_program_action_line).each do |programa| %>
             <table>
                 <tr>
                     <td>
-                        <%= a.nombre%>
+                        <%= programa.nombre%>
+                    </td>
+                    <td>
+                        <%CriticalSuccessFactor.where(:program_id => programa.programid).each do |accion|%>
+                        <table>
+                          <tr>
+                            <td>
+                                <%= accion.title%>
+                            </td>
+                            <td>
+                              <%ActivityType.select('activity_types.description').joins(:critical_success_factors).where('critical_success_factors.id = :action',:action => accion.id).each do |actividad|%>
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        <%= actividad.description%>
+                                      </td>
+                                    </tr>
+                                  </table>
+                              <%end%>
+                            </td>
+                          </tr>
+                        </table>
+                        <%end%>
                     </td>
                 </tr>
-            </table><%end%>
+            </table>
+            <%end%>
         </td>
+
 
       </tr>
   <% end %>

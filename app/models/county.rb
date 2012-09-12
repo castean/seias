@@ -5,7 +5,7 @@ class County < ActiveRecord::Base
   belongs_to :countries
   has_many :towns, :foreign_key => "county_id"
   has_and_belongs_to_many :regions
-  has_and_belongs_to_many :judical_districts
+  has_and_belongs_to_many :judicial_districts
   
   before_destroy :check_for_county
   
