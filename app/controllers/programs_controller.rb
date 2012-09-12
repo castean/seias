@@ -103,9 +103,10 @@ programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,p
                 programs.id = :program_id and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date
                 ", {:program_id => params[:program_id][:program_id], :start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
 
+
     respond_to do |format|
       format.html # index.html.erb
-      format.xls { send_data @program.to_xls, content_type: 'application/vnd.ms-excel', filename: 'programs.xls' }
+      format.xls { send_data @program.to_xls(:columns => [:description, :nombre, :totalv, :hombre, :mujer, :totalp], :headers => ['Programa', 'Actividad','Total Valor','Hombres','Mujeres','Total Personas']), content_type: 'application/vnd.ms-excel', filename: 'programs.xls' }
       
       format.json { render json: @program }
       
