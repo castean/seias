@@ -26,7 +26,9 @@ gem 'jquery_datepicker'
 gem 'authlogic'
 gem 'easy_roles'
 gem 'cancan'
-gem 'acts_as_xlsx' #to excel
+
+#to excel
+gem 'acts_as_xlsx'
 require 'csv'
 gem "spreadsheet"
 gem "to_xls"
@@ -66,3 +68,5 @@ gem "net-ldap"
 
 #Correo al tener un error en production.
 gem 'exception_notification'
+
+gem 'pivot_table'

@@ -1,5 +1,6 @@
-<%= form_tag  :action => 'program_report', :method => "post" do %>
-  <div class="field">
+<%= form_tag  :action => "program_report", :method => "post" do %>
+
+   <div class="field">
     <%= label :program_id, "Programa" %>
     <%= select(:program_id, :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }) %>
   </div>
@@ -14,5 +15,11 @@
     <%= datepicker :end_date, :end_date, :dateFormat => "yy-mm-dd"  %>
 
   </div>
-  <%= submit_tag("Buscar") %>
+  <div class="field">
+    <%= label :finder, "Busqueda por:" %>
+
+    Programa <%= radio_button("finder", "program", "program", :checked => true) %>
+    Distrito Judicial <%= radio_button("finder", "program", "pajs")  %>
+  </div>
+ <%= submit_tag("Buscar") %>
 <% end %>

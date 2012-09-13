@@ -134,9 +134,9 @@ ActiveRecord::Schema.define(:version => 20120905205756) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "counties_judical_districts", :id => false, :force => true do |t|
+  create_table "counties_judicial_districts", :id => false, :force => true do |t|
     t.integer "county_id"
-    t.integer "judical_district_id"
+    t.integer "judicial_district_id"
   end
 
   create_table "counties_regions", :id => false, :force => true do |t|
@@ -220,17 +220,17 @@ ActiveRecord::Schema.define(:version => 20120905205756) do
   end
 
   create_table "goals", :force => true do |t|
-    t.integer  "month",                      :null => false
-    t.integer  "year",                       :null => false
-    t.string   "minimum",                    :null => false
-    t.string   "satisfying",                 :null => false
-    t.string   "excelent",                   :null => false
-    t.integer  "critical_success_factor_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.integer  "month",              :null => false
+    t.integer  "year",               :null => false
+    t.string   "minimum",            :null => false
+    t.string   "satisfying",         :null => false
+    t.string   "excelent",           :null => false
+    t.integer  "critical_factor_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
-  add_index "goals", ["critical_success_factor_id"], :name => "index_goals_on_critical_success_factor_id"
+  add_index "goals", ["critical_factor_id"], :name => "index_goals_on_critical_success_factor_id"
 
   create_table "groups", :force => true do |t|
     t.string   "name"
