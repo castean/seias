@@ -18,6 +18,10 @@
     <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.all.collect{ |u| [u.name, u.id] }, {:include_blank => false}, :class => "span7" %>
   </div>
   <div class="field">
+    <%= f.label :responsable_id, "Responsable" %>
+    <%= f.select :responsable_id, User.order("name").all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Responsable --"} %>
+  </div>
+  <div class="field">
     <%= f.label :name, "Nombre" %>
     <%= f.text_field :name, :class => "span7" %>
   </div>
@@ -126,7 +130,7 @@
     </div>
     <div class="field">
       <%= f.label :period_time_id, "Periodo de tiempo del reporte" %>
-      <%= f.select :period_time_id, PeriodTime.all.collect{ |u| [u.name, u.id] }, {:include_blank => false}, :class => "span7" %>
+      <%= f.select :period_time_id, PeriodTime.all.collect{ |u| [u.name, u.id] }, {:include_blank => "-- Selecciona Uno --"}, :class => "span7" %>
     </div>
 
   </div>

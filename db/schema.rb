@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905205756) do
+ActiveRecord::Schema.define(:version => 20120913154138) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20120905205756) do
     t.integer  "catalog_table_reference"
     t.integer  "critical_factor_id"
     t.integer  "period_time_id"
+    t.integer  "responsable_id"
   end
 
   create_table "critical_success_factor_types", :force => true do |t|
