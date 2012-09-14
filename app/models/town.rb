@@ -3,7 +3,9 @@ class Town < ActiveRecord::Base
 
   belongs_to :county, :primary_key => "cve_mun"
   has_many :places
+  has_many :persons
   has_many :activities
+
 
   acts_as_gmappable
   

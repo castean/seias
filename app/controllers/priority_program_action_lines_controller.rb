@@ -107,8 +107,11 @@ class PriorityProgramActionLinesController < ApplicationController
   def report
     @priority_program_action_lines = PriorityProgramActionLine.order("hierarchy").all
 
+
+
     respond_to do |format|
       format.html # index.html.erb
+      format.xls {send_data @priority_program_action_lines.to_xls, content_type: 'application/vnd.ms-excel', filename: 'lineas.xls' }
       format.json { render json: @priority_program_action_lines }
     end
   end
