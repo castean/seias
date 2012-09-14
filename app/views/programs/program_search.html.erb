@@ -1,7 +1,10 @@
 <%= form_tag  :action => "program_report", :method => "post" do %>
 
    <div class="field">
-    <%= label :program_id, "Programa" %>
+     <%= label :finder, "Busqueda por:" %>
+     Programa <%= radio_button("finder", "qty", "one", :checked => true)%>
+     Todos los Programas<%= radio_button("finder", "qty", 'all' ) %>
+     </br>
     <%= select(:program_id, :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }) %>
   </div>
   <div class="field">
