@@ -1,44 +1,30 @@
 <% if params[:finder][:program] == "program"   %>
     <h3>Lista de Programas</h3>
-
     <table class="table table-striped">
       <thead>
-          <tr>
-
-            <th>Programa</th>
-
-          </tr>
-        </thead>
-
       <tr>
-        <% c = Program.find(params[:program_id][:program_id]) %>
-        <td><%= c.name %></td>
-        <td><%= c.description %></td>
-
+        <th>Programa</th>
+        <th>Descripcion</th>
+        <th>Tipo de Actividad</th>
+        <th>Valor</th>
+        <th>Hombres</th>
+        <th>Mujeres</th>
+        <th>Total Personas</th>
       </tr>
+      </thead>
 
-    </table>
-    <table class="table table-striped">
-      <thead>
+      <% @program.each do |p| %>
+
           <tr>
-            <th>Tipo de Actividad</th>
-            <th>Valor</th>
-            <th>Hombres</th>
-            <th>Mujeres</th>
-            <th>Total Personas</th>
+            <td><%= p.name%></td>
+            <td><%= p.description%></td>
+            <td><%= p.nombre%></td>
+            <td><%= p.totalv%></td>
+            <td><%= p.hombre%></td>
+            <td><%= p.mujer%></td>
+            <td><%= p.totalp%></td>
           </tr>
-        </thead>
-
-    <% @program.each do |p| %>
-
-      <tr>
-        <td><%= p.nombre%></td>
-        <td><%= p.totalv%></td>
-        <td><%= p.hombre%></td>
-        <td><%= p.mujer%></td>
-        <td><%= p.totalp%></td>
-      </tr>
-    <%end%>
+      <%end%>
     </table>
     <br/>
 
@@ -46,26 +32,11 @@
 
 <% elsif params[:finder][:program] == "pajs" %>
     <h3>Lista de Programas por Distrito Judicial</h3>
-
     <table class="table table-striped">
       <thead>
       <tr>
-
         <th>Programa</th>
-
-      </tr>
-      </thead>
-
-      <tr>
-        <% c = Program.find(params[:program_id][:program_id]) %>
-        <td><%= c.name %></td>
-        <td><%= c.description %></td>
-      </tr>
-
-    </table>
-    <table class="table table-striped">
-      <thead>
-      <tr>
+        <th>Descripcion</th>
         <th>Tipo de Actividad</th>
         <th>Distrito</th>
         <th>Total Actividades</th>
@@ -75,6 +46,8 @@
       <% @program.each do |p| %>
 
           <tr>
+            <td><%= p.pnombre %></td>
+            <td><%= p.pdescripcion %></td>
             <td><%= p.anombre %></td>
             <td><%= p.dnombre %></td>
             <td><%= p.totalv %></td>
