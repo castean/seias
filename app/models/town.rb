@@ -3,6 +3,7 @@ class Town < ActiveRecord::Base
 
   belongs_to :county
   has_many :places
+  has_many :persons
 
   acts_as_gmappable
   
