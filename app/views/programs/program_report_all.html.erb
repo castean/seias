@@ -59,3 +59,7 @@
     <%=  link_to 'Descargar en excel', request.parameters.merge({:format => :xls}), :controller => 'programs', :action => 'program_report' %>
 
 <% end %>
+</br>
+<div class="pager">
+  <%= paginate @program %>
+</div>

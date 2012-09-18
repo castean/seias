@@ -59,7 +59,7 @@ class Activity < ActiveRecord::Base
   def validar_program_start_date
     hoy = Date.today
     self.activity_type.critical_success_factors.each do |factor|
-      if hoy < factor.program.start_date.to_date
+      if hoy < factor.program.start_date
         errors.add(:activity_date_start, "El Programa al que esta ligada esta actividad aun no a empezado")
       end   
     end

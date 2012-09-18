@@ -1,0 +1,83 @@
+<% if @prog_type == "one"  %>
+    <h3>Lista de Programas con sus Actividades por Municipio</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Municipio</th>
+        </tr>
+      </thead>
+      <tr>
+      <% @c = County.find(:first, :conditions => ["cve_mun = ? and state_id = ?", params[:county_id][:cve_mun], 8]) %>
+
+        <td><%= @c.name %></td>
+      </tr>
+    </table>
+
+    </table>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Programa</th>
+        <th>Descripcion</th>
+        <th>Tipo de Actividad</th>
+        <th>Cantidad</th>
+        <th>Personas</th>
+        <th>Mes</th>
+      </tr>
+      </thead>
+
+      <% @program.each do |p| %>
+
+          <tr>
+            <td><%= p.pnombre%></td>
+            <td><%= p.pdescripcion%></td>
+            <td><%= p.anombre %></td>
+            <td><%= p.totalv%></td>
+            <td><%= p.totalp%></td>
+            <td><%= p.mes.to_date.strftime("%B")%></td>
+          </tr>
+      <%end%>
+    </table>
+    <br/>
+
+    <%=  link_to 'Descargar en excel', request.parameters.merge({:format => :xls}), :controller => 'programs', :action => 'program_report_all' %>
+<% elsif @prog_type == "all"  %>
+<h3>Lista de Programas con sus Actividades por Municipio</h3>
+
+
+    </table>
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            <th>Municipio</th>
+            <th>Programa</th>
+            <th>Descripcion</th>
+            <th>Tipo de Actividad</th>
+            <th>Cantidad</th>
+            <th>Personas</th>
+            <th>Mes</th>
+            </tr>
+        </thead>
+
+    <% @program.each do |p| %>
+
+      <tr>
+        <% @c = County.find(:first, :conditions => ["cve_mun = ? and state_id = ?", p.mun, 8]) %>
+        <td><%= @c.name %></td>
+        <td><%= p.pnombre%></td>
+        <td><%= p.pdescripcion%></td>
+        <td><%= p.anombre%></td>
+        <td><%= p.totalv%></td>
+        <td><%= p.totalp%></td>
+        <td><%= p.mes.to_date.strftime("%B")%></td>
+      </tr>
+    <%end%>
+    </table>
+    <br/>
+
+    <%=  link_to 'Descargar en excel', request.parameters.merge({:format => :xls}), :controller => 'programs', :action => 'program_report_all' %>
+<%end %>
+</br>
+<div class="pager">
+  <%= paginate @program %>
+</div>

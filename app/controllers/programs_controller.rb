@@ -110,14 +110,14 @@ class ProgramsController < ApplicationController
                   ').joins(:critical_success_factors => {:activity_types => :activities }).group('activities.activity_type_id,programs.id,programs.description,programs.name,programs.department_id,programs.responsable_id,
                   programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,programs.start_date,activity_types.description').where("
                   programs.id = :program_id and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date
-                  ", {:program_id => params[:program_id][:program_id], :start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
+                  ", {:program_id => params[:program_id][:program_id], :start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1}).page(params[:page]).per(25)
       elsif params[:finder][:program] == "pajs"
         @program = Program.select('programs.name as pnombre, programs.description pdescripcion, activity_types.description as anombre,judicial_districts.name dnombre,sum(cast(activities.value as int)) as totalv'
                           ).joins(:critical_success_factors => {:activity_types => {:activities => {:town => {:county => :judicial_districts}}}}).group('programs.name,
                     programs.description,activities.activity_type_id,
                     activity_types.description, judicial_districts.id,judicial_districts.name'
                     ).where("programs.id = :program_id and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date ",
-                    {:program_id => params[:program_id][:program_id], :start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
+                    {:program_id => params[:program_id][:program_id], :start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1}).page(params[:page]).per(25)
 
       end
 
@@ -142,7 +142,7 @@ class ProgramsController < ApplicationController
                 ').joins(:critical_success_factors => {:activity_types => :activities }).group('activities.activity_type_id,programs.id,programs.description,programs.name,programs.department_id,programs.responsable_id,
                 programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,programs.start_date,activity_types.description'
                 ).where("activities.activity_date_start > :start_date and activities.activity_date_end < :end_date
-                ", {:start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
+                ", {:start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1}).page(params[:page]).per(25)
 
     elsif params[:finder][:program] == "pajs"
         @program = Program.select('programs.name as pnombre, programs.description pdescripcion, activity_types.description as anombre,judicial_districts.name dnombre,sum(cast(activities.value as int)) as totalv'
@@ -150,7 +150,7 @@ class ProgramsController < ApplicationController
                     programs.description,activities.activity_type_id,
                     activity_types.description, judicial_districts.id,judicial_districts.name'
         ).where("activities.activity_date_start > :start_date and activities.activity_date_end < :end_date ",
-                {:start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
+                {:start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1}).page(params[:page]).per(25)
 
       respond_to do |format|
         format.html # index.html.erb
@@ -165,6 +165,28 @@ class ProgramsController < ApplicationController
     end
   end
   def program_report_county
-
+    @prog_type = params[:finder][:qty]
+    if @prog_type == "one"
+    @program = Program.select("programs.name as pnombre, programs.description as pdescripcion, activity_types.description as anombre,
+                sum(cast(activities.value as int)) as totalv, sum(activities.qty_men) + sum(activities.qty_women) as totalp,
+                to_char(activities.activity_date_start, 'YYYY-MM-DD') as mes, activities.county_id as mun
+               ").order("activities.county_id,date_part('month', activities.activity_date_start) ").joins(:critical_success_factors => {:activity_types => {:activities => {:town => :county}}}).group("activities.activity_type_id,programs.id,programs.description,programs.name,programs.department_id,programs.responsable_id,
+               programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,programs.program_start_date,activity_types.description,
+                date_part('month', activities.activity_date_start),activities.county_id,to_char(activities.activity_date_start, 'YYYY-MM-DD')").where("activities.county_id = :county_id and
+               date_part('year',activities.activity_date_start) = :start_date", {:county_id =>params[:county_id][:cve_mun] ,:start_date => params[:date][:year]}).page(params[:page]).per(25)
+    elsif  @prog_type == "all"
+    @program = Program.select("programs.name as pnombre, programs.description pdescripcion, activity_types.description as anombre,
+                sum(cast(activities.value as int)) as totalv,
+               sum(activities.qty_men) + sum(activities.qty_women) as totalp, to_char(activities.activity_date_start, 'YYYY-MM-DD') as mes, activities.county_id as mun
+               ").order("activities.county_id,date_part('month', activities.activity_date_start) ").joins(:critical_success_factors => {:activity_types => {:activities => {:town => :county}}}).group("activities.activity_type_id,programs.id,programs.description,programs.name,programs.department_id,programs.responsable_id,
+               programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,programs.program_start_date,activity_types.description,
+                date_part('month', activities.activity_date_start),activities.county_id,to_char(activities.activity_date_start, 'YYYY-MM-DD')").where("
+               date_part('year',activities.activity_date_start) = :start_date", {:start_date => params[:date][:year]}).page(params[:page]).per(25)
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xls { send_data @program.to_xls(:columns => [:pnombre, :pdescripcion, :anombre, :totalv, :totalp, :mun, :mes], :headers => ['Programa', 'Descripcion del Programa', 'Actividad','Total Actividades','Beneficiados','Municipio', 'Mes']), content_type: 'application/vnd.ms-excel', filename: 'todos_programas.xls' }
+      format.json { render json: @program }
+    end
   end
 end

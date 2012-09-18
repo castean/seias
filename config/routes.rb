@@ -83,6 +83,7 @@ Seias::Application.routes.draw do
   match '/programs/report' => 'programs#program_search'
   match '/programs/program_report' => 'programs#program_report'
   match '/programs/program_report_all' => 'programs#program_report_all'
+  match '/programs/program_report_county' => 'programs#program_report_county'
 
   resources :programs
 
