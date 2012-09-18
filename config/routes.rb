@@ -1,5 +1,7 @@
 Seias::Application.routes.draw do
 
+  resources :people
+
   resources :period_times
 
   match '/critical_factors/for_catalog_table_id/:table' => 'critical_factors#for_catalog_table_id'
@@ -8,8 +10,6 @@ Seias::Application.routes.draw do
   end
 
   resources :ped_programs
-
-  match "home/download_manual" => "home#download_manual", :as => :manual
  
   resources :ped_program_definitions
 
@@ -97,6 +97,9 @@ Seias::Application.routes.draw do
   resource :user_sessions
   match '/users/change_password' => 'users#change_password'
   resources :users
+
+  match "home/download_manual" => "home#download_manual", :as => :manual
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

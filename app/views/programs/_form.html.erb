@@ -33,8 +33,8 @@
     <%= f.select :responsable_id, User.order("name").all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Responsable --"} %>
   </div>
   <div class="field">	
-    <%= f.label :start_date, "Fecha Inicio del Programa" %>
-    <%= f.datepicker :start_date, :dateFormat => "dd-mm-yy" %>
+    <%= f.label :program_start_date, "Fecha Inicio del Programa" %>
+    <%= f.datepicker :program_start_date, :dateFormat => "dd-mm-yy" %>
   </div>
   <div class="field">
     <%= f.label :cut_day, "Día Corte de Captura" %>

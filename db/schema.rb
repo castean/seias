@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120913154138) do
+ActiveRecord::Schema.define(:version => 20120914200516) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -330,6 +330,57 @@ ActiveRecord::Schema.define(:version => 20120913154138) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.text     "ped_program"
+  end
+
+  create_table "people", :force => true do |t|
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "name",                    :null => false
+    t.string   "last_name",               :null => false
+    t.string   "second_last_name"
+    t.integer  "marital_status_id"
+    t.boolean  "sex",                     :null => false
+    t.integer  "ethnic_group_id",         :null => false
+    t.datetime "birthday",                :null => false
+    t.integer  "born_town_id"
+    t.integer  "town_id"
+    t.string   "address"
+    t.string   "address_two"
+    t.integer  "code_area"
+    t.integer  "phone"
+    t.integer  "cel_phone"
+    t.integer  "emergency_phone"
+    t.string   "rfc"
+    t.string   "curp"
+    t.string   "email"
+    t.string   "tutor"
+    t.integer  "tutor_relationship_id"
+    t.integer  "tutor_marital_status_id"
+    t.integer  "medical_service_id"
+    t.boolean  "student"
+    t.boolean  "reader"
+    t.integer  "schooling"
+    t.integer  "school_type_id"
+    t.boolean  "worker"
+    t.string   "job"
+    t.boolean  "self_employment"
+    t.string   "occupation"
+    t.boolean  "job_seeker"
+    t.integer  "user_id"
+    t.boolean  "discapacity_status"
+    t.boolean  "diagnosis"
+    t.text     "diagnosis_description"
+    t.integer  "discapacity_origin_id"
+    t.date     "discapacity_origin_year"
+    t.text     "observations"
+    t.integer  "status_id"
+    t.boolean  "funcional_support"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.integer  "county_id"
+    t.integer  "county_id_2"
   end
 
   create_table "period_times", :force => true do |t|

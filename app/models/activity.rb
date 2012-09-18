@@ -59,12 +59,20 @@ class Activity < ActiveRecord::Base
   def validar_program_start_date
     hoy = Date.today
     self.activity_type.critical_success_factors.each do |factor|
-      if hoy < factor.program.start_date
+      if hoy < factor.program.program_start_date.to_date
         errors.add(:activity_date_start, "El Programa al que esta ligada esta actividad aun no a empezado")
-      end   
+      end
     end
-
   end
+
+  #def validar_program_start_date
+  #  hoy = Date.today
+  #  ActivityType.select("to_char(programs.start_date, 'YYYY-MM-DD') as fecha").joins(:critical_success_factors => :program).where(:id => activity_type_id).each do |factor|
+  #    if hoy < factor.fecha
+  #      errors.add(:activity_date_start, "El Programa al que esta ligada esta actividad aun no a empezado")
+  #    end
+  #  end
+  #end
 
   def validate_activity_sdate
     limite = Date.today + 7
