@@ -11,7 +11,7 @@ class Program < ActiveRecord::Base
   attr_accessible :department_id, :description, :name, :responsable_id, :direction_id,:priority_program_action_line_id , :cut_day, :start_date,
   #Para seleccionar multiples lineas de accion antes de crear un Programa
   :selectRight, :selectLeft
-  attr_accessor :selectRight, :selectLeft, :start_date, :end_date, :finder
+  attr_accessor :selectRight, :selectLeft, :start_date
   
   validates :department_id, :presence => true
   validates :description, :presence => true
@@ -21,8 +21,8 @@ class Program < ActiveRecord::Base
   validates :cut_day, :presence => true
 
   validates :start_date, :presence => true
-  validates :end_date, :presence => true
-  validates :finder, :presence => true
+  #validates :end_date, :presence => true
+  #validates :finder, :presence => true
 
   #validates :selectRight, :presence => true
   validates :selectLeft, :presence => true
