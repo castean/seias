@@ -100,91 +100,104 @@
     <%= f.label :email, "Correo Electrónico" %>
     <%= f.text_field :email %>
   </div>
-  <div class="field">
-    <%= f.label :tutor, "Tutor" %>
-    <%= f.text_field :tutor %>
+  <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div3', this)" /> Datos del tutor  </br>
+  <div id="div3" style="display:none">
+      <div class="field">
+        <%= f.label :tutor, "Tutor" %>
+        <%= f.text_field :tutor %>
+      </div>
+      <div class="field">
+        <%= f.label :tutor_relationship_id, "Parentesco" %>
+        <%= f.text_field :tutor_relationship_id %>
+      </div>
+      <div class="field">
+        <%= f.label :tutor_marital_status_id, "Estado Civil" %>
+        <%= f.text_field :tutor_marital_status_id %>
+      </div>
+      <div class="field">
+        <%= f.label :medical_service_id, "Servicio Médico" %>
+        <%= f.text_field :medical_service_id %>
+      </div>
   </div>
-  <div class="field">
-    <%= f.label :tutor_relationship_id, "Parentesco" %>
-    <%= f.text_field :tutor_relationship_id %>
-  </div>
-  <div class="field">
-    <%= f.label :tutor_marital_status_id, "Estado Civil" %>
-    <%= f.text_field :tutor_marital_status_id %>
-  </div>
-  <div class="field">
-    <%= f.label :medical_service_id, "Servicio Médico" %>
-    <%= f.text_field :medical_service_id %>
-  </div>
-  <div class="field">
-    <%= f.label :student, "Estudia?" %>
-    <%= f.text_field :student %>
-  </div>
-  <div class="field">
-    <%= f.label :reader, "Sabe Leer?" %>
-    <%= f.text_field :reader %>
-  </div>
-  <div class="field">
-    <%= f.label :schooling, "Escolaridad" %>
-    <%= f.text_field :schooling %>
-  </div>
-  <div class="field">
-    <%= f.label :school_type_id, "Donde Estudio?" %>
-    <%= f.text_field :school_type_id %>
-  </div>
-  <div class="field">
-    <%= f.label :worker, "Trabaja?" %>
-    <%= f.text_field :worker %>
-  </div>
-  <div class="field">
-    <%= f.label :job, "Lugar donde Labora" %>
-    <%= f.text_field :job %>
-  </div>
-  <div class="field">
-    <%= f.label :self_employment, "Es Autoempleo?" %>
-    <%= f.text_field :self_employment %>
-  </div>
-  <div class="field">
-    <%= f.label :occupation, "Tiene algún Oficio" %>
-    <%= f.text_field :occupation %>
-  </div>
-  <div class="field">
-    <%= f.label :job_seeker, "Desea pertenecer a la bolsa de trabajo?" %>
-    <%= f.text_field :job_seeker %>
-  </div>
-  <div class="field">
-    <%= f.label :discapacity_status, "Cuenta con algúna Discapacidad" %>
-    <%= f.text_field :discapacity_status %>
-  </div>
-  <div class="field">
-    <%= f.label :diagnosis, "Cuenta con Diagnóstico" %>
-    <%= f.text_field :diagnosis %>
-  </div>
-  <div class="field">
-    <%= f.label :diagnosis_description, "Diagnóstico" %>
-    <%= f.text_area :diagnosis_description %>
-  </div>
-  <div class="field">
-    <%= f.label :discapacity_origin_id, "Origen de la discapacidad" %>
-    <%= f.text_field :discapacity_origin_id %>
-  </div>
-  <div class="field">
-    <%= f.label :discapacity_origin_year, "Indique el año de origen" %>
-    <%= f.text_field :discapacity_origin_year %>
-  </div>
-  <div class="field">
-    <%= f.label :observations, "Observaciones" %>
-    <%= f.text_field :observations %>
-  </div>
-  <div class="field">
-    <%= f.label :funcional_support, "Utiliza apoyos funcionales?" %>
-    <%= f.text_field :funcional_support %>
-  </div>
+  <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div1', this)" /> Sabe leer?  </br>
+  <div id="div1" style="display:none">
+      <div class="field">
+        <%= f.label :student, "Estudia?" %>
+        <%= f.text_field :student %>
+      </div>
+      <div class="field">
+        <%= f.label :reader, "Sabe Leer?" %>
+        <%= f.text_field :reader %>
+      </div>
+      <div class="field">
+        <%= f.label :schooling, "Escolaridad" %>
+        <%= f.text_field :schooling %>
+      </div>
+      <div class="field">
+        <%= f.label :school_type_id, "Donde Estudio?" %>
+        <%= f.text_field :school_type_id %>
+      </div>
+      <div class="field">
+      </div>
+        <%= f.label :worker, "Trabaja?" %>
+        <%= f.text_field :worker %>
+      </div>
+      <div class="field">
+        <%= f.label :job, "Lugar donde Labora" %>
+        <%= f.text_field :job %>
+      </div>
+      <div class="field">
+        <%= f.label :self_employment, "Es Autoempleo?" %>
+        <%= f.text_field :self_employment %>
+      </div>
+      <div class="field">
+        <%= f.label :occupation, "Tiene algún Oficio" %>
+        <%= f.text_field :occupation %>
+      </div>
+      <div class="field">
+        <%= f.label :job_seeker, "Desea pertenecer a la bolsa de trabajo?" %>
+        <%= f.text_field :job_seeker %>
+      </div>
 
-
-
-
+    <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div2', this)" /> Cuenta con alguna discapacidad?  </br>
+    <div id="div2" style="display:none">
+      <div class="field">
+        <%= f.label :discapacity_status, "Cuenta con algúna Discapacidad" %>
+        <%= f.text_field :discapacity_status %>
+      </div>
+      <div class="field">
+        <%= f.label :diagnosis, "Cuenta con Diagnóstico" %>
+        <%= f.text_field :diagnosis %>
+      </div>
+      <div class="field">
+        <%= f.label :diagnosis_description, "Diagnóstico" %>
+        <%= f.text_area :diagnosis_description %>
+      </div>
+      <div class="field">
+        <%= f.label :discapacity_origin_id, "Origen de la discapacidad" %>
+        <%= f.text_field :discapacity_origin_id %>
+      </div>
+      <div class="field">
+        <%= f.label :discapacity_origin_year, "Indique el año de origen" %>
+        <%= f.text_field :discapacity_origin_year %>
+      </div>
+      <div class="field">
+        <%= f.label :observations, "Observaciones" %>
+        <%= f.text_field :observations %>
+      </div>
+      <div class="field">
+        <%= f.label :funcional_support, "Utiliza apoyos funcionales?" %>
+        <%= f.text_field :funcional_support %>
+      </div>
+  </div>
+  </br>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+<script type="text/javascript">
+    function showMe (it, box) {
+    var vis = (box.checked) ? "block" : "none";
+    document.getElementById(it).style.display = vis;
+    }
+</script>
