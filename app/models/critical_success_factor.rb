@@ -1,6 +1,5 @@
 #encoding:utf-8
 class CriticalSuccessFactor < ActiveRecord::Base
-
   belongs_to :unit_of_measurement
   #belongs_to :sexennial_state_plan_component
   belongs_to :user
