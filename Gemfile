@@ -28,7 +28,6 @@ gem 'easy_roles'
 gem 'cancan'
 
 #to excel
-gem 'acts_as_xlsx'
 require 'csv'
 gem "spreadsheet"
 gem "to_xls"

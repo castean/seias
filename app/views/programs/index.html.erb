@@ -43,5 +43,3 @@
 <% if can? :create, Program %>
 	<%= link_to 'Nuevo Programa', new_program_path, :class => "btn primary" %>
 <%end%>
-<br/>
-<%= link_to 'Descargar en excel', url_for(:format=>"xlsx") %>

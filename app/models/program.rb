@@ -1,6 +1,5 @@
 #encoding:utf-8
 class Program < ActiveRecord::Base
-  acts_as_xlsx
   DAYS = (1..31)
   
   belongs_to :direction
