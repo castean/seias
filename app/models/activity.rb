@@ -19,12 +19,13 @@ class Activity < ActiveRecord::Base
   validates :public_target_id, :presence => true
   validates :activity_type_id, :presence => true
   validates :county_id, :presence => true
-  validate :validate_captured_day, :unless => Proc.new{ |activity| activity.activity_date_start.nil? || activity.activity_type.critical_success_factors.nil?}
+  validate :validate_captured_day, :unless => Proc.new{ |activity| activity.activity_date_start.nil? || activity.activity_type == 0}
   validate :validate_activity_sdate, :unless => Proc.new{ |activity| activity.activity_date_start.nil?}
   validate :validate_sdate_fdate, :unless => Proc.new{ |activity| activity.activity_date_end.nil? || activity.activity_date_start.nil?}
   validate :validar_nulos
   validate :validar_town_id
-  validate :validar_program_start_date , :unless => Proc.new{ |activity| activity.activity_type.nil? || activity.activity_type.critical_success_factors.nil? }
+  validate :validar_activity_type_id
+  validate :validar_program_start_date , :unless => Proc.new{ |activity| activity.activity_type.nil? || activity.activity_type == 0 }
   
   def validar_nulos
     if self.qty_men.nil?
@@ -42,25 +43,40 @@ class Activity < ActiveRecord::Base
     end
   end
 
+  def validar_activity_type_id
+    t = self.activity_type_id
+    if t == 0  or t.nil? or t == " "
+      errors.add(:town_id, "Seleccione por favor un tipo de actividad")
+    end
+  end
+
   def validate_captured_day
     hoy = Date.today
     diahoy = Date.today.day
-    if self.activity_date_start.month < hoy.month
-      self.activity_type.critical_success_factors.each do |factor|
-        if diahoy > factor.program.cut_day
-          errors.add(:activity_date_start, "La fecha límite para captura de esa actividad ya termino")
-          break
+    t = self.activity_type_id
+    if t == 0 or t.nil? or t == " "
+      errors.add(:town_id, "Seleccione por favor un tipo de actividad")
+    else
+      if self.activity_date_start.month < hoy.month
+        self.activity_type.critical_success_factors.each do |factor|
+          if diahoy > factor.program.cut_day
+            errors.add(:activity_date_start, "La fecha límite para captura de esa actividad ya termino")
+            break
+          end
         end
       end
-
     end
   end
   
   def validar_program_start_date
     hoy = Date.today
-    self.activity_type.critical_success_factors.each do |factor|
-      if hoy < factor.program.program_start_date.to_date
-        errors.add(:activity_date_start, "El Programa al que esta ligada esta actividad aun no a empezado")
+    if t == 0 or t.nil? or t == " "
+      errors.add(:town_id, "Seleccione por favor un tipo de actividad")
+    else
+      self.activity_type.critical_success_factors.each do |factor|
+        if hoy < factor.program.program_start_date.to_date
+          errors.add(:activity_date_start, "El Programa al que esta ligada esta actividad aun no a empezado")
+        end
       end
     end
   end

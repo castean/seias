@@ -178,7 +178,7 @@ $(document).ready(function(){
                     $(row).appendTo("#selectLeft");
                     // Fill sub category select
                     $.each(data, function(i, j){
-                        row = "<option value=\"" + j[0] + "\">" + j[1] + "</option>";
+                        row = "<option value=\"" + j[1] + "\">" + j[0] + "</option>";
                         $(row).appendTo("#selectLeft");
                     });
                 }
