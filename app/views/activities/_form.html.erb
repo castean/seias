@@ -12,28 +12,32 @@
   
   <%= f.hidden_field :user_id %>
   <br />
-    <a href="#" class="show_hide_department">Cambiar de Departamento</a>
-    <div class="slidingDivDepartment">
-      <div class="field">
-        <%= f.label :department_id, "Departamento" %>
-        <%= f.collection_select :department_id, Department.find_all_by_direction_id( current_user.department.direction_id).sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona un Departamento --"} %>
-      </div>
-      <a href="#" class="show_hide_department">Ocultar</a></br>
-    </div>
+  <% if @activity.new_record? %>
+        <div class="field">
+          <%= f.label :program_id, "Programa" %>
+          <%= f.collection_select :program_id, Program.find_all_by_department_id( current_user.department_id).sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona un Programa --"} %>
+        </div>
+  <% else %>
+
+        <div class="field">
+          <%= f.label :program_id, "Programa" %>
+          <%= fill_programs_select(f)%>
+        </div>
+
+  <% end %>
+
+
   <div class="field">
     <%= f.label :activity_type_id, "Tipo de Actividad" %>
-   <%= fill_activity_type_select f %>
+   <%= fill_activity_type_select(f) %>
   </div>
  
   <div class="field">
-  	
   	<%= f.label :value, "Valor ",{:id=>"typess"} %>
     <%= f.text_field :value %>
     
   </div>
-  <a href="#" class="show_hide">Capturar Detalle de Hombres y Mujeres</a>
-  <div class="slidingDiv">
-	
+  <div class="field">
 		  <div class="field">
 		    <%= f.label :qty_men, "Cantidad de Hombres" %>
 		    <%= f.number_field :qty_men %>
@@ -42,28 +46,25 @@
 		    <%= f.label :qty_women, "Cantidad de Mujeres" %>
 		    <%= f.number_field :qty_women %>
 		  </div>
-		  <a href="#" class="show_hide">Ocultar</a></br>
   </div>
   </br>	
   <div class="field">
     <%= f.label :description, "Descripción" %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :rows => 3, :cols => 20 %>
   </div>
   <div class="field">
   	
     <%= f.label :activity_date_start, "Fecha Inicio de Actividad" %>
     <%= f.datepicker :activity_date_start, :dateFormat => "dd-mm-yy" %>
-    <!-- <%= f.date_select :activity_date_start %> -->
   </div>
   <div class="field">
   	
     <%= f.label :activity_date_end, "Fecha Fin de Actividad" %>
     <%= f.datepicker :activity_date_end, :dateFormat => "dd-mm-yy" %>
-    <!--<%= f.date_select :activity_date_end %>-->
   </div> 
   <div class="field">
     <%= f.label :county_id, "Municipio" %>
-    <%= f.collection_select :county_id,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
+    <%= f.collection_select :county_id,  County.order("name").where(:state_id => 8).order("substring(name,1,1)"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
   </div>
   
   <div class="field">

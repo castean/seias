@@ -122,7 +122,7 @@ class TownsController < ApplicationController
 
   def for_countyid
     #@towns = Town.find_all_by_county_id( params[:id]).sort_by{ |k| k['name'] }
-    @towns = Town.where(:county_id => params[:county_id], :state_id => 8).order("name")
+    @towns = Town.where(:county_id => params[:county_id], :state_id => 8).order("substring(name,1,1)")
     respond_to do |format|
       format.json  { render :json => @towns }
     end

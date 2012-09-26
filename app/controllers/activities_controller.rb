@@ -117,12 +117,12 @@ class ActivitiesController < ApplicationController
     end
   end
   # Ing. César Reyes # Carga Valores de Activity_Types con CoffeScript y json
-  def for_departmentid
+  def for_programid
 
     sql = "Select distinct activity_types.name, activity_types.id from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
                       INNER JOIN critical_success_factors ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
                       INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
-                      WHERE programs.department_id = #{params[:department_id]} order by activity_types.name"
+                      WHERE programs.id = #{params[:program_id]} order by activity_types.name"
     @filter_activity_types = ActiveRecord::Base.connection.select_rows(sql)
     @filter_activity_types.map{|name, id|}
     respond_to do |format|

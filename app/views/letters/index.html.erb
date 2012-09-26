@@ -1,0 +1,6 @@
+<h2>Selecione letra </h2>
+</br>
+<% for letter in @letters %>
+    <%= link_to letter.char, "letters/" + letter.char %>
+<% end %>
+

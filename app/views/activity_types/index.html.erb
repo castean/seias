@@ -1,11 +1,8 @@
 <h2>Listado de Tipo de Actividades</h2>
 </br>
-<%= form_tag activity_types_path, :method => 'get' do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
-<% end %>
+<%=  link_to 'Busqueda', activity_types_search_path %>
+</br>
+</br>
 <% if can? :create, ActivityType %>
     <%= link_to 'Crear un Tipo de Actividad', new_activity_type_path, :class => "btn primary" %>
 <% end %>
@@ -50,8 +47,8 @@
 <% end %>
 </table>
 
-
-</br>
 <div class="pager">
-	<%= paginate @activity_types %>
+  <%= paginate @activity_types %>
 </div>
+
+

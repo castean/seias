@@ -44,10 +44,12 @@ class CriticalFactorsController < ApplicationController
     @critical_factor.user = current_user
     @critical_factor.confidential = false
 
+
     respond_to do |format|
       if @critical_factor.save
-        format.html { redirect_to @critical_factor, notice: 'Critical factor was successfully created.' }
+        format.html { redirect_to @critical_factor, notice: 'Critical factor was successfully created.'}
         format.json { render json: @critical_factor, status: :created, location: @critical_factor }
+
       else
         format.html { render action: "new" }
         format.json { render json: @critical_factor.errors, status: :unprocessable_entity }
@@ -85,9 +87,10 @@ class CriticalFactorsController < ApplicationController
 
   def for_catalog_table_id
     c = CatalogTable.find(params[:table])
-    @sql = "SELECT * FROM " +  c.table
+
+    @sql = "SELECT " + c.table + ".description, " + c.table + ".id as proc_id FROM " +  c.table
     ppal = ActiveRecord::Base.connection.select_rows(@sql)
-    ppal.map{|description,id|}
+    ppal.map{|proc_id,description|}
 
     #@t = ActiveRecord::Base.connection.select_rows(@sql)
 

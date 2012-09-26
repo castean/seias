@@ -26,6 +26,7 @@ gem 'jquery_datepicker'
 gem 'authlogic'
 gem 'easy_roles'
 gem 'cancan'
+gem "scoped_search"
 
 require 'csv'
 gem "spreadsheet"

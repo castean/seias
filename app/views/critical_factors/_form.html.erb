@@ -14,7 +14,7 @@
   <% end %>
   </br>
   <div class="field">
-    <%= f.label :critical_success_factor_type_id, "Tipo de Factor Crítico" %>
+    <%= f.label :critical_success_factor_type_id, "Tipo de Indicador" %>
     <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.all.collect{ |u| [u.name, u.id] }, {:include_blank => false}, :class => "span7" %>
   </div>
   <div class="field">
@@ -66,8 +66,8 @@
       </div>
   </div>
   <div class="field">
-    <%= f.label :catalog_table_reference, "Que Medir " %>
-    <%= f.select :catalog_table_reference, CatalogTable.order("name").all.collect{ |u| [u.name, u.id] },
+    <%= f.label :catalog_table_id, "Que Medir " %>
+    <%= f.select :catalog_table_id, CatalogTable.order("name").all.collect{ |u| [u.name, u.id] },
                  {:include_blank => false}, :class => "span7", :id => "catalog_table_id"  %>
   </div>
 
@@ -76,10 +76,7 @@
     <%= f.label :criterion_of_measurement_id, "Tipo de datos a obtener?" %>
     <%= f.select :criterion_of_measurement_id, options_for_select([["Personas", "1"], ["Cantidad del Tipo de Actividad ", "2"], ["Ambos", "3"]]) %>  </br> </br>
 
-  <!-- ------------------------------------ -->
-    <!-- <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div1', this)" /> --><h4>Numerador</h4>
-    <!-- <input type="checkbox" name="modtype"  value="value2" onclick="showMe('div2', this)" /> Numerador Capturado  </br> -->
-    <!-- <div id="div1" style="display:none">  -->
+  <h4>Numerador</h4>
     <div>
       <div class="field">
         <table border="0">
@@ -121,9 +118,7 @@
         </table> 
        </div>
     </div>
-    <!-- <div id="div2" style="display:none">Show Div 2</div>   -->
 
-    <!-- <input type="checkbox" name="modtype"  value="value4" onclick="showMe('div3', this)" /> Denominador Compuesto -->
     <div class="field">
       <h4>Denominador</h4></br>
       <%= f.text_field :critical_factor_id, :class => "span4" %>
