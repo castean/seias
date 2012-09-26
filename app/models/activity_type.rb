@@ -1,5 +1,6 @@
 #encoding:utf-8
 class ActivityType < ActiveRecord::Base
+
   belongs_to :unit_of_measurement
   has_many :activities, :order => 'activity_date_start DESC'
   has_and_belongs_to_many :critical_success_factors
@@ -12,9 +13,12 @@ class ActivityType < ActiveRecord::Base
   validates :name, :presence => true  
   validates :unit_of_measurement_id, :presence => true
 
-  
+
+  scoped_search :on => :name, :complete_value => :true, :default_order => true
+
+
   before_destroy :check_for_activities
-  
+
   def check_for_activities
     if activities.count > 0
       errors.add_to_base("No se pueden borrar acciones mientras tenga actividades dependientes")
@@ -32,12 +36,4 @@ class ActivityType < ActiveRecord::Base
     end
   end
 
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
-    else
-      find(:all)
-    end
-  end
-  
 end

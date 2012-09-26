@@ -6,7 +6,7 @@ module CriticalFactorsHelper
       f.select("selectLeft",{},{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
 
     else
-      tabla =  CatalogTable.find(@critical_factor.catalog_table_reference).table.to_s
+      tabla =  CatalogTable.find(@critical_factor.catalog_table_id).table.to_s
       @sql = "Select name, id as proc_id from " + tabla + " WHERE id NOT IN
 	           (SELECT " + tabla + ".id
                FROM public.catalog_tables_critical_factors, public.critical_factors, public.catalog_tables, public." + tabla + "
@@ -27,7 +27,7 @@ module CriticalFactorsHelper
     if @critical_factor.new_record?
       f.select("selectRight",{},{},{:multiple=>true, :size => 6, :id=>'selectRight'})
     else
-      tabla =  CatalogTable.find(@critical_factor.catalog_table_reference).table.to_s
+      tabla =  CatalogTable.find(@critical_factor.catalog_table_id).table.to_s
       sql = "SELECT " + tabla + ".name, " + tabla + ".id as proc_id
              FROM public.catalog_tables_critical_factors, public.critical_factors, public.catalog_tables, public." + tabla + "
              WHERE critical_factors.id = catalog_tables_critical_factors.critical_factor_id
