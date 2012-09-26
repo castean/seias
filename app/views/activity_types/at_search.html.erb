@@ -1,0 +1,54 @@
+<h2>Listado de Tipo de Actividades</h2>
+</br>
+<div id="books_search">
+  <%= form_tag activity_types_search_path, :method => :get do %>
+      <%= auto_complete_field_tag_jquery(:search, params[:search], {:placeholder => "Teclee lo que desea buscar"}) %>
+      <button id='submit_search' style="font-size: 12px;">Search</button>
+  <%end%>
+</div>
+
+<% if can? :create, ActivityType %>
+    <%= link_to 'Crear un Tipo de Actividad', new_activity_type_path, :class => "btn primary" %>
+<% end %>
+<% if params[:search].blank?  %>
+<%else%>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Medidas</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <% @at_sea.each do |activity_type| %>
+          <% um = UnitOfMeasurement.find(activity_type.unit_of_measurement_id)%>
+          <tr>
+            <td><%= activity_type.name %></td>
+            <td><%= activity_type.description %></td>
+            <!--<td><%= activity_type.unit_of_measurement_id %></td>-->
+            <td><%= um.name + " " + activity_type.measurement_description%></td>
+
+            <td><%= link_to 'Actividades', activity_type %></td>
+            <% if can? :update, activity_type %>
+                <td>
+                  <%= link_to(edit_activity_type_path(activity_type)) do %>
+                      <%= image_tag("edit.png") %>
+                  <% end %>
+                </td>
+            <% end %>
+            <% if can? :destroy, activity_type %>
+                <td>
+
+                  <%= link_to(activity_type, :confirm => '¿Esta seguro?', :method => :delete,:remote =>true) do %>
+                      <%= image_tag("delete.png") %>
+                  <% end %>
+                </td>
+            <% end %>
+          </tr>
+      <% end %>
+    </table>
+<%end%>

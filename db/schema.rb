@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914200516) do
+ActiveRecord::Schema.define(:version => 20120924181740) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -134,6 +134,11 @@ ActiveRecord::Schema.define(:version => 20120914200516) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "counties_judical_districts", :id => false, :force => true do |t|
+    t.integer "county_id"
+    t.integer "judical_district_id"
+  end
+
   create_table "counties_judicial_districts", :id => false, :force => true do |t|
     t.integer "county_id"
     t.integer "judicial_district_id"
@@ -172,7 +177,6 @@ ActiveRecord::Schema.define(:version => 20120914200516) do
     t.datetime "updated_at",                                                                       :null => false
     t.integer  "criterion_of_measurement_id"
     t.integer  "catalog_table_id"
-    t.integer  "catalog_table_reference"
     t.integer  "critical_factor_id"
     t.integer  "period_time_id"
     t.integer  "responsable_id"
@@ -246,6 +250,12 @@ ActiveRecord::Schema.define(:version => 20120914200516) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "circunscription"
+  end
+
+  create_table "marital_statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "ped_action_lines", :force => true do |t|
@@ -457,11 +467,11 @@ ActiveRecord::Schema.define(:version => 20120914200516) do
     t.string   "description"
     t.integer  "department_id"
     t.integer  "responsable_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "direction_id"
     t.integer  "cut_day"
-    t.datetime "start_date"
+    t.datetime "program_start_date"
   end
 
   create_table "public_targets", :force => true do |t|

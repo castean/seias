@@ -6,7 +6,7 @@ class ActivityTypesController < ApplicationController
   def index
     @activity_types = ActivityType.order("name").page(params[:page]).per(30)
     #@activity_types = ActivityType.search(params[:search]).page(params[:page]).per(30)
-
+    #@activity_types = ActivityType.search_for(params[:search], :order => params[:order]).all(:include => :name)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -86,4 +86,21 @@ class ActivityTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def auto_complete_search
+    begin
+      @items = ActivityType.complete_for(params[:search])
+    rescue ScopedSearch::QueryNotSupported => e
+      @items = [{:error =>e.to_s}]
+    end
+    render :json => @items
+  end
+
+  def at_search
+  @at_sea = ActivityType.search_for(params[:search], :order => params[:order]).all
+  rescue => e
+    flash[:error] = e.to_s
+    @at_sea = ActivityType.search_for ''
+  end
+
 end

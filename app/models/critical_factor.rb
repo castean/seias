@@ -25,14 +25,19 @@ class CriticalFactor < ActiveRecord::Base
   after_save :save_selectright
 
   def save_selectright
-    @a = params[:critical_factor][:selectRight]
+   @test2 = self.selectRight.map { |k,v| "#{k} is #{v}" }
 
-    @a.each do |hacer|
-      @catalog_tables_critical_factor = CatalogTablesCriticalFactor.new(params[:catalog_table_id],self.id ,hacer)
-      @catalog_tables_critical_factor.save
-    end
+   print(@test2)
 
+  #  self.selectRight.each_pair do |t|
+  #    a = CatalogTablesCriticalFactor.new
+  #      a.catalog_table_id = self.catalog_table_id
+  #      a.critical_factor_id = self.id
+  #      a.table_select_field_id = t.proc_id
+  #    a.save
+  #  end
   end
+
   #validates :unit_of_measurement_description, :presence => true
 
   #validates :confidential, :presence => true
