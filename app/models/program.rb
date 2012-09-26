@@ -6,6 +6,8 @@ class Program < ActiveRecord::Base
   belongs_to :department
   belongs_to :user
   has_many :critical_success_factors
+ # has_many :activity_types, :through => :critical_success_factors
+
   has_and_belongs_to_many :priority_program_action_lines
   attr_accessible :department_id, :description, :name, :responsable_id, :direction_id,:priority_program_action_line_id , :cut_day, :program_start_date,
   #Para seleccionar multiples lineas de accion antes de crear un Programa
@@ -19,7 +21,7 @@ class Program < ActiveRecord::Base
   validates :direction_id, :presence => true
   validates :cut_day, :presence => true
 
-  validates :start_date, :presence => true
+  #validates :start_date, :presence => true
   #validates :end_date, :presence => true
   #validates :finder, :presence => true
 

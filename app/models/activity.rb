@@ -6,9 +6,10 @@ class Activity < ActiveRecord::Base
   belongs_to :activity_type
   belongs_to :user
   has_many :activity_types_critical_success_factors
+  belongs_to :program
 
-  attr_accessible :activity_date_start,:activity_date_end, :description, :value, :town_id, :group_id, :public_target_id, :activity_type_id, :county_id, :user_id, :qty_women, :qty_men, :department_id
-  attr_accessor :department_id
+  attr_accessible :activity_date_start,:activity_date_end, :description, :value, :town_id, :group_id, :public_target_id, :activity_type_id, :county_id, :user_id, :qty_women, :qty_men, :program_id
+  attr_accessor :program_id
   validates_numericality_of :qty_men, :only_integer => true
   validates_numericality_of :qty_women, :only_integer => true
   validates :activity_date_start, :presence => true
@@ -25,7 +26,7 @@ class Activity < ActiveRecord::Base
   validate :validar_nulos
   validate :validar_town_id
   validate :validar_activity_type_id
-  validate :validar_program_start_date , :unless => Proc.new{ |activity| activity.activity_type.nil? || activity.activity_type == 0 }
+  #validate :validar_program_start_date , :unless => Proc.new{ |activity| activity.activity_type.nil? || activity.activity_type == 0 }
   
   def validar_nulos
     if self.qty_men.nil?

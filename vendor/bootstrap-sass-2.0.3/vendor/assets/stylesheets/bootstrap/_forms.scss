@@ -54,7 +54,7 @@ label {
 // Inputs, Textareas, Selects
 input, textarea, select, .uneditable-input {
   display: inline-block;
-  width: 210px;
+  width: 580px;//defautl 210, cambiado por cfgacia 26 de Sep 2012
   height: $baseLineHeight;
   padding: 4px;
   margin-bottom: 9px;
@@ -123,7 +123,7 @@ input[type="file"] {
 
 // Chrome on Linux and Mobile Safari need background-color
 select {
-  width: 220px; // default input width + 10px of padding that doesn't get applied
+  width: 590px; // default input width + 10px of padding that doesn't get applied - default 220px modificado por cfgarcia 26 sep 2012
   background-color: $inputBackground;
 }
 

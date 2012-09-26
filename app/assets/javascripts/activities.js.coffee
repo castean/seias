@@ -31,14 +31,14 @@ $(document).ready ->
     $(".slidingDivDepartment").slideToggle();
 
 $(document).ready ->
-  $("select#activity_department_id").change ->
+  $("select#activity_program_id").change ->
     id_value_string = $(this).val()
     if id_value_string > "0"
       $.ajax
         method: "put"
         dataType: "json"
         cache: false
-        url:  application_root_path() + "/activities/for_departmentid/" + id_value_string
+        url:  application_root_path() + "/activities/for_programid/" + id_value_string
         timeout: 20000
         error: (XMLHttpRequest, errorTextStatus, error) ->
           alert "Failed to submit : " + errorTextStatus + " ;" + error
