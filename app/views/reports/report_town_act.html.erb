@@ -1,0 +1,22 @@
+<h3>Reporte de Actividades por Localidad</h3>
+</table>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Referencia</th>
+    <th>Localidad</th>
+    <th>Total Actividades</th>
+</tr>
+  </thead>
+
+  <% @geoloc.each do |p| %>
+
+      <tr>
+        <td><%= p.georef %></td>
+        <td><%= p.tnombre%></td>
+        <td><%= p.totalact %></td>
+      </tr>
+  <%end%>
+</table>
+</br>
+<%=  link_to 'Descargar en excel', request.parameters.merge({:format => :xls}), :controller => 'programs', :action => 'report_town_act' %>

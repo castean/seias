@@ -87,6 +87,12 @@ Seias::Application.routes.draw do
 
   resources :programs
 
+  match '/reports/report_town_act' => 'reports#report_town_act'
+  match '/reports/program_report' => 'reports#program_report'
+  match '/reports/program_report_all' => 'reports#program_report_all'
+  match '/reports/program_report_county' => 'reports#program_report_county'
+  resources :reports
+
   match '/critical_success_factors/for_program_id/:id' => 'critical_success_factors#for_program_id'
   resources :critical_success_factors
 
