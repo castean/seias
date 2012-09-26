@@ -7,7 +7,7 @@ module ActivitiesHelper
            # INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
             #WHERE programs.department_id = #{current_user.department_id} order by activity_types.name"
             #sql = "Select activity_types.name, activity_types.id from activity_types"
-        f.select :activity_type_id, {}, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo"}
+        f.select :activity_type_id, {}, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo", :class=>"ddl_width"}
      else
 
 
@@ -23,7 +23,7 @@ module ActivitiesHelper
             #sql = "Select activity_types.name, activity_types.id from activity_types"
             filter_activity_types = ActiveRecord::Base.connection.select_rows(sql)
             filter_activity_types.map{|name, id|}
-            f.select :activity_type_id, filter_activity_types, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo"}
+            f.select :activity_type_id, filter_activity_types, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo", :class=>"ddl_width"}
      end
   end
   def fill_programs_select(f)
@@ -70,6 +70,6 @@ module ActivitiesHelper
                   activity_types.id = #{@activity.activity_type_id})"
     p = ActiveRecord::Base.connection.select_rows(s)
     p.map{|description, id|}
-    f.select :program_id, p, {:prompt => false}
+    f.select :program_id, p, {:prompt => false}, :class=>"ddl_width"
   end
 end
