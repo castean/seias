@@ -21,7 +21,7 @@
 
         <div class="field">
           <%= f.label :program_id, "Programa" %>
-          <%= fill_programs_select f %>
+          <%= fill_programs_select f, :cols => 200 %>
         </div>
 
   <% end %>
@@ -51,7 +51,7 @@
   </br>	
   <div class="field">
     <%= f.label :description, "Descripción" %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :rows => 3, :cols => 20 %>
   </div>
   <div class="field">
   	
