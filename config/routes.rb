@@ -1,5 +1,7 @@
 Seias::Application.routes.draw do
 
+  resources :marital_statuses
+
   resources :people
 
   resources :period_times
@@ -73,8 +75,10 @@ Seias::Application.routes.draw do
   post '/states/import' => "states#states_import", :as => :importarestados
   resources :states
 
+  match '/activity_types/search' => 'activity_types#at_search'
   resources :activity_types do
     resource :unit_of_measurements
+    #get 'auto_complete_search'
   end
   
   #resources :activitygoals
