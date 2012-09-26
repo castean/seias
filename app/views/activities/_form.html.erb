@@ -21,7 +21,7 @@
 
         <div class="field">
           <%= f.label :program_id, "Programa" %>
-          <%= fill_programs_select f, :cols => 200 %>
+          <%= fill_programs_select(f)%>
         </div>
 
   <% end %>
@@ -29,11 +29,10 @@
 
   <div class="field">
     <%= f.label :activity_type_id, "Tipo de Actividad" %>
-   <%= fill_activity_type_select f %>
+   <%= fill_activity_type_select(f) %>
   </div>
  
   <div class="field">
-  	
   	<%= f.label :value, "Valor ",{:id=>"typess"} %>
     <%= f.text_field :value %>
     
@@ -57,13 +56,11 @@
   	
     <%= f.label :activity_date_start, "Fecha Inicio de Actividad" %>
     <%= f.datepicker :activity_date_start, :dateFormat => "dd-mm-yy" %>
-    <!-- <%= f.date_select :activity_date_start %> -->
   </div>
   <div class="field">
   	
     <%= f.label :activity_date_end, "Fecha Fin de Actividad" %>
     <%= f.datepicker :activity_date_end, :dateFormat => "dd-mm-yy" %>
-    <!--<%= f.date_select :activity_date_end %>-->
   </div> 
   <div class="field">
     <%= f.label :county_id, "Municipio" %>
