@@ -15,7 +15,7 @@
   <% if @activity.new_record? %>
         <div class="field">
           <%= f.label :program_id, "Programa" %>
-          <%= f.collection_select :program_id, Program.find_all_by_department_id( current_user.department_id).sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona un Programa --"} %>
+          <%= f.collection_select :program_id, Program.find_all_by_department_id( current_user.department_id).sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona un Programa --"}, :class=>"ddl_width" %>
         </div>
   <% else %>
 
@@ -50,7 +50,7 @@
   </br>	
   <div class="field">
     <%= f.label :description, "Descripción" %>
-    <%= f.text_area :description, :rows => 3, :cols => 20 %>
+    <%= f.text_area :description, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
   	

@@ -7,11 +7,11 @@ module ActivitiesHelper
            # INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
             #WHERE programs.department_id = #{current_user.department_id} order by activity_types.name"
             #sql = "Select activity_types.name, activity_types.id from activity_types"
-        f.select :activity_type_id, {}, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo"}
+        f.select :activity_type_id, {}, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo", :class=>"ddl_width"}
      else
 
 
-            pro = "Select programs.id from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
+            pro = "Select MAX(programs.id) from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
             INNER JOIN critical_success_factors ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
             INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
             WHERE  activity_types.id = #{@activity.activity_type_id}"
@@ -23,11 +23,8 @@ module ActivitiesHelper
             #sql = "Select activity_types.name, activity_types.id from activity_types"
             filter_activity_types = ActiveRecord::Base.connection.select_rows(sql)
             filter_activity_types.map{|name, id|}
-            f.select :activity_type_id, filter_activity_types, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo"}
+            f.select :activity_type_id, filter_activity_types, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo", :class=>"ddl_width"}
      end
-
-
-
   end
   def fill_programs_select(f)
     s = "SELECT
@@ -42,7 +39,7 @@ module ActivitiesHelper
                   critical_success_factors.program_id = programs.id AND
                   activity_types_critical_success_factors.critical_success_factor_id = critical_success_factors.id AND
                   activity_types.id = activity_types_critical_success_factors.activity_type_id AND
-                  activity_types.id = 386
+                  activity_types.id = #{@activity.activity_type_id}
 
                 UNION
 
@@ -59,7 +56,7 @@ module ActivitiesHelper
                   critical_success_factors.program_id = programs.id AND
                   activity_types_critical_success_factors.critical_success_factor_id = critical_success_factors.id AND
                   activity_types.id = activity_types_critical_success_factors.activity_type_id AND
-                  programs.department_id = 8 AND programs.id <>   (SELECT
+                  programs.department_id = #{current_user.department_id} AND programs.id <>   (SELECT
                   MAX(programs.id)
                   FROM
                   public.programs,
@@ -70,9 +67,9 @@ module ActivitiesHelper
                   critical_success_factors.program_id = programs.id AND
                   activity_types_critical_success_factors.critical_success_factor_id = critical_success_factors.id AND
                   activity_types.id = activity_types_critical_success_factors.activity_type_id AND
-                  activity_types.id = 386)"
+                  activity_types.id = #{@activity.activity_type_id})"
     p = ActiveRecord::Base.connection.select_rows(s)
     p.map{|description, id|}
-    f.select :program_id, p, {:prompt => false}
+    f.select :program_id, p, {:prompt => false}, :class=>"ddl_width"
   end
 end
