@@ -14,8 +14,8 @@ module ActivityTypesHelper
       @acumuladoh = @activity_type.activities.sum((:qty_men), :conditions => ['activity_date_start >= ?', anioini] )
       @sumam = @activity_type.activities.sum((:qty_women), :conditions => ['activity_date_start >= ?', fechaini] )
       @acumuladom = @activity_type.activities.sum((:qty_women), :conditions => ['activity_date_start >= ?', anioini] )
-      #sumav = @activity_type.activities.sum((:value), :conditions => ['activity_date_start >= ?', fechaini] )  
-      #acumuladov = @activity_type.activities.sum((:value), :conditions => ['activity_date_start >= ?', anioini] )
+      #@sumav = @activity_type.activities.sum((:value), :conditions => ['activity_date_start >= ?', fechaini] )
+      #@acumuladov = @activity_type.activities.sum((:value), :conditions => ['activity_date_start >= ?', anioini] )
       
       @suma = @sumah + @sumam
       @acumulado = @acumuladoh + @acumuladom
@@ -29,7 +29,7 @@ module ActivityTypesHelper
     else
       @sql = "Select title,id from critical_success_factors where id not in (SELECT critical_success_factors.id FROM critical_success_factors INNER JOIN activity_types_critical_success_factors
               ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
-              WHERE activity_types_critical_success_factors.activity_type_id = " + @activity_type.id.to_s + "ORDER BY title)"
+              WHERE activity_types_critical_success_factors.activity_type_id = " + @activity_type.id.to_s + ") ORDER BY title"
       
       @t = ActiveRecord::Base.connection.select_rows(@sql)
 

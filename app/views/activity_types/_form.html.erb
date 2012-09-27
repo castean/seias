@@ -47,7 +47,7 @@
           </td>
             <td align="left">&nbsp;</td>
              <td align="left">&nbsp;</td>
-            <td rowspan="3" align="left">
+            <td rowspan="3" align="left"  class = "span7" >
               <label>
                 <%= f.select("selectRightActivity",options_for_select(@activity_type.critical_success_factors.order("title").all.collect { |cat| [cat.title, cat.id] }, @activity_type.name { |cat| cat.id}),{}, :size => 6,:multiple=>true, :id=>'selectRightActivity') %>
               </label>
