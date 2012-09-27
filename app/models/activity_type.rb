@@ -1,6 +1,6 @@
 #encoding:utf-8
 class ActivityType < ActiveRecord::Base
-
+  scoped_search :on => :name, :complete_value => :true, :default_order => true
   belongs_to :unit_of_measurement
   has_many :activities, :order => 'activity_date_start DESC'
   has_and_belongs_to_many :critical_success_factors
@@ -14,7 +14,7 @@ class ActivityType < ActiveRecord::Base
   validates :unit_of_measurement_id, :presence => true
 
 
-  scoped_search :on => :name, :complete_value => :true, :default_order => true
+
 
 
   before_destroy :check_for_activities

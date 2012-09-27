@@ -16,6 +16,9 @@ class Ability
       can :destroy, UserSession 
       can :change_password, User
       can :download_manual, Home
+      can :program_search, Program
+      can :program_report, Program
+      can :program_report_all, Program
       can :program_report, Report
       can :program_report_all, Report
       can :program_report_county, Report
