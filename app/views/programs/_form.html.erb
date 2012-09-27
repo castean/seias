@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :description, "Descripción" %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
     <%= f.label :direction_id, "Dirección" %>
@@ -41,42 +41,34 @@
     <%= f.select :cut_day, Program::DAYS, {:include_blank => "-- Selecciona un Día --"} %>
   </div>
 
-    <div>
-      <table border="0">
-         <tr>
-         <td colspan="2"><h4>Líneas de Acción Disponibles</h4></td>
-            <td colspan="2"><h4>Líneas de Acción Relacionadas al Programa</h4></td>
-         </tr>
-         <tr>
-         <td rowspan="3" align="right">
-        <label>
-          <%=fillrightleftselection(f)%>
-        </label>
-      </td>
-        <td align="left">&nbsp;</td>
-         <td align="left">&nbsp;</td>
-        <td rowspan="3" align="left">
-          <label>
-            <%= f.select("selectRight",options_for_select(@program.priority_program_action_lines.order("name").all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRight'}) %>
-          </label>
+  <div>
+    <table border="0">
+       <tr>
+       <td><h4>Líneas de Acción Disponibles</h4></td>
+       </tr>
+       <tr>
+       <td align="left">
+      <%= fillrightleftselection(f)%>
+    </td>
+    </tr>
+      <tr>
+        <td>
+          <input name="btnRight" type="button" id="btnRight" value="v" onClick="javascript:moveToRightOrLeft(1);">
+
+          <input name="btnLeft" type="button" id="btnLeft" value="^" onClick="javascript:moveToRightOrLeft(2);">
         </td>
-         </tr>
-         <tr>
-         <td align="left">&nbsp;</td>
-         <td align="left"><label>
-         <input name="btnRight" type="button" id="btnRight" value="&gt;&gt;" onClick="javascript:moveToRightOrLeft(1);">
-         </label>
-      </td> 
       </tr>
-         <tr>
-         <td align="left">&nbsp;</td>
-         <td align="left"><label>
-         <input name="btnLeft" type="button" id="btnLeft" value="&lt;&lt;" onClick="javascript:moveToRightOrLeft(2);">
-             </label>
-      </td> 
-      </tr> 
-      </table> 
-     </div>
+       <tr>
+       <td><h4>Líneas de Acción Relacionadas al Programa</h4></td>
+       </tr>
+      <td align="left">
+        <%= f.select("selectRight",options_for_select(@program.priority_program_action_lines.order("name").all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRight', :class=>"span7"}) %>
+      </td>
+      </tr>
+    </table>
+
+   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

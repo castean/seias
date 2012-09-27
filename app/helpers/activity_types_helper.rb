@@ -14,8 +14,8 @@ module ActivityTypesHelper
       @acumuladoh = @activity_type.activities.sum((:qty_men), :conditions => ['activity_date_start >= ?', anioini] )
       @sumam = @activity_type.activities.sum((:qty_women), :conditions => ['activity_date_start >= ?', fechaini] )
       @acumuladom = @activity_type.activities.sum((:qty_women), :conditions => ['activity_date_start >= ?', anioini] )
-      #@sumav = @activity_type.activities.sum((:value), :conditions => ['activity_date_start >= ?', fechaini] )
-      #@acumuladov = @activity_type.activities.sum((:value), :conditions => ['activity_date_start >= ?', anioini] )
+      @sumav = @activity_type.activities.sum("cast(activities.value as integer)", :conditions => ['activity_date_start >= ?', fechaini])
+      @acumuladov = @activity_type.activities.sum("cast(activities.value as integer)", :conditions => ['activity_date_start >= ?', anioini])
       
       @suma = @sumah + @sumam
       @acumulado = @acumuladoh + @acumuladom
@@ -24,7 +24,7 @@ module ActivityTypesHelper
 
   def fillrightleftselectionactivity(f)
     if @activity_type.new_record?
-      f.select("selectLeft",options_for_select(CriticalSuccessFactor.order("title").all.collect { |cat| [cat.title, cat.id] }, @activity_type.name { |cat| cat.id}),{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
+      f.select("selectLeft",options_for_select(CriticalSuccessFactor.order("title").all.collect { |cat| [cat.title, cat.id] }, @activity_type.name { |cat| cat.id}),{},{:multiple=>true, :size => 6, :id=>'selectLeft', :class=>"span7"})
       #f.select("selectLeft",options_for_select(PriorityProgramActionLine.order("name").all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectLeft'})
     else
       @sql = "Select title,id from critical_success_factors where id not in (SELECT critical_success_factors.id FROM critical_success_factors INNER JOIN activity_types_critical_success_factors
@@ -33,7 +33,7 @@ module ActivityTypesHelper
       
       @t = ActiveRecord::Base.connection.select_rows(@sql)
 
-      f.select("selectLeft",options_for_select(@t),{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
+      f.select("selectLeft",options_for_select(@t),{},{:multiple=>true, :size => 6, :id=>'selectLeft', :style =>"overflow-x:scroll", :class=>"span7"})
     end
   end
   

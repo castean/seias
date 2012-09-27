@@ -6,7 +6,7 @@ module CriticalSuccessFactorsHelper
       ppal = ActiveRecord::Base.connection.select_rows(sql)
       ppal.map{|name,id|}
 
-      f.select("selectLeft",ppal,{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
+      f.select("selectLeft",ppal,{},{:multiple=>true, :size => 6, :id=>'selectLeft', :class=>"span7"})
 
     else
       @sql = "Select name,id from priority_program_action_lines WHERE id NOT IN
@@ -19,7 +19,7 @@ module CriticalSuccessFactorsHelper
       ppal = ActiveRecord::Base.connection.select_rows(@sql)
       ppal.map{|name,id|}
 
-      f.select("selectLeft",ppal,{},{:multiple=>true, :size => 6, :id=>'selectLeft'})
+      f.select("selectLeft",ppal,{},{:multiple=>true, :size => 6, :id=>'selectLeft', :class=>"span7"})
     end
   end
 end
