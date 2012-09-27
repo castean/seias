@@ -22,6 +22,7 @@ class Ability
       can :program_report, Report
       can :program_report_all, Report
       can :program_report_county, Report
+      can :report_town_act, Report
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            

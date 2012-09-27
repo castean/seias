@@ -9,7 +9,7 @@ class ReportsController < ApplicationController
     if @date_ini == "" or @date_end == ""
       redirect_to reports_path, :notice => "Debes de llenar todos los campos"
     elsif @prog_type == "all"
-      redirect_to programs_program_report_all_path(request.parameters)
+      redirect_to reports_program_report_all_path(request.parameters)
     else
       if params[:finder][:program] == "program"
 
@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
                   ", {:program_id => params[:program_id][:program_id], :start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
       elsif params[:finder][:program] == "pajs"
         @program = Program.select('programs.name as pnombre, programs.description pdescripcion, activity_types.name as anombre, activity_types.description as ndesc,judicial_districts.name dnombre,sum(cast(activities.value as int)) as totalv'
-        ).joins(:critical_success_factors => {:activity_types => {:activities => {:town => {:county => :judicial_districts}}}}).group('programs.name,
+        ).order("judicial_districts.name, activity_types.name").joins(:critical_success_factors => {:activity_types => {:activities => {:town => {:county => :judicial_districts}}}}).group('programs.name,
                     programs.description,activities.activity_type_id,activity_types.name,
                     activity_types.description, judicial_districts.id,judicial_districts.name'
         ).where("programs.id = :program_id and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date ",
@@ -54,7 +54,7 @@ class ReportsController < ApplicationController
 
     elsif params[:finder][:program] == "pajs"
       @program = Program.select('programs.name as pnombre, programs.description pdescripcion, activity_types.name as anombre, activity_types.description as ndesc,judicial_districts.name dnombre,sum(cast(activities.value as int)) as totalv'
-      ).joins(:critical_success_factors => {:activity_types => {:activities => {:town => {:county => :judicial_districts}}}}).group('programs.name,
+      ).order("judicial_districts.name, programs.name").joins(:critical_success_factors => {:activity_types => {:activities => {:town => {:county => :judicial_districts}}}}).group('programs.name,
                     programs.description,activities.activity_type_id,activity_types.name,
                     activity_types.description, judicial_districts.id,judicial_districts.name'
       ).where("activities.activity_date_start > :start_date and activities.activity_date_end < :end_date ",
@@ -77,18 +77,19 @@ class ReportsController < ApplicationController
     if @prog_type == "one"
       @program = Program.select("programs.name as pnombre, programs.description as pdescripcion, activity_types.name as anombre, activity_types.description as ndesc,
                 sum(cast(activities.value as int)) as totalv, sum(activities.qty_men) + sum(activities.qty_women) as totalp,
-                to_char(activities.activity_date_start, 'YYYY-MM-DD') as mes, activities.county_id as mun
-               ").order("activities.county_id,date_part('month', activities.activity_date_start) ").joins(:critical_success_factors => {:activity_types => {:activities => {:town => :county}}}).group("activities.activity_type_id,programs.id,programs.description,programs.name,programs.department_id,programs.responsable_id,
-               programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,programs.program_start_date,activity_types.name, activity_types.description,
-                date_part('month', activities.activity_date_start),activities.county_id,to_char(activities.activity_date_start, 'YYYY-MM-DD')").where("activities.county_id = :county_id and
-               date_part('year',activities.activity_date_start) = :start_date", {:county_id =>params[:county_id][:cve_mun] ,:start_date => params[:date][:year]})
+                to_char(activities.activity_date_start,'Month') as mes, counties.name as mun
+               ").order("activities.county_id,date_part('month', activities.activity_date_start),programs.name ").joins(:critical_success_factors => {:activity_types => {:activities => :county}}
+                ).group("programs.name,programs.description,activity_types.name, activity_types.description,
+                counties.name, activities.county_id, to_char(activities.activity_date_start,'Month'),date_part('month', activities.activity_date_start)
+                ").where("counties.state_id = 8 and activities.county_id = :county_id and date_part('year',activities.activity_date_start) = :start_date",
+                {:county_id =>params[:county_id][:cve_mun] ,:start_date => params[:date][:year]})
     elsif  @prog_type == "all"
       @program = Program.select("programs.name as pnombre, programs.description pdescripcion, activity_types.name as anombre, activity_types.description as ndesc,
                 sum(cast(activities.value as int)) as totalv,
-               sum(activities.qty_men) + sum(activities.qty_women) as totalp, to_char(activities.activity_date_start, 'YYYY-MM-DD') as mes, counties.name as mun
+               sum(activities.qty_men) + sum(activities.qty_women) as totalp, to_char(activities.activity_date_start,'Month') as mes, counties.name as mun
                ").order("activities.county_id,date_part('month', activities.activity_date_start) ").joins(:critical_success_factors => {:activity_types => {:activities => :county}}).group("activities.activity_type_id,programs.id,programs.description,programs.name,programs.department_id,programs.responsable_id,
                programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,programs.program_start_date,activity_types.name, activity_types.description,
-                date_part('month', activities.activity_date_start),activities.county_id,counties.name,to_char(activities.activity_date_start, 'YYYY-MM-DD')").where("
+                to_char(activities.activity_date_start,'Month'),date_part('month', activities.activity_date_start),activities.county_id,counties.name,to_char(activities.activity_date_start, 'YYYY-MM-DD')").where("
                 counties.state_id = 8 and date_part('year',activities.activity_date_start) = :start_date", {:start_date => params[:date][:year]})
     end
     respond_to do |format|
