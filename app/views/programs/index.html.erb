@@ -1,5 +1,13 @@
 <h3>Lista de Programas</h3>
+
 <%=  link_to 'Reporte', programs_report_path %>
+
+<br />
+<% if can? :create, Program %>
+    <%= link_to 'Nuevo Programa', new_program_path, :class => "btn primary" %>
+<%end%>
+</br>
+
 <table class="table table-striped">
   <thead>
 	  <tr>
@@ -39,7 +47,4 @@
 <% end %>
 </table>
 
-<br />
-<% if can? :create, Program %>
-	<%= link_to 'Nuevo Programa', new_program_path, :class => "btn primary" %>
-<%end%>
+

@@ -23,7 +23,7 @@
   </div>
   <div class="field">
     <%= f.label :description, "Descripción" %>
-    <%= f.text_area :description, :size=>"100x5", :class => "span7" %>
+    <%= f.text_area :description, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
     <%= f.label :unit_of_measurement_id, "Unidad de Medida" %>
@@ -32,46 +32,32 @@
   <div class="field">
     <%= f.label :measurement_description, "Descripción. Que vamos a medir?" %>
     <%= f.text_area :measurement_description, :size=>"100x5", :class => "span7" %>
+  </div>
   <div>
-      <table border="0">
+    <table border="0">
          <tr>
-           <td colspan="2"><h4>Acciones Disponibles</h4></td>
-          <td></td>
-          <td colspan="2"><h4>Acciones Relacionados a la Actividad</h4></td>
+           <td><h4>Acciones Disponibles</h4></td>
          </tr>
          <tr>
-           <td rowspan="3" align="right">
-            <label>
+           <td align="left">
               <%= fillrightleftselectionactivity(f)%>
-            </label>
           </td>
-            <td align="left">&nbsp;</td>
-             <td align="left">&nbsp;</td>
-            <td rowspan="3" align="left">
-              <label>
-                <%= f.select("selectRightActivity",options_for_select(@activity_type.critical_success_factors.order("title").all.collect { |cat| [cat.title, cat.id] }, @activity_type.name { |cat| cat.id}),{}, :size => 6,:multiple=>true, :id=>'selectRightActivity') %>
-              </label>
-            </td>
+        </tr>
+        <tr>
+          <td>
+            <input name="btnRight" type="button" id="btnRight" value="v" onClick="javascript:moveToRightOrLeft(1);">
+
+            <input name="btnLeft" type="button" id="btnLeft" value="^" onClick="javascript:moveToRightOrLeft(2);">
           </td>
-          </tr>
-          <tr>
-             <td align="left">&nbsp;</td>
-             <td align="left">
-               <label>
-                 <input name="btnRight" type="button" id="btnRight" value="&gt;&gt;" onClick="javascript:moveToRightOrLeft(1);">
-                </label>
-          </td> 
-          </tr>
-          <tr>
-             <td align="left">&nbsp;</td>
-             <td align="left">
-               <label>
-                   <input name="btnLeft" type="button" id="btnLeft" value="&lt;&lt;" onClick="javascript:moveToRightOrLeft(2);">
-                </label>
-            </td> 
-          </tr> 
-      </table> 
-       </div>
+        </tr>
+         <tr>
+             <td><h4>Acciones Relacionados a la Actividad</h4></td>
+         </tr>
+          <td align="left">
+            <%= f.select("selectRightActivity",options_for_select(@activity_type.critical_success_factors.order("title").all.collect { |cat| [cat.title, cat.id] }, @activity_type.name { |cat| cat.id}),{}, :size => 6,:multiple=>true, :id=>'selectRightActivity', :style =>"overflow-x:scroll", :class=>"span7") %>
+          </td>
+        </tr>
+    </table> 
   </div>
 
   <div class="actions">
