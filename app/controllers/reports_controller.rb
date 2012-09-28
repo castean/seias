@@ -74,6 +74,14 @@ class ReportsController < ApplicationController
   end
   def program_report_county
     @prog_type = params[:finder][:qty]
+    @para = params[:month_part]
+    @months = 0
+    case @para
+      when '1'; @months = 1,2,3
+      when '2'; @months = 4,5,6
+      when '3'; @months = 7,8,9
+      when '4'; @months = 10,11,12
+    end
     if @prog_type == "one"
       @program = Program.select("programs.name as pnombre, programs.description as pdescripcion, activity_types.name as anombre, activity_types.description as ndesc,
                 sum(cast(activities.value as int)) as totalv, sum(activities.qty_men) + sum(activities.qty_women) as totalp,
@@ -90,7 +98,8 @@ class ReportsController < ApplicationController
                ").order("activities.county_id,date_part('month', activities.activity_date_start) ").joins(:critical_success_factors => {:activity_types => {:activities => :county}}).group("activities.activity_type_id,programs.id,programs.description,programs.name,programs.department_id,programs.responsable_id,
                programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,programs.program_start_date,activity_types.name, activity_types.description,
                 to_char(activities.activity_date_start,'Month'),date_part('month', activities.activity_date_start),activities.county_id,counties.name,to_char(activities.activity_date_start, 'YYYY-MM-DD')").where("
-                counties.state_id = 8 and date_part('year',activities.activity_date_start) = :start_date", {:start_date => params[:date][:year]})
+                counties.state_id = 8 and date_part('year',activities.activity_date_start) = :start_date and
+                date_part('month',activities.activity_date_start) in (:month)", {:start_date => params[:date][:year], :month => @months})
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -100,8 +109,8 @@ class ReportsController < ApplicationController
   end
 
   def report_town_act
-    @date_ini =  params[:start_date][:start_date]
-    @date_end =  params[:end_date][:end_date]
+    @date_ini =  params[:start_datec][:start_datec]
+    @date_end =  params[:end_datec][:end_datec]
     if @date_ini == "" or @date_end == ""
       redirect_to reports_path, :notice => "Debes de llenar todos los campos"
     else
@@ -109,7 +118,7 @@ class ReportsController < ApplicationController
               sum(cast(activities.value as int)) as totalact").order("counties.name ").joins(:activities,:towns ).group("
               (cast(towns.state_id as char) || towns.county_id || towns.cve_loc),counties.name").where("counties.state_id = 8
               and towns.state_id = 8 and towns.name like '%*%' and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date",
-              {:start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
+              {:start_date => (params[:start_datec][:start_datec]).to_date - 1, :end_date => (params[:end_datec][:end_datec]).to_date + 1})
 
       respond_to do |format|
         format.html # index.html.erb

@@ -45,9 +45,12 @@
         <div class="field">
           <%= label :start_date, "Año" %>
           <%= select_year(Date.today, :start_year => 2012, :end_year => Time.now.year) %>
+        </div>
+        <div class="field">
+          <%= label :start_date, "Trimestre" %>
+          <%= select_tag(:month_part,(options_for_select([['Enero-Marzo', 1], ['Abril-Junio', 2], ['Julio-Septiembre', 3], ['Octubre-Diciembre', 4]]))) %>
 
         </div>
-
         <%= submit_tag("Buscar") %>
     <% end %>
   </div>
@@ -55,11 +58,11 @@
     <%= form_tag  :action => "report_town_act", :method => "post" do %>
         <div class="field">
           <%= label :start_date, "Fecha Inicio de Actividad" %>
-          <%= datepicker :start_date, :start_date,  :dateFormat => "yy-mm-dd" %>
+          <%= datepicker :start_datec, :start_datec,  :dateFormat => "yy-mm-dd" %>
         </div>
         <div class="field">
           <%= label :end_date, "Fecha Fin de Actividad" %>
-          <%= datepicker :end_date, :end_date, :dateFormat => "yy-mm-dd"  %>
+          <%= datepicker :end_datec, :end_datec, :dateFormat => "yy-mm-dd"  %>
 
         </div>
         <%= submit_tag("Buscar") %>
