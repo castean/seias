@@ -78,7 +78,7 @@ Seias::Application.routes.draw do
   match '/activity_types/search' => 'activity_types#at_search'
   resources :activity_types do
     resource :unit_of_measurements
-    #get 'auto_complete_search'
+    get 'auto_complete_search'
   end
   
   #resources :activitygoals
