@@ -2,7 +2,7 @@
 </br>
 <div id="books_search">
   <%= form_tag activity_types_search_path, :method => :get do %>
-      <%= auto_complete_field_tag_jquery(:search, params[:search], {:placeholder => "Teclee lo que desea buscar"}) %>
+      <%= text_field_tag :search %>
       <button id='submit_search' style="font-size: 12px;">Search</button>
   <%end%>
 </div>
