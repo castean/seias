@@ -10,7 +10,11 @@
           Programa <%= radio_button("finder", "qty", "one", :checked => true)%>
           Todos los Programas<%= radio_button("finder", "qty", 'all' ) %>
           </br>
-          <%= select(:program_id, :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }) %>
+          <%= select(:program_id, :program_id, Program.order("name").group("programs.id, programs.name,
+          programs.description,programs.department_id,programs.responsable_id,programs.created_at,programs.updated_at,programs.direction_id,
+          programs.cut_day,programs.program_start_date
+          ").joins(:critical_success_factors => {:activity_types => :activities}).where("activities.user_id = :user_id
+          ", :user_id => current_user).collect { |p| ["Programa No. " + p.name + " - " + p.description, p.id] }) %>
         </div>
         <div class="field">
           <%= label :start_date, "Fecha Inicio de Actividad" %>
