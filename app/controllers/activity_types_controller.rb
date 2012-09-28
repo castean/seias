@@ -87,14 +87,14 @@ class ActivityTypesController < ApplicationController
     end
   end
 
-  def auto_complete_search
-    begin
-      @items = ActivityType.complete_for(params[:search])
-    rescue ScopedSearch::QueryNotSupported => e
-      @items = [{:error =>e.to_s}]
-    end
-    render :json => @items
-  end
+  #def auto_complete_search
+   # begin
+    #  @items = ActivityType.complete_for(params[:search])
+    #rescue ScopedSearch::QueryNotSupported => e
+     # @items = [{:error =>e.to_s}]
+    #end
+    #render :json => @items
+  #end
 
   def at_search
   @at_sea = ActivityType.search_for(params[:search], :order => params[:order]).all
