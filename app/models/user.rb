@@ -1,9 +1,10 @@
 #encoding:utf-8
 class User < ActiveRecord::Base
 
+
   acts_as_authentic do |config|
     config.crypto_provider = Authlogic::CryptoProviders::MD5
-    config.validate_password_field = false if [:ldap].include?(Seias::Application.config.authorization_method)
+    config.validate_password_field #= false if [:ldap].include?(Seias::Application.config.authorization_method)
     config.logged_in_timeout = 1.day
   end
 
@@ -17,9 +18,9 @@ class User < ActiveRecord::Base
   belongs_to :department
 
   attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :department_id, :roles, :avatar 
-    
+
   before_destroy :check_for_dependencias
-  
+
 
 
   def check_for_dependencias
@@ -30,6 +31,7 @@ class User < ActiveRecord::Base
   end
 
   ROLES = %w[admin moderator user planeacion]
+  PLANEACION = %w[user planeacion]
  
   serialize :roles
  

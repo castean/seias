@@ -32,6 +32,9 @@ class Ability
         can :manage, :all
       when "planeacion" then
          10.times { print "Hello planeacion" }
+        can :manage, Department
+        can :manage, Direction
+        can :manage, User
         can :manage, PriorityProgram
         can :manage, PriorityProgramGoal
         can :manage, PriorityProgramStrategy
