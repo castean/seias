@@ -59,7 +59,6 @@ Seias::Application.routes.draw do
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
   match '/towns/for_countyid/:county_id' => 'towns#for_countyid'
-  match '/departments/for_programid/:id' => 'departments#for_programid'
   resources :departments
 
   match '/activities/for_activitytypeid/:activity_type_id' => 'activities#for_activitytypeid'
