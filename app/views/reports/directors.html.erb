@@ -1,6 +1,8 @@
 <div xmlns="http://www.w3.org/1999/html">
+  <h3>Reportes</h3>
   Programas<%= radio_button_tag "field", 1, true,{:id => "button1", :class => "show_hide"} %>
-
+  Municipios<%= radio_button_tag "field", 2, false,{:id => "button2", :class => "show_hide"} %>
+  Actividades por localidad<%= radio_button_tag "field", 3, false,{:id => "button3", :class => "show_hide"} %>
   </br>
   </br>
   <div id="div-sh-1" class="toHide"  >
@@ -10,7 +12,7 @@
           Programa <%= radio_button("finder", "qty", "one", :checked => true)%>
           Todos los Programas<%= radio_button("finder", "qty", 'all' ) %>
           </br>
-          <%= search_prog() %>
+          <%= select(:program_id, :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }) %>
         </div>
         <div class="field">
           <%= label :start_date, "Fecha Inicio de Actividad" %>
@@ -43,10 +45,28 @@
         <div class="field">
           <%= label :start_date, "Año" %>
           <%= select_year(Date.today, :start_year => 2012, :end_year => Time.now.year) %>
+        </div>
+        <div class="field">
+          <%= label :start_date, "Trimestre" %>
+          <%= select_tag(:month_part,(options_for_select([['Enero-Marzo', 1], ['Abril-Junio', 2], ['Julio-Septiembre', 3], ['Octubre-Diciembre', 4]]))) %>
 
         </div>
-
         <%= submit_tag("Buscar") %>
     <% end %>
+  </div>
+  <div id="div-sh-3" class="toHide"  >
+    <%= form_tag  :action => "report_town_act", :method => "post" do %>
+        <div class="field">
+          <%= label :start_date, "Fecha Inicio de Actividad" %>
+          <%= datepicker :start_datec, :start_datec,  :dateFormat => "yy-mm-dd" %>
+        </div>
+        <div class="field">
+          <%= label :end_date, "Fecha Fin de Actividad" %>
+          <%= datepicker :end_datec, :end_datec, :dateFormat => "yy-mm-dd"  %>
+
+        </div>
+        <%= submit_tag("Buscar") %>
+    <% end %>
+
   </div>
 </div>

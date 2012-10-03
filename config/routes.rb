@@ -1,5 +1,6 @@
 Seias::Application.routes.draw do
 
+
   resources :religions
 
   resources :business_lines
@@ -7,8 +8,11 @@ Seias::Application.routes.draw do
   match '/institutions_types/for_institution_type_id/:id' => 'institutions_types#for_institution_type_id'
   resources :institutions_types
 
-
   resources :institutions
+
+  resources :sexes
+
+  resources :ethnic_groups
 
   resources :marital_statuses
 
@@ -65,7 +69,6 @@ Seias::Application.routes.draw do
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
   match '/towns/for_countyid/:county_id' => 'towns#for_countyid'
-  match '/departments/for_programid/:id' => 'departments#for_programid'
   resources :departments
 
   match '/activities/for_activitytypeid/:activity_type_id' => 'activities#for_activitytypeid'

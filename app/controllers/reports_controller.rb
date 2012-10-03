@@ -33,7 +33,7 @@ class ReportsController < ApplicationController
         format.html # index.html.erb
 
         if params[:finder][:program] == "program"
-          format.xls { send_data @program.to_xls(:columns => [:name, :description, :anombre, :ndesc, :totalv, :hombre, :mujer, :totalp], :headers => ['Programa', 'Descripcion del Programa', 'Actividad', 'Descripcion Actividad','Total Valor','Hombres','Mujeres','Total Personas']), content_type: 'application/vnd.ms-excel', filename: 'programas.xls' }
+          format.xls { send_data @program.to_xls(:columns => [:name, :description, :anombre, :ndesc, :totalv, :hombre, :mujer, :totalp], :headers => ['Programa', 'Descripcion del Programa', 'Actividad', 'Descripcion Actividad','Total Cantidades','Hombres','Mujeres','Total Personas']), content_type: 'application/vnd.ms-excel', filename: 'programas.xls' }
         elsif params[:finder][:program] == "pajs"
           format.xls { send_data @program.to_xls(:columns => [:pnombre, :pdescripcion, :anombre, :ndesc, :dnombre,:totalv], :headers => ['Programa', 'Descripcion del Programa', 'Actividad', 'Descripcion Actividad','Distrito Judicial','Total de Actividades']), content_type: 'application/vnd.ms-excel', filename: 'distritos.xls' }
         end
@@ -65,7 +65,7 @@ class ReportsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       if params[:finder][:program] == "program"
-        format.xls { send_data @program.to_xls(:columns => [:name, :description, :anombre, :ndesc, :totalv, :hombre, :mujer, :totalp], :headers => ['Programa', 'Descripcion del Programa', 'Actividad','Descripcion Actividad','Total Valor','Hombres','Mujeres','Total Personas']), content_type: 'application/vnd.ms-excel', filename: 'todos_programas.xls' }
+        format.xls { send_data @program.to_xls(:columns => [:name, :description, :anombre, :ndesc, :totalv, :hombre, :mujer, :totalp], :headers => ['Programa', 'Descripcion del Programa', 'Actividad','Descripcion Actividad','Total Cantidades','Hombres','Mujeres','Total Personas']), content_type: 'application/vnd.ms-excel', filename: 'todos_programas.xls' }
       elsif params[:finder][:program] == "pajs"
         format.xls { send_data @program.to_xls(:columns => [:pnombre, :pdescripcion, :anombre, :ndesc, :dnombre,:totalv], :headers => ['Programa', 'Descripcion del Programa', 'Actividad','Descripcion Actividad','Distrito Judicial','Total de Actividades']), content_type: 'application/vnd.ms-excel', filename: 'todos_distritos.xls' }
       end
