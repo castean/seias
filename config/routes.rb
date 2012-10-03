@@ -1,5 +1,9 @@
 Seias::Application.routes.draw do
 
+  resources :sexes
+
+  resources :ethnic_groups
+
   resources :marital_statuses
 
   resources :people

@@ -100,9 +100,49 @@ $(document).ready(function(){
             }
         });
 
+    // Ing. César Reyes // ciudades y localidades
 
 
-                 // Ing. César Reyes // Programas - Lineas de Accion
+    $("#birth_county_id").change(function(){
+        var id_value_string = $(this).val();
+        if (id_value_string == "") {
+            // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
+            $("#birth_town_id option").remove();
+            var row = "<option value=\"" + "" + "\">" + "" + "</option>";
+            $(row).appendTo("#birth_town_id");
+            //alert("Failed to submit : Vacio  c");
+        }
+        else {
+            // Send the request and update sub category dropdown
+            // window.location = "../get_maps_by_town/" + id_value_string
+            $.ajax({
+                dataType: "json",
+                cache: false,
+                url: application_root_path() + '/towns/for_countyid/' + id_value_string,
+                timeout: 20000,
+                error: function(XMLHttpRequest, errorTextStatus, error){
+                    alert("Failed to submit : "+ errorTextStatus+" ;"+error);
+                },
+                success: function(data){
+
+                    // Clear all options from sub category select
+                    $("#birth_town_id option").remove();
+                    //put in a empty default line
+                    var row = "<option value=\"" + "0" + "\">" + "-- Seleciona la Localidad --" + "</option>";
+                    $(row).appendTo("#birth_town_id");
+                    // Fill sub category select
+                    $.each(data, function(i, j){
+                        row = "<option value=\"" + j.id + "\">" + j.name + "</option>";
+                        $(row).appendTo("#birth_town_id");
+                    });
+                }
+            });
+
+        }
+    });
+
+
+    // Ing. César Reyes // Programas - Lineas de Accion
 
 
         $("#program_id").change(function(){
