@@ -1,5 +1,9 @@
 Seias::Application.routes.draw do
 
+  resources :sexes
+
+  resources :ethnic_groups
+
   resources :marital_statuses
 
   resources :people
@@ -55,7 +59,6 @@ Seias::Application.routes.draw do
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
   match '/towns/for_countyid/:county_id' => 'towns#for_countyid'
-  match '/departments/for_programid/:id' => 'departments#for_programid'
   resources :departments
 
   match '/activities/for_activitytypeid/:activity_type_id' => 'activities#for_activitytypeid'
@@ -78,7 +81,7 @@ Seias::Application.routes.draw do
   match '/activity_types/search' => 'activity_types#at_search'
   resources :activity_types do
     resource :unit_of_measurements
-    #get 'auto_complete_search'
+    get 'auto_complete_search'
   end
   
   #resources :activitygoals

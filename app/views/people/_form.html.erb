@@ -29,15 +29,15 @@
   </div>
   <div class="field">
     <%= f.label :marital_status_id, "Estado Civil" %>
-    <%= f.text_field :marital_status_id %>
+    <%= f.collection_select :marital_status_id,  MaritalStatus.order("name"), :id, :name, options ={:prompt => false} %>
   </div>
   <div class="field">
     <%= f.label :sex, "Sexo" %>
-    <%= f.text_field :sex %>
+    <%= f.collection_select :sex,  Sex.order("name"), :id, :name, options ={:prompt => false} %>
   </div>
   <div class="field">
     <%= f.label :ethnic_group_id, "Grupo Etnico" %>
-    <%= f.text_field :ethnic_group_id %>
+    <%= f.collection_select :ethnic_group_id,  EthnicGroup.order("name"), :id, :name, options ={:prompt => false} %>
   </div>
   <div class="field">
     <%= f.label :birthday, "Fecha de Nacimiento" %>
@@ -45,16 +45,16 @@
   </div>
   <div class="field">
     <%= f.label :county_id, "Municipio de Nacimiento" %>
-    <%= f.collection_select :county_id,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
+    <%= f.collection_select :county_id,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "birth_county_id" %>
   </div>
   <div class="field">
     <%= f.label :born_town_id, "Localidad de Nacimiento" %>
-    <%= f.collection_select :born_town_id,  Town.order("name").where(:county_id => @person.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "born_town_id" %>
+    <%= f.collection_select :born_town_id,  Town.order("name").where(:county_id => @person.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "birth_town_id" %>
   </div>
   Dirección
   <div class="field">
     <%= f.label :county_id_2, "Municipio" %>
-    <%= f.collection_select :county_id_2,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id_2" %>
+    <%= f.collection_select :county_id_2,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
   </div>
   <div class="field">
     <%= f.label :town_id, "Localidad" %>
@@ -96,10 +96,10 @@
     <%= f.label :curp, "CURP" %>
     <%= f.text_field :curp %>
   </div>
-  <div class="field">
-    <%= f.label :email, "Correo Electrónico" %>
-    <%= f.text_field :email %>
-  </div>
+    <div class="field">
+      <%= f.label :medical_service_id, "Servicio Médico" %>
+      <%= f.text_field :medical_service_id %>
+    </div>
   <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div3', this)" /> Datos del tutor  </br>
   <div id="div3" style="display:none">
       <div class="field">
@@ -112,11 +112,7 @@
       </div>
       <div class="field">
         <%= f.label :tutor_marital_status_id, "Estado Civil" %>
-        <%= f.text_field :tutor_marital_status_id %>
-      </div>
-      <div class="field">
-        <%= f.label :medical_service_id, "Servicio Médico" %>
-        <%= f.text_field :medical_service_id %>
+        <%= f.collection_select :tutor_marital_status_id,  MaritalStatus.order("name"), :id, :name, options ={:prompt => false} %>
       </div>
   </div>
   <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div1', this)" /> Sabe leer?  </br>
