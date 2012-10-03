@@ -5,7 +5,7 @@ module ProgramsHelper
     else
       @sql = "Select name,id from priority_program_action_lines where id not in (SELECT priority_program_action_lines.id FROM priority_program_action_lines INNER JOIN priority_program_action_lines_programs
               ON priority_program_action_lines.id = priority_program_action_lines_programs.priority_program_action_line_id
-              WHERE priority_program_action_lines_programs.program_id = " + @program.id.to_s + "ORDER BY name)"
+              WHERE priority_program_action_lines_programs.program_id = " + @program.id.to_s + ") ORDER BY name"
 
       @t = ActiveRecord::Base.connection.select_rows(@sql)
 

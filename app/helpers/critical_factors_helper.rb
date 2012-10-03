@@ -41,8 +41,5 @@ module CriticalFactorsHelper
 
       f.select("selectRight",ppal,{},{:multiple=>true, :size => 6, :id=>'selectRight'})
     end
-
-
-
   end
 end

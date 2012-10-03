@@ -1,5 +1,6 @@
 #encoding:utf-8
 class Activity < ActiveRecord::Base
+  belongs_to :county, :primary_key => "cve_mun"
   belongs_to :town
   belongs_to :group
   belongs_to :public_target
@@ -7,7 +8,7 @@ class Activity < ActiveRecord::Base
   belongs_to :user
   has_many :activity_types_critical_success_factors
 
-  belongs_to :county, :primary_key => "cve_mun"
+
 
   belongs_to :program
 

@@ -1,0 +1,23 @@
+<h1>Listing institutions_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @institutions_types.each do |institutions_type| %>
+  <tr>
+    <td><%= institutions_type.name %></td>
+    <td><%= link_to 'Show', institutions_type %></td>
+    <td><%= link_to 'Edit', edit_institutions_type_path(institutions_type) %></td>
+    <td><%= link_to 'Destroy', institutions_type, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Institutions type', new_institutions_type_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120924181740) do
+ActiveRecord::Schema.define(:version => 20121003201543) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -110,6 +110,13 @@ ActiveRecord::Schema.define(:version => 20120924181740) do
     t.string   "decstatus"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+  end
+
+  create_table "business_lines", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "institution_type_id"
   end
 
   create_table "catalog_tables", :force => true do |t|
@@ -216,12 +223,25 @@ ActiveRecord::Schema.define(:version => 20120924181740) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "direction_id"
+    t.integer  "user_id"
   end
 
   create_table "directions", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
+
+  create_table "ethnic_groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "father_institutions", :id => false, :force => true do |t|
+    t.integer "institution_id"
+    t.integer "father_institution_id"
   end
 
   create_table "goals", :force => true do |t|
@@ -243,6 +263,42 @@ ActiveRecord::Schema.define(:version => 20120924181740) do
     t.boolean  "vulnerable"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "institutions", :force => true do |t|
+    t.integer  "institution_type_id"
+    t.string   "name"
+    t.integer  "type_person"
+    t.string   "legal_name"
+    t.string   "legal_last_name"
+    t.string   "legal_second_last_name"
+    t.string   "rfc"
+    t.integer  "link_user_id"
+    t.integer  "town_id"
+    t.string   "address"
+    t.integer  "external_address_number"
+    t.integer  "internal_address_number"
+    t.string   "second_address"
+    t.integer  "zip_code"
+    t.datetime "date_operation_start"
+    t.datetime "date_operation_end"
+    t.integer  "religion_id"
+    t.string   "email"
+    t.integer  "business_line_id"
+    t.integer  "status_id"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.boolean  "gmaps"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.integer  "county_id"
+    t.string   "phone"
+  end
+
+  create_table "institutions_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "judicial_districts", :force => true do |t|
@@ -487,11 +543,23 @@ ActiveRecord::Schema.define(:version => 20120924181740) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "religions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "sexennial_state_plan_components", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "sexes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "states", :force => true do |t|
