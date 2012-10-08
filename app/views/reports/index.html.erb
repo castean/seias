@@ -24,8 +24,15 @@
         </div>
         <div class="field">
           <%= label :finder, "Busqueda por:" %>
-          Programa <%= radio_button("finder", "program", "program", :checked => true) %>
-          Distrito Judicial <%= radio_button("finder", "program", "pajs")  %>
+          Programa <%= radio_button("finder", "program", "program", {:id => "button4", :class => "show_hide_n",:checked => true} ) %>
+          Distrito Judicial <%= radio_button("finder", "program", "pajs",{:id => "button5", :class => "show_hide_n"})  %>
+          Regiones <%= radio_button("finder", "program", "reg", {:id => "button6", :class => "show_hide_s"})  %>
+        </div>
+        <div id="div-sh-s" class="toHide_s" class="field" style="border-width: 2px;  border-style: solid; border-color: gray; width:250px;" >
+          Region <%= radio_button("finder", "region", "one", :checked => true) %>
+          Todas las Regiones <%= radio_button("finder", "region", "all")  %>
+
+          <%= select(:region_id, :region_id, Region.order("name").all.collect{ |p| [p.name , p.id] }) %>
         </div>
         <%= submit_tag("Buscar") %>
     <% end %>
@@ -60,7 +67,7 @@
           <%= label :start_date, "Fecha Inicio de Actividad" %>
           <%= datepicker :start_datec, :start_datec,  :dateFormat => "yy-mm-dd" %>
         </div>
-        <div class="field">
+        <div >
           <%= label :end_date, "Fecha Fin de Actividad" %>
           <%= datepicker :end_datec, :end_datec, :dateFormat => "yy-mm-dd"  %>
 

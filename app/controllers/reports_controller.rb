@@ -26,7 +26,25 @@ class ReportsController < ApplicationController
                     activity_types.description, judicial_districts.id,judicial_districts.name'
         ).where("programs.id = :program_id and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date ",
                 {:program_id => params[:program_id][:program_id], :start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
+      elsif params[:finder][:program] == "reg"
 
+        if params[:finder][:region] == "one"
+          @program = Program.select('programs.*, activity_types.name as anombre, activity_types.description as ndesc,sum(cast(activities.value as int)) as totalv, sum(activities.qty_men) as hombre,
+                  sum(activities.qty_women) as mujer, sum(activities.qty_men) + sum(activities.qty_women) as totalp, regions.name as dnombre
+                  ').joins(:critical_success_factors => {:activity_types => {:activities => {:town => {:county => :regions}}} }).group('activities.activity_type_id,programs.id,programs.description,programs.name,programs.department_id,
+                  programs.responsable_id,programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,programs.program_start_date,activity_types.name,activity_types.description
+                  ,regions.name').where("
+                  programs.id = :program_id and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date and regions.id = :region_id
+                  ", {:program_id => params[:program_id][:program_id], :start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1, :region_id => params[:region_id][:region_id]})
+
+        elsif params[:finder][:region] == "all"
+          @program = Program.select('programs.name, programs.description, activity_types.name as anombre, activity_types.description as ndesc,regions.name dnombre,sum(cast(activities.value as int)) as totalv'
+          ).order("regions.name, activity_types.name").joins(:critical_success_factors => {:activity_types => {:activities => {:town => {:county => :regions}}}}).group('programs.name,
+                    programs.description,activities.activity_type_id,activity_types.name,
+                    activity_types.description, regions.id,regions.name'
+          ).where("programs.id = :program_id and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date ",
+                  {:program_id => params[:program_id][:program_id], :start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
+        end
       end
 
       respond_to do |format|
@@ -36,6 +54,12 @@ class ReportsController < ApplicationController
           format.xls { send_data @program.to_xls(:columns => [:name, :description, :anombre, :ndesc, :totalv, :hombre, :mujer, :totalp], :headers => ['Programa', 'Descripcion del Programa', 'Actividad', 'Descripcion Actividad','Total Cantidades','Hombres','Mujeres','Total Personas']), content_type: 'application/vnd.ms-excel', filename: 'programas.xls' }
         elsif params[:finder][:program] == "pajs"
           format.xls { send_data @program.to_xls(:columns => [:pnombre, :pdescripcion, :anombre, :ndesc, :dnombre,:totalv], :headers => ['Programa', 'Descripcion del Programa', 'Actividad', 'Descripcion Actividad','Distrito Judicial','Total de Actividades']), content_type: 'application/vnd.ms-excel', filename: 'distritos.xls' }
+        elsif params[:finder][:program] == "reg"
+          if params[:finder][:region] == "one"
+            format.xls { send_data @program.to_xls(:columns => [:dnombre,:name, :description, :anombre, :ndesc,  :totalv, :mujer, :hombre, :totalp], :headers => ['Region','Programa', 'Descripcion del Programa', 'Actividad','Descripcion Actividad','Cantidad de Actividades','Mujeres Beneficiadas','Hombres Beneficiados','Total de Beneficiarios']), content_type: 'application/vnd.ms-excel', filename: 'programa_region.xls' }
+          elsif params[:finder][:region] == "all"
+            format.xls { send_data @program.to_xls(:columns => [:name, :description, :anombre, :ndesc, :dnombre, :totalv], :headers => ['Programa', 'Descripcion del Programa', 'Actividad','Descripcion Actividad','Region','Total General']), content_type: 'application/vnd.ms-excel', filename: 'programa_todas_regiones.xls' }
+          end
         end
         format.json { render json: @program }
 
@@ -43,35 +67,57 @@ class ReportsController < ApplicationController
     end
   end
   def program_report_all
-
-    if params[:finder][:program] == "program"
-      @program = Program.select('programs.*, activity_types.name as anombre, activity_types.description as ndesc,sum(cast(activities.value as int)) as totalv, sum(activities.qty_men) as hombre,
+    @prog_type_rep = params[:finder][:program]
+    case @prog_type_rep
+      when 'program'; @program = Program.select('programs.*, activity_types.name as anombre, activity_types.description as ndesc,sum(cast(activities.value as int)) as totalv, sum(activities.qty_men) as hombre,
                 sum(activities.qty_women) as mujer, sum(activities.qty_men) + sum(activities.qty_women) as totalp
                 ').joins(:critical_success_factors => {:activity_types => :activities }).group('activities.activity_type_id,programs.id,programs.description,programs.name,programs.department_id,programs.responsable_id,
                 programs.created_at,programs.updated_at,programs.direction_id,programs.cut_day,programs.program_start_date,activity_types.name,activity_types.description'
       ).where("activities.activity_date_start > :start_date and activities.activity_date_end < :end_date
                 ", {:start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
 
-    elsif params[:finder][:program] == "pajs"
-      @program = Program.select('programs.name as pnombre, programs.description pdescripcion, activity_types.name as anombre, activity_types.description as ndesc,judicial_districts.name dnombre,sum(cast(activities.value as int)) as totalv'
+      when 'pajs'; @program = Program.select('programs.name as pnombre, programs.description pdescripcion, activity_types.name as anombre, activity_types.description as ndesc,judicial_districts.name dnombre,sum(cast(activities.value as int)) as totalv'
       ).order("judicial_districts.name, programs.name").joins(:critical_success_factors => {:activity_types => {:activities => {:town => {:county => :judicial_districts}}}}).group('programs.name,
                     programs.description,activities.activity_type_id,activity_types.name,
                     activity_types.description, judicial_districts.id,judicial_districts.name'
       ).where("activities.activity_date_start > :start_date and activities.activity_date_end < :end_date ",
               {:start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
+
+      when 'reg';
+        if params[:finder][:region] == "one"
+          @program = Program.select('programs.name, programs.description, activity_types.name as anombre, activity_types.description as ndesc,regions.name dnombre,sum(cast(activities.value as int)) as totalv,
+                                    sum(activities.qty_men) as hombre, sum(activities.qty_women) as mujer, sum(activities.qty_men) + sum(activities.qty_women) as totalp'
+          ).order("regions.name, activity_types.name").joins(:critical_success_factors => {:activity_types => {:activities => {:town => {:county => :regions}}}}).group('programs.name,
+                    programs.description,activities.activity_type_id,activity_types.name,
+                    activity_types.description, regions.id,regions.name'
+          ).where("activities.activity_date_start > :start_date and activities.activity_date_end < :end_date and regions.id = :region_id",
+                  {:start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1, :region_id => params[:region_id][:region_id]})
+        elsif params[:finder][:region] == "all"
+          @program = Program.select('programs.name, programs.description, activity_types.name as anombre, activity_types.description as ndesc,regions.name dnombre,sum(cast(activities.value as int)) as totalv'
+          ).order("regions.name, activity_types.name").joins(:critical_success_factors => {:activity_types => {:activities => {:town => {:county => :regions}}}}).group('programs.name,
+                    programs.description,activities.activity_type_id,activity_types.name,
+                    activity_types.description, regions.id,regions.name'
+          ).where("activities.activity_date_start > :start_date and activities.activity_date_end < :end_date ",
+                  {:start_date => (params[:start_date][:start_date]).to_date - 1, :end_date => (params[:end_date][:end_date]).to_date + 1})
+        end
+
     end
-
-
     respond_to do |format|
       format.html # index.html.erb
-      if params[:finder][:program] == "program"
-        format.xls { send_data @program.to_xls(:columns => [:name, :description, :anombre, :ndesc, :totalv, :hombre, :mujer, :totalp], :headers => ['Programa', 'Descripcion del Programa', 'Actividad','Descripcion Actividad','Total Cantidades','Hombres','Mujeres','Total Personas']), content_type: 'application/vnd.ms-excel', filename: 'todos_programas.xls' }
-      elsif params[:finder][:program] == "pajs"
-        format.xls { send_data @program.to_xls(:columns => [:pnombre, :pdescripcion, :anombre, :ndesc, :dnombre,:totalv], :headers => ['Programa', 'Descripcion del Programa', 'Actividad','Descripcion Actividad','Distrito Judicial','Total de Actividades']), content_type: 'application/vnd.ms-excel', filename: 'todos_distritos.xls' }
+      case @prog_type_rep
+        when 'program'; format.xls { send_data @program.to_xls(:columns => [:name, :description, :anombre, :ndesc, :totalv, :hombre, :mujer, :totalp], :headers => ['Programa', 'Descripcion del Programa', 'Actividad','Descripcion Actividad','Total Cantidades','Hombres','Mujeres','Total Personas']), content_type: 'application/vnd.ms-excel', filename: 'todos_programas.xls' }
+        when 'pajs'; format.xls { send_data @program.to_xls(:columns => [:pnombre, :pdescripcion, :anombre, :ndesc, :dnombre,:totalv], :headers => ['Programa', 'Descripcion del Programa', 'Actividad','Descripcion Actividad','Distrito Judicial','Total de Actividades']), content_type: 'application/vnd.ms-excel', filename: 'todos_distritos.xls' }
+        when 'reg';
+          if params[:finder][:region] == "one"
+            format.xls { send_data @program.to_xls(:columns => [:dnombre,:name, :description, :anombre, :ndesc, :totalv, :mujer, :hombre, :totalp], :headers => ['Region','Programa','Descripcion del Programa', 'Actividad','Descripcion Actividad','Cantidad de Actividades','Mujeres Beneficiadas','Hombres Beneficiados','Total de Beneficiarios']), content_type: 'application/vnd.ms-excel', filename: 'todos_programas_region.xls' }
+          elsif params[:finder][:region] == "all"
+            format.xls { send_data @program.to_xls(:columns => [:dnombre,:name, :description, :anombre, :ndesc, :totalv], :headers => ['Region','Programa','Descripcion del Programa', 'Actividad','Descripcion Actividad','Total General']), content_type: 'application/vnd.ms-excel', filename: 'todos_programas_todas_regiones.xls' }
+          end
       end
       format.json { render json: @program }
     end
   end
+
   def program_report_county
     @prog_type = params[:finder][:qty]
     @para = params[:month_part]
@@ -114,9 +160,9 @@ class ReportsController < ApplicationController
     if @date_ini == "" or @date_end == ""
       redirect_to reports_path, :notice => "Debes de llenar todos los campos"
     else
-      @geoloc = County.select("cast(towns.state_id as char) || towns.county_id || towns.cve_loc as georef, counties.name as tnombre,
-              sum(cast(activities.value as int)) as totalact").order("counties.name ").joins(:activities,:towns ).group("
-              (cast(towns.state_id as char) || towns.county_id || towns.cve_loc),counties.name").where("counties.state_id = 8
+      @geoloc = Town.select("cast(towns.state_id as char) || lpad(towns.county_id::text,3,'0') || lpad(towns.cve_loc::text, 4, '0') as georef, towns.name as tnombre,
+              sum(cast(activities.value as int)) as totalact").order("towns.name ").joins(:activities).group("
+              towns.name,cast(towns.state_id as char) || lpad(towns.county_id::text,3,'0') || lpad(towns.cve_loc::text, 4, '0')").where("towns.state_id = 8
               and towns.state_id = 8 and towns.name like '%*%' and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date",
               {:start_date => (params[:start_datec][:start_datec]).to_date - 1, :end_date => (params[:end_datec][:end_datec]).to_date + 1})
 
