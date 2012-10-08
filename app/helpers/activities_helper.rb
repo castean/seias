@@ -81,4 +81,5 @@ module ActivitiesHelper
     p.map{|description, id|}
     f.select :program_id, p, {:prompt => false}, :class=>"ddl_width"
   end
+
 end

@@ -29,4 +29,33 @@ module ProgramsHelper
       ", :user_id => current_user).collect { |p| ["Programa No. " + p.name + " - " + p.description, p.id] })
     end
   end
+
+  def fillrightleftselectionusers(f)
+    if @program.new_record?
+      f.select("sLusers",options_for_select(User.order("name").all.collect { |cat| [cat.name + " " + cat.last_name + " " + cat.second_last_name, cat.id] }, @program.name { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'sLusers', :class=>"span7"})
+    else
+      @sql = "Select name || ' ' || last_name || ' ' || second_last_name as fullname,id from users where id not in (SELECT users.id FROM users INNER JOIN programs_users
+              ON users.id = programs_users.user_id
+              WHERE programs_users.program_id = " + @program.id.to_s + ") ORDER BY name, last_name, second_last_name"
+
+      ppal = ActiveRecord::Base.connection.select_rows(@sql)
+      ppal.map{|fullname,id|}
+
+      f.select("sLusers",ppal,{},{:multiple=>true, :size => 6, :id=>'sLusers', :class=>"span7"})
+    end
+  end
+  def selectrightfillusers(f)
+    if @program.new_record?
+      f.select("sRusers",{},{},{:multiple=>true, :size => 6, :id=>'sRusers', :class =>"span7"})
+      #f.select("sLusers",options_for_select(PriorityProgramActionLine.order("name").all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'sLusers', :class=>"span7"})
+    else
+      @sql = "Select name || ' ' || last_name || ' ' || second_last_name as fullname, id from users where id in (SELECT programs_users.user_id FROM programs_users
+              WHERE programs_users.program_id = " + @program.id.to_s + ") ORDER BY name, last_name, second_last_name"
+
+      ppal = ActiveRecord::Base.connection.select_rows(@sql)
+      ppal.map{|fullname,id|}
+
+      f.select("sRusers",ppal,{},{:multiple=>true, :size => 6, :id=>'sRusers', :class =>"span7"})
+    end
+  end
 end

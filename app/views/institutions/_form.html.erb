@@ -41,7 +41,7 @@
           <%= f.label :rfc,"RFC" %>
         </td>
         <td>
-          <%= f.label :business_line_id, "Giro dela Institución" %>
+          <%= f.label :business_line_id, "Giro de la Institución" %>
         </td>
       </tr>
       <tr>
@@ -207,7 +207,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.select :religion_id, Religion.order("id").all.collect{ |c| [c.name.to_s, c.id]}, {:include_blank => "-- Selecciona una Religion --"} %>
+          <%= f.select :religion_id, Religion.order("substring(name,1,1)").all.collect{ |c| [c.name.to_s, c.id]}, {:include_blank => "-- Selecciona una Religion --"} %>
         </td>
         <td>
           <%= f.number_field :status_id %>

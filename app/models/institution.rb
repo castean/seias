@@ -14,9 +14,37 @@ class Institution < ActiveRecord::Base
                   :gmaps, :institution_type_id, :internal_address_number, :latitude, :legal_last_name, :legal_name,
                   :legal_second_last_name, :link_user_id, :longitude, :name, :phone, :religion_id, :rfc, :second_address, :status_id, :town_id,
                   :type_person, :zip_code,
-                  #Para seleccionar multiples lineas de accion antes de crear un Programa
+                  #Para seleccionar multiples Instituciones de apoyo antes de crear una Institución
                   :selectRight, :selectLeft
   attr_accessor :selectRight, :selectLeft
+
+  validates :name, :presence => true
+  validates :rfc, :presence => true
+  validates :address, :presence => true
+  validates :external_address_number, :presence => true
+  validates :second_address, :presence => true
+  validates :zip_code, :presence => true
+  validates :email, :presence => true
+  validates :legal_name, :presence => true
+  validates :legal_last_name, :presence => true
+  validates :link_user_id, :presence => true
+  validates :date_operation_start, :presence => true
+
+  validate :valida_town_id
+  def valida_town_id
+    t = self.town_id
+    if t == 0 or t.blank? or t.nil?
+      errors.add('Localidad: ', "Seleccione por favor una Localidad")
+    end
+  end
+
+  validate :valida_giro
+  def valida_giro
+    t = self.business_line_id
+    if t == 0 or t.blank? or t.nil?
+      errors.add('Giro de la Institución: ', "Seleccione por favor un giro")
+    end
+  end
 
   def selectRight=(options)
 
@@ -31,7 +59,7 @@ class Institution < ActiveRecord::Base
   end
 
   def gmaps4rails_address
-#describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
+     #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
     "#{self.address}, #{self.external_address_number}, #{self.town_id}"
   end
 end

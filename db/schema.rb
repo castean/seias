@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005190129) do
+ActiveRecord::Schema.define(:version => 20121008154756) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -534,6 +534,11 @@ ActiveRecord::Schema.define(:version => 20121005190129) do
     t.integer  "direction_id"
     t.integer  "cut_day"
     t.datetime "program_start_date"
+  end
+
+  create_table "programs_users", :id => false, :force => true do |t|
+    t.integer "program_id"
+    t.integer "user_id"
   end
 
   create_table "public_targets", :force => true do |t|
