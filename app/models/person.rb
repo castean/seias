@@ -3,6 +3,7 @@ class Person < ActiveRecord::Base
   belongs_to :town
   belongs_to :ethnic_group
   belongs_to :sex
+  belong_to :medical_service
 
   attr_accessible :name, :last_name, :second_last_name, :marital_status_id, :sex, :ethnic_group_id, :birthday, :born_town_id, :county_id, :county_id_2, :town_id, :address, :address_two,
                   :code_area, :phone, :cel_phone, :emergency_phone, :rfc, :curp, :email, :tutor, :tutor_relationship_id, :tutor_marital_status_id, :medical_service_id,
