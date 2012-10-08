@@ -11,12 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20121003201543) do
-=======
->>>>>>> ac4750c2b787cabb1af5825315f9a12066e07361
+ActiveRecord::Schema.define(:version => 20121008154756) do
 
-ActiveRecord::Schema.define(:version => 20121003201543) do
   create_table "activities", :force => true do |t|
     t.string   "value"
     t.text     "description"
@@ -121,11 +117,6 @@ ActiveRecord::Schema.define(:version => 20121003201543) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "institution_type_id"
-<<<<<<< HEAD
-=======
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
->>>>>>> ac4750c2b787cabb1af5825315f9a12066e07361
   end
 
   create_table "catalog_tables", :force => true do |t|
@@ -289,20 +280,12 @@ ActiveRecord::Schema.define(:version => 20121003201543) do
     t.integer  "internal_address_number"
     t.string   "second_address"
     t.integer  "zip_code"
-<<<<<<< HEAD
-=======
-    t.integer  "phone"
->>>>>>> ac4750c2b787cabb1af5825315f9a12066e07361
     t.datetime "date_operation_start"
     t.datetime "date_operation_end"
     t.integer  "religion_id"
     t.string   "email"
     t.integer  "business_line_id"
     t.integer  "status_id"
-<<<<<<< HEAD
-=======
-    t.integer  "father_institution_id"
->>>>>>> ac4750c2b787cabb1af5825315f9a12066e07361
     t.float    "longitude"
     t.float    "latitude"
     t.boolean  "gmaps"
@@ -326,6 +309,12 @@ ActiveRecord::Schema.define(:version => 20121003201543) do
   end
 
   create_table "marital_statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "medical_services", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -545,6 +534,11 @@ ActiveRecord::Schema.define(:version => 20121003201543) do
     t.integer  "direction_id"
     t.integer  "cut_day"
     t.datetime "program_start_date"
+  end
+
+  create_table "programs_users", :id => false, :force => true do |t|
+    t.integer "program_id"
+    t.integer "user_id"
   end
 
   create_table "public_targets", :force => true do |t|

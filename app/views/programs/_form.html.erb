@@ -66,7 +66,33 @@
       </td>
       </tr>
     </table>
+   </div>
 
+  <div class="field">
+      <table border="0">
+         <tr>
+         <td><h4>Usuarios que pueden aportar las actividades del programa</h4></td>
+         </tr>
+         <tr>
+         <td align="left">
+        <%= fillrightleftselectionusers(f) %>
+      </td>
+      </tr>
+        <tr>
+          <td>
+            <input name="btnRight" type="button" id="btnRight" value="v" onClick="javascript:moverlusers(1);">
+
+            <input name="btnLeft" type="button" id="btnLeft" value="^" onClick="javascript:moverltusers(2);">
+          </td>
+        </tr>
+         <tr>
+         <td><h4>Usuarios que ya aportan al programa</h4></td>
+         </tr>
+        <td align="left">
+          <%= selectrightfillusers(f)%>
+        </td>
+        </tr>
+      </table>
    </div>
 
   <div class="actions">
@@ -131,5 +157,57 @@ $(document).ready(function(){
     });
 });
 
+ function moverlusers(side){
+ var listLeft=document.getElementById('sLusers');
+     var listRight=document.getElementById('sRusers');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las líneas de acción a la derecha');
+             return false;
+         }
+        else{
+         var selected=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selected].value,listLeft.options[selected].text); listLeft.remove(selected);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+    }
+    else if(side==2){
+     if(listRight.options.length==0){
+         alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+        else{
+         var selected=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selected].value,listRight.options[selected].text);
+             listRight.remove(selected);
+              if(listRight.options.length>0){
+             listRight.options[0].selected=true;
+             } 
+        } 
+    } 
+} 
+ function move(listBoxTo,optionValue,optionDisplayText){
+ var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+ } 
+
+$(document).ready(function(){
+    $('#new_program').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#sRusers").children("option").map(function(){ return $(this).attr('value') })
+        $("#sRusers").val(options);
+    });
+
+    $('form[id*=edit_program]').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#sRusers").children("option").map(function(){ return $(this).attr('value') })
+        $("#sRusers").val(options);
+    });
+});
 </script>
 
