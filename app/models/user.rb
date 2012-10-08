@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :programs , :foreign_key => "responsable_id"
   belongs_to :department
   belongs_to :direction
+  has_and_belongs_to_many :programs
 
   attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :department_id, :roles, :avatar 
 

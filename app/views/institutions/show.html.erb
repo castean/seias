@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @institution.name %>
+</p>
+<p>
+  <b>Dirección:</b>
+  <%= @institution.address %>  <%= @institution.external_address_number %>
+</p>
+<p>
+  <b>Colonia:</b>
+  <%= @institution.second_address %>
+</p>
+
+<p>
+  <b>Código Postal:</b>
+  <%= @institution.zip_code %>
+</p>
+
+<p>
+  <b>Teléfono:</b>
+  <%= @institution.phone %>
+</p>
+</br>
+<%= gmaps("map_options" =>{:auto_zoom => false, :zoom => 7},"markers" => {"data" => @json}) %>
+
+<%= link_to 'Edit', edit_institution_path(@institution) %> |
+<%= link_to 'Back', institutions_path %>

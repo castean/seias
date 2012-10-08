@@ -1,0 +1,332 @@
+<%= form_for(@institution) do |f| %>
+  <% if @institution.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@institution.errors.count, "error") %> prohibited this institution from being saved:</h2>
+
+      <ul>
+      <% @institution.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  </br>
+  <div class="field">
+    <h4>Identificador Tipo</h4>
+    <%= f.collection_select :institution_type_id, InstitutionsType .order("name"),:id, :name, options= {:prompt => "-- Selecciona un Identificador --"}, :id => "institution_type_id" %>
+  </div>
+  </br>
+  <div>
+    <h4>
+      Datos Fiscales
+    </h4>
+    <table class="table table-striped">
+      <tr>
+        <td>
+          <%= f.label :name,"Nombre ó Denomiación Social" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.text_field :name, :class=>"span7" %>
+        </td>
+      </tr>
+    </table>
+    <table class="table table-striped">
+      <tr>
+        <td>
+          <%= f.label :type_person,"Tipo de Persona" %>
+        </td>
+        <td>
+          <%= f.label :rfc,"RFC" %>
+        </td>
+        <td>
+          <%= f.label :business_line_id, "Giro de la Institución" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.select :type_person, options_for_select([["Física", "1"], ["Moral ", "2"]]), :class=>"span2"%>
+        </td>
+        <td>
+          <%= f.text_field :rfc, :class=>"span2" %>
+        </td>
+        <td>
+          <%= f.collection_select :business_line_id,  BusinessLine.order("name").where(:institution_type_id => @institution.institution_type_id), :id, :name, options ={:prompt => "-- Seleccione el giro --"}, :id => "business_line_id", :class=>"span3" %>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="field">
+    <table class="table table-striped">
+      <thead>
+        <h4>
+            Dirección
+        </h4>
+      </thead>
+      <tr>
+        <td>
+          <%= f.label :address, "Calle" %>
+        </td>
+        <td>
+          <%= f.label :external_address_number, "Número Exterior" %>
+        </td>
+        <td>
+          <%= f.label :internal_address_number, "Número Interior" %>
+        </td>
+      </tr>
+        <td>
+          <%= f.text_field :address, :class=>"span3" %>
+        </td>
+        <td>
+          <%= f.number_field :external_address_number, :class=>"span2" %>
+        </td>
+        <td>
+          <%= f.number_field :internal_address_number, :class=>"span2" %>
+        </td>
+      <tr>
+        <td>
+          <%= f.label :second_address, "Colónia" %>
+        </td>
+        <td>
+          <%= f.label :zip_code, "Código Postal" %>
+        </td>
+        <td>
+          <%= f.label :phone, "Teléfono" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.text_field :second_address, :class=>"span3" %>
+        </td>
+        <td>
+          <%= f.number_field :zip_code, :class=>"span2" %>
+        </td>
+        <td>
+          <%= f.number_field :phone, :class=>"span2" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :county_id,"Municipio" %>
+        </td>
+        <td>
+          <%= f.label :town_id,"Localidad" %>
+        </td>
+        <td class="span2"></td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.collection_select :county_id,  County.order("name").where(:state_id => 8).order("substring(name,1,1)"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id", :class => "span3" %>
+        </td>
+        <td>
+          <%= f.collection_select :town_id,  Town.order("name").where(:county_id => @institution.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "town_id", :class => "span3" %>
+        </td>
+        <td class="span2"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <h4>Responsable Legal</h4>
+      </thead>
+      <tr>
+        <td>
+          <%= f.label :legal_name,"Nombre" %>
+        </td>
+        <td>
+          <%= f.label :legal_last_name, "Apellido Paterno" %>
+        </td>
+        <td>
+          <%= f.label :legal_second_last_name, "Apellido Materno" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.text_field :legal_name, :class=>"span3"%>
+        </td>
+        <td>
+          <%= f.text_field :legal_last_name, :class=>"span2" %>
+        </td>
+        <td>
+          <%= f.text_field :legal_second_last_name, :class=>"span2" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :email, "Correo Electrónico" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.text_field :email, :class=>"span3" %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="field">
+    <%= f.label :link_user_id, "Persona para enlace y responsable del altas en el sistema " %>
+    <%= f.select :link_user_id, User.order("name").all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Responsable --"} %>
+  </div>
+
+  <div>
+    <table class="table table-striped">
+      <thead>
+      <h4>
+        Información Adicional
+      </h4>
+      </thead>
+      <tr>
+        <td>
+          <%= f.label :date_operation_start, "Fecha de Inicio de Operaciones" %>
+        </td>
+        <td>
+          <%= f.label :date_operation_end, "Fecha de Fin de Operaciones" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.datepicker :date_operation_start, :dateFormat => "dd-mm-yy", :class=>"span3" %>
+        </td>
+        <td>
+          <%= f.datepicker :date_operation_end, :dateFormat => "dd-mm-yy", :class=>"span3" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :religion_id,"Religion" %>
+        </td>
+        <td>
+          <%= f.label :status_id, "Estatus" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.select :religion_id, Religion.order("substring(name,1,1)").all.collect{ |c| [c.name.to_s, c.id]}, {:include_blank => "-- Selecciona una Religion --"} %>
+        </td>
+        <td>
+          <%= f.number_field :status_id %>
+        </td>
+      </tr>
+    </table
+  </div>
+
+  <div class="field">
+      <table border="0">
+         <tr>
+         <td><h4>Instituciones disponibles para brindar apoyo</h4></td>
+         </tr>
+         <tr>
+         <td align="left">
+        <%= fillrightleftselectioninstitution(f) %>
+      </td>
+      </tr>
+        <tr>
+          <td>
+            <input name="btnRight" type="button" id="btnRight" value="v" onClick="javascript:moveToRightOrLeft(1);">
+
+            <input name="btnLeft" type="button" id="btnLeft" value="^" onClick="javascript:moveToRightOrLeft(2);">
+          </td>
+        </tr>
+         <tr>
+         <td><h4>Instituciones de las que recibe apoyo</h4></td>
+         </tr>
+        <td align="left">
+          <%= selectrightfillinstitutions(f)%>
+        </td>
+        </tr>
+      </table>
+   </div>
+
+  <div><h4>Datos de Georeferenciación</h4>
+    <table class="table table-striped">
+      <tr>
+        <td>
+          <%= f.label :latitude, "Latitud" %>
+        </td>
+        <td>
+          <%= f.label :longitude, "Longitud" %>
+        </td>
+        <td>
+          <%= f.label :gmaps %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.text_field :latitude %>
+        </td>
+        <td>
+          <%= f.text_field :longitude %>
+        </td>
+        <td>
+          <%= f.check_box :gmaps %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  </br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+     function moveToRightOrLeft(side){
+     var listLeft=document.getElementById('selectLeft');
+     var listRight=document.getElementById('selectRight');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las instituciones a la derecha');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas las instituciones a la izquierda');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+     function move(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+ } 
+
+    $(document).ready(function(){
+        $('#new_institution').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRight").val(options);
+        });
+
+        $('form[id*=edit_institution]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRight").val(options);
+        });
+    });
+
+</script>

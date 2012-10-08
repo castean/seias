@@ -1,5 +1,15 @@
 Seias::Application.routes.draw do
 
+
+  resources :religions
+
+  resources :business_lines
+
+  match '/institutions_types/for_institution_type_id/:id' => 'institutions_types#for_institution_type_id'
+  resources :institutions_types
+
+  resources :institutions
+
   resources :sexes
 
   resources :ethnic_groups

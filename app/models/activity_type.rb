@@ -13,10 +13,6 @@ class ActivityType < ActiveRecord::Base
   validates :name, :presence => true  
   validates :unit_of_measurement_id, :presence => true
 
-
-
-
-
   before_destroy :check_for_activities
 
   def check_for_activities

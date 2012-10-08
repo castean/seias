@@ -1,0 +1,57 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  institution_type_id: 1
+  name: MyString
+  type_person: 1
+  legal_name: MyString
+  legal_last_name: MyString
+  legal_second_last_name: MyString
+  rfc: MyString
+  link_user_id: 1
+  country_id: 1
+  town_id: 1
+  address: MyString
+  external_address_number: 1
+  internal_address_number: 1
+  second_address: MyString
+  zip_code: 1
+  phone: 1
+  date_operation_start: 2012-10-01 08:56:06
+  date_operation_end: 2012-10-01 08:56:06
+  religion_id: 1
+  email: MyString
+  busines_line_id: 1
+  status_id: 1
+  father_institution_id: 1
+  longitude: 1.5
+  latitude: 1.5
+  gmaps: false
+
+two:
+  institution_type_id: 1
+  name: MyString
+  type_person: 1
+  legal_name: MyString
+  legal_last_name: MyString
+  legal_second_last_name: MyString
+  rfc: MyString
+  link_user_id: 1
+  country_id: 1
+  town_id: 1
+  address: MyString
+  external_address_number: 1
+  internal_address_number: 1
+  second_address: MyString
+  zip_code: 1
+  phone: 1
+  date_operation_start: 2012-10-01 08:56:06
+  date_operation_end: 2012-10-01 08:56:06
+  religion_id: 1
+  email: MyString
+  busines_line_id: 1
+  status_id: 1
+  father_institution_id: 1
+  longitude: 1.5
+  latitude: 1.5
+  gmaps: false

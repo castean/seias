@@ -9,10 +9,11 @@ class Program < ActiveRecord::Base
  # has_many :activity_types, :through => :critical_success_factors
 
   has_and_belongs_to_many :priority_program_action_lines
+  has_and_belongs_to_many :users
   attr_accessible :department_id, :description, :name, :responsable_id, :direction_id,:priority_program_action_line_id , :cut_day, :program_start_date,
   #Para seleccionar multiples lineas de accion antes de crear un Programa
-  :selectRight, :selectLeft
-  attr_accessor :selectRight, :selectLeft
+  :selectRight, :selectLeft, :sLusers, :sRusers
+  attr_accessor :selectRight, :selectLeft, :sLusers, :sRusers
   
   validates :department_id, :presence => true
   validates :description, :presence => true
@@ -45,6 +46,18 @@ class Program < ActiveRecord::Base
       unless option.empty?
         line = PriorityProgramActionLine.find(option)
         self.priority_program_action_lines << line
+      end
+    end
+  end
+
+  def sRusers=(options)
+
+    self.users.clear
+
+    options.each do |option|
+      unless option.empty?
+        line = User.find(option)
+        self.users << line
       end
     end
   end
