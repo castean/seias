@@ -1,12 +1,19 @@
 <h3>Actividades</h3>
+
 <% if can? :create, Activity %>
 	</br>
 	<%= link_to 'Agregar Actividad', new_activity_path, :class => "btn primary" %>
 <% end %>
 </br>
+<div style="OVERFLOW: auto; WIDTH: 100%; HEIGHT: 100%">
 <table class="table table-striped">
   <thead>
       <tr>
+        <th>Identificador</th>
+        <th>Tipo de Actividad</th>
+        <th>Cantidad</th>
+        <th>Hombres</th>
+        <th>Mujeres</th>
         <th>Descripción</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
@@ -15,6 +22,11 @@
   </thead>
 <% @activities.each do |activity| %>
   <tr>
+    <td><%= activity.id %></td>
+    <td><%= activity.activity_type.name %></td>
+    <td><%= activity.value %></td>
+    <td><%= activity.qty_men %></td>
+    <td><%= activity.qty_women %></td>
     <td><%= activity.description %></td>
     <td><%= l activity.activity_date_start.to_date, :format => :short %></td>
     <td><%= l activity.activity_date_end.to_date, :format => :short %></td>
@@ -41,4 +53,4 @@
 <div class="pager">
 	<%= paginate @activities %>
 </div>
-
+</div>
