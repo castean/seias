@@ -66,7 +66,7 @@
 
     <table class="table table-striped">
       <tr>
-        <th>Mes: <%= params[:start_date][:start_date] %> </th>
+        <th>Mes: <%= (params[:start_date][:start_date]).to_date.strftime("%B") + " - " + (params[:end_date][:end_date]).to_date.strftime("%B") %> </th>
       </tr>
       <% if params[:finder][:region] == "one"  %>
           <tr>
