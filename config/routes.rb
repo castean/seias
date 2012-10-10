@@ -1,5 +1,6 @@
 Seias::Application.routes.draw do
 
+  resources :medical_services
 
   resources :religions
 

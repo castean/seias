@@ -8,3 +8,14 @@ $(document).ready ->
   $(".show_hide").click ->
     $(".toHide").hide()
     $("#div-sh-" + $(this).val()).show "slow"
+
+$(document).ready ->
+  $("#div-sh-s").hide()
+  $(".show_hide_s").click ->
+    $(".toHide_s").hide()
+    $("#div-sh-s").show "slow"
+
+$(document).ready ->
+  $("#div-sh-s").hide()
+  $(".show_hide_n").click ->
+    $(".toHide_s").hide()
