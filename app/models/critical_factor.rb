@@ -1,7 +1,7 @@
 #encoding:utf-8
 class CriticalFactor < ActiveRecord::Base
   belongs_to :criterion_of_measurement
-  belongs_to :catalog_tables
+  has_and_belongs_to_many :catalog_tables
   has_many :goals
   belongs_to :unit_of_measurement
   belongs_to :critical_success_factor_type
@@ -22,12 +22,12 @@ class CriticalFactor < ActiveRecord::Base
   validates :percentage, :presence => true
   validates :unit_of_measurement_id, :presence => true
 
-  after_save :save_selectright
+  #after_save :save_selectright
 
-  def save_selectright
-   @test2 = self.selectRight.map { |k,v| "#{k} is #{v}" }
+  #def save_selectright
+  # @test2 = self.selectRight.map { |k,v| "#{k} is #{v}" }
 
-   print(@test2)
+  # print(@test2)
 
   #  self.selectRight.each_pair do |t|
   #    a = CatalogTablesCriticalFactor.new
@@ -36,7 +36,7 @@ class CriticalFactor < ActiveRecord::Base
   #      a.table_select_field_id = t.proc_id
   #    a.save
   #  end
-  end
+  #end
 
   #validates :unit_of_measurement_description, :presence => true
 
@@ -54,13 +54,13 @@ class CriticalFactor < ActiveRecord::Base
   #  end
   #end
 
-  #def selectRight=(options)
-  #  self.catalog_tables.clear
-  #  options.each do |option|
-  #    unless option.empty?
-  #      line = CatalogTable.find(option)
-  #      self.catalog_tables << line
-  #    end
-  #  end
-  #end
+  def selectRight=(options)
+    self.catalog_tables.clear
+    options.each do |option|
+      unless option.empty?
+        line = CatalogTable.find(option)
+        self.catalog_tables << line
+      end
+    end
+  end
 end

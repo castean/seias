@@ -186,11 +186,30 @@ $(document).ready(function(){
 
 
 
-    // Ing. Antonio // Programas - Lineas de Accion
+    // Ing. Antonio // indicador - catalogo de tablas
 
 
     $("#catalog_table_id").change(function(){
         var id_value_string = $(this).val();
+        var ruta = "";
+        switch (id_value_string)
+        {
+            case "1":
+                ruta="peds/for_catalog_table_id/";
+                break;
+            case "2":
+                ruta="priority_program_action_lines/for_catalog_table_id/";
+                break;
+            case "3":
+                ruta="programs/for_catalog_table_id/";
+                break;
+            case "4":
+                ruta="critical_success_factors/for_catalog_table_id/";
+                break;
+            case "5":
+                ruta="activity_types/for_catalog_table_id/";
+                break;
+        }
         if (id_value_string == "") {
             // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
             $("#selectLeft option").remove();
@@ -204,7 +223,7 @@ $(document).ready(function(){
             $.ajax({
                 dataType: "json",
                 cache: false,
-                url:  application_root_path() + '/critical_factors/for_catalog_table_id/' + id_value_string,
+                url:  "../" + application_root_path() + ruta + id_value_string,
                 timeout: 20000,
                 error: function(XMLHttpRequest, errorTextStatus, error){
                     alert("Failed to submit : " + id_value_string + errorTextStatus+" ;"+error );
@@ -229,7 +248,7 @@ $(document).ready(function(){
 
 
 
-    // Ing. Antonio // Programas - Lineas de Accion
+    // Ing. Antonio // instituciones - giro de la empresa
 
 
     $("#institution_type_id").change(function(){

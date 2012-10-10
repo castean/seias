@@ -35,6 +35,7 @@ Seias::Application.routes.draw do
 
   resources :ped_sub_themes
 
+  match '/priority_program_action_lines/for_catalog_table_id/:table' => 'priority_program_action_lines#for_catalog_table_id'
   get '/priority_program_action_lines/report' => "priority_program_action_lines#report", :as => :report
   resources :priority_program_action_lines
 
@@ -50,6 +51,7 @@ Seias::Application.routes.draw do
 
   resources :ped_goals
 
+  match '/peds/for_catalog_table_id/:table' => 'peds#for_catalog_table_id'
   resources :peds
 
   match "/maps/index" => "maps#index"
@@ -88,6 +90,7 @@ Seias::Application.routes.draw do
   post '/states/import' => "states#states_import", :as => :importarestados
   resources :states
 
+  match '/activity_types/for_catalog_table_id/:table' => 'activity_types#for_catalog_table_id'
   match '/activity_types/search' => 'activity_types#at_search'
   resources :activity_types do
     resource :unit_of_measurements
@@ -97,11 +100,12 @@ Seias::Application.routes.draw do
   #resources :activitygoals
 
   resources :public_targets
+
   match '/programs/report' => 'programs#program_search'
   match '/programs/program_report' => 'programs#program_report'
   match '/programs/program_report_all' => 'programs#program_report_all'
   match '/programs/program_report_county' => 'programs#program_report_county'
-
+  match '/programs/for_catalog_table_id/:table' => 'programs#for_catalog_table_id'
   resources :programs
 
   match '/reports/report_town_act' => 'reports#report_town_act'
@@ -110,6 +114,7 @@ Seias::Application.routes.draw do
   match '/reports/program_report_county' => 'reports#program_report_county'
   resources :reports
 
+  match '/critical_success_factors/for_catalog_table_id/:table' => 'critical_success_factors#for_catalog_table_id'
   match '/critical_success_factors/for_program_id/:id' => 'critical_success_factors#for_program_id'
   resources :critical_success_factors
 
