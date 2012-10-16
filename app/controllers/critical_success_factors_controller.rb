@@ -97,4 +97,18 @@ class CriticalSuccessFactorsController < ApplicationController
       format.json  { render :json => @t}
     end
   end
+
+  def for_catalog_table_id
+    c = CatalogTable.find(params[:table])
+
+    @sql = "SELECT " + c.table + ".description, " + c.table + ".id as proc_id FROM " +  c.table
+    ppal = ActiveRecord::Base.connection.select_rows(@sql)
+    ppal.map{|proc_id,description|}
+
+    #@t = ActiveRecord::Base.connection.select_rows(@sql)
+
+    respond_to do |format|
+      format.json  { render :json => ppal}
+    end
+  end
 end
