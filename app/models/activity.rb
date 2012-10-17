@@ -51,7 +51,7 @@ class Activity < ActiveRecord::Base
 
   def validar_activity_type_id
     t = self.activity_type_id
-    if t == 0  or t.nil? or t == " "
+    if t == 0  or t.nil? or t == " "  or t.blank?
       errors.add('Tipo de Actividad: ', "Seleccione por favor un tipo de actividad")
     end
   end
