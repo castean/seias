@@ -1,0 +1,23 @@
+<h1>Listing funcional_supports</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @funcional_supports.each do |funcional_support| %>
+  <tr>
+    <td><%= funcional_support.name %></td>
+    <td><%= link_to 'Show', funcional_support %></td>
+    <td><%= link_to 'Edit', edit_funcional_support_path(funcional_support) %></td>
+    <td><%= link_to 'Destroy', funcional_support, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Funcional support', new_funcional_support_path %>

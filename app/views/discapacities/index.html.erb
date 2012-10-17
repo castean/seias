@@ -1,0 +1,23 @@
+<h1>Listing discapacities</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @discapacities.each do |discapacity| %>
+  <tr>
+    <td><%= discapacity.name %></td>
+    <td><%= link_to 'Show', discapacity %></td>
+    <td><%= link_to 'Edit', edit_discapacity_path(discapacity) %></td>
+    <td><%= link_to 'Destroy', discapacity, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Discapacity', new_discapacity_path %>

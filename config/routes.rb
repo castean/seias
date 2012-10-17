@@ -1,5 +1,17 @@
 Seias::Application.routes.draw do
 
+  resources :funcional_supports
+
+  resources :discapacities
+
+  resources :discapacity_origins
+
+  resources :school_types
+
+  resources :grades
+
+  resources :relationships
+
   resources :medical_services
 
   resources :religions
