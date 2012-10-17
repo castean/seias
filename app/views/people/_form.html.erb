@@ -2,7 +2,6 @@
   <% if @person.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
-
       <ul>
       <% @person.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -98,7 +97,7 @@
   </div>
     <div class="field">
       <%= f.label :medical_service_id, "Servicio Médico" %>
-      <%= f.text_field :medical_service_id %>
+      <%= f.collection_select :medical_service_id,  MedicalService.order("name"), :id, :name, options ={:prompt => false} %>
     </div>
   <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div3', this)" /> Datos del tutor  </br>
   <div id="div3" style="display:none">
@@ -108,7 +107,7 @@
       </div>
       <div class="field">
         <%= f.label :tutor_relationship_id, "Parentesco" %>
-        <%= f.text_field :tutor_relationship_id %>
+        <%= f.collection_select :tutor_relationship_id,  Relationship.order("name"), :id, :name, options ={:prompt => false} %>
       </div>
       <div class="field">
         <%= f.label :tutor_marital_status_id, "Estado Civil" %>
@@ -119,19 +118,19 @@
   <div id="div1" style="display:none">
       <div class="field">
         <%= f.label :student, "Estudia?" %>
-        <%= f.text_field :student %>
+        <%= f.check_box :student %>
       </div>
       <div class="field">
         <%= f.label :reader, "Sabe Leer?" %>
-        <%= f.text_field :reader %>
+        <%= f.check_box :reader %>
       </div>
       <div class="field">
-        <%= f.label :schooling, "Escolaridad" %>
-        <%= f.text_field :schooling %>
+        <%= f.label :schooling, "Maximo Grado Escolar" %>
+        <%= f.collection_select :schooling,  Grade.order("name"), :id, :name, options ={:prompt => false} %>
       </div>
       <div class="field">
-        <%= f.label :school_type_id, "Donde Estudio?" %>
-        <%= f.text_field :school_type_id %>
+        <%= f.label :school_type_id, "Tipo de Escuela?" %>
+        <%= f.collection_select :school_type_id,  SchoolType.order("name"), :id, :name, options ={:prompt => false} %>
       </div>
       <div class="field">
       </div>
@@ -144,7 +143,7 @@
       </div>
       <div class="field">
         <%= f.label :self_employment, "Es Autoempleo?" %>
-        <%= f.text_field :self_employment %>
+        <%= f.check_box :self_employment %>
       </div>
       <div class="field">
         <%= f.label :occupation, "Tiene algún Oficio" %>
@@ -152,26 +151,52 @@
       </div>
       <div class="field">
         <%= f.label :job_seeker, "Desea pertenecer a la bolsa de trabajo?" %>
-        <%= f.text_field :job_seeker %>
+        <%= f.check_box :job_seeker %>
       </div>
 
     <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div2', this)" /> Cuenta con alguna discapacidad?  </br>
     <div id="div2" style="display:none">
       <div class="field">
         <%= f.label :discapacity_status, "Cuenta con algúna Discapacidad" %>
-        <%= f.text_field :discapacity_status %>
+        <%= f.check_box :discapacity_status %>
       </div>
       <div class="field">
         <%= f.label :diagnosis, "Cuenta con Diagnóstico" %>
-        <%= f.text_field :diagnosis %>
+        <%= f.check_box :diagnosis %>
       </div>
+      <div>
+        <table border="0">
+           <tr>
+           <td><h4>Seleccione el Tipo de Discapacidad</h4></td>
+           </tr>
+           <tr>
+           <td align="left">
+          <%= fillrightleftselection(f)%>
+        </td>
+        </tr>
+          <tr>
+            <td>
+              <input name="btnRight" type="button" id="btnRight" value="v" onClick="javascript:moveToRightOrLeft(1);">
+
+              <input name="btnLeft" type="button" id="btnLeft" value="^" onClick="javascript:moveToRightOrLeft(2);">
+            </td>
+          </tr>
+           <tr>
+           <td><h4>Líneas de Acción Relacionadas al Pr</h4></td>
+           </tr>
+          <td align="left">
+            <%= f.select("selectRight",options_for_select(@program.priority_program_action_lines.order("name").all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRight', :class=>"span7"}) %>
+          </td>
+          </tr>
+        </table>
+         </div>
       <div class="field">
         <%= f.label :diagnosis_description, "Diagnóstico" %>
         <%= f.text_area :diagnosis_description %>
       </div>
       <div class="field">
         <%= f.label :discapacity_origin_id, "Origen de la discapacidad" %>
-        <%= f.text_field :discapacity_origin_id %>
+        <%= f.collection_select :discapacity_origin_id,  DiscapacityOrigin.order("name"), :id, :name, options ={:prompt => false} %>
       </div>
       <div class="field">
         <%= f.label :discapacity_origin_year, "Indique el año de origen" %>

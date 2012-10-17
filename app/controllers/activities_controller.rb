@@ -8,7 +8,7 @@ class ActivitiesController < ApplicationController
     #id = current_user && current_user.record.id
     #@activities = Activity.where("user_id = #{ id }")
     
-    @activities = Activity.where(:user_id => current_user).order("activity_date_start DESC").page(params[:page]).per(25)
+    @activities = Activity.where(:user_id => current_user).order("id DESC").page(params[:page]).per(25)
     #@activities = Activity.order("description").page(params[:page]).per(25)
     
     respond_to do |format|
