@@ -1,5 +1,13 @@
 Seias::Application.routes.draw do
 
+  resources :age_ranges
+
+  resources :school_ages
+
+  resources :age_populations
+
+  resources :guardianships
+
   resources :funcional_supports
 
   resources :discapacities
@@ -21,7 +29,9 @@ Seias::Application.routes.draw do
   match '/institutions_types/for_institution_type_id/:id' => 'institutions_types#for_institution_type_id'
   resources :institutions_types
 
-  resources :institutions
+  resources :institutions do
+    resources :one_reg_institutions
+  end
 
   resources :sexes
 

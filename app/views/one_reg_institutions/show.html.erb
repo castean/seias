@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Institution:</b>
+  <%= @one_reg_institution.institution_id %>
+</p>
+
+<p>
+  <b>According social purpose:</b>
+  <%= @one_reg_institution.according_social_purpose %>
+</p>
+
+<p>
+  <b>People sex:</b>
+  <%= @one_reg_institution.people_sex %>
+</p>
+
+<p>
+  <b>Min age:</b>
+  <%= @one_reg_institution.min_age %>
+</p>
+
+<p>
+  <b>Max age:</b>
+  <%= @one_reg_institution.max_age %>
+</p>
+
+<p>
+  <b>Capacity:</b>
+  <%= @one_reg_institution.capacity %>
+</p>
+
+<p>
+  <b>Public target:</b>
+  <%= @one_reg_institution.public_target_id %>
+</p>
+
+<p>
+  <b>Operation status:</b>
+  <%= @one_reg_institution.operation_status %>
+</p>
+
+
+<%= link_to 'Edit', edit_one_reg_institution_path(@one_reg_institution) %> |
+<%= link_to 'Back', one_reg_institutions_path %>

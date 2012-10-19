@@ -1,0 +1,33 @@
+<h1>Listing age_populations</h1>
+
+<table>
+  <tr>
+    <th>Institution</th>
+    <th>Guardianship</th>
+    <th>Sex</th>
+    <th>Age range</th>
+    <th>Total qty registered</th>
+    <th>Real qty registered</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @age_populations.each do |age_population| %>
+  <tr>
+    <td><%= age_population.institution_id %></td>
+    <td><%= age_population.guardianship_id %></td>
+    <td><%= age_population.sex_id %></td>
+    <td><%= age_population.age_range_id %></td>
+    <td><%= age_population.total_qty_registered %></td>
+    <td><%= age_population.real_qty_registered %></td>
+    <td><%= link_to 'Show', age_population %></td>
+    <td><%= link_to 'Edit', edit_age_population_path(age_population) %></td>
+    <td><%= link_to 'Destroy', age_population, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Age population', new_age_population_path %>
