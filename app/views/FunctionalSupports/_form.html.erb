@@ -1,10 +1,10 @@
-<%= form_for(@funcional_support) do |f| %>
-  <% if @funcional_support.errors.any? %>
+<%= form_for(@functionalsupport) do |f| %>
+  <% if @functionalsupport.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@funcional_support.errors.count, "error") %> prohibited this funcional_support from being saved:</h2>
+      <h2><%= pluralize(@functionalsupport.errors.count, "error") %> prohibited this funcional_support from being saved:</h2>
 
       <ul>
-      <% @funcional_support.errors.full_messages.each do |msg| %>
+      <% @functionalsupport.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

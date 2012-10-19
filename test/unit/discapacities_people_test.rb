@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FuncionalSupportTest < ActiveSupport::TestCase
+class DiscapacitiesPeopleTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,6 +1,8 @@
 Seias::Application.routes.draw do
 
-  resources :funcional_supports
+  resources :documentations
+
+  resources :functional_supports
 
   resources :discapacities
 

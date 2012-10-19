@@ -4,7 +4,8 @@ class Town < ActiveRecord::Base
   #belongs_to :county
   belongs_to :county, :primary_key => "cve_mun"
   has_many :places
-  has_many :persons
+  #has_many :people, :primary_key => "born_town_id"
+  has_many :people, :primary_key => "town_id"
   has_many :activities
 
 
