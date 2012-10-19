@@ -5,6 +5,8 @@ class Institution < ActiveRecord::Base
   belongs_to :town
   belongs_to :user
   belongs_to :religion
+  has_many :one_reg_institutions
+  has_and_belongs_to_many :discapacities
   has_and_belongs_to_many(:institutions,
                           :join_table => "father_institutions",
                           :foreign_key => "institution_id",

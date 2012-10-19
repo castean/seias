@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Institution:</b>
+  <%= @age_population.institution_id %>
+</p>
+
+<p>
+  <b>Guardianship:</b>
+  <%= @age_population.guardianship_id %>
+</p>
+
+<p>
+  <b>Sex:</b>
+  <%= @age_population.sex_id %>
+</p>
+
+<p>
+  <b>Age range:</b>
+  <%= @age_population.age_range_id %>
+</p>
+
+<p>
+  <b>Total qty registered:</b>
+  <%= @age_population.total_qty_registered %>
+</p>
+
+<p>
+  <b>Real qty registered:</b>
+  <%= @age_population.real_qty_registered %>
+</p>
+
+
+<%= link_to 'Edit', edit_age_population_path(@age_population) %> |
+<%= link_to 'Back', age_populations_path %>

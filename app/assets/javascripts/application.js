@@ -290,7 +290,53 @@ $(document).ready(function(){
 
     });
 
-//
+    //
 
 
+  function showMe (it, box) {
+    var vis = (box.checked) ? "block" : "none";
+    document.getElementById(it).style.display = vis;
+    }
+
+
+   // Mover de Izquierda a Derecha  creado por Ing. Antonio Castellanos
+
+ function moveToRightOrLeft(side){
+ var listLeft=document.getElementById('selectLeft');
+     var listRight=document.getElementById('selectRight');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las líneas de acción a la derecha');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+    }
+    else if(side==2){
+     if(listRight.options.length==0){
+         alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+        else{
+         var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+             listRight.options[0].selected=true;
+             } 
+        } 
+    } 
+} 
+ function move(listBoxTo,optionValue,optionDisplayText){
+ var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+ } 
 

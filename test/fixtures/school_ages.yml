@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  institution_id: 1
+  grade_id: 1
+  guardianship_id: 1
+  sex_id: 1
+  total_qty_registered: 1
+  real_qty_registered: 1
+
+two:
+  institution_id: 1
+  grade_id: 1
+  guardianship_id: 1
+  sex_id: 1
+  total_qty_registered: 1
+  real_qty_registered: 1
