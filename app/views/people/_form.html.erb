@@ -32,7 +32,7 @@
   </div>
   <div class="field">
     <%= f.label :sex, "Sexo" %>
-    <%= f.collection_select :sex,  Sex.order("name"), :id, :name, options ={:prompt => false} %>
+    <%= f.collection_select :sex,  Sex.order("id limit 2"), :id, :name, options ={:prompt => false} %>
   </div>
   <div class="field">
     <%= f.label :ethnic_group_id, "Grupo Etnico" %>
@@ -43,22 +43,36 @@
     <%= f.datepicker :birthday, :dateFormat => "dd-mm-yy" %>
   </div>
   <div class="field">
-    <%= f.label :county_id, "Municipio de Nacimiento" %>
-    <%= f.collection_select :county_id,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "birth_county_id" %>
+    <%= f.label :born_county_id, "Municipio de Nacimiento" %>
+    <%= f.collection_select :born_county_id,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "birth_county_id" %>
   </div>
-  <div class="field">
-    <%= f.label :born_town_id, "Localidad de Nacimiento" %>
-    <%= f.collection_select :born_town_id,  Town.order("name").where(:county_id => @person.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "birth_town_id" %>
-  </div>
+   <% if @person.new_record? %>
+        <div class="field">
+          <%= f.label :born_town_id, "Localidad de Nacimiento" %>
+          <%= f.collection_select :born_town_id,  Town.order("name").where(:county_id => @person.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "birth_town_id" %>
+        </div>
+   <% else %>
+        <div class="field">
+          <%= f.label :born_town_id, "Localidad de Nacimiento" %>
+          <%= f.collection_select :born_town_id,  Town.order("name").where(:county_id => Town.find(@person.born_town_id).county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "birth_town_id" %>
+        </div>
+   <% end %>
   Dirección
   <div class="field">
-    <%= f.label :county_id_2, "Municipio" %>
-    <%= f.collection_select :county_id_2,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
+    <%= f.label :county_id, "Municipio" %>
+    <%= f.collection_select :county_id,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
   </div>
-  <div class="field">
-    <%= f.label :town_id, "Localidad" %>
-    <%= f.collection_select :town_id,  Town.order("name").where(:county_id => @person.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "town_id" %>
-  </div>
+  <% if @person.new_record? %>
+      <div class="field">
+        <%= f.label :town_id, "Localidad" %>
+        <%= f.collection_select :town_id,  Town.order("name").where(:county_id => @person.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "town_id" %>
+      </div>
+  <% else %>
+        <div class="field">
+          <%= f.label :town_id, "Localidad" %>
+          <%= f.collection_select :town_id,  Town.order("name").where(:county_id => @person.town.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "town_id" %>
+        </div>
+  <% end %>
   <div class="field">
     <%= f.label :address, "Dirección" %>
     <%= f.text_field :address %>
@@ -99,10 +113,10 @@
       <%= f.label :medical_service_id, "Servicio Médico" %>
       <%= f.collection_select :medical_service_id,  MedicalService.order("name"), :id, :name, options ={:prompt => false} %>
     </div>
-  <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div3', this)" /> Datos del tutor  </br>
+  <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div3', this)" /> Informacion del Tutor  </br>
   <div id="div3" style="display:none">
       <div class="field">
-        <%= f.label :tutor, "Tutor" %>
+        <%= f.label :tutor, "Nombre Completo del Tutor" %>
         <%= f.text_field :tutor %>
       </div>
       <div class="field">
@@ -114,12 +128,8 @@
         <%= f.collection_select :tutor_marital_status_id,  MaritalStatus.order("name"), :id, :name, options ={:prompt => false} %>
       </div>
   </div>
-  <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div1', this)" /> Sabe leer?  </br>
+  <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div1', this)" /> Informacion Academica </br>
   <div id="div1" style="display:none">
-      <div class="field">
-        <%= f.label :student, "Estudia?" %>
-        <%= f.check_box :student %>
-      </div>
       <div class="field">
         <%= f.label :reader, "Sabe Leer?" %>
         <%= f.check_box :reader %>
@@ -129,11 +139,17 @@
         <%= f.collection_select :schooling,  Grade.order("name"), :id, :name, options ={:prompt => false} %>
       </div>
       <div class="field">
+        <%= f.label :student, "Estudia?" %>
+        <%= f.check_box :student %>
+      </div>
+      <div class="field">
         <%= f.label :school_type_id, "Tipo de Escuela?" %>
         <%= f.collection_select :school_type_id,  SchoolType.order("name"), :id, :name, options ={:prompt => false} %>
       </div>
+  </div>
+    <input type="checkbox" name="modtype"  value="value1" onclick="showMe('divInfLab', this)" /> Informacion Laboral </br>
+    <div id="divInfLab" style="display:none">
       <div class="field">
-      </div>
         <%= f.label :worker, "Trabaja?" %>
         <%= f.check_box :worker %>
       </div>
@@ -153,46 +169,47 @@
         <%= f.label :job_seeker, "Desea pertenecer a la bolsa de trabajo?" %>
         <%= f.check_box :job_seeker %>
       </div>
+    </div>
 
-    <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div2', this)" /> Cuenta con alguna discapacidad?  </br>
+    <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div2', this)" /> Informacion de Discapacidades  </br>
     <div id="div2" style="display:none">
       <div class="field">
         <%= f.label :discapacity_status, "Cuenta con algúna Discapacidad" %>
         <%= f.check_box :discapacity_status %>
       </div>
-      <div class="field">
-        <%= f.label :diagnosis, "Cuenta con Diagnóstico" %>
-        <%= f.check_box :diagnosis %>
-      </div>
       <div>
         <table border="0">
            <tr>
-           <td><h4>Seleccione el Tipo de Discapacidad</h4></td>
+           <td><h4>Discapacidades Disponibles</h4></td>
            </tr>
            <tr>
            <td align="left">
-          <%= fillrightleftselection(f)%>
+          <%= fill_discapacity_left_select(f)%>
         </td>
         </tr>
           <tr>
             <td>
-              <input name="btnRight" type="button" id="btnRight" value="v" onClick="javascript:moveToRightOrLeft(1);">
+              <input name="btnRightD" type="button" id="btnRightD" value="v" onClick="javascript:moveToRightOrLeft(1);">
 
-              <input name="btnLeft" type="button" id="btnLeft" value="^" onClick="javascript:moveToRightOrLeft(2);">
+              <input name="btnLeftD" type="button" id="btnLeftD" value="^" onClick="javascript:moveToRightOrLeft(2);">
             </td>
           </tr>
            <tr>
-           <td><h4>Líneas de Acción Relacionadas al Pr</h4></td>
+           <td><h4>Discapacidad Asignada</h4></td>
            </tr>
           <td align="left">
-            <%= f.select("selectRight",options_for_select(@program.priority_program_action_lines.order("name").all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRight', :class=>"span7"}) %>
+            <%= fill_discapacity_right_select(f)%>
           </td>
           </tr>
         </table>
          </div>
       <div class="field">
+        <%= f.label :diagnosis, "Cuenta con Diagnóstico" %>
+        <%= f.check_box :diagnosis %>
+      </div>
+      <div class="field">
         <%= f.label :diagnosis_description, "Diagnóstico" %>
-        <%= f.text_area :diagnosis_description %>
+        <%= f.text_area :diagnosis_description, :class=>"text_area_height_width" %>
       </div>
       <div class="field">
         <%= f.label :discapacity_origin_id, "Origen de la discapacidad" %>
@@ -207,10 +224,62 @@
         <%= f.text_field :observations %>
       </div>
       <div class="field">
-        <%= f.label :funcional_support, "Utiliza apoyos funcionales?" %>
-        <%= f.text_field :funcional_support %>
+        <%= f.label :use_functional_support, "Utiliza apoyos funcionales?" %>
+        <%= f.check_box :use_functional_support %>
       </div>
+      <div>
+        <table border="0">
+           <tr>
+           <td><h4>Aparatos Funcionales Disponibles</h4></td>
+           </tr>
+           <tr>
+           <td align="left">
+          <%= fill_functional_support_left_select(f)%>
+        </td>
+        </tr>
+          <tr>
+            <td>
+              <input name="btnRightFS" type="button" id="btnRightFS" value="v" onClick="javascript:moveToRightOrLeftFS(1);">
+
+              <input name="btnLeftFS" type="button" id="btnLeftFS" value="^" onClick="javascript:moveToRightOrLeftFS(2);">
+            </td>
+          </tr>
+           <tr>
+           <td><h4>Aparatos Funcionales Asignados</h4></td>
+           </tr>
+          <td align="left">
+            <%= fill_functional_support_right_select(f)%>
+          </td>
+          </tr>
+        </table>
+         </div>
   </div>
+    <div>
+      <table border="0">
+         <tr>
+         <td><h4>Documentacion Disponible</h4></td>
+         </tr>
+         <tr>
+         <td align="left">
+        <%= fill_documentation_left_select(f)%>
+      </td>
+      </tr>
+        <tr>
+          <td>
+            <input name="btnRightDo" type="button" id="btnRightDo" value="v" onClick="javascript:moveToRightOrLeftDo(1);">
+
+            <input name="btnLeftDo" type="button" id="btnLeftDo" value="^" onClick="javascript:moveToRightOrLeftDo(2);">
+          </td>
+        </tr>
+         <tr>
+         <td><h4>Documentacion Presentada</h4></td>
+         </tr>
+        <td align="left">
+          <%= fill_documentation_right_select(f)%>
+        </td>
+        </tr>
+      </table>
+       </div>
   </br>
   <div class="actions">
     <%= f.submit %>
@@ -222,3 +291,167 @@
     document.getElementById(it).style.display = vis;
     }
 </script>
+<script type="text/javascript">
+     function moveToRightOrLeft(side){
+     var listLeft=document.getElementById('selectLeftD');
+     var listRight=document.getElementById('selectRightD');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las discapacidades abajo');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas las discapacidades arriba');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+     function move(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+     } 
+
+    $(document).ready(function(){
+        $('#new_person').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightD").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightD").val(options);
+        });
+
+        $('form[id*=edit_person]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightD").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightD").val(options);
+        });
+    });
+
+     function moveToRightOrLeftFS(side){
+     var listLeft=document.getElementById('selectLeftFS');
+     var listRight=document.getElementById('selectRightFS');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas los Apoyos Funcionales abajo');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              moveFS(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas los Aparatos Funcionales arriba');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              moveFS(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+
+     function moveFS(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+     } 
+
+    $(document).ready(function(){
+        $('#new_person').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightFS").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightFS").val(options);
+        });
+
+        $('form[id*=edit_person]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightFS").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightFS").val(options);
+        });
+    });
+
+     function moveToRightOrLeftDo(side){
+     var listLeft=document.getElementById('selectLeftDo');
+     var listRight=document.getElementById('selectRightDo');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las discapacidades abajo');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              moveDo(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas las discapacidades arriba');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              moveDo(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+     function moveDo(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+     } 
+
+    $(document).ready(function(){
+        $('#new_person').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightDo").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightDo").val(options);
+        });
+
+        $('form[id*=edit_person]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightDo").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightDo").val(options);
+        });
+    });
+</script>
+
+
+

@@ -7,7 +7,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string    :last_name,           :null => false
       t.string    :second_last_name
       t.integer   :marital_status_id
-      t.boolean   :sex,                 :null => false
+      t.integer   :sex,                 :null => false
       t.integer   :ethnic_group_id,     :null => false
       t.datetime  :birthday,            :null => false
       t.integer   :born_town_id
@@ -42,7 +42,9 @@ class CreatePeople < ActiveRecord::Migration
       t.date      :discapacity_origin_year
       t.text      :observations
       t.integer   :status_id
-      t.boolean   :funcional_support
+      t.boolean   :use_functional_support
+      t.integer   :born_county_id
+      t.integer   :county_id
 
 
       t.timestamps

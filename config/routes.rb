@@ -1,12 +1,20 @@
 Seias::Application.routes.draw do
 
+<<<<<<< HEAD
   resources :type_people
+=======
+  resources :documentations
+
+  resources :functional_supports
+
+  resources :age_ranges
+
+  resources :school_ages
+>>>>>>> c3732d514cff0d20c0dede386d1c5b2327f5158f
 
   resources :age_ranges
 
   resources :guardianships
-
-  resources :funcional_supports
 
   resources :discapacities
 
