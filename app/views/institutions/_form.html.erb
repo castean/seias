@@ -46,7 +46,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.select :type_person, options_for_select([["Física", "1"], ["Moral ", "2"]]), :class=>"span2"%>
+          <%= f.collection_select :type_person, TypePerson.order("name").all, :id, :name, options ={:prompt => "-- Seleccione Tipo de Persona --"} ,:class=>"span3"%>
         </td>
         <td>
           <%= f.text_field :rfc, :class=>"span2" %>

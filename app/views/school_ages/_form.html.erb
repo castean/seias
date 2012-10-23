@@ -1,38 +1,33 @@
-<%= form_for(@school_age) do |f| %>
-  <% if @school_age.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@school_age.errors.count, "error") %> prohibited this school_age from being saved:</h2>
-
-      <ul>
-      <% @school_age.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for(@school_age, :url => url, :method => method) do |f| %>
+    <% if @school_age.errors.any? %>
+        <div id="error_explanation">
+            <h2>Imposible registrar informacion</h2>
+            <ul>
+                <% @school_age.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+  </br>
   <div class="field">
-    <%= f.label :institution_id %><br />
-    <%= f.number_field :institution_id %>
+    <%= f.label :grade_id %>
+    <%= f.collection_select :grade_id, Grade.order("name").all, :id, :name, options ={:prompt => "-- Seleccione Grado --"}, :class=>"span3"%>
   </div>
   <div class="field">
-    <%= f.label :grade_id %><br />
-    <%= f.number_field :grade_id %>
+    <%= f.label :guardianship_id %>
+    <%= f.collection_select :guardianship_id, Guardianship.order("name").all, :id, :name, options ={:prompt => "-- Seleccione Tutela --"}, :class=>"span3"%>
   </div>
   <div class="field">
-    <%= f.label :guardianship_id %><br />
-    <%= f.number_field :guardianship_id %>
+    <%= f.label :sex_id %>
+    <%= f.collection_select :sex_id, Sex.order("id").limit(2).all, :id, :name, options ={:prompt => "-- Seleccione Sexo --"} ,:class=>"span3"%>
   </div>
   <div class="field">
-    <%= f.label :sex_id %><br />
-    <%= f.number_field :sex_id %>
-  </div>
-  <div class="field">
-    <%= f.label :total_qty_registered %><br />
+    <%= f.label :total_qty_registered %>
     <%= f.number_field :total_qty_registered %>
   </div>
   <div class="field">
-    <%= f.label :real_qty_registered %><br />
+    <%= f.label :real_qty_registered %>
     <%= f.number_field :real_qty_registered %>
   </div>
   <div class="actions">

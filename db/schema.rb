@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019212508) do
+ActiveRecord::Schema.define(:version => 20121023171512) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -736,6 +736,12 @@ ActiveRecord::Schema.define(:version => 20121019212508) do
     t.integer  "state_id"
     t.integer  "country_id"
     t.string   "gmaps",       :default => "t"
+  end
+
+  create_table "type_people", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "units_of_measurement", :force => true do |t|

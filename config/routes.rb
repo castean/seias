@@ -1,10 +1,8 @@
 Seias::Application.routes.draw do
 
+  resources :type_people
+
   resources :age_ranges
-
-  resources :school_ages
-
-  resources :age_populations
 
   resources :guardianships
 
@@ -30,7 +28,9 @@ Seias::Application.routes.draw do
   resources :institutions_types
 
   resources :institutions do
+    resources :age_populations
     resources :one_reg_institutions
+    resources :school_ages
   end
 
   resources :sexes

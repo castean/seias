@@ -4,7 +4,7 @@ class OneRegInstitution < ActiveRecord::Base
   MIN_AGE = (0..100)
   belongs_to :institution
   belongs_to :public_target
-  belongs_to :sex
+  belongs_to :sex, :foreign_key => "people_sex"
   has_and_belongs_to_many :discapacities
   attr_accessible :according_social_purpose, :capacity, :institution_id, :max_age, :min_age, :operation_status, :people_sex, :public_target_id, :selectLeft, :selectRight
 
@@ -22,9 +22,6 @@ class OneRegInstitution < ActiveRecord::Base
       end
     end
   end
-
-
-
 
 
 end
