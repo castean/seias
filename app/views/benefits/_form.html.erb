@@ -1,0 +1,45 @@
+<%= form_for(@benefit) do |f| %>
+  <% if @benefit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@benefit.errors.count, "error") %> prohibited this benefit from being saved:</h2>
+
+      <ul>
+      <% @benefit.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :period %><br />
+    <%= f.text_field :period %>
+  </div>
+  <div class="field">
+    <%= f.label :worth %><br />
+    <%= f.number_field :worth %>
+  </div>
+  <div class="field">
+    <%= f.label :benefit_category_id %><br />
+    <%= f.number_field :benefit_category_id %>
+  </div>
+  <div class="field">
+    <%= f.label :delivery_date %><br />
+    <%= f.date_select :delivery_date %>
+  </div>
+  <div class="field">
+    <%= f.label :qty %><br />
+    <%= f.number_field :qty %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_price %><br />
+    <%= f.text_field :unit_price %>
+  </div>
+  <div class="field">
+    <%= f.label :affiliate_id %><br />
+    <%= f.number_field :affiliate_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

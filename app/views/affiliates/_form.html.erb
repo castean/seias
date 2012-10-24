@@ -1,0 +1,75 @@
+<%= form_tag  :action => "search_affiliate", :method => "post" do %>
+    <div class="field">
+      <%= label :finder, "Busqueda por:" %>
+      Personas<%= radio_button_tag "field", 1, true,{:id => "button1", :class => "show_hide"} %>
+      Instituciones<%= radio_button_tag "field", 2, false,{:id => "button2", :class => "show_hide"} %>
+    </div>
+    <div id="div-sh-1" class="toHide">
+      <%= label :people, "Busqueda de Personas" %><br />
+      <%= autocomplete_field_tag :affiliate_per, '', autocomplete_person_name_affiliates_path %>
+      <%= submit_tag "Buscar personas" %>
+    </div>
+    <div id="div-sh-2" class="toHide">
+      <%= label :institution, "Busqueda de Instituciones" %><br />
+      <%= autocomplete_field_tag :affiliate_ins, '', autocomplete_institution_name_affiliates_path %>
+
+      <%= submit_tag "Buscar instituciones" %>
+    </div>
+<% end %>
+
+  <% if @affiliate_benefit != "" %>
+      <%= form_for(@affiliate) do |f| %>
+          <% if @affiliate.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@affiliate.errors.count, "error") %> prohibited this affiliate from being saved:</h2>
+
+                <ul>
+                  <% @affiliate.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+        <p>
+          <% if params[:affiliate_ins] == "institution" %>
+            <b>Institución:</b>
+            <%= @affiliate_benefit.name %>
+          <% elsif :type_ben == "person" %>
+              <b>Persona:</b>
+              <%= @affiliate_benefit.name %>
+          <% end %>
+        </p>
+
+        <div class="field">
+          <%= f.label :program_id, "Programa" %>
+          <%= f.collection_select :program_id, Program.find_all_by_department_id( current_user.department_id).sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona un Programa --"}, :class=>"ddl_width" %>
+        </div>
+
+
+
+        <div class="field">
+          <%= f.label "Tipo de Actividad" %>
+          <%=  %>
+        </div>
+      <div class="field">
+        <%= f.label :period_time_id %><br />
+        <%= f.number_field :period_time_id %>
+      </div>
+      <div class="field">
+        <%= f.label :period_number %><br />
+        <%= f.number_field :period_number %>
+      </div>
+      <div class="field">
+        <%= f.label :institution_id %><br />
+        <%= f.number_field :institution_id %>
+      </div>
+      <div class="field">
+        <%= f.label :person_id %><br />
+        <%= f.number_field :person_id %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  <% end %>

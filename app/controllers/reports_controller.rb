@@ -173,4 +173,27 @@ class ReportsController < ApplicationController
       end
     end
   end
+
+  def test1
+    obj1 = Order.new(:city => 'London', :quarter => 'Q1')
+    obj2 = Order.new(:city => 'London', :quarter => 'Q2')
+    obj3 = Order.new(:city => 'London', :quarter => 'Q3')
+    obj4 = Order.new(:city => 'London', :quarter => 'Q4')
+    obj5 = Order.new(:city => 'New York', :quarter => '01')
+    obj6 = Order.new(:city => 'New York', :quarter => '02')
+    obj7 = Order.new(:city => 'New York', :quarter => '03')
+    obj8 = Order.new(:city => 'New York', :quarter => '04')
+
+    data = [obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8]
+
+    grid = PivotTable::Grid.new do |g|
+      g.source_data = data
+      g.column_name = :quarter
+      g.row_name = :city
+    end
+
+    g.build
+
+  end
+
 end

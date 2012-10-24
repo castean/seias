@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008154756) do
+ActiveRecord::Schema.define(:version => 20121017165403) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -110,6 +110,29 @@ ActiveRecord::Schema.define(:version => 20121008154756) do
     t.string   "decstatus"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+  end
+
+  create_table "affiliates", :force => true do |t|
+    t.integer  "public_target_id"
+    t.integer  "program_id"
+    t.integer  "period_time_id"
+    t.integer  "period_number"
+    t.integer  "institution_id"
+    t.integer  "person_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "benefits", :force => true do |t|
+    t.string   "period"
+    t.integer  "worth"
+    t.integer  "benefit_category_id"
+    t.date     "delivery_date"
+    t.integer  "qty"
+    t.decimal  "unit_price"
+    t.integer  "affiliate_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "business_lines", :force => true do |t|
@@ -233,6 +256,18 @@ ActiveRecord::Schema.define(:version => 20121008154756) do
     t.integer  "user_id"
   end
 
+  create_table "discapacities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "discapacity_origins", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "ethnic_groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -242,6 +277,12 @@ ActiveRecord::Schema.define(:version => 20121008154756) do
   create_table "father_institutions", :id => false, :force => true do |t|
     t.integer "institution_id"
     t.integer "father_institution_id"
+  end
+
+  create_table "funcional_supports", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "goals", :force => true do |t|
@@ -256,6 +297,12 @@ ActiveRecord::Schema.define(:version => 20121008154756) do
   end
 
   add_index "goals", ["critical_factor_id"], :name => "index_goals_on_critical_success_factor_id"
+
+  create_table "grades", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -554,7 +601,19 @@ ActiveRecord::Schema.define(:version => 20121008154756) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "relationships", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "religions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "school_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Period:</b>
+  <%= @benefit.period %>
+</p>
+
+<p>
+  <b>Worth:</b>
+  <%= @benefit.worth %>
+</p>
+
+<p>
+  <b>Benefit category:</b>
+  <%= @benefit.benefit_category_id %>
+</p>
+
+<p>
+  <b>Delivery date:</b>
+  <%= @benefit.delivery_date %>
+</p>
+
+<p>
+  <b>Qty:</b>
+  <%= @benefit.qty %>
+</p>
+
+<p>
+  <b>Unit price:</b>
+  <%= @benefit.unit_price %>
+</p>
+
+<p>
+  <b>Affiliate:</b>
+  <%= @benefit.affiliate_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_benefit_path(@benefit) %> |
+<%= link_to 'Back', benefits_path %>

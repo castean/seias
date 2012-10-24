@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  public_target_id: 1
+  program_id: 1
+  period_time_id: 1
+  period_number: 1
+  institution_id: 1
+  person_id: 1
+
+two:
+  public_target_id: 1
+  program_id: 1
+  period_time_id: 1
+  period_number: 1
+  institution_id: 1
+  person_id: 1
