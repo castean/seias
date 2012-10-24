@@ -1,29 +1,215 @@
-<p id="notice"><%= notice %></p>
+<p id="notice" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+
+<table class="table table-striped">
+  <thead>
+    <h4>Datos Fiscales</h4>
+  </thead>
+  <tr>
+    <th>
+      Nombre o Denominación Social
+    </th>
+    <th>
+      Tipo de Persona
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <%= @institution.name %>
+    </td>
+    <td>
+      <%= @institution.type_person.name %>
+    </td>
+  </tr>
+</table>
+<table class="table table-striped">
+  <tr>
+    <th>
+      Nombre del Representante o Responsable Legal
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <%= @institution.legal_name%> <%= @institution.legal_last_name%> <%= @institution.legal_second_last_name%>
+    </td>
+  </tr>
+</table>
+<table class="table table-striped">
+  <tr>
+    <th>
+      Teléfono
+    </th>
+    <th>
+      RFC
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <%= @institution.phone %>
+    </td>
+    <td>
+      <%= @institution.rfc %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Estado
+    </th>
+    <th>
+      Pais
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <%= @institution.town.name %>
+    </td>
+    <td>
+      <%= @institution.town.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Municipio
+    </th>
+    <th>
+      Localidad
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <%= @institution.town.name %>
+    </td>
+    <td>
+      <%= @institution.town.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Calle
+    </th>
+    <th>
+      Numero
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <%= @institution.address%>
+    </td>
+    <td>
+      <%= @institution.external_address_number %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Colonia
+    </th>
+    <th>
+      Código Postal
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <%= @institution.second_address%>
+    </td>
+    <td>
+      <%= @institution.zip_code %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Giro
+    </th>
+    <th>
+      Correo Electrónico
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <%= @institution.business_line.name%>
+    </td>
+    <td>
+      <%= @institution.email %>
+    </td>
+  </tr>
+</table>
 
 <p>
-  <b>Name:</b>
-  <%= @institution.name %>
-</p>
-<p>
-  <b>Dirección:</b>
-  <%= @institution.address %>  <%= @institution.external_address_number %>
-</p>
-<p>
-  <b>Colonia:</b>
-  <%= @institution.second_address %>
+  <b>Total de Residentes:</b></br>
 </p>
 
-<p>
-  <b>Código Postal:</b>
-  <%= @institution.zip_code %>
-</p>
-
-<p>
-  <b>Teléfono:</b>
-  <%= @institution.phone %>
-</p>
 </br>
-<%= gmaps("map_options" =>{:auto_zoom => false, :zoom => 7},"markers" => {"data" => @json}) %>
+</br>
+    <%= link_to 'Escolaridad', new_institution_school_age_path(@institution), :class => "btn" %>
+</br>
+</br>
+<% @institution.school_ages.each do |b| %>
+    <p>
+      <b>Nivel Escolar:</b></br>
+        <%= b.grade.name %>
+    </p>
+    </br>
+    <%= link_to "Editar Escolaridad", [@institution, b], :method => :edit %>
+<%end%>
+</br>
+</br>
 
-<%= link_to 'Edit', edit_institution_path(@institution) %> |
-<%= link_to 'Back', institutions_path %>
+<%= link_to 'Población', new_institution_age_population_path(@institution), :class => "btn" %>
+</br>
+</br>
+<% @institution.age_populations.each do |c| %>
+    <p>
+      <b>Nivel Escolar:</b>
+      <%= c.age_range.name %></br>
+    </p>
+    </br>
+    <%= link_to "Editar Población", [@institution, c], :method => :edit %>
+<%end%>
+</br>
+</br>
+    <%= link_to 'Reg_Inst.1/R01', new_institution_one_reg_institution_path(@institution), :class => "btn" %>
+</br>
+</br>
+<% @institution.one_reg_institutions.each do |a| %>
+    <p>
+      <b>Objetivo Social Acorde:</b></br>
+        <%= a.according_social_purpose%>
+    </p>
+    <p>
+      <b>Sexo de Beneficiarios:</b></br>
+        <%= a.sex.name%>
+    </p>
+    <p>
+      <b>Edad Mínima:</b></br>
+        <%= a.min_age%>
+    </p>
+    <p>
+      <b>Edad Máxima:</b></br>
+        <%= a.max_age%>
+    </p>
+    <p>
+      <b>Capacidad:</b></br>
+        <%= a.capacity%>
+    </p>
+    <p>
+      <b>Población Objetivo:</b></br>
+      <%= a.public_target.name%>
+    </p>
+    </br>
+    <%= link_to "Editar Reg-Inst.1/R01", [@institution, a], :method => :edit %>
+<%end%>
+</br>
+</br>
+<%= link_to 'Reg_Inst.2/R01', new_institution_one_reg_institution_path(@institution), :class => "btn" %>
+</br>
+</br>
+</br>
+
+<div class="btn-group">
+    <%= gmaps("map_options" =>{:auto_zoom => false, :zoom => 7},"markers" => {"data" => @json}) %>
+</div>
+</br>
+<div class="btn-group">
+  <% if can? :update, @critical_success_factor %>
+      <%= link_to 'Editar', edit_institution_path(@institution), :class => "btn" %>
+  <% end %>
+  <%= link_to 'Regresar', institutions_path, :class => "btn" %>
+</div>

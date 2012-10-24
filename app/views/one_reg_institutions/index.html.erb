@@ -1,0 +1,37 @@
+<h1>Listing one_reg_institutions</h1>
+
+<table>
+  <tr>
+    <th>Institution</th>
+    <th>According social purpose</th>
+    <th>People sex</th>
+    <th>Min age</th>
+    <th>Max age</th>
+    <th>Capacity</th>
+    <th>Public target</th>
+    <th>Operation status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @one_reg_institutions.each do |one_reg_institution| %>
+  <tr>
+    <td><%= one_reg_institution.institution_id %></td>
+    <td><%= one_reg_institution.according_social_purpose %></td>
+    <td><%= one_reg_institution.people_sex %></td>
+    <td><%= one_reg_institution.min_age %></td>
+    <td><%= one_reg_institution.max_age %></td>
+    <td><%= one_reg_institution.capacity %></td>
+    <td><%= one_reg_institution.public_target_id %></td>
+    <td><%= one_reg_institution.operation_status %></td>
+    <td><%= link_to 'Show', one_reg_institution %></td>
+    <td><%= link_to 'Edit', edit_one_reg_institution_path(one_reg_institution) %></td>
+    <td><%= link_to 'Destroy', one_reg_institution, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New One reg institution', new_one_reg_institution_path %>

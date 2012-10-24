@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121017165403) do
+
+ActiveRecord::Schema.define(:version => 20121023171512) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -122,6 +123,25 @@ ActiveRecord::Schema.define(:version => 20121017165403) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
+
+
+  create_table "age_populations", :force => true do |t|
+    t.integer  "institution_id"
+    t.integer  "guardianship_id"
+    t.integer  "sex_id"
+    t.integer  "age_range_id"
+    t.integer  "total_qty_registered"
+    t.integer  "real_qty_registered"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "age_ranges", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
 
   create_table "benefits", :force => true do |t|
     t.string   "period"
@@ -262,11 +282,37 @@ ActiveRecord::Schema.define(:version => 20121017165403) do
     t.datetime "updated_at", :null => false
   end
 
+
+  create_table "discapacities_one_reg_institutions", :id => false, :force => true do |t|
+    t.integer "one_reg_institution_id"
+    t.integer "discapacity_id"
+  end
+
+  create_table "discapacities_people", :id => false, :force => true do |t|
+    t.integer "discapacity_id"
+    t.integer "person_id"
+  end
+
+
   create_table "discapacity_origins", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+
+  create_table "documentations", :force => true do |t|
+    t.string   "name"
+    t.integer  "belongs"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "documentations_people", :id => false, :force => true do |t|
+    t.integer "documentation_id"
+    t.integer "person_id"
+  end
+
 
   create_table "ethnic_groups", :force => true do |t|
     t.string   "name"
@@ -279,11 +325,20 @@ ActiveRecord::Schema.define(:version => 20121017165403) do
     t.integer "father_institution_id"
   end
 
-  create_table "funcional_supports", :force => true do |t|
+
+  create_table "functional_supports", :force => true do |t|
+
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+
+  create_table "functional_supports_people", :id => false, :force => true do |t|
+    t.integer "functional_support_id"
+    t.integer "person_id"
+  end
+
 
   create_table "goals", :force => true do |t|
     t.integer  "month",              :null => false
@@ -310,6 +365,12 @@ ActiveRecord::Schema.define(:version => 20121017165403) do
     t.boolean  "vulnerable"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "guardianships", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "institutions", :force => true do |t|
@@ -365,6 +426,19 @@ ActiveRecord::Schema.define(:version => 20121017165403) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "one_reg_institutions", :force => true do |t|
+    t.integer  "institution_id"
+    t.boolean  "according_social_purpose"
+    t.integer  "people_sex"
+    t.integer  "min_age"
+    t.integer  "max_age"
+    t.integer  "capacity"
+    t.integer  "public_target_id"
+    t.integer  "operation_status"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "ped_action_lines", :force => true do |t|
@@ -460,7 +534,6 @@ ActiveRecord::Schema.define(:version => 20121017165403) do
     t.string   "last_name",               :null => false
     t.string   "second_last_name"
     t.integer  "marital_status_id"
-    t.boolean  "sex",                     :null => false
     t.integer  "ethnic_group_id",         :null => false
     t.datetime "birthday",                :null => false
     t.integer  "born_town_id"
@@ -495,11 +568,12 @@ ActiveRecord::Schema.define(:version => 20121017165403) do
     t.date     "discapacity_origin_year"
     t.text     "observations"
     t.integer  "status_id"
-    t.boolean  "funcional_support"
+    t.boolean  "use_functional_support"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.integer  "county_id"
-    t.integer  "county_id_2"
+    t.integer  "sex"
+    t.integer  "born_county_id"
   end
 
   create_table "period_times", :force => true do |t|
@@ -613,6 +687,18 @@ ActiveRecord::Schema.define(:version => 20121017165403) do
     t.datetime "updated_at", :null => false
   end
 
+
+  create_table "school_ages", :force => true do |t|
+    t.integer  "institution_id"
+    t.integer  "grade_id"
+    t.integer  "guardianship_id"
+    t.integer  "sex_id"
+    t.integer  "total_qty_registered"
+    t.integer  "real_qty_registered"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
   create_table "school_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -662,6 +748,12 @@ ActiveRecord::Schema.define(:version => 20121017165403) do
     t.integer  "state_id"
     t.integer  "country_id"
     t.string   "gmaps",       :default => "t"
+  end
+
+  create_table "type_people", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "units_of_measurement", :force => true do |t|

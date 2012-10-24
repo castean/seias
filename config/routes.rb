@@ -1,5 +1,6 @@
 Seias::Application.routes.draw do
 
+
   resources :benefits
 
   match '/affiliates/search_affiliate' => 'affiliates#search_affiliate'
@@ -7,6 +8,32 @@ Seias::Application.routes.draw do
     get :autocomplete_person_name, :on => :collection
     get :autocomplete_institution_name, :on => :collection
   end
+
+  resources :type_people
+
+  resources :documentations
+
+  resources :functional_supports
+
+  resources :age_ranges
+
+  resources :school_ages
+
+
+  resources :age_ranges
+
+  resources :guardianships
+
+  resources :discapacities
+
+  resources :discapacity_origins
+
+  resources :school_types
+
+  resources :grades
+
+  resources :relationships
+
 
   resources :medical_services
 
@@ -17,7 +44,11 @@ Seias::Application.routes.draw do
   match '/institutions_types/for_institution_type_id/:id' => 'institutions_types#for_institution_type_id'
   resources :institutions_types
 
-  resources :institutions
+  resources :institutions do
+    resources :age_populations
+    resources :one_reg_institutions
+    resources :school_ages
+  end
 
   resources :sexes
 

@@ -58,7 +58,15 @@ class CriticalFactor < ActiveRecord::Base
     self.catalog_tables.clear
     options.each do |option|
       unless option.empty?
-        line = CatalogTable.find(option)
+        line = CatalogTable.find(catalog_table_id)
+        modelo = line.model
+        case modelo
+          when 'ActivityTypes'
+            line = ActivityType.find(options,options.id)
+          when 'Programs'
+            line = Program.find(options)
+        end
+
         self.catalog_tables << line
       end
     end

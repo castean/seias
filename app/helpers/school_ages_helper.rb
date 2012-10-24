@@ -1,0 +1,2 @@
+module SchoolAgesHelper
+end

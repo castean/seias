@@ -37,49 +37,17 @@ module ActivitiesHelper
   end
   def fill_programs_select(f)
     s = "SELECT
-                  programs.description,
-                  programs.id
-                FROM
-                  public.programs,
-                  public.critical_success_factors,
-                  public.activity_types_critical_success_factors,
-                  public.activity_types
-                WHERE
-                  critical_success_factors.program_id = programs.id AND
-                  activity_types_critical_success_factors.critical_success_factor_id = critical_success_factors.id AND
-                  activity_types.id = activity_types_critical_success_factors.activity_type_id AND
-                  activity_types.id = #{@activity.activity_type_id}
-
-                UNION
-
-                SELECT
-                DISTINCT
-                  programs.description,
-                  programs.id
-                FROM
-                  public.programs,
-                  public.critical_success_factors,
-                  public.activity_types_critical_success_factors,
-                  public.activity_types
-                WHERE
-                  critical_success_factors.program_id = programs.id AND
-                  activity_types_critical_success_factors.critical_success_factor_id = critical_success_factors.id AND
-                  activity_types.id = activity_types_critical_success_factors.activity_type_id AND
-                  programs.department_id = #{current_user.department_id} AND programs.id <>   (SELECT
-                  MAX(programs.id)
-                  FROM
-                  public.programs,
-                  public.critical_success_factors,
-                  public.activity_types_critical_success_factors,
-                  public.activity_types
-                WHERE
-                  critical_success_factors.program_id = programs.id AND
-                  activity_types_critical_success_factors.critical_success_factor_id = critical_success_factors.id AND
-                  activity_types.id = activity_types_critical_success_factors.activity_type_id AND
-                  activity_types.id = #{@activity.activity_type_id})"
+          programs.description,
+          programs.id
+        FROM
+          public.programs_users,
+          public.programs
+        WHERE
+          programs_users.program_id = programs.id AND programs_users.user_id = #{current_user.id};
+        "
     p = ActiveRecord::Base.connection.select_rows(s)
     p.map{|description, id|}
-    f.select :program_id, p, {:prompt => false}, :class=>"ddl_width"
+    f.select :program_id, p, {:prompt => "Selecciona un Programa"}, :class=>"ddl_width"
   end
 
 end
