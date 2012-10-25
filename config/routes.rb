@@ -1,5 +1,11 @@
 Seias::Application.routes.draw do
 
+  match '/relations/new/:person_id' => 'relations#new'
+  resources :relations
+
+  match '/families/add_family/:person_id' => 'families#add_family'
+  resources :families
+
   resources :documentations
 
   resources :functional_supports

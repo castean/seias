@@ -1,5 +1,10 @@
 #encoding:utf-8
 class Person < ActiveRecord::Base
+
+
+  #has_many :relations
+  #has_many :relatives, :through => "relations"
+
   belongs_to :town
   belongs_to :ethnic_group
   #belongs_to :sex
@@ -11,7 +16,10 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :discapacities
   has_and_belongs_to_many :functional_supports
   has_and_belongs_to_many :documentations
-
+  has_many :families
+  has_many :kins, :through => :families
+  has_many :inverse_families, :class_name => "Family", :foreign_key => "kin_id"
+  has_many :inverse_kins, :through => :inverse_families, :source => :person
   attr_accessible :name, :last_name, :second_last_name, :marital_status_id, :sex, :ethnic_group_id, :birthday, :born_town_id, :born_county_id, :county_id, :town_id, :address, :address_two,
                   :code_area, :phone, :cel_phone, :emergency_phone, :rfc, :curp, :email, :tutor, :tutor_relationship_id, :tutor_marital_status_id, :medical_service_id,
                   :student, :reader, :schooling, :school_type_id, :worker, :job, :self_employment, :occupation, :job_seeker, :user_id, :discapacity_status, :diagnosis,
@@ -53,5 +61,8 @@ class Person < ActiveRecord::Base
         self.documentations << line
       end
     end
+  end
+  def fullname
+    "#{name} #{last_name} #{second_last_name}"
   end
 end

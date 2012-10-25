@@ -1,0 +1,66 @@
+<table>
+  <tr>
+    <th>Familiares de <%= @person.fullname %>:</th>
+  </tr>
+
+  <% @person.families.each do |family| %>
+      <tr>
+        <td>
+          <%= family.kin.fullname %>
+        </td>
+        <td>
+          <%= family.relationship.name %>
+        </td>
+        <td>
+          <%= link_to "Quitar", family, :method => :delete %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+<table>
+  <tr>
+    <th><%= @person.fullname %> es:</th>
+  </tr>
+  <% @person.inverse_families.each do |family| %>
+      <tr>
+        <td>
+          <%= family.relationship.name %>  de
+        </td>
+        <td>
+          <%= family.person.fullname %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+<%= form_for(@family) do |f| %>
+    <% if @family.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@family.errors.count, "error") %> prohibited this family from being saved:</h2>
+
+          <ul>
+            <% @family.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.hidden_field :person_id %>
+    </div>
+    <div class="field">
+      <%= f.label :kin_id, "Familiar" %><br />
+      <%= f.text_field :kin_id %>
+    </div>
+    <div class="field">
+      <%= f.label :relationship_id, "Parentesco" %><br />
+      <%= f.collection_select :relationship_id,  Relationship.order("name"), :id, :name, options ={:prompt => "-- Selecciona el Parentesco --"}%>
+    </div>
+    <div class="field">
+      <%= f.label :income, "Ingreso" %><br />
+      <%= f.text_field :income %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
