@@ -11,6 +11,7 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :discapacities
   has_and_belongs_to_many :functional_supports
   has_and_belongs_to_many :documentations
+  has_many :affiliates
 
   attr_accessible :name, :last_name, :second_last_name, :marital_status_id, :sex, :ethnic_group_id, :birthday, :born_town_id, :born_county_id, :county_id, :town_id, :address, :address_two,
                   :code_area, :phone, :cel_phone, :emergency_phone, :rfc, :curp, :email, :tutor, :tutor_relationship_id, :tutor_marital_status_id, :medical_service_id,

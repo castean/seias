@@ -25,22 +25,42 @@ class AffiliatesController < ApplicationController
 
   # GET /affiliates/new
   # GET /affiliates/new.json
-  def new
-    if params[:type_ben].nil?
 
-      if params[:type_ben] == "1"
-        @benefit_type = Person.find_by_name(:affiliate_benefit)
-      elsif params[:type_ben] == "2"
-        @benefit_type = Institution.find_by_name(:affiliate_benefit)
+  def new
+    @affiliate = Affiliate.new
+
+    if params[:type] == "ben"
+      if params[:field] == "1"
+        name_ben = params[:affiliates][:person]
+        sql = "Select id , name from people WHERE (LOWER(people.name) ILIKE '%#{name_ben}%') ORDER BY people.name"
+        @affiliate_benefit = ActiveRecord::Base.connection.select_rows(sql)
+        @affiliate_benefit.map{|name, id|}
+        respond_to do |format|
+          format.html # new.html.erb
+          format.json  { render :json => @affiliate_benefit}
+        end
+        #@affiliate_benefit = Person.where(:id => "12")
+      elsif params[:field] == "2"
+        name_ben = params[:affiliates][:institution]
+        @affiliate_benefit = Institution.find(1)
+      end
+    elsif params[:ben_aff] != "" && params[:type_ben]!= ""
+        if params[:type_ben] == "ben"
+          @affiliate_p = Person.find(params[:ben_aff])
+          respond_to do |format|
+            format.html # new.html.erb
+            format.json  { render :json => @affiliate_p}
+          end
+        end
+    else
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @affiliate }
       end
     end
 
-    @affiliate = Affiliate.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @affiliate }
-    end
   end
+
 
   # GET /affiliates/1/edit
   def edit
@@ -93,12 +113,40 @@ class AffiliatesController < ApplicationController
 
   def search_affiliate
    # @affiliate_benefit = nil
-   # @affiliate_benefit = Institution.where("(LOWER(institution.name) ILIKE '%:name%') ", :name => params[:affiliate][:institution])
-    if params[:affiliate_per] != "" && params[:affiliate_ins] == "" && params[:field] == "1"
-      redirect_to new_affiliate_path(:affiliate_benefit => params[:affiliate_per], :type_ben => params[:field])
-    elsif params[:affiliate_per] == "" && params[:affiliate_ins] != "" && params[:field] == "2"
-      redirect_to new_affiliate_path(:affiliate_benefit => params[:affiliate_ins], :type_ben => params[:field])
-    end
+
+    #if params[:affiliate_per] != "" && params[:affiliate_ins] == "" && params[:field] == "1"
+     # @affiliate_benefit = Person.where("(LOWER(people.name) ILIKE '%:name%') ", :name => params[:affiliate_per])
+      #redirect_to new_affiliate_path(:affiliate_benefit => params[:affiliate_per], :type_ben => params[:field])
+   # elsif params[:affiliate_per] == "" && params[:affiliate_ins] != "" && params[:field] == "2"
+      #@affiliate_benefit = Institution.where("(LOWER(institutions.name) ILIKE '%:name%') ", :name => params[:affiliate_ins])
+      #redirect_to new_affiliate_path(:affiliate_benefit => params[:affiliate_ins], :type_ben => params[:field])
+    #end
+      respond_to do |format|
+        format.html { redirect_to new_affiliate_path(params[:affiliate_ins], params[:field]) }
+
+      end
 
   end
+  # ISC Christian Ivan Alderete Garcia funcion para cambiar valores con CoffeScript y json
+  def for_activitytypeid
+    @activity_types = ActivityType.includes(:unit_of_measurement).where(:id => params[:activity_type_id])
+
+    respond_to do |format|
+      format.json  { render :json => @activity_types.to_json(:include => :unit_of_measurement)}
+    end
+  end
+  # Ing. César Reyes # Carga Valores de Activity_Types con CoffeScript y json
+  def for_programid
+
+    sql = "Select distinct activity_types.name, activity_types.id from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
+                      INNER JOIN critical_success_factors ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
+                      INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
+                      WHERE programs.id = #{params[:program_id]} order by activity_types.name"
+    @filter_activity_types = ActiveRecord::Base.connection.select_rows(sql)
+    @filter_activity_types.map{|name, id|}
+    respond_to do |format|
+      format.json  { render :json => @filter_activity_types}
+    end
+  end
 end
+

@@ -6,4 +6,8 @@ $(document).ready ->
   $("#div-sh-2").hide()
   $(".show_hide").click ->
     $(".toHide").hide()
-    $("#div-sh-" + $(this).val()).show
+    $("#div-sh-" + $(this).val()).show;
+
+$ ->
+  $('.search_ben').click ->
+    alert "jala"

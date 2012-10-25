@@ -37,7 +37,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(:user_id => id)
 
     if params[:continuos] == '1' 
-      
+
       @activity = Activity.where(:user_id => id).last.dup
       
       respond_to do |format|
@@ -111,9 +111,9 @@ class ActivitiesController < ApplicationController
   # ISC Christian Ivan Alderete Garcia funcion para cambiar valores con CoffeScript y json
   def for_activitytypeid
     @activity_types = ActivityType.includes(:unit_of_measurement).where(:id => params[:activity_type_id])
-    
+
     respond_to do |format|
-      format.json  { render :json => @activity_types.to_json(:include => :unit_of_measurement)}      
+      format.json  { render :json => @activity_types.to_json(:include => :unit_of_measurement)}
     end
   end
   # Ing. César Reyes # Carga Valores de Activity_Types con CoffeScript y json

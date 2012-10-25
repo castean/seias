@@ -3,7 +3,8 @@ Seias::Application.routes.draw do
 
   resources :benefits
 
-  match '/affiliates/search_affiliate' => 'affiliates#search_affiliate'
+  post '/affiliates/new/' => "affiliates#new"
+  match '/affiliates/new/:id' => "affiliates#new"
   resources :affiliates do
     get :autocomplete_person_name, :on => :collection
     get :autocomplete_institution_name, :on => :collection
