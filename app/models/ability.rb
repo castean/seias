@@ -7,7 +7,6 @@ class Ability
       can :create, UserSession
       #puts "Usuario Nulo"
     else
-
       can :read, :all
       can :for_countyid, Town
       can :for_directionid, Department
@@ -24,6 +23,7 @@ class Ability
       can :program_report_county, Report
       can :report_town_act, Report
       can :for_programid, Activity
+      can :autocomplete_person_name, Affiliate
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            
@@ -56,7 +56,8 @@ class Ability
         can :destroy, Activity do |acti|
           acti.try(:user) == user 
         end
-      when "user" then
+        when "user" then
+        can :create, Affiliate
         can :create, Activity
         can :update, Activity do |acti|
           acti.try(:user) == user 

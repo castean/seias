@@ -5,6 +5,7 @@ Seias::Application.routes.draw do
 
   post '/affiliates/new/' => "affiliates#new"
   match '/affiliates/new/:id' => "affiliates#new"
+  match '/affiliates/for_programid/:program_id' => 'affiliates#for_programid'
   resources :affiliates do
     get :autocomplete_person_name, :on => :collection
     get :autocomplete_institution_name, :on => :collection

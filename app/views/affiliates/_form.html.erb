@@ -16,22 +16,22 @@
     </div>
 <% end %>
 <% if params[:type] == "ben" %>
-<table>
-  <tr>
-    <th>Nombre</th>
-  </tr>
-<% @affiliate_benefit.each do |affiliate| %>
-      <tr>
-        <td><%= link_to affiliate[1], new_affiliate_path(:ben_aff => affiliate[0], :type_ben => params[:type]) %></td>
-      </tr>
-  <% end %>
+  <table>
+    <tr>
+      <th>Nombre</th>
+    </tr>
+      <% @affiliate_benefit.each do |affiliate| %>
+    <tr>
+      <td><%= link_to affiliate[1], new_affiliate_path(:ben_aff => affiliate[0], :type_ben => params[:type]) %></td>
+    </tr>
+  </table>
 <% end %>
-  <% if params[:ben_aff] != "" && params[:type_ben] != "" %>
+<% end %>
+  <% if params[:type_ben] == "ben" or params[:type_ben] == "ins"   %>
       <%= form_for(@affiliate) do |f| %>
           <% if @affiliate.errors.any? %>
               <div id="error_explanation">
                 <h2><%= pluralize(@affiliate.errors.count, "error") %> prohibited this affiliate from being saved:</h2>
-
                 <ul>
                   <% @affiliate.errors.full_messages.each do |msg| %>
                       <li><%= msg %></li>
@@ -46,7 +46,7 @@
             <%= @affiliate_p.name %>
           <% elsif params[:type_ben] == "ben" %>
               <b>Persona:</b>
-              <%= @affiliate_p.name %>
+              <%= @affiliate_p.name + ' ' + @affiliate_p.last_name + ' ' + @affiliate_p.second_last_name%>
           <% end %>
         </p>
 
@@ -55,30 +55,28 @@
           <%= f.collection_select :program_id, Program.find_all_by_department_id( current_user.department_id).sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona un Programa --"}, :class=>"ddl_width" %>
         </div>
 
-
-
         <div class="field">
           <%= f.label "Tipo de Actividad" %>
-          <%=  %>
+          <%= fill_activity_type_select(f) %>
         </div>
-      <div class="field">
-        <%= f.label :period_time_id %><br />
-        <%= f.number_field :period_time_id %>
-      </div>
-      <div class="field">
-        <%= f.label :period_number %><br />
-        <%= f.number_field :period_number %>
-      </div>
-      <div class="field">
-        <%= f.label :institution_id %><br />
-        <%= f.number_field :institution_id %>
-      </div>
-      <div class="field">
-        <%= f.label :person_id %><br />
-        <%= f.number_field :person_id %>
-      </div>
-      <div class="actions">
-        <%= f.submit %>
-      </div>
-    <% end %>
+        <div class="field">
+          <%= f.label :period_time_id %><br />
+          <%= f.number_field :period_time_id %>
+        </div>
+        <div class="field">
+          <%= f.label :period_number %><br />
+          <%= f.number_field :period_number %>
+        </div>
+        <div class="field">
+          <%= f.label :institution_id %><br />
+          <%= f.number_field :institution_id %>
+        </div>
+        <div class="field">
+          <%= f.label :person_id %><br />
+          <%= f.number_field :person_id %>
+        </div>
+        <div class="actions">
+         <%= f.submit %>
+        </div>
+      <% end %>
   <% end %>

@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20121023171512) do
+ActiveRecord::Schema.define(:version => 20121026163304) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -113,18 +112,6 @@ ActiveRecord::Schema.define(:version => 20121023171512) do
     t.datetime "updated_at",            :null => false
   end
 
-  create_table "affiliates", :force => true do |t|
-    t.integer  "public_target_id"
-    t.integer  "program_id"
-    t.integer  "period_time_id"
-    t.integer  "period_number"
-    t.integer  "institution_id"
-    t.integer  "person_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-
   create_table "age_populations", :force => true do |t|
     t.integer  "institution_id"
     t.integer  "guardianship_id"
@@ -141,7 +128,6 @@ ActiveRecord::Schema.define(:version => 20121023171512) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
 
   create_table "benefits", :force => true do |t|
     t.string   "period"
@@ -282,7 +268,6 @@ ActiveRecord::Schema.define(:version => 20121023171512) do
     t.datetime "updated_at", :null => false
   end
 
-
   create_table "discapacities_one_reg_institutions", :id => false, :force => true do |t|
     t.integer "one_reg_institution_id"
     t.integer "discapacity_id"
@@ -293,13 +278,11 @@ ActiveRecord::Schema.define(:version => 20121023171512) do
     t.integer "person_id"
   end
 
-
   create_table "discapacity_origins", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
 
   create_table "documentations", :force => true do |t|
     t.string   "name"
@@ -313,11 +296,19 @@ ActiveRecord::Schema.define(:version => 20121023171512) do
     t.integer "person_id"
   end
 
-
   create_table "ethnic_groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "families", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "kin_id"
+    t.integer  "relationship_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.decimal  "income"
   end
 
   create_table "father_institutions", :id => false, :force => true do |t|
@@ -325,20 +316,16 @@ ActiveRecord::Schema.define(:version => 20121023171512) do
     t.integer "father_institution_id"
   end
 
-
   create_table "functional_supports", :force => true do |t|
-
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-
   create_table "functional_supports_people", :id => false, :force => true do |t|
     t.integer "functional_support_id"
     t.integer "person_id"
   end
-
 
   create_table "goals", :force => true do |t|
     t.integer  "month",              :null => false
@@ -675,10 +662,26 @@ ActiveRecord::Schema.define(:version => 20121023171512) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "relations", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "relative_id"
+    t.integer  "relationship_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "relationships", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "relatives", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "relative_id"
+    t.integer  "relationship_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "religions", :force => true do |t|
@@ -686,7 +689,6 @@ ActiveRecord::Schema.define(:version => 20121023171512) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
 
   create_table "school_ages", :force => true do |t|
     t.integer  "institution_id"

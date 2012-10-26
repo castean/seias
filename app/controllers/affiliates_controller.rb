@@ -1,5 +1,5 @@
 class AffiliatesController < ApplicationController
-  autocomplete :person, :name, :full => :false
+  autocomplete :person, :name, :extra_data => [:last_name],:full => :false
   autocomplete :institution, :name, :full => :false
   # GET /affiliates
   # GET /affiliates.json
@@ -127,14 +127,7 @@ class AffiliatesController < ApplicationController
       end
 
   end
-  # ISC Christian Ivan Alderete Garcia funcion para cambiar valores con CoffeScript y json
-  def for_activitytypeid
-    @activity_types = ActivityType.includes(:unit_of_measurement).where(:id => params[:activity_type_id])
 
-    respond_to do |format|
-      format.json  { render :json => @activity_types.to_json(:include => :unit_of_measurement)}
-    end
-  end
   # Ing. César Reyes # Carga Valores de Activity_Types con CoffeScript y json
   def for_programid
 
