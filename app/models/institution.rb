@@ -5,8 +5,20 @@ class Institution < ActiveRecord::Base
   belongs_to :town
   belongs_to :user
   belongs_to :religion
+
+  has_many :affiliates
+
+  belongs_to :business_line
+  belongs_to :type_person, :foreign_key => "type_person"
   has_many :one_reg_institutions
+  has_many :school_ages
+  has_many :age_populations
+  has_many :age_ranges
+  has_many :grades
+  has_many :sex
+  has_many :guardianships
   has_and_belongs_to_many :discapacities
+
   has_and_belongs_to_many(:institutions,
                           :join_table => "father_institutions",
                           :foreign_key => "institution_id",

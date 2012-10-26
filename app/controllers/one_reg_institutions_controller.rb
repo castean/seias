@@ -1,8 +1,9 @@
 class OneRegInstitutionsController < ApplicationController
-  # GET /one_reg_institutions
-  # GET /one_reg_institutions.json
   load_and_authorize_resource
   before_filter :find_institution
+
+  # GET /one_reg_institutions
+  # GET /one_reg_institutions.json
   def index
     @one_reg_institutions = OneRegInstitution.all
 
@@ -42,8 +43,8 @@ class OneRegInstitutionsController < ApplicationController
   # POST /one_reg_institutions
   # POST /one_reg_institutions.json
   def create
-    @one_reg_institution = OneRegInstitution.new(params[:one_reg_institution])
     @one_reg_institution.institution_id = @institution
+    @one_reg_institution = @institution.one_reg_institutions.build(params[:one_reg_institution])
 
     respond_to do |format|
       if @one_reg_institution.save

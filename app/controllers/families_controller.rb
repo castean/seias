@@ -1,4 +1,5 @@
 class FamiliesController < ApplicationController
+  autocomplete :person, :name, :full => :false
   def add_family
     @person = Person.find(params[:person_id])
     @family = Family.new(:person_id => params[:person_id])

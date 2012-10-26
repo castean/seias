@@ -43,9 +43,8 @@ class GoalsController < ApplicationController
   # POST /goals
   # POST /goals.json
   def create
-    @goal = Goal.new(params[:goal])
     @goal.critical_factor_id = @critical_factor
-
+    @goal = @critical_factor.goals.build(params[:goal])
     respond_to do |format|
       if @goal.save
         format.html { redirect_to @critical_factor, notice: 'Meta registrada correctamente.' }

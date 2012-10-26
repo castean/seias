@@ -1,5 +1,5 @@
 <h1>New school_age</h1>
 
-<%= render 'form' %>
 
-<%= link_to 'Back', school_ages_path %>
+
+<%= render :partial => 'form', :locals => {:url => institution_school_ages_path(@institution), :method => :post} %>

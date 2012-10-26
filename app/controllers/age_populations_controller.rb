@@ -1,4 +1,7 @@
 class AgePopulationsController < ApplicationController
+  load_and_authorize_resource
+  before_filter :find_institution
+
   # GET /age_populations
   # GET /age_populations.json
   def index
@@ -40,11 +43,12 @@ class AgePopulationsController < ApplicationController
   # POST /age_populations
   # POST /age_populations.json
   def create
-    @age_population = AgePopulation.new(params[:age_population])
+    @age_population.institution_id = @institution
+    @age_population = @institution.age_populations.build(params[:age_population])
 
     respond_to do |format|
       if @age_population.save
-        format.html { redirect_to @age_population, notice: 'Age population was successfully created.' }
+        format.html { redirect_to @institution, notice: 'Age population was successfully created.' }
         format.json { render json: @age_population, status: :created, location: @age_population }
       else
         format.html { render action: "new" }
@@ -79,5 +83,9 @@ class AgePopulationsController < ApplicationController
       format.html { redirect_to age_populations_url }
       format.json { head :no_content }
     end
+  end
+  protected
+  def find_institution
+    @institution = Institution.find(params[:institution_id])
   end
 end

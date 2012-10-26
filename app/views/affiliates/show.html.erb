@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Public target:</b>
+  <%= @affiliate.public_target_id %>
+</p>
+
+<p>
+  <b>Program:</b>
+  <%= @affiliate.program_id %>
+</p>
+
+<p>
+  <b>Period time:</b>
+  <%= @affiliate.period_time_id %>
+</p>
+
+<p>
+  <b>Period number:</b>
+  <%= @affiliate.period_number %>
+</p>
+
+<p>
+  <b>Institution:</b>
+  <%= @affiliate.institution_id %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%= @affiliate.person_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_affiliate_path(@affiliate) %> |
+<%= link_to 'Back', affiliates_path %>

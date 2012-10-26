@@ -1,3 +1,18 @@
+<div id="div-sh-1" class="toHide">
+  <%= label_tag :busqueda_de_personas %><br />
+  <%= autocomplete_field_tag :person, autocomplete_person_name_affiliates_path %>
+  <%= submit_tag "Buscar personas" %>
+</div>
+<table>
+  <tr>
+    <th>Nombre</th>
+  </tr>
+  <% @affiliate_benefit.each do |affiliate| %>
+      <tr>
+        <td><%= link_to affiliate[1], new_affiliate_path(:ben_aff => affiliate[0], :type_ben => params[:type]) %></td>
+      </tr>
+  <% end %>
+</table>
 <table>
   <tr>
     <th>Familiares de <%= @person.fullname %>:</th>
