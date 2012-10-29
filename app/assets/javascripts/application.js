@@ -16,6 +16,7 @@
 //= require_tree .
 // Loads all Bootstrap javascripts
 //= require bootstrap
+//= require autocomplete-rails
 
 
 // Ing. César Reyes // Esta Funcion es para el manejo de los dropdownlist
@@ -82,18 +83,18 @@ $(document).ready(function(){
                     error: function(XMLHttpRequest, errorTextStatus, error){
                         alert("Failed to submit : "+ errorTextStatus+" ;"+error);
                     },
-                    success: function(data){   
-          
+                    success: function(data){
+
                         // Clear all options from sub category select
                         $("#town_id option").remove();
                         //put in a empty default line
                         var row = "<option value=\"" + "0" + "\">" + "-- Seleciona la Localidad --" + "</option>";
-                        $(row).appendTo("#town_id");                        
+                        $(row).appendTo("#town_id");
                         // Fill sub category select
                         $.each(data, function(i, j){
-                        	row = "<option value=\"" + j.id + "\">" + j.name + "</option>";  
-                            $(row).appendTo("#town_id");                    
-                        });            
+                        	row = "<option value=\"" + j.id + "\">" + j.name + "</option>";
+                            $(row).appendTo("#town_id");
+                        });
                      }
                 });
 

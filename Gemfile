@@ -70,3 +70,7 @@ gem "net-ldap"
 gem 'exception_notification'
 
 gem 'pivot_table'
+gem 'rails3-jquery-autocomplete'
+
+#Search
+gem "ransack"

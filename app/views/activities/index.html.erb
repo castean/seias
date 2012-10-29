@@ -1,5 +1,11 @@
 <h3>Actividades</h3>
-
+<%= search_form_for @search do |f| %>
+    <div class="field">
+      <%= f.label :description_cont, "Descripcion" %>
+      <%= f.text_field :description_cont %>
+    </div>
+    <div class="actions"><%= f.submit "Buscar" %></div>
+<% end %>
 <% if can? :create, Activity %>
 	</br>
 	<%= link_to 'Agregar Actividad', new_activity_path, :class => "btn primary" %>

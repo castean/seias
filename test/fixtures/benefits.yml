@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  period: MyString
+  worth: 1
+  benefit_category_id: 1
+  delivery_date: 2012-10-17
+  qty: 1
+  unit_price: 9.99
+  affiliate_id: 1
+
+two:
+  period: MyString
+  worth: 1
+  benefit_category_id: 1
+  delivery_date: 2012-10-17
+  qty: 1
+  unit_price: 9.99
+  affiliate_id: 1
