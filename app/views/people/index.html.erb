@@ -2,6 +2,8 @@
 
 <table>
   <tr>
+    <th>Nombre</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,6 +11,8 @@
 
 <% @people.each do |person| %>
   <tr>
+    <th> <%= person.fullname %></th>
+    <th><%= link_to "Familiares", "/families/add_family/#{person.id}" %></th>
     <td><%= link_to 'Show', person %></td>
     <td><%= link_to 'Edit', edit_person_path(person) %></td>
     <td><%= link_to 'Destroy', person, confirm: 'Are you sure?', method: :delete %></td>

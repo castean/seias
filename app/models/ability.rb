@@ -24,6 +24,7 @@ class Ability
       can :report_town_act, Report
       can :for_programid, Activity
       can :autocomplete_person_name, Affiliate
+      can :for_program_id, Affiliate
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            

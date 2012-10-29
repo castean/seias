@@ -46,7 +46,8 @@
             <%= @affiliate_p.name %>
           <% elsif params[:type_ben] == "ben" %>
               <b>Persona:</b>
-              <%= @affiliate_p.name + ' ' + @affiliate_p.last_name + ' ' + @affiliate_p.second_last_name%>
+              <% @person = Person.find(params[:ben_aff])  %>
+              <%= @person.name + ' ' + @person.last_name + ' ' + @person.second_last_name%>
           <% end %>
         </p>
 
@@ -57,11 +58,12 @@
 
         <div class="field">
           <%= f.label "Tipo de Actividad" %>
-          <%= fill_activity_type_select(f) %>
+          <%= fill_activity_type_select_af(f) %>
         </div>
         <div class="field">
-          <%= f.label :period_time_id %><br />
-          <%= f.number_field :period_time_id %>
+          <%= f.label :period_time_id,  "Periodo" %><br />
+          <%= f.collection_select :period_time_id, PeriodTime.all.collect.sort_by{ |k| k['id'] }  , :id, :name, options ={:prompt => "-- Selecciona un Periodo --"}, :class=>"ddl_width" %>
+
         </div>
         <div class="field">
           <%= f.label :period_number %><br />
@@ -69,14 +71,14 @@
         </div>
         <div class="field">
           <%= f.label :institution_id %><br />
-          <%= f.number_field :institution_id %>
+          <%= f.collection_select :institution_id, Institution.all.collect.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona un Periodo --"},  :class=>"ddl_width" %>
         </div>
-        <div class="field">
-          <%= f.label :person_id %><br />
-          <%= f.number_field :person_id %>
-        </div>
+
+          <%= f.hidden_field :person_id, :value => @person.id %>
+
         <div class="actions">
          <%= f.submit %>
         </div>
       <% end %>
   <% end %>
+<%= @affiliate.activity_type_id %>

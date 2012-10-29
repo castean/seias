@@ -1,12 +1,7 @@
 module AffiliatesHelper
-  def fill_activity_type_select(f)
+  def fill_activity_type_select_af(f)
     if @affiliate.new_record?
-      #sql = "Select distinct activity_types.name, activity_types.id from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
-      #  INNER JOIN critical_success_factors ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
-      # INNER JOIN Programs ON programs.id = critical_success_factors.program_id INNER JOIN directions ON directions.id = programs.direction_id
-      #WHERE programs.department_id = #{current_user.department_id} order by activity_types.name"
-      #sql = "Select activity_types.name, activity_types.id from activity_types"
-      f.select :activity_type_id, {}, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo", :class=>"ddl_width"}
+     f.select :activity_type_id, {}, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"aff_type", :class=>"ddl_width"}
     else
 
       id = 0
@@ -29,13 +24,13 @@ module AffiliatesHelper
       end
 
       #sql = "Select activity_types.name, activity_types.id from activity_types"
-      filter_activity_types = ActiveRecord::Base.connection.select_rows(sql)
-      filter_activity_types.map{|name, id|}
-      f.select :activity_type_id, filter_activity_types, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"tipo", :class=>"ddl_width"}
+      filter_activity_types_af = ActiveRecord::Base.connection.select_rows(sql)
+      filter_activity_types_af.map{|name, id|}
+      f.select :activity_type_id, filter_activity_types_af, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"aff_type", :class=>"ddl_width"}
     end
   end
 
-  def fill_programs_select(f)
+  def fill_programs_select_af(f)
     s = "SELECT
           programs.description,
           programs.id

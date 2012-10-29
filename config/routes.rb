@@ -1,17 +1,19 @@
 Seias::Application.routes.draw do
 
 
+
+  match '/families/add_family/:person_id' => 'families#add_family'
+  resources :families
+
   resources :benefits
 
   post '/affiliates/new/' => "affiliates#new"
   match '/affiliates/new/:id' => "affiliates#new"
-  match '/affiliates/for_programid/:program_id' => 'affiliates#for_programid'
+  match '/affiliates/for_program_id/:program_id' => 'affiliates#for_program_id'
   resources :affiliates do
     get :autocomplete_person_name, :on => :collection
     get :autocomplete_institution_name, :on => :collection
   end
-
-  resources :type_people
 
   resources :documentations
 

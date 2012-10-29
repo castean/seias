@@ -74,7 +74,8 @@ class AffiliatesController < ApplicationController
 
     respond_to do |format|
       if @affiliate.save
-        format.html { redirect_to @affiliate, notice: 'Affiliate was successfully created.' }
+        format.html { redirect_to @affiliate, notice: 'Affiliate was successfully created.' + @affiliate.activity_type_id +
+            @affiliate.person_id}
         format.json { render json: @affiliate, status: :created, location: @affiliate }
       else
         format.html { render action: "new" }
@@ -111,25 +112,8 @@ class AffiliatesController < ApplicationController
     end
   end
 
-  def search_affiliate
-   # @affiliate_benefit = nil
-
-    #if params[:affiliate_per] != "" && params[:affiliate_ins] == "" && params[:field] == "1"
-     # @affiliate_benefit = Person.where("(LOWER(people.name) ILIKE '%:name%') ", :name => params[:affiliate_per])
-      #redirect_to new_affiliate_path(:affiliate_benefit => params[:affiliate_per], :type_ben => params[:field])
-   # elsif params[:affiliate_per] == "" && params[:affiliate_ins] != "" && params[:field] == "2"
-      #@affiliate_benefit = Institution.where("(LOWER(institutions.name) ILIKE '%:name%') ", :name => params[:affiliate_ins])
-      #redirect_to new_affiliate_path(:affiliate_benefit => params[:affiliate_ins], :type_ben => params[:field])
-    #end
-      respond_to do |format|
-        format.html { redirect_to new_affiliate_path(params[:affiliate_ins], params[:field]) }
-
-      end
-
-  end
-
   # Ing. César Reyes # Carga Valores de Activity_Types con CoffeScript y json
-  def for_programid
+  def for_program_id
 
     sql = "Select distinct activity_types.name, activity_types.id from activity_types INNER JOIN activity_types_critical_success_factors ON activity_types_critical_success_factors.activity_type_id = activity_types.id
                       INNER JOIN critical_success_factors ON critical_success_factors.id = activity_types_critical_success_factors.critical_success_factor_id
@@ -138,6 +122,7 @@ class AffiliatesController < ApplicationController
     @filter_activity_types = ActiveRecord::Base.connection.select_rows(sql)
     @filter_activity_types.map{|name, id|}
     respond_to do |format|
+      format.html # new.html.erb
       format.json  { render :json => @filter_activity_types}
     end
   end
