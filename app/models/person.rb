@@ -25,8 +25,10 @@ class Person < ActiveRecord::Base
                   :code_area, :phone, :cel_phone, :emergency_phone, :rfc, :curp, :email, :tutor, :tutor_relationship_id, :tutor_marital_status_id, :medical_service_id,
                   :student, :reader, :schooling, :school_type_id, :worker, :job, :self_employment, :occupation, :job_seeker, :user_id, :discapacity_status, :diagnosis,
                   :diagnosis_description, :discapacity_origin_id, :discapacity_origin_year, :observations, :status_id, :use_functional_support, :selectLeftD,
-                  :selectRightD, :selectLeftFS, :selectRightFS, :avatar, :selectLeftDo, :selectRightDo
+                  :selectRightD, :selectLeftFS, :selectRightFS, :avatar, :selectLeftDo, :selectRightDo, :income
   attr_accessor   :selectLeftD, :selectRightD, :selectLeftFS, :selectRightFS, :avatar, :selectLeftDo, :selectRightDo
+
+  validates_uniqueness_of :name , :scope => [:last_name, :second_last_name, :birthday]
 
   def selectRightD=(options)
 

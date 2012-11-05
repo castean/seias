@@ -1,8 +1,13 @@
 class FamiliesController < ApplicationController
-  autocomplete :person, :name, :full => :false
+  load_and_authorize_resource
   def add_family
     @person = Person.find(params[:person_id])
     @family = Family.new(:person_id => params[:person_id])
+
+    @search = Person.search(params[:q])
+    @people = @search.result
+
+
 
     respond_to do |format|
       format.html # new.html.erb
