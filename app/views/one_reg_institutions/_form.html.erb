@@ -84,10 +84,33 @@
     </div>
    </div>
   </br>
-  <div class="field">
-    <%= f.label :operation_status,"Estatus Operativo" %>
-    <%= f.number_field :operation_status %>
-  </div>
+
+  <div>
+      <table border="0">
+         <tr>
+         <td><h4>Documentacion Disponible</h4></td>
+         </tr>
+         <tr>
+         <td align="left">
+        <%= filldocrightleftselectiononereginst(f)%>
+      </td>
+      </tr>
+        <tr>
+          <td>
+            <input name="btnRightdo" type="button" id="btnRightdo" value="v" onClick="javascript:moveToRightOrLefttwo(1);">
+
+            <input name="btnLeftdo" type="button" id="btnLeftdo" value="^" onClick="javascript:moveToRightOrLefttwo(2);">
+          </td>
+        </tr>
+         <tr>
+         <td><h4>Documentacion Presentada</h4></td>
+         </tr>
+        <td align="left">
+          <%= f.select("selectRighttwo",options_for_select(@one_reg_institution.documentations.order("name").all.collect { |cat| [cat.name, cat.id] }, @one_reg_institution.id { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRighttwo', :class=>"span7"}) %>
+        </td>
+        </tr>
+      </table>
+   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
@@ -106,6 +129,18 @@ $(document).ready(function(){
         //SelectRight seleccionar
         var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
         $("#selectRight").val(options);
+    });
+
+    $('#new_one_reg_institution').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#selectRighttwo").children("option").map(function(){ return $(this).attr('value') })
+        $("#selectRightwo").val(options);
+    });
+
+    $('form[id*=edit_one_reg_institution]').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#selectRighttwo").children("option").map(function(){ return $(this).attr('value') })
+        $("#selectRightwo").val(options);
     });
 });
 </script>

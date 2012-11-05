@@ -1,9 +1,7 @@
 Seias::Application.routes.draw do
 
 
-<<<<<<< HEAD
   resources :type_people
-=======
 
   match '/families/add_family/:person_id' => 'families#add_family'
   resources :families
@@ -16,19 +14,11 @@ Seias::Application.routes.draw do
     get :autocomplete_person_name, :on => :collection
     get :autocomplete_institution_name, :on => :collection
   end
->>>>>>> 7d921abab2ce4e8d2f7dd73aeece3a1299637dc0
+
 
   resources :documentations
 
   resources :functional_supports
-
-  resources :age_ranges
-
-  resources :school_ages
-<<<<<<< HEAD
-=======
-
->>>>>>> 7d921abab2ce4e8d2f7dd73aeece3a1299637dc0
 
   resources :age_ranges
 
@@ -43,7 +33,6 @@ Seias::Application.routes.draw do
   resources :grades
 
   resources :relationships
-
 
   resources :medical_services
 
