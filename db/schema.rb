@@ -11,7 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20121105165835) do
+
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -112,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.datetime "updated_at",            :null => false
   end
 
+<<<<<<< HEAD
   create_table "affiliates", :force => true do |t|
     t.integer  "person_id"
     t.integer  "institution_id"
@@ -152,6 +155,8 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.datetime "updated_at",          :null => false
   end
 
+=======
+>>>>>>> e4888a3b556f3c6a6be4bc99c163b194da4a2dcd
   create_table "business_lines", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",          :null => false
@@ -279,6 +284,7 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
   create_table "discapacities_one_reg_institutions", :id => false, :force => true do |t|
     t.integer "one_reg_institution_id"
     t.integer "discapacity_id"
@@ -289,12 +295,15 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.integer "person_id"
   end
 
+=======
+>>>>>>> e4888a3b556f3c6a6be4bc99c163b194da4a2dcd
   create_table "discapacity_origins", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
   create_table "documentations", :force => true do |t|
     t.string   "name"
     t.integer  "belongs"
@@ -312,12 +321,15 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.integer "person_id"
   end
 
+=======
+>>>>>>> e4888a3b556f3c6a6be4bc99c163b194da4a2dcd
   create_table "ethnic_groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
   create_table "families", :force => true do |t|
     t.integer  "person_id"
     t.integer  "kin_id"
@@ -327,6 +339,8 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.decimal  "income"
   end
 
+=======
+>>>>>>> e4888a3b556f3c6a6be4bc99c163b194da4a2dcd
   create_table "father_institutions", :id => false, :force => true do |t|
     t.integer "institution_id"
     t.integer "father_institution_id"
@@ -338,11 +352,14 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
   create_table "functional_supports_people", :id => false, :force => true do |t|
     t.integer "functional_support_id"
     t.integer "person_id"
   end
 
+=======
+>>>>>>> e4888a3b556f3c6a6be4bc99c163b194da4a2dcd
   create_table "goals", :force => true do |t|
     t.integer  "month",              :null => false
     t.integer  "year",               :null => false
@@ -370,12 +387,15 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.datetime "updated_at",  :null => false
   end
 
+<<<<<<< HEAD
   create_table "guardianships", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+=======
+>>>>>>> e4888a3b556f3c6a6be4bc99c163b194da4a2dcd
   create_table "institutions", :force => true do |t|
     t.integer  "institution_type_id"
     t.string   "name"
@@ -431,6 +451,7 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
   create_table "one_reg_institutions", :force => true do |t|
     t.integer  "institution_id"
     t.boolean  "according_social_purpose"
@@ -444,6 +465,8 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.datetime "updated_at",               :null => false
   end
 
+=======
+>>>>>>> e4888a3b556f3c6a6be4bc99c163b194da4a2dcd
   create_table "ped_action_lines", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -707,6 +730,7 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
   create_table "school_ages", :force => true do |t|
     t.integer  "institution_id"
     t.integer  "grade_id"
@@ -718,6 +742,8 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.datetime "updated_at",           :null => false
   end
 
+=======
+>>>>>>> e4888a3b556f3c6a6be4bc99c163b194da4a2dcd
   create_table "school_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -769,12 +795,15 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.string   "gmaps",       :default => "t"
   end
 
+<<<<<<< HEAD
   create_table "type_people", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+=======
+>>>>>>> e4888a3b556f3c6a6be4bc99c163b194da4a2dcd
   create_table "units_of_measurement", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false

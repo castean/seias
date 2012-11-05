@@ -1,34 +1,32 @@
 <p id="notice"><%= notice %></p>
 
+
+
 <p>
-  <b>Public target:</b>
-  <%= @affiliate.public_target_id %>
+  <b>Periodo de tiempo:</b>
+  <%= PeriodTime.find(@affiliate.period_time_id).name %>
+
 </p>
 
 <p>
-  <b>Program:</b>
-  <%= @affiliate.program_id %>
-</p>
-
-<p>
-  <b>Period time:</b>
-  <%= @affiliate.period_time_id %>
-</p>
-
-<p>
-  <b>Period number:</b>
+  <b>Número de Periodos:</b>
   <%= @affiliate.period_number %>
 </p>
 
 <p>
-  <b>Institution:</b>
-  <%= @affiliate.institution_id %>
+  <b>Institucion:</b>
+  <%= Institution.find(@affiliate.institution_id).name %>
 </p>
 
 <p>
-  <b>Person:</b>
+  <b>Afiliado:</b>
   <%= @affiliate.person_id %>
 </p>
+<p>
+  <b>Actividad:</b>
+  <%= @affiliate.activity_type_id %>
+</p>
+
 
 
 <%= link_to 'Edit', edit_affiliate_path(@affiliate) %> |

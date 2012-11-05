@@ -8,6 +8,27 @@ $(document).ready ->
     $(".toHide").hide()
     $("#div-sh-" + $(this).val()).show;
 
-$ ->
-  $('.search_ben').click ->
-    alert "jala"
+$(document).ready ->
+  $("select#affiliate_program_id").change ->
+    id_value_string = $(this).val()
+    if id_value_string > "0"
+      $.ajax
+        method: "put"
+        dataType: "json"
+        cache: false
+        url:  application_root_path() + "/affiliates/for_program_id/" + id_value_string
+        timeout: 20000
+        error: (XMLHttpRequest, errorTextStatus, error) ->
+          alert "Failed to submit : " + errorTextStatus + " ;" + error  + id_value_string
+        success: (data) ->
+          $("#typess").text("Valor")
+          #alert "entro"
+          # Clear all options from sub category select
+          $("#aff_type option").remove()
+          #put in a empty default line
+          row = "<option value=\"" + "0" + "\">" + "-- Seleciona el Tipo de Actividad --" + "</option>"
+          $(row).appendTo "#aff_type"
+          # Fill sub category select
+          $.each data, (i, j) ->
+            row = "<option value=\"" + j[1] + "\">" + j[0] + "</option>"
+            $(row).appendTo "#aff_type";
