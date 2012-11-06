@@ -341,3 +341,42 @@ $(document).ready(function(){
      return true;
  } 
 
+
+ function moveToRightOrLefttwo(side){
+ var listLeft=document.getElementById('selectLefttwo');
+     var listRight=document.getElementById('selectRighttwo');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las líneas de acción a la derecha');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+    }
+    else if(side==2){
+     if(listRight.options.length==0){
+         alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+        else{
+         var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+             listRight.options[0].selected=true;
+             } 
+        } 
+    } 
+} 
+ function movetwo(listBoxTo,optionValue,optionDisplayText){
+ var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+}

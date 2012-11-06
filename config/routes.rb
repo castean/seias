@@ -1,4 +1,8 @@
 Seias::Application.routes.draw do
+
+  resources :type_people
+
+
   match '/families/add_family/:person_id' => 'families#add_family'
   resources :families
 
@@ -13,14 +17,10 @@ Seias::Application.routes.draw do
     get :autocomplete_institution_name, :on => :collection
   end
 
+
   resources :documentations
 
   resources :functional_supports
-
-  resources :age_ranges
-
-  resources :school_ages
-
 
   resources :age_ranges
 
@@ -35,7 +35,6 @@ Seias::Application.routes.draw do
   resources :grades
 
   resources :relationships
-
 
   resources :medical_services
 

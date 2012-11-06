@@ -10,17 +10,24 @@
       </ul>
     </div>
   <% end %>
-  <table>
-    <tr>
-      <% if @affiliate.person_id != "" and @affiliate.institution_ben_id == "" %>
-          <b>Persona Beneficiada:</b>
-          <%= @affiliate.person.fullname %>
-      <% elsif @affiliate.institution_ben_id != "" and @affiliate.person_id == "" %>
-          <b>Institución Beneficiada:</b>
-          <%= Institution.find(@affiliate.institution_ben_id).name %>
-      <% end %>
-    </tr>
-  </table>
+
+
+  <% if params[:id]  %>
+    <table>
+      <tr><th><b>Persona Beneficiada:</b></th></tr>
+      <tr><td><%= Person.find(params[:id]).name %></td></tr>
+    </table>
+    <table>
+      <tr><th><b>Programa Afiliado:</b></th></tr>
+        <% @affiliate.each do |affiliate| %>
+          <% if affiliate[0] %>
+            <tr><td><%= Activity.find(affiliate.activity_aff).name %></td> </tr>
+
+          <% end %>
+        <% end %>
+    </table>
+  <% end %>
+
 
   <div class="field">
     <%= f.label :period %><br />

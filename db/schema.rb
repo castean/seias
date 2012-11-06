@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031192516) do
+ActiveRecord::Schema.define(:version => 20121105165835) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -300,6 +300,11 @@ ActiveRecord::Schema.define(:version => 20121031192516) do
     t.integer  "belongs"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "documentations_one_reg_institutions", :id => false, :force => true do |t|
+    t.integer "documentation_id"
+    t.integer "institution_id"
   end
 
   create_table "documentations_people", :id => false, :force => true do |t|
