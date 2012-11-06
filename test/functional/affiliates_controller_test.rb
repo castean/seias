@@ -18,7 +18,7 @@ class AffiliatesControllerTest < ActionController::TestCase
 
   test "should create affiliate" do
     assert_difference('Affiliate.count') do
-      post :create, affiliate: { institution_id: @affiliate.institution_id, period_number: @affiliate.period_number, period_time_id: @affiliate.period_time_id, person_id: @affiliate.person_id, program_id: @affiliate.program_id, public_target_id: @affiliate.public_target_id }
+      post :create, affiliate: { activity_type_id: @affiliate.activity_type_id, institution_id: @affiliate.institution_id, institution_id: @affiliate.institution_id, period_number: @affiliate.period_number, period_time_id: @affiliate.period_time_id, person_id: @affiliate.person_id }
     end
 
     assert_redirected_to affiliate_path(assigns(:affiliate))
@@ -35,7 +35,7 @@ class AffiliatesControllerTest < ActionController::TestCase
   end
 
   test "should update affiliate" do
-    put :update, id: @affiliate, affiliate: { institution_id: @affiliate.institution_id, period_number: @affiliate.period_number, period_time_id: @affiliate.period_time_id, person_id: @affiliate.person_id, program_id: @affiliate.program_id, public_target_id: @affiliate.public_target_id }
+    put :update, id: @affiliate, affiliate: { activity_type_id: @affiliate.activity_type_id, institution_id: @affiliate.institution_id, institution_id: @affiliate.institution_id, period_number: @affiliate.period_number, period_time_id: @affiliate.period_time_id, person_id: @affiliate.person_id }
     assert_redirected_to affiliate_path(assigns(:affiliate))
   end
 

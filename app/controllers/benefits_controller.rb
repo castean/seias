@@ -25,7 +25,7 @@ class BenefitsController < ApplicationController
   # GET /benefits/new.json
   def new
     @benefit = Benefit.new
-
+    @affiliate = Affiliate.find(params[:id])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @benefit }

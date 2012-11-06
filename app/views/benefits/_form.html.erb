@@ -10,6 +10,17 @@
       </ul>
     </div>
   <% end %>
+  <table>
+    <tr>
+      <% if @affiliate.person_id != "" and @affiliate.institution_ben_id == "" %>
+          <b>Persona Beneficiada:</b>
+          <%= @affiliate.person.fullname %>
+      <% elsif @affiliate.institution_ben_id != "" and @affiliate.person_id == "" %>
+          <b>Institución Beneficiada:</b>
+          <%= Institution.find(@affiliate.institution_ben_id).name %>
+      <% end %>
+    </tr>
+  </table>
 
   <div class="field">
     <%= f.label :period %><br />
@@ -24,8 +35,8 @@
     <%= f.number_field :benefit_category_id %>
   </div>
   <div class="field">
-    <%= f.label :delivery_date %><br />
-    <%= f.date_select :delivery_date %>
+    <%= f.label :delivery_date, "Fecha de entrega" %>
+    <%= f.datepicker :delivery_date, :dateFormat => "dd-mm-yy" %>
   </div>
   <div class="field">
     <%= f.label :qty %><br />

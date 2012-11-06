@@ -1,7 +1,7 @@
 module AffiliatesHelper
   def fill_activity_type_select_af(f)
     if @affiliate.new_record?
-     f.select :activity_type_id, {}, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"aff_type", :class=>"ddl_width"}
+     f.select :activity_type_id, {}, {:prompt => '-- Seleciona el Tipo de Actividad --'}, { :class=>"ddl_width"}
     else
 
       id = 0
@@ -26,7 +26,7 @@ module AffiliatesHelper
       #sql = "Select activity_types.name, activity_types.id from activity_types"
       filter_activity_types_af = ActiveRecord::Base.connection.select_rows(sql)
       filter_activity_types_af.map{|name, id|}
-      f.select :activity_type_id, filter_activity_types_af, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:id=>"aff_type", :class=>"ddl_width"}
+      f.select :activity_type_id, filter_activity_types_af, {:prompt => '-- Seleciona el Tipo de Actividad --'}, {:class=>"ddl_width"}
     end
   end
 

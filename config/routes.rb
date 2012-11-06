@@ -1,10 +1,8 @@
 Seias::Application.routes.draw do
-
-
-
   match '/families/add_family/:person_id' => 'families#add_family'
   resources :families
 
+  match '/benefits/new/:id' => 'benefits#new'
   resources :benefits
 
   post '/affiliates/new/' => "affiliates#new"
