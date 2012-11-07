@@ -25,7 +25,9 @@ class BenefitsController < ApplicationController
   # GET /benefits/new.json
   def new
     @benefit = Benefit.new
-
+    if params[:id]
+      @affiliate = Affiliate.where(:person_id => params[:id], :activity_type_id => 'DISTINCT activity_type_id')
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @benefit }

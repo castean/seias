@@ -1,5 +1,6 @@
 Seias::Application.routes.draw do
 
+
   resources :priorities
 
   match '/offices/for_program_id/:program_id' => 'offices#for_program_id'
@@ -9,9 +10,11 @@ Seias::Application.routes.draw do
 
   resources :type_people
 
+
   match '/families/add_family/:person_id' => 'families#add_family'
   resources :families
 
+  match '/benefits/new/:id' => 'benefits#new'
   resources :benefits
 
   post '/affiliates/new/' => "affiliates#new"

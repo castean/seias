@@ -1,11 +1,10 @@
 class AffiliatesController < ApplicationController
-  autocomplete :person, :name, :extra_data => [:last_name],:full => :false
+  autocomplete :person, :name, :extra_data => [:last_name, :second_last_name],:display_value => :fullname
   autocomplete :institution, :name, :full => :false
   # GET /affiliates
   # GET /affiliates.json
   def index
     @affiliates = Affiliate.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @affiliates }
@@ -29,29 +28,42 @@ class AffiliatesController < ApplicationController
   def new
     @affiliate = Affiliate.new
 
-    if params[:type] == "ben"
+    if params[:type] == "ben" or (params[:ben_aff] != "" and params[:field] != "")
       if params[:field] == "1"
-        name_ben = params[:affiliates][:person]
-        sql = "Select id , name from people WHERE (LOWER(people.name) ILIKE '%#{name_ben}%') ORDER BY people.name"
-        @affiliate_benefit = ActiveRecord::Base.connection.select_rows(sql)
-        @affiliate_benefit.map{|name, id|}
-        respond_to do |format|
-          format.html # new.html.erb
-          format.json  { render :json => @affiliate_benefit}
-        end
-        #@affiliate_benefit = Person.where(:id => "12")
-      elsif params[:field] == "2"
-        name_ben = params[:affiliates][:institution]
-        @affiliate_benefit = Institution.find(1)
-      end
-    elsif params[:ben_aff] != "" && params[:type_ben]!= ""
-        if params[:type_ben] == "ben"
-          @affiliate_p = Person.find(params[:ben_aff])
+        if params[:ben_aff].to_s != ""
+          @affiliate_benefit = Person.find(params[:ben_aff])
           respond_to do |format|
             format.html # new.html.erb
-            format.json  { render :json => @affiliate_p}
+            format.json  { render :json => @affiliate_benefit}
+          end
+        else
+          name_ben = params[:affiliates][:person]
+          sql = "Select id , name || ' ' || last_name || ' ' || second_last_name as nameben from people WHERE
+          (LOWER(people.name || ' ' || people.last_name || ' ' || people.second_last_name)
+          ILIKE '%#{name_ben}%') ORDER BY people.name"
+          @affiliate_benefit = ActiveRecord::Base.connection.select_rows(sql)
+          @affiliate_benefit.map{|nameben, id|}
+          respond_to do |format|
+            format.html # new.html.erb
+            format.json  { render :json => @affiliate_benefit}
           end
         end
+      elsif params[:field] == "2"
+        if params[:ben_aff].to_s != ""
+          @affiliate_benefit = Institution.find(params[:ben_aff])
+          respond_to do |format|
+            format.html # new.html.erb
+            format.json  { render :json => @affiliate_benefit}
+          end
+        else
+          name_ben = params[:affiliates][:institution]
+          @affiliate_benefit = Institution.order(:name).where("LOWER(institutions.name) ILIKE '%#{name_ben}%'")
+          respond_to do |format|
+            format.html # new.html.erb
+            format.json  { render :json => @affiliate_benefit}
+          end
+        end
+      end
     else
       respond_to do |format|
         format.html # new.html.erb
@@ -74,11 +86,10 @@ class AffiliatesController < ApplicationController
 
     respond_to do |format|
       if @affiliate.save
-        format.html { redirect_to @affiliate, notice: 'Affiliate was successfully created.' + @affiliate.activity_type_id +
-            @affiliate.person_id}
+        format.html { redirect_to new_benefit_path(:aff_id => @affiliate.id), notice: 'Affiliate was successfully created.' }
         format.json { render json: @affiliate, status: :created, location: @affiliate }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to  new_affiliate_path(@affiliate, :ben_aff => @affiliate.ben_aff, :field => @affiliate.field), notice: 'Llena todos los campos'}
         format.json { render json: @affiliate.errors, status: :unprocessable_entity }
       end
     end

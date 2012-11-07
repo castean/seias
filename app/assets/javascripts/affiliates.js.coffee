@@ -24,11 +24,11 @@ $(document).ready ->
           $("#typess").text("Valor")
           #alert "entro"
           # Clear all options from sub category select
-          $("#aff_type option").remove()
+          $("#affiliate_activity_type_id option").remove()
           #put in a empty default line
           row = "<option value=\"" + "0" + "\">" + "-- Seleciona el Tipo de Actividad --" + "</option>"
-          $(row).appendTo "#aff_type"
+          $(row).appendTo "#affiliate_activity_type_id"
           # Fill sub category select
           $.each data, (i, j) ->
             row = "<option value=\"" + j[1] + "\">" + j[0] + "</option>"
-            $(row).appendTo "#aff_type";
+            $(row).appendTo "#affiliate_activity_type_id";

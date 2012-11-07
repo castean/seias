@@ -5,7 +5,12 @@ class Affiliate < ActiveRecord::Base
   belongs_to :period_time
   belongs_to :activity_type
 
-  attr_accessible :period_number, :period_time_id, :person_id, :program_id, :public_target_id,
-                  :institution_id, :activity_type_id
-  attr_accessor :program_id, :activity_type_id, :person_id
+  attr_accessible :person_id, :institution_id, :activity_type_id , :period_time_id, :period_number, :institution_ben_id,:program_id,:field, :ben_aff
+  attr_accessor  :program_id,:field, :ben_aff
+
+  validates :institution_id, :presence => true
+  validates :activity_type_id, :presence => true
+  validates :period_time_id, :presence => true
+  validates :period_number, :presence => true
+
 end

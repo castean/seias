@@ -11,6 +11,24 @@
     </div>
   <% end %>
 
+
+  <% if params[:id]  %>
+    <table>
+      <tr><th><b>Persona Beneficiada:</b></th></tr>
+      <tr><td><%= Person.find(params[:id]).name %></td></tr>
+    </table>
+    <table>
+      <tr><th><b>Programa Afiliado:</b></th></tr>
+        <% @affiliate.each do |affiliate| %>
+          <% if affiliate[0] %>
+            <tr><td><%= Activity.find(affiliate.activity_aff).name %></td> </tr>
+
+          <% end %>
+        <% end %>
+    </table>
+  <% end %>
+
+
   <div class="field">
     <%= f.label :period %><br />
     <%= f.text_field :period %>
@@ -24,8 +42,8 @@
     <%= f.number_field :benefit_category_id %>
   </div>
   <div class="field">
-    <%= f.label :delivery_date %><br />
-    <%= f.date_select :delivery_date %>
+    <%= f.label :delivery_date, "Fecha de entrega" %>
+    <%= f.datepicker :delivery_date, :dateFormat => "dd-mm-yy" %>
   </div>
   <div class="field">
     <%= f.label :qty %><br />

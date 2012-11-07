@@ -65,4 +65,7 @@ class Person < ActiveRecord::Base
   def fullname
     "#{name} #{last_name} #{second_last_name}"
   end
+  def funky_method
+    "#{name} #{last_name} #{second_last_name}"
+  end
 end
