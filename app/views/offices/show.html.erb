@@ -1,0 +1,85 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Department:</b>
+  <%= @office.department_id %>
+</p>
+
+<p>
+  <b>Internal office number:</b>
+  <%= @office.internal_office_number %>
+</p>
+
+<p>
+  <b>External office number:</b>
+  <%= @office.external_office_number %>
+</p>
+
+<p>
+  <b>Record no:</b>
+  <%= @office.record_no %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @office.type_id %>
+</p>
+
+<p>
+  <b>To:</b>
+  <%= @office.to %>
+</p>
+
+<p>
+  <b>Office date:</b>
+  <%= @office.office_date %>
+</p>
+
+<p>
+  <b>Office recive date:</b>
+  <%= @office.office_recive_date %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @office.name %>
+</p>
+
+<p>
+  <b>Observations:</b>
+  <%= @office.observations %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%= @office.person_id %>
+</p>
+
+<p>
+  <b>Activity type:</b>
+  <%= @office.activity_type_id %>
+</p>
+
+<p>
+  <b>Avatar:</b>
+  <%= @office.avatar %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @office.user_id %>
+</p>
+
+<p>
+  <b>Priority:</b>
+  <%= @office.priority_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @office.status_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_office_path(@office) %> |
+<%= link_to 'Back', offices_path %>

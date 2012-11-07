@@ -24,5 +24,17 @@ class OneRegInstitution < ActiveRecord::Base
     end
   end
 
+  def selectRighttwo=(options)
+
+    self.documentations.clear
+
+    options.each do |option|
+      unless option.empty?
+        line = Documentation.find(option)
+        self.documentations << line
+      end
+    end
+  end
+
 
 end

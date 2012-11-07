@@ -24,9 +24,12 @@ class Ability
       can :report_town_act, Report
       can :for_programid, Activity
       can :autocomplete_person_name, Affiliate
+      can :autocomplete_person_last_name, Office
       can :autocomplete_person_name_last_name, Affiliate
       can :autocomplete_institution_name, Affiliate
+
       can :for_program_id, Affiliate
+      can :for_program_id, Office
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            
@@ -61,7 +64,11 @@ class Ability
         end
         when "user" then
         can :create, Affiliate
+<<<<<<< HEAD
+        can :create, Office
+=======
         can :create, Benefit
+>>>>>>> b5724da197885d16ab0f7adc6978d316da5dc4a1
         can :create, Activity
         can :update, Activity do |acti|
           acti.try(:user) == user 

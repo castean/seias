@@ -11,7 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105165835) do
+
+ActiveRecord::Schema.define(:version => 20121107194840) do
+
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -304,7 +306,7 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
 
   create_table "documentations_one_reg_institutions", :id => false, :force => true do |t|
     t.integer "documentation_id"
-    t.integer "institution_id"
+    t.integer "one_reg_institution_id"
   end
 
   create_table "documentations_people", :id => false, :force => true do |t|
@@ -429,6 +431,32 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+
+  create_table "offices", :force => true do |t|
+    t.integer  "department_id"
+    t.string   "internal_office_number"
+    t.string   "external_office_number"
+    t.string   "record_no"
+    t.integer  "type_id"
+    t.string   "to"
+    t.datetime "office_date"
+    t.datetime "office_recive_date"
+    t.string   "name"
+    t.text     "observations"
+    t.integer  "person_id"
+    t.integer  "activity_type_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "user_id"
+    t.integer  "priority_id"
+    t.integer  "status_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "direction_id"
   end
 
   create_table "one_reg_institutions", :force => true do |t|
@@ -568,7 +596,6 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.boolean  "diagnosis"
     t.text     "diagnosis_description"
     t.integer  "discapacity_origin_id"
-    t.date     "discapacity_origin_year"
     t.text     "observations"
     t.integer  "status_id"
     t.boolean  "use_functional_support"
@@ -578,6 +605,8 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.integer  "sex"
     t.integer  "born_county_id"
     t.float    "income"
+    t.string   "social_security_number"
+    t.integer  "discapacity_origin_year"
   end
 
   create_table "period_times", :force => true do |t|
@@ -605,6 +634,12 @@ ActiveRecord::Schema.define(:version => 20121105165835) do
     t.boolean  "gmaps"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "priorities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "priority_program_action_lines", :force => true do |t|
