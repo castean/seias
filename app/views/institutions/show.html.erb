@@ -206,6 +206,7 @@
     </p>
     </br>
     <%= link_to "Editar Escolaridad", [@institution, b], :method => :edit %>
+    <%= link_to "Borrar Escolaridad", [@institution, b], :method => :delete, :confirm => "Esta usted seguro?" %>
 <%end%>
 </br>
 </br>
@@ -220,6 +221,7 @@
     </p>
     </br>
     <%= link_to "Editar Población", [@institution, c], :method => :edit %>
+    <%= link_to "Borrar Población", [@institution, c], :method => :delete, :confirm => "Esta usted seguro?" %>
 <%end%>
 </br>
 </br>
@@ -252,14 +254,15 @@
       <%= a.public_target_id%>
     </p>
     </br>
-    <%= link_to "Editar Reg-Inst.1/R01", [@institution, a], :method => :edit %>
+    <%= link_to "Editar Reg-Inst.1/R01", [@institution, a], :method => :edit %> |
+    <%= link_to "Borrar Reg-Inst.1/R01", [@institution, a], :method => :delete, :confirm => "Esta usted seguro?" %>
 <%end%>
 </br>
 </br>
-<%= link_to 'Reg_Inst.2/R01', new_institution_one_reg_institution_path(@institution), :class => "btn" %>
+   <%# link_to 'Reg_Inst.2/R01', new_institution_one_reg_institution_path(@institution), :class => "btn" %>
+<!--</br>
 </br>
-</br>
-</br>
+</br> -->
 
 <div class="btn-group">
     <%= gmaps("map_options" =>{:auto_zoom => false, :zoom => 7},"markers" => {"data" => @json}) %>

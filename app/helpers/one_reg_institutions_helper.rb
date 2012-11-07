@@ -14,7 +14,7 @@ module OneRegInstitutionsHelper
   end
   def filldocrightleftselectiononereginst(f)
     if @one_reg_institution.new_record?
-      f.select("selectLefttwo",options_for_select(Documentation.order("name").all.collect { |cat| [cat.name, cat.id] }, @institution.id { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectLefttwo', :class=>"span7"})
+      f.select("selectLefttwo",options_for_select(Documentation.order("name").all.collect { |cat| [cat.name, cat.id] }, @one_reg_institution.id { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectLefttwo', :class=>"span7"})
     else
       @sql = "Select name,id from documentation where id not in (SELECT documentation.id FROM documentation INNER JOIN documentations_one_reg_institutions
               ON documentation.id = documentations_one_reg_institutions.documentation_id

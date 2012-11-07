@@ -1,13 +1,12 @@
 #encoding:utf-8
 class Person < ActiveRecord::Base
-
-
   #has_many :relations
   #has_many :relatives, :through => "relations"
 
   belongs_to :town
   belongs_to :ethnic_group
   #belongs_to :sex
+  belongs_to :office
   belongs_to :medical_service
   belongs_to :relationship
   belongs_to :grade

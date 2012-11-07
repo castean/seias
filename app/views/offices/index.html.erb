@@ -1,0 +1,53 @@
+<h1>Listing offices</h1>
+
+<table>
+  <tr>
+    <th>Department</th>
+    <th>Internal office number</th>
+    <th>External office number</th>
+    <th>Record no</th>
+    <th>Type</th>
+    <th>To</th>
+    <th>Office date</th>
+    <th>Office recive date</th>
+    <th>Name</th>
+    <th>Observations</th>
+    <th>Person</th>
+    <th>Activity type</th>
+    <th>Avatar</th>
+    <th>User</th>
+    <th>Priority</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @offices.each do |office| %>
+  <tr>
+    <td><%= office.department_id %></td>
+    <td><%= office.internal_office_number %></td>
+    <td><%= office.external_office_number %></td>
+    <td><%= office.record_no %></td>
+    <td><%= office.type_id %></td>
+    <td><%= office.to %></td>
+    <td><%= office.office_date %></td>
+    <td><%= office.office_recive_date %></td>
+    <td><%= office.name %></td>
+    <td><%= office.observations %></td>
+    <td><%= office.person_id %></td>
+    <td><%= office.activity_type_id %></td>
+    <td><%= office.avatar %></td>
+    <td><%= office.user_id %></td>
+    <td><%= office.priority_id %></td>
+    <td><%= office.status_id %></td>
+    <td><%= link_to 'Show', office %></td>
+    <td><%= link_to 'Edit', edit_office_path(office) %></td>
+    <td><%= link_to 'Destroy', office, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Office', new_office_path %>
