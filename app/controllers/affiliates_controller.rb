@@ -86,7 +86,7 @@ class AffiliatesController < ApplicationController
 
     respond_to do |format|
       if @affiliate.save
-        format.html { redirect_to new_benefit_path(:aff_id => @affiliate.id), notice: 'Affiliate was successfully created.' }
+        format.html { redirect_to new_benefit_path(:aff_id => @affiliate.person_id), notice: 'Affiliate was successfully created.' }
         format.json { render json: @affiliate, status: :created, location: @affiliate }
       else
         format.html { redirect_to  new_affiliate_path(@affiliate, :ben_aff => @affiliate.ben_aff, :field => @affiliate.field), notice: 'Llena todos los campos'}

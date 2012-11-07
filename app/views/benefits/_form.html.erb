@@ -15,49 +15,63 @@
   <% if params[:id]  %>
     <table>
       <tr><th><b>Persona Beneficiada:</b></th></tr>
-      <tr><td><%= Person.find(params[:id]).name %></td></tr>
+    <% if @affiliate.person_id %>
+      <tr><td><%= Person.find(@affiliate.person_id).fullname %></td></tr>
+    <% elsif @affiliate.institution_ben_id %>
+          <tr><td><%= Institution.find(@affiliate.institution_ben_id).name %></td></tr>
+    <% end %>
     </table>
     <table>
       <tr><th><b>Programa Afiliado:</b></th></tr>
-        <% @affiliate.each do |affiliate| %>
-          <% if affiliate[0] %>
-            <tr><td><%= Activity.find(affiliate.activity_aff).name %></td> </tr>
+      <% @affiliate_benefit = Affiliate.find_by_sql("select distinct(activity_type_id), person_id, institution_id from affiliates where person_id = #{@affiliate.person_id}") %>
+      <% @affiliate_benefit.each do |affiliate| %>
+          <tr><td><%= link_to affiliate.activity_type.name, new_benefit_path(:aff_ben => affiliate.person_id, :aff_act => affiliate.institution_id) %></td> </tr>
+      <% end %>
 
-          <% end %>
-        <% end %>
     </table>
   <% end %>
 
+  <% if params[:aff_ben] != "" and params[:aff_actn] != ""%>
+        <table>
+          <tr><th><b>Persona Beneficiada:</b></th></tr>
 
-  <div class="field">
-    <%= f.label :period %><br />
-    <%= f.text_field :period %>
-  </div>
-  <div class="field">
-    <%= f.label :worth %><br />
-    <%= f.number_field :worth %>
-  </div>
-  <div class="field">
-    <%= f.label :benefit_category_id %><br />
-    <%= f.number_field :benefit_category_id %>
-  </div>
-  <div class="field">
-    <%= f.label :delivery_date, "Fecha de entrega" %>
-    <%= f.datepicker :delivery_date, :dateFormat => "dd-mm-yy" %>
-  </div>
-  <div class="field">
-    <%= f.label :qty %><br />
-    <%= f.number_field :qty %>
-  </div>
-  <div class="field">
-    <%= f.label :unit_price %><br />
-    <%= f.text_field :unit_price %>
-  </div>
-  <div class="field">
-    <%= f.label :affiliate_id %><br />
-    <%= f.number_field :affiliate_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+              <tr><td><%= Person.find(params[:aff_ben]).fullname %></td></tr>
+
+        </table>
+        <table>
+          <tr><th><b>Programa Afiliado:</b></th></tr>
+          <tr><td><%= ActivityType.find(params[:aff_act]).name %></td></tr>
+        </table>
+    <div class="field">
+      <%= f.label :period %><br />
+      <%= f.text_field :period %>
+    </div>
+    <div class="field">
+      <%= f.label :worth %><br />
+      <%= f.number_field :worth %>
+    </div>
+    <div class="field">
+      <%= f.label :benefit_category_id %><br />
+      <%= f.number_field :benefit_category_id %>
+    </div>
+    <div class="field">
+      <%= f.label :delivery_date, "Fecha de entrega" %>
+      <%= f.datepicker :delivery_date, :dateFormat => "dd-mm-yy" %>
+    </div>
+    <div class="field">
+      <%= f.label :qty %><br />
+      <%= f.number_field :qty %>
+    </div>
+    <div class="field">
+      <%= f.label :unit_price %><br />
+      <%= f.text_field :unit_price %>
+    </div>
+    <div class="field">
+      <%= f.label :affiliate_id %><br />
+      <%= f.number_field :affiliate_id %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+   <% end %>
 <% end %>
