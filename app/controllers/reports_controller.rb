@@ -161,16 +161,22 @@ class ReportsController < ApplicationController
       redirect_to reports_path, :notice => "Debes de llenar todos los campos"
     else
       @geoloc = Town.select("cast(towns.state_id as char) || lpad(towns.county_id::text,3,'0') || lpad(towns.cve_loc::text, 4, '0') as georef, towns.name as tnombre,
-              sum(cast(activities.value as int)) as totalact").order("towns.name ").joins(:activities).group("
-              towns.name,cast(towns.state_id as char) || lpad(towns.county_id::text,3,'0') || lpad(towns.cve_loc::text, 4, '0')").where("towns.state_id = 8
-              and towns.state_id = 8 and towns.name like '%*%' and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date",
-              {:start_date => (params[:start_datec][:start_datec]).to_date - 1, :end_date => (params[:end_datec][:end_datec]).to_date + 1})
+              sum(cast(activities.value as int)) as totalact, sum(activities.qty_men) + sum(activities.qty_women) as totalp, programs.name as pname, programs.description as pdescription").order("towns.name ").joins(:activities => {:activity_type => {:critical_success_factors => :program}} ).group("
+              towns.name,cast(towns.state_id as char) || lpad(towns.county_id::text,3,'0') || lpad(towns.cve_loc::text, 4, '0'),programs.name,programs.description").where("towns.state_id = 8
+              and towns.state_id = 8 and activities.activity_date_start > :start_date and activities.activity_date_end < :end_date
+              and programs.id = :program_id",
+              {:start_date => (params[:start_datec][:start_datec]).to_date - 1, :end_date => (params[:end_datec][:end_datec]).to_date + 1, :program_id => params[:program_id][:program_id]})
 
+        if @geoloc.first.nil?
+          redirect_to reports_path, :notice => "No existe información con el criterio de busqueda"
+
+      else
       respond_to do |format|
         format.html # index.html.erb
-        format.xls { send_data @geoloc.to_xls(:columns => [:georef, :tnombre, :totalact], :headers => ['Referencia','Localidad', 'Total Actividades']), content_type: 'application/vnd.ms-excel', filename: 'localidad_geo.xls' }
+        format.xls { send_data @geoloc.to_xls(:columns => [:georef, :tnombre, :totalact, :totalp], :headers => ['Referencia','Localidad', 'Total de apoyos', 'Total de beneficiarios']), content_type: 'application/vnd.ms-excel', filename: 'localidad_geo'+ @geoloc.first.pname + '_'+ @geoloc.first.pdescription + '.xls' }
         format.json { render json: @geoloc }
       end
+        end
     end
   end
 

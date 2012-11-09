@@ -12,36 +12,26 @@
   <% end %>
 
 
-  <% if params[:id]  %>
-    <table>
-      <tr><th><b>Persona Beneficiada:</b></th></tr>
-    <% if @affiliate.person_id %>
-      <tr><td><%= Person.find(@affiliate.person_id).fullname %></td></tr>
-    <% elsif @affiliate.institution_ben_id %>
-          <tr><td><%= Institution.find(@affiliate.institution_ben_id).name %></td></tr>
-    <% end %>
-    </table>
+
+  <table>
+    <tr><th><b>Persona Beneficiada:</b></th></tr>
+    <tr><td><%= Person.find(params[:id]).fullname %></td></tr>
+  </table>
+  <% if params[:aff_act_id]%>
     <table>
       <tr><th><b>Programa Afiliado:</b></th></tr>
-      <% @affiliate_benefit = Affiliate.find_by_sql("select distinct(activity_type_id), person_id, institution_id from affiliates where person_id = #{@affiliate.person_id}") %>
-      <% @affiliate_benefit.each do |affiliate| %>
-          <tr><td><%= link_to affiliate.activity_type.name, new_benefit_path(:aff_ben => affiliate.person_id, :aff_act => affiliate.institution_id) %></td> </tr>
-      <% end %>
-
+        <tr><td><%= ActivityType.find(params[:aff_act_id]).name %></td> </tr>
+      </table>
+  <% else %>
+    <table>
+      <tr><th><b>Programa Afiliado:</b></th></tr>
+        <% @affiliate.each do |affiliate| %>
+            <tr><td><%= link_to affiliate.activity_type.name, params[:id].to_s + '/?' + 'aff=' + affiliate.id.to_s + '&aff_act_id=' + affiliate.activity_type_id.to_s %></td> </tr>
+        <% end %>
     </table>
   <% end %>
 
-  <% if params[:aff_ben] != "" and params[:aff_actn] != ""%>
-        <table>
-          <tr><th><b>Persona Beneficiada:</b></th></tr>
-
-              <tr><td><%= Person.find(params[:aff_ben]).fullname %></td></tr>
-
-        </table>
-        <table>
-          <tr><th><b>Programa Afiliado:</b></th></tr>
-          <tr><td><%= ActivityType.find(params[:aff_act]).name %></td></tr>
-        </table>
+  <% if params[:aff]%>
     <div class="field">
       <%= f.label :period %><br />
       <%= f.text_field :period %>
@@ -66,10 +56,7 @@
       <%= f.label :unit_price %><br />
       <%= f.text_field :unit_price %>
     </div>
-    <div class="field">
-      <%= f.label :affiliate_id %><br />
-      <%= f.number_field :affiliate_id %>
-    </div>
+          <%= f.hidden_field :affiliate_id, :value => params[:aff] %>
     <div class="actions">
       <%= f.submit %>
     </div>

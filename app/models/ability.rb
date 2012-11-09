@@ -64,11 +64,8 @@ class Ability
         end
         when "user" then
         can :create, Affiliate
-<<<<<<< HEAD
         can :create, Office
-=======
         can :create, Benefit
->>>>>>> b5724da197885d16ab0f7adc6978d316da5dc4a1
         can :create, Activity
         can :update, Activity do |acti|
           acti.try(:user) == user 
