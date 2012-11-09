@@ -29,9 +29,20 @@ class BenefitsController < ApplicationController
       person_id = params[:id]
       @affiliate = Affiliate.find_all_by_person_id(person_id)
     end
+    if params[:continuos] == '1'
+
+      @benefit_s = Benefit.last.dup
+
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @benefit_s }
+
+      end
+    else
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @benefit }
+    end
     end
   end
 
@@ -47,8 +58,11 @@ class BenefitsController < ApplicationController
 
     respond_to do |format|
       if @benefit.save
-        format.html { redirect_to @benefit, notice: 'Benefit was successfully created.' }
-        format.json { render json: @benefit, status: :created, location: @benefit }
+        #format.html { redirect_to @benefit, notice: 'Benefit was successfully created.' }
+        flash[:notice] = 'La actividad se dio de alta satisfactoriamente.'
+        format.html { redirect_to(:action => 'new', :continuos => 1 )}
+
+        #format.json { render json: @benefit, status: :created, location: @benefit }
       else
         format.html { render action: "new" }
         format.json { render json: @benefit.errors, status: :unprocessable_entity }
