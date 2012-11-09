@@ -1,8 +1,11 @@
 Seias::Application.routes.draw do
 
 
+  resources :statuses
+
   resources :priorities
 
+  match '/offices/end_office/:id' => 'offices#end_office'
   match '/offices/for_program_id/:program_id' => 'offices#for_program_id'
   resources :offices do
     get :autocomplete_person_last_name, :on => :collection
