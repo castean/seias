@@ -2,7 +2,7 @@ class CreateAffiliates < ActiveRecord::Migration
   def change
     create_table :affiliates do |t|
       t.integer :public_target_id
-      t.integer :program_id
+      t.integer :activity_type_id
       t.integer :period_time_id
       t.integer :period_number
       t.integer :institution_id

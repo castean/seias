@@ -3,14 +3,24 @@ Seias::Application.routes.draw do
 
 
   match '/families/add_family/:person_id' => 'families#add_family'
-  resources :families
+  match '/families/for_search' => 'families#for_search'
+  #match '/families/add_family/action' => 'families#add_family/:person_id'
+  resources :families   do
+    get :autocomplete_last_name, :on => :collection
+    get :autocomplete_name, :on => :collection
+    get :autocomplete_second_last_name, :on => :collection
+
+  end
 
   resources :benefits
 
   post '/affiliates/new/' => "affiliates#new"
   match '/affiliates/new/:id' => "affiliates#new"
+  match '/affiliates/for_program_id/:program_id' => 'affiliates#for_program_id'
   resources :affiliates do
     get :autocomplete_person_name, :on => :collection
+    get :autocomplete_person_last_name, :on => :collection
+    get :autocomplete_person_second_last_name, :on => :collection
     get :autocomplete_institution_name, :on => :collection
   end
 

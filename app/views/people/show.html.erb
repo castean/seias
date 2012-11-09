@@ -1,5 +1,14 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <%= image_tag @person.avatar(:small) %>
+</p>
 
+<p>
+  <b>Nombre:</b></br>
+  <%= @person.fullname %>
+</p>
+</br>
 
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
+<% if can? :update, @person %>
+    <%= link_to 'Editar', edit_person_path(@person) %> |
+<% end %>
+<%= link_to 'Registro de Personas', people_path %>

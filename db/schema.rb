@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121026191032) do
+ActiveRecord::Schema.define(:version => 20121106203248) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -113,14 +113,14 @@ ActiveRecord::Schema.define(:version => 20121026191032) do
   end
 
   create_table "affiliates", :force => true do |t|
-    t.integer  "public_target_id"
+    t.integer  "person_id"
+    t.integer  "institution_id"
     t.integer  "activity_type_id"
     t.integer  "period_time_id"
     t.integer  "period_number"
-    t.integer  "institution_id"
-    t.integer  "person_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "institution_ben_id"
   end
 
   create_table "age_populations", :force => true do |t|
@@ -302,6 +302,11 @@ ActiveRecord::Schema.define(:version => 20121026191032) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "documentations_one_reg_institutions", :id => false, :force => true do |t|
+    t.integer "documentation_id"
+    t.integer "one_reg_institution_id"
+  end
+
   create_table "documentations_people", :id => false, :force => true do |t|
     t.integer "documentation_id"
     t.integer "person_id"
@@ -319,6 +324,7 @@ ActiveRecord::Schema.define(:version => 20121026191032) do
     t.integer  "relationship_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.decimal  "income"
   end
 
   create_table "father_institutions", :id => false, :force => true do |t|
@@ -572,6 +578,7 @@ ActiveRecord::Schema.define(:version => 20121026191032) do
     t.integer  "sex"
     t.integer  "born_county_id"
     t.float    "income"
+    t.string   "social_security_number"
   end
 
   create_table "period_times", :force => true do |t|
