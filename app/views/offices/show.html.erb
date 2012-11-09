@@ -1,84 +1,67 @@
-<p id="notice"><%= notice %></p>
+<p id="notice" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+   xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
 
 <p>
-  <b>Department:</b>
-  <%= @office.department_id %>
+  <b>Dirección:</b>
+  <%= @office.direction.name %>
 </p>
 
 <p>
-  <b>Internal office number:</b>
+  <b>No. Oficio Interno:</b>
   <%= @office.internal_office_number %>
 </p>
 
+<%if @office.external_office_number.blank? or @office.external_office_number.nil?%>
+<%else%>
+    <p>
+      <b>External office number:</b>
+      <%= @office.external_office_number %>
+    </p>
+    <p>
+        <b>Office date:</b>
+        <%= @office.office_date %>
+    </p>
+    <p>
+      <b>Office recive date:</b>
+      <%= @office.office_recive_date %>
+    </p>
+<%end%>
 <p>
-  <b>External office number:</b>
-  <%= @office.external_office_number %>
-</p>
-
-<p>
-  <b>Record no:</b>
+  <b>No. Expediente:</b>
   <%= @office.record_no %>
 </p>
-
 <p>
-  <b>Type:</b>
-  <%= @office.type_id %>
+  <b>Prioridad:</b>
+  <%= Priority.find(@office.priority_id).name %>
 </p>
-
+</br>
+</br>
 <p>
-  <b>To:</b>
-  <%= @office.to %>
+  <b>Para:</b></br>
+  <%= User.find(@office.user_id).fullname %>
 </p>
-
+</br>
+</br>
 <p>
-  <b>Office date:</b>
-  <%= @office.office_date %>
-</p>
-
-<p>
-  <b>Office recive date:</b>
-  <%= @office.office_recive_date %>
-</p>
-
-<p>
-  <b>Name:</b>
+  <b>Asunto:</b></br>
   <%= @office.name %>
 </p>
 
 <p>
-  <b>Observations:</b>
+  <b>Información:</b></br>
   <%= @office.observations %>
 </p>
-
+</br>
 <p>
-  <b>Person:</b>
-  <%= @office.person_id %>
+  <b>Apoyos Solicitados:</b></br>
+  <%= @office.activity_type.name %>
 </p>
-
+</br></br>
 <p>
-  <b>Activity type:</b>
-  <%= @office.activity_type_id %>
+  <b>Atentamente:</b></br>
+  <%= Person.find(@office.person_id).fullname  %>
 </p>
-
-<p>
-  <b>Avatar:</b>
-  <%= @office.avatar %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @office.user_id %>
-</p>
-
-<p>
-  <b>Priority:</b>
-  <%= @office.priority_id %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @office.status_id %>
-</p>
+</br>
 
 
 <%= link_to 'Edit', edit_office_path(@office) %> |

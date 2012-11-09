@@ -1,6 +1,6 @@
 <%= form_for(@office) do |f| %>
   <% if @office.errors.any? %>
-    <div id="error_explanation">
+        <div id="error_explanation" xmlns="http://www.w3.org/1999/html">
       <h2><%= pluralize(@office.errors.count, "error") %> prohibited this office from being saved:</h2>
 
       <ul>
@@ -34,10 +34,6 @@
     <%= f.label :record_no, "No. Expediente" %>
     <%= f.text_field :record_no %>
   </div>
-  <div class="field">
-    <%= f.label :type_id, "Tipo de Oficio" %>
-    <%= f.number_field :type_id %>
-  </div>
 
   <div class="field">
     <%= f.label :user_id, "Para" %>
@@ -58,16 +54,19 @@
   <div class="field">
     <%= f.label "Apoyo Solicitado" %>
     <%= fill_activity_type_select_of(f) %>
+
   </div>
   <div class="field">
     <%= f.label :person_id, "Atentamente," %>
-    <%= f.autocomplete_field :person, autocomplete_person_last_name_offices_path %>
-    <%= f.select :person_id, Person.order("name").all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Destinatario --"} %>
+    <%= f.autocomplete_field :person, autocomplete_person_last_name_offices_path, :id_element => '#office_person_id'%>
+    <%= f.hidden_field :person_id%>
+    <%# f.select :person_id, Person.order("name").all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Destinatario --"} %>
+    <%= f.hidden_field :status_id, :value => 2%>
   </div>
 
   <div class="field">
     <%= f.label :priority_id, "Prioridad" %>
-    <%= f.number_field :priority_id %>
+    <%= f.collection_select :priority_id,  Priority.order("id").all, :id, :name, options ={:prompt => "-- Selecciona Prioridad --"}%>
   </div>
 
   <div class="actions">

@@ -11,9 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20121107194840) do
-
+ActiveRecord::Schema.define(:version => 20121108190148) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -50,6 +48,11 @@ ActiveRecord::Schema.define(:version => 20121107194840) do
   create_table "activity_types_critical_success_factors", :id => false, :force => true do |t|
     t.integer "activity_type_id"
     t.integer "critical_success_factor_id"
+  end
+
+  create_table "activity_types_offices", :id => false, :force => true do |t|
+    t.integer "activity_type_id"
+    t.integer "office_id"
   end
 
   create_table "activitygoals", :force => true do |t|
@@ -433,7 +436,6 @@ ActiveRecord::Schema.define(:version => 20121107194840) do
     t.datetime "updated_at", :null => false
   end
 
-
   create_table "offices", :force => true do |t|
     t.integer  "department_id"
     t.string   "internal_office_number"
@@ -457,6 +459,8 @@ ActiveRecord::Schema.define(:version => 20121107194840) do
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
     t.integer  "direction_id"
+    t.text     "person_info"
+    t.text     "user_info"
   end
 
   create_table "one_reg_institutions", :force => true do |t|
@@ -784,6 +788,12 @@ ActiveRecord::Schema.define(:version => 20121107194840) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "name"
+  end
+
+  create_table "statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "towns", :force => true do |t|

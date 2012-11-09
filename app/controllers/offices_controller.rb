@@ -1,5 +1,5 @@
 class OfficesController < ApplicationController
-  autocomplete :person, :last_name, :extra_data => [:name],:full => :false
+  autocomplete :person, :last_name, :extra_data => [:name, :second_last_name],:display_value => :fullname
   # GET /offices
   # GET /offices.json
   def index
@@ -45,7 +45,7 @@ class OfficesController < ApplicationController
 
     respond_to do |format|
       if @office.save
-        format.html { redirect_to @office, notice: 'Office was successfully created.' }
+        format.html { redirect_to @office, notice: 'Office was successfully created.'  }
         format.json { render json: @office, status: :created, location: @office }
       else
         format.html { render action: "new" }
@@ -93,6 +93,16 @@ class OfficesController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json  { render :json => @filter_activity_types}
+    end
+  end
+
+  def end_office
+    @office = Office.find(params[:id])
+    @office.update_attribute :status_id, "4"
+
+    respond_to do |format|
+      format.html { redirect_to offices_url }
+      format.json { head :no_content }
     end
   end
 end
