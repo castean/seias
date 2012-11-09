@@ -1,6 +1,13 @@
 class AffiliatesController < ApplicationController
+
+ # autocomplete :person, :name, :extra_data => [:last_name],:full => :false
+ # autocomplete :person, :last_name, :full => :false
+ # autocomplete :person, :second_last_name, :full => :false
+
   autocomplete :person, :name, :extra_data => [:last_name, :second_last_name],:display_value => :fullname
+
   autocomplete :institution, :name, :full => :false
+  autocomplete_last_name
   # GET /affiliates
   # GET /affiliates.json
   def index

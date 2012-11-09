@@ -1,21 +1,41 @@
-<div id="div-sh-1" class="toHide">
-  <%= label_tag :busqueda_de_personas %><br />
-  <%= autocomplete_field_tag :person, autocomplete_person_name_affiliates_path %>
-  <%= submit_tag "Buscar personas" %>
-</div>
+
+<%= form_for(@family) do |f| %>
+    <% if @family.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@family.errors.count, "error") %> prohibited this family from being saved:</h2>
+          <ul>
+            <% @family.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <p>
+      Nombre(s) <%= autocomplete_field_tag :kin_name, params[:kin_name], autocomplete_name_families_path, :id=>"kname" %><br/>
+      Apellido Paterno <%= autocomplete_field_tag :kin_last_name, params[:kin_last_name], autocomplete_last_name_families_path, :id=>"klastname" %><br/>
+      Apellido Materno <%= autocomplete_field_tag :kin_second_last_name, params[:kin_second_last_name], autocomplete_second_last_name_families_path, :id=>"ksecondlastname" %><br/>
+      <input name="btnSearch" type="button" id="btnSearch" value="Buscar" onClick="javascript:search_people();">
+    </p>
+    <div class="field">
+      <%= f.hidden_field :person_id %>
+    </div>
+    <h3>Agregar Familiar</h3>
+    <div class="field">
+      <%= f.label :kin_id, "Familiar" %><br />
+      <%= f.collection_select :kin_id,  Person.all, :id, :fullname, options ={:prompt => "-- Selecciona un Familiar --",  :id=>"kin_id"}%>
+    </div>
+    <div class="field">
+      <%= f.label :relationship_id, "Parentesco" %><br />
+      <%= f.collection_select :relationship_id,  Relationship.order("name"), :id, :name, options ={:prompt => "-- Selecciona el Parentesco --"}%>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
+<br/>
 <table>
   <tr>
-    <th>Nombre</th>
-  </tr>
-  <% @affiliate_benefit.each do |affiliate| %>
-      <tr>
-        <td><%= link_to affiliate[1], new_affiliate_path(:ben_aff => affiliate[0], :type_ben => params[:type]) %></td>
-      </tr>
-  <% end %>
-</table>
-<table>
-  <tr>
-    <th>Familiares de <%= @person.fullname %>:</th>
+    <th><h3> Familiares de <%= @person.fullname %>: </h3></th>
   </tr>
 
   <% @person.families.each do |family| %>
@@ -32,50 +52,36 @@
       </tr>
   <% end %>
 </table>
-<table>
-  <tr>
-    <th><%= @person.fullname %> es:</th>
-  </tr>
-  <% @person.inverse_families.each do |family| %>
-      <tr>
-        <td>
-          <%= family.relationship.name %>  de
-        </td>
-        <td>
-          <%= family.person.fullname %>
-        </td>
-      </tr>
-  <% end %>
-</table>
-<%= form_for(@family) do |f| %>
-    <% if @family.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@family.errors.count, "error") %> prohibited this family from being saved:</h2>
+<br/>
 
-          <ul>
-            <% @family.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
 
-    <div class="field">
-      <%= f.hidden_field :person_id %>
-    </div>
-    <div class="field">
-      <%= f.label :kin_id, "Familiar" %><br />
-      <%= f.text_field :kin_id %>
-    </div>
-    <div class="field">
-      <%= f.label :relationship_id, "Parentesco" %><br />
-      <%= f.collection_select :relationship_id,  Relationship.order("name"), :id, :name, options ={:prompt => "-- Selecciona el Parentesco --"}%>
-    </div>
-    <div class="field">
-      <%= f.label :income, "Ingreso" %><br />
-      <%= f.text_field :income %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-<% end %>
+<script type="text/javascript">
+    function search_people() {
+     var kname = document.getElementById('kname').value;
+    var klastname = document.getElementById('klastname').value;
+    var ksecondlastname = document.getElementById('ksecondlastname').value;
+    //alert("Failed to submit : ");
+        $.ajax({
+            dataType: "json",
+            cache: false,
+            url:  application_root_path() + '/families/for_search?kin_name=' + kname + '&kin_last_name=' + klastname + '&kin_second_last_name=' + ksecondlastname,
+            timeout: 20000,
+            error: function(XMLHttpRequest, errorTextStatus, error){
+                alert("Failed to submit : "+ errorTextStatus+" ;"+error);
+            },
+            success: function(data){
+                //alert("URL :" + '/families/for_search?kin_name=' + kname + '&kin_last_name=' + klastname + '&kin_second_last_name=' + ksecondlastname);
+                // Clear all options from sub category select
+                $("select#family_kin_id option").remove();
+                //put in a empty default line
+                var row = "<option value=\"" + "0" + "\">" + "-- Seleciona el Familiar --" + "</option>";
+                $(row).appendTo("select#family_kin_id");
+                // Fill sub category select
+                $.each(data, function(i, j){
+                    row = "<option value=\"" + j.id + "\">" + j.name + " " + j.last_name + " " + j.second_last_name + "</option>";
+                    $(row).appendTo("select#family_kin_id");
+                });
+            }
+        });   
+    };
+</script>

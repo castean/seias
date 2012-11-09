@@ -342,6 +342,7 @@ $(document).ready(function(){
  } 
 
 
+
  function moveToRightOrLefttwo(side){
  var listLeft=document.getElementById('selectLefttwo');
      var listRight=document.getElementById('selectRighttwo');
@@ -380,3 +381,4 @@ $(document).ready(function(){
      listBoxTo.add(newOption, null);
      return true;
 }
+

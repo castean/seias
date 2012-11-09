@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20121106203248) do
+=======
 ActiveRecord::Schema.define(:version => 20121108190148) do
+>>>>>>> dee58e5b499accb2a61439cfcf1201ab2d2ffdb5
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -436,6 +440,8 @@ ActiveRecord::Schema.define(:version => 20121108190148) do
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
+=======
   create_table "offices", :force => true do |t|
     t.integer  "department_id"
     t.string   "internal_office_number"
@@ -463,6 +469,7 @@ ActiveRecord::Schema.define(:version => 20121108190148) do
     t.text     "user_info"
   end
 
+>>>>>>> dee58e5b499accb2a61439cfcf1201ab2d2ffdb5
   create_table "one_reg_institutions", :force => true do |t|
     t.integer  "institution_id"
     t.boolean  "according_social_purpose"
@@ -610,7 +617,10 @@ ActiveRecord::Schema.define(:version => 20121108190148) do
     t.integer  "born_county_id"
     t.float    "income"
     t.string   "social_security_number"
+<<<<<<< HEAD
+=======
     t.integer  "discapacity_origin_year"
+>>>>>>> dee58e5b499accb2a61439cfcf1201ab2d2ffdb5
   end
 
   create_table "period_times", :force => true do |t|
