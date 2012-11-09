@@ -27,7 +27,6 @@ class Ability
       can :autocomplete_person_last_name, Office
       can :autocomplete_person_name_last_name, Affiliate
       can :autocomplete_institution_name, Affiliate
-
       can :for_program_id, Affiliate
       can :for_program_id, Office
       # Basically if/elsif/else (notice there's nothing

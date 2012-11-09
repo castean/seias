@@ -18,9 +18,20 @@
     <tr><td><%= Person.find(params[:id]).fullname %></td></tr>
   </table>
   <% if params[:aff_act_id]%>
-    <table>
-      <tr><th><b>Programa Afiliado:</b></th></tr>
-        <tr><td><%= ActivityType.find(params[:aff_act_id]).name %></td> </tr>
+    <% @aff_end = Affiliate.find(params[:aff]) %>
+    <table >
+      <tr>
+        <th><b>Programa Afiliado</b></th>
+        <th>Peridicidad</th>
+        <th>Número de Periodos</th>
+        <th>Institución</th>
+      </tr>
+      <tr>
+        <td><%= @aff_end.activity_type.name %></td>
+        <td><%= @aff_end.period_time.name %></td>
+        <td><%= @aff_end.period_number %></td>
+        <td><%= @aff_end.institution.name %></td>
+      </tr>
       </table>
   <% else %>
     <table>
@@ -32,6 +43,7 @@
   <% end %>
 
   <% if params[:aff]%>
+    </br>
     <div class="field">
       <%= f.label :period %><br />
       <%= f.text_field :period %>
@@ -62,3 +74,6 @@
     </div>
    <% end %>
 <% end %>
+
+    </br>
+<%= @benefit_s  %>
