@@ -1,0 +1,68 @@
+<p id="notice" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+   xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+
+<p>
+  <b>Dirección:</b>
+  <%= @office.direction.name %>
+</p>
+
+<p>
+  <b>No. Oficio Interno:</b>
+  <%= @office.internal_office_number %>
+</p>
+
+<%if @office.external_office_number.blank? or @office.external_office_number.nil?%>
+<%else%>
+    <p>
+      <b>External office number:</b>
+      <%= @office.external_office_number %>
+    </p>
+    <p>
+        <b>Office date:</b>
+        <%= @office.office_date %>
+    </p>
+    <p>
+      <b>Office recive date:</b>
+      <%= @office.office_recive_date %>
+    </p>
+<%end%>
+<p>
+  <b>No. Expediente:</b>
+  <%= @office.record_no %>
+</p>
+<p>
+  <b>Prioridad:</b>
+  <%= Priority.find(@office.priority_id).name %>
+</p>
+</br>
+</br>
+<p>
+  <b>Para:</b></br>
+  <%= User.find(@office.user_id).fullname %>
+</p>
+</br>
+</br>
+<p>
+  <b>Asunto:</b></br>
+  <%= @office.name %>
+</p>
+
+<p>
+  <b>Información:</b></br>
+  <%= @office.observations %>
+</p>
+</br>
+<p>
+  <b>Apoyos Solicitados:</b></br>
+  <%= @office.activity_type.name %>
+</p>
+</br></br>
+<p>
+  <b>Atentamente:</b></br>
+  <%= Person.find(@office.person_id).fullname  %>
+</p>
+</br>
+
+
+<%= link_to 'Edit', edit_office_path(@office) %> |
+<%= link_to 'Back', offices_path %>

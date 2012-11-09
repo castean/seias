@@ -1,6 +1,18 @@
 Seias::Application.routes.draw do
 
 
+  resources :statuses
+
+  resources :priorities
+
+  match '/offices/end_office/:id' => 'offices#end_office'
+  match '/offices/for_program_id/:program_id' => 'offices#for_program_id'
+  resources :offices do
+    get :autocomplete_person_last_name, :on => :collection
+  end
+
+  resources :type_people
+
 
   match '/families/add_family/:person_id' => 'families#add_family'
   match '/families/for_search' => 'families#for_search'
@@ -12,6 +24,7 @@ Seias::Application.routes.draw do
 
   end
 
+  match '/benefits/new/:id' => 'benefits#new'
   resources :benefits
 
   post '/affiliates/new/' => "affiliates#new"
@@ -24,14 +37,10 @@ Seias::Application.routes.draw do
     get :autocomplete_institution_name, :on => :collection
   end
 
+
   resources :documentations
 
   resources :functional_supports
-
-  resources :age_ranges
-
-  resources :school_ages
-
 
   resources :age_ranges
 
@@ -46,7 +55,6 @@ Seias::Application.routes.draw do
   resources :grades
 
   resources :relationships
-
 
   resources :medical_services
 

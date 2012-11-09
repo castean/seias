@@ -25,7 +25,10 @@ class BenefitsController < ApplicationController
   # GET /benefits/new.json
   def new
     @benefit = Benefit.new
-
+    if params[:id]
+      person_id = params[:id]
+      @affiliate = Affiliate.find_all_by_person_id(person_id)
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @benefit }

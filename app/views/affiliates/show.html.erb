@@ -4,7 +4,7 @@
 
 <p>
   <b>Periodo de tiempo:</b>
-  <%= PeriodTime.find(@affiliate.period_time_id).name %>
+  <%= @affiliate.period_time.name %>
 
 </p>
 
@@ -15,16 +15,20 @@
 
 <p>
   <b>Institucion:</b>
-  <%= Institution.find(@affiliate.institution_id).name %>
+  <%= @affiliate.institution.name %>
 </p>
 
 <p>
   <b>Afiliado:</b>
-  <%= @affiliate.person_id %>
+  <% if @affiliate.institution_ben_id.nil? %>
+    <%= @affiliate.person.fullname %>
+  <% elsif @affiliate.person_id.nil? %>
+    <%= Institution.find(@affiliate.institution_ben_id).name %>
+  <% end %>
 </p>
 <p>
   <b>Actividad:</b>
-  <%= @affiliate.activity_type_id %>
+  <%= @affiliate.activity_type.name %>
 </p>
 
 

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20121106203248) do
+=======
+ActiveRecord::Schema.define(:version => 20121108190148) do
+>>>>>>> dee58e5b499accb2a61439cfcf1201ab2d2ffdb5
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -48,6 +52,11 @@ ActiveRecord::Schema.define(:version => 20121106203248) do
   create_table "activity_types_critical_success_factors", :id => false, :force => true do |t|
     t.integer "activity_type_id"
     t.integer "critical_success_factor_id"
+  end
+
+  create_table "activity_types_offices", :id => false, :force => true do |t|
+    t.integer "activity_type_id"
+    t.integer "office_id"
   end
 
   create_table "activitygoals", :force => true do |t|
@@ -431,6 +440,36 @@ ActiveRecord::Schema.define(:version => 20121106203248) do
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
+=======
+  create_table "offices", :force => true do |t|
+    t.integer  "department_id"
+    t.string   "internal_office_number"
+    t.string   "external_office_number"
+    t.string   "record_no"
+    t.integer  "type_id"
+    t.string   "to"
+    t.datetime "office_date"
+    t.datetime "office_recive_date"
+    t.string   "name"
+    t.text     "observations"
+    t.integer  "person_id"
+    t.integer  "activity_type_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "user_id"
+    t.integer  "priority_id"
+    t.integer  "status_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "direction_id"
+    t.text     "person_info"
+    t.text     "user_info"
+  end
+
+>>>>>>> dee58e5b499accb2a61439cfcf1201ab2d2ffdb5
   create_table "one_reg_institutions", :force => true do |t|
     t.integer  "institution_id"
     t.boolean  "according_social_purpose"
@@ -568,7 +607,6 @@ ActiveRecord::Schema.define(:version => 20121106203248) do
     t.boolean  "diagnosis"
     t.text     "diagnosis_description"
     t.integer  "discapacity_origin_id"
-    t.date     "discapacity_origin_year"
     t.text     "observations"
     t.integer  "status_id"
     t.boolean  "use_functional_support"
@@ -579,6 +617,10 @@ ActiveRecord::Schema.define(:version => 20121106203248) do
     t.integer  "born_county_id"
     t.float    "income"
     t.string   "social_security_number"
+<<<<<<< HEAD
+=======
+    t.integer  "discapacity_origin_year"
+>>>>>>> dee58e5b499accb2a61439cfcf1201ab2d2ffdb5
   end
 
   create_table "period_times", :force => true do |t|
@@ -606,6 +648,12 @@ ActiveRecord::Schema.define(:version => 20121106203248) do
     t.boolean  "gmaps"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "priorities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "priority_program_action_lines", :force => true do |t|
@@ -750,6 +798,12 @@ ActiveRecord::Schema.define(:version => 20121106203248) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "name"
+  end
+
+  create_table "statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "towns", :force => true do |t|

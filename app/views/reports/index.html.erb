@@ -64,6 +64,10 @@
   <div id="div-sh-3" class="toHide"  >
     <%= form_tag  :action => "report_town_act", :method => "post" do %>
         <div class="field">
+          <%= label :program_id, "Programa" %>
+          <%= select(:program_id, :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }) %>
+        </div>
+        <div class="field">
           <%= label :start_date, "Fecha Inicio de Actividad" %>
           <%= datepicker :start_datec, :start_datec,  :dateFormat => "yy-mm-dd" %>
         </div>

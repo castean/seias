@@ -11,35 +11,54 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :period %><br />
-    <%= f.text_field :period %>
-  </div>
-  <div class="field">
-    <%= f.label :worth %><br />
-    <%= f.number_field :worth %>
-  </div>
-  <div class="field">
-    <%= f.label :benefit_category_id %><br />
-    <%= f.number_field :benefit_category_id %>
-  </div>
-  <div class="field">
-    <%= f.label :delivery_date %><br />
-    <%= f.date_select :delivery_date %>
-  </div>
-  <div class="field">
-    <%= f.label :qty %><br />
-    <%= f.number_field :qty %>
-  </div>
-  <div class="field">
-    <%= f.label :unit_price %><br />
-    <%= f.text_field :unit_price %>
-  </div>
-  <div class="field">
-    <%= f.label :affiliate_id %><br />
-    <%= f.number_field :affiliate_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+  <table>
+    <tr><th><b>Persona Beneficiada:</b></th></tr>
+    <tr><td><%= Person.find(params[:id]).fullname %></td></tr>
+  </table>
+  <% if params[:aff_act_id]%>
+    <table>
+      <tr><th><b>Programa Afiliado:</b></th></tr>
+        <tr><td><%= ActivityType.find(params[:aff_act_id]).name %></td> </tr>
+      </table>
+  <% else %>
+    <table>
+      <tr><th><b>Programa Afiliado:</b></th></tr>
+        <% @affiliate.each do |affiliate| %>
+            <tr><td><%= link_to affiliate.activity_type.name, params[:id].to_s + '/?' + 'aff=' + affiliate.id.to_s + '&aff_act_id=' + affiliate.activity_type_id.to_s %></td> </tr>
+        <% end %>
+    </table>
+  <% end %>
+
+  <% if params[:aff]%>
+    <div class="field">
+      <%= f.label :period %><br />
+      <%= f.text_field :period %>
+    </div>
+    <div class="field">
+      <%= f.label :worth %><br />
+      <%= f.number_field :worth %>
+    </div>
+    <div class="field">
+      <%= f.label :benefit_category_id %><br />
+      <%= f.number_field :benefit_category_id %>
+    </div>
+    <div class="field">
+      <%= f.label :delivery_date, "Fecha de entrega" %>
+      <%= f.datepicker :delivery_date, :dateFormat => "dd-mm-yy" %>
+    </div>
+    <div class="field">
+      <%= f.label :qty %><br />
+      <%= f.number_field :qty %>
+    </div>
+    <div class="field">
+      <%= f.label :unit_price %><br />
+      <%= f.text_field :unit_price %>
+    </div>
+          <%= f.hidden_field :affiliate_id, :value => params[:aff] %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+   <% end %>
 <% end %>

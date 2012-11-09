@@ -6,6 +6,7 @@ class Institution < ActiveRecord::Base
   belongs_to :user
   belongs_to :religion
 
+
   has_many :affiliates
 
   belongs_to :business_line
