@@ -26,7 +26,10 @@ class BenefitsController < ApplicationController
   def new
     @benefit = Benefit.new
     if params[:id]
-      @affiliate = Affiliate.where(:person_id => params[:id], :activity_type_id => 'DISTINCT activity_type_id')
+      person_id = params[:id]
+      #@affiliate = Affiliate.find_by_sql("select distinct(activity_type_id) from affiliates where person_id = #{person_id}")
+          #where(:person_id => params[:id], :activity_type_id => 'DISTINCT activity_type_id')
+      @affiliate = Affiliate.find_by_person_id(person_id)
     end
     respond_to do |format|
       format.html # new.html.erb
