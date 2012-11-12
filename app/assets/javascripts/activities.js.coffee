@@ -46,7 +46,7 @@ $(document).ready ->
           $("#typess").text("Valor")
           #alert "entro"
           # Clear all options from sub category select
-          $("#tipo option").remove()                             z
+          $("#tipo option").remove()
           #put in a empty default line
           row = "<option value=\"" + "0" + "\">" + "-- Seleciona el Tipo de Actividad --" + "</option>"
           $(row).appendTo "#tipo"

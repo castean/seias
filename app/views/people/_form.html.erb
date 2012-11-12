@@ -1,4 +1,4 @@
-<%= form_for(@person) do |f| %>
+<%= form_for @person, :html => { :multipart => true } do |f| %>
   <% if @person.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
@@ -109,9 +109,13 @@
     <%= f.label :curp, "CURP" %>
     <%= f.text_field :curp %>
   </div>
+  <div class="field">
+    <%= f.label :medical_service_id, "Servicio Médico" %>
+    <%= f.collection_select :medical_service_id,  MedicalService.order("name"), :id, :name, options ={:prompt => false} %>
+  </div>
     <div class="field">
-      <%= f.label :medical_service_id, "Servicio Médico" %>
-      <%= f.collection_select :medical_service_id,  MedicalService.order("name"), :id, :name, options ={:prompt => false} %>
+      <%= f.label :social_security_number, "Numero de Afiliacion" %>
+      <%= f.text_field :social_security_number %>
     </div>
   <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div3', this)" /> Informacion del Tutor  </br>
   <div id="div3" style="display:none">
@@ -156,6 +160,10 @@
       <div class="field">
         <%= f.label :job, "Lugar donde trabaja" %>
         <%= f.text_field :job %>
+      </div>
+      <div class="field">
+        <%= f.label :income, "Ingreso" %><br />
+        <%= f.text_field :income %>
       </div>
       <div class="field">
         <%= f.label :self_employment, "Es Autoempleo?" %>

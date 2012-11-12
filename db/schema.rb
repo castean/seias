@@ -619,6 +619,7 @@ ActiveRecord::Schema.define(:version => 20121109225320) do
     t.float    "income"
     t.string   "social_security_number"
     t.integer  "discapacity_origin_year"
+
   end
 
   create_table "period_times", :force => true do |t|

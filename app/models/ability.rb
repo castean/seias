@@ -23,22 +23,36 @@ class Ability
       can :program_report_county, Report
       can :report_town_act, Report
       can :for_programid, Activity
-      can :autocomplete_person_name, Affiliate
-      can :autocomplete_person_last_name, Office
-      can :autocomplete_person_name_last_name, Affiliate
-      can :autocomplete_institution_name, Affiliate
 
+      can :autocomplete_person_name, Affiliate
+      can :autocomplete_institution_name, Affiliate
       can :for_program_id, Affiliate
+
       can :for_program_id, Office
+      can :autocomplete_person_last_name, Office
+
+      can :autocomplete_last_name, Family
+      can :autocomplete_name, Family
+      can :autocomplete_second_last_name, Family
+
+
+
+
+
+
+
+
+
+
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            
       case user.roles.to_s 
       when "admin" then
-        10.times { print "Hello admin" }
+        #10.times { print "Hello admin" }
         can :manage, :all
       when "planeacion" then
-         10.times { print "Hello planeacion" }
+         #10.times { print "Hello planeacion" }
         can :manage, Department
         can :manage, Direction
         can :manage, User
