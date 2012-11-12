@@ -1,6 +1,8 @@
 Seias::Application.routes.draw do
 
 
+  resources :worths
+
   resources :statuses
 
   resources :priorities

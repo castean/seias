@@ -49,8 +49,8 @@
       <%= f.text_field :period %>
     </div>
     <div class="field">
-      <%= f.label :worth %><br />
-      <%= f.number_field :worth %>
+      <%= f.label :worth_id %><br />
+      <%= f.number_field :worth_id, Worth.find_by_direction_id(Department.find(current_user.department_id).direction_id) %>
     </div>
     <div class="field">
       <%= f.label :benefit_category_id %><br />

@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20121106203248) do
-=======
-ActiveRecord::Schema.define(:version => 20121108190148) do
->>>>>>> dee58e5b499accb2a61439cfcf1201ab2d2ffdb5
+ActiveRecord::Schema.define(:version => 20121112183327) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -37,6 +33,25 @@ ActiveRecord::Schema.define(:version => 20121108190148) do
   add_index "activities", ["group_id"], :name => "index_activities_on_group_id"
   add_index "activities", ["public_target_id"], :name => "index_activities_on_public_target_id"
   add_index "activities", ["town_id"], :name => "index_activities_on_town_id"
+
+  create_table "activities_bk", :id => false, :force => true do |t|
+    t.integer  "id"
+    t.string   "value"
+    t.text     "description"
+    t.integer  "town_id"
+    t.integer  "group_id"
+    t.integer  "public_target_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "activity_type_id"
+    t.integer  "county_id"
+    t.integer  "user_id"
+    t.datetime "activity_date_start"
+    t.datetime "activity_date_end"
+    t.integer  "qty_men"
+    t.integer  "qty_women"
+    t.integer  "oldid"
+  end
 
   create_table "activity_types", :force => true do |t|
     t.string   "name"
@@ -151,7 +166,7 @@ ActiveRecord::Schema.define(:version => 20121108190148) do
 
   create_table "benefits", :force => true do |t|
     t.string   "period"
-    t.integer  "worth"
+    t.integer  "worth_id"
     t.integer  "benefit_category_id"
     t.date     "delivery_date"
     t.integer  "qty"
@@ -440,8 +455,14 @@ ActiveRecord::Schema.define(:version => 20121108190148) do
     t.datetime "updated_at", :null => false
   end
 
-<<<<<<< HEAD
-=======
+  create_table "office_records", :force => true do |t|
+    t.integer  "office_id"
+    t.text     "info"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "offices", :force => true do |t|
     t.integer  "department_id"
     t.string   "internal_office_number"
@@ -469,7 +490,6 @@ ActiveRecord::Schema.define(:version => 20121108190148) do
     t.text     "user_info"
   end
 
->>>>>>> dee58e5b499accb2a61439cfcf1201ab2d2ffdb5
   create_table "one_reg_institutions", :force => true do |t|
     t.integer  "institution_id"
     t.boolean  "according_social_purpose"
@@ -617,10 +637,7 @@ ActiveRecord::Schema.define(:version => 20121108190148) do
     t.integer  "born_county_id"
     t.float    "income"
     t.string   "social_security_number"
-<<<<<<< HEAD
-=======
     t.integer  "discapacity_origin_year"
->>>>>>> dee58e5b499accb2a61439cfcf1201ab2d2ffdb5
   end
 
   create_table "period_times", :force => true do |t|
@@ -866,6 +883,13 @@ ActiveRecord::Schema.define(:version => 20121108190148) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "worths", :force => true do |t|
+    t.string   "name"
+    t.integer  "direction_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
 end
