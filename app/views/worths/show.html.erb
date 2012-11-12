@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @worth.name %>
+</p>
+
+<p>
+  <b>Direction:</b>
+  <%= @worth.direction_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_worth_path(@worth) %> |
+<%= link_to 'Back', worths_path %>

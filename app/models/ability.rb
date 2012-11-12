@@ -35,15 +35,6 @@ class Ability
       can :autocomplete_name, Family
       can :autocomplete_second_last_name, Family
 
-
-
-
-
-
-
-
-
-
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            
@@ -77,6 +68,7 @@ class Ability
           acti.try(:user) == user 
         end
         when "user" then
+          can :create, Worth
         can :create, Affiliate
         can :create, Office
         can :create, Benefit

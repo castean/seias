@@ -1,0 +1,25 @@
+<%= form_for(@worth) do |f| %>
+  <% if @worth.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@worth.errors.count, "error") %> prohibited this worth from being saved:</h2>
+
+      <ul>
+      <% @worth.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :direction_id %><br />
+    <%= f.collection_select :direction_id, Direction.all.sort_by{ |k| k['name'] } , :id, :name, options ={:prompt => "-- Selecciona una Dirección --"}, :class=>"ddl_width" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
