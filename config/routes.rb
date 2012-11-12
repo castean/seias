@@ -1,5 +1,12 @@
 Seias::Application.routes.draw do
 
+
+
+  resources :benefit_types
+
+  resources :benefit_categories
+
+
   resources :worths
 
   resources :statuses

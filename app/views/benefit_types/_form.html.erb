@@ -1,0 +1,25 @@
+<%= form_for(@benefit_type) do |f| %>
+  <% if @benefit_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@benefit_type.errors.count, "error") %> prohibited this benefit_type from being saved:</h2>
+
+      <ul>
+      <% @benefit_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :benefit_category_id %><br />
+    <%= f.collection_select :benefit_category_id, BenefitCategory.all.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona una categoria --"} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
