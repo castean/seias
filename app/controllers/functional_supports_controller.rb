@@ -1,6 +1,6 @@
 class FunctionalSupportsController < ApplicationController
-  # GET /FunctionalSupports
-  # GET /FunctionalSupports.json
+  # GET /functional_supports
+  # GET /functional_supports.json
   def index
     @functionalsupports = FunctionalSupport.all
 
@@ -10,8 +10,8 @@ class FunctionalSupportsController < ApplicationController
     end
   end
 
-  # GET /FunctionalSupports/1
-  # GET /FunctionalSupports/1.json
+  # GET /functional_supports/1
+  # GET /functional_supports/1.json
   def show
     @functionalsupport = FunctionalSupport.find(params[:id])
 
@@ -21,8 +21,8 @@ class FunctionalSupportsController < ApplicationController
     end
   end
 
-  # GET /FunctionalSupports/new
-  # GET /FunctionalSupports/new.json
+  # GET /functional_supports/new
+  # GET /functional_supports/new.json
   def new
     @functionalsupport = FunctionalSupport.new
 
@@ -32,13 +32,13 @@ class FunctionalSupportsController < ApplicationController
     end
   end
 
-  # GET /FunctionalSupports/1/edit
+  # GET /functional_supports/1/edit
   def edit
     @functionalsupport = FunctionalSupport.find(params[:id])
   end
 
-  # POST /FunctionalSupports
-  # POST /FunctionalSupports.json
+  # POST /functional_supports
+  # POST /functional_supports.json
   def create
     @functionalsupport = FunctionalSupport.new(params[:functionalsupport])
 
@@ -53,8 +53,8 @@ class FunctionalSupportsController < ApplicationController
     end
   end
 
-  # PUT /FunctionalSupports/1
-  # PUT /FunctionalSupports/1.json
+  # PUT /functional_supports/1
+  # PUT /functional_supports/1.json
   def update
     @functionalsupport = FunctionalSupport.find(params[:id])
 
@@ -69,8 +69,8 @@ class FunctionalSupportsController < ApplicationController
     end
   end
 
-  # DELETE /FunctionalSupports/1
-  # DELETE /FunctionalSupports/1.json
+  # DELETE /functional_supports/1
+  # DELETE /functional_supports/1.json
   def destroy
     @functionalsupport = FunctionalSupport.find(params[:id])
     @functionalsupport.destroy
