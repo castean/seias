@@ -1,5 +1,5 @@
 <p id="notice" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-   xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+   xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
 
 <p>
   <b>Dirección:</b>
@@ -14,16 +14,20 @@
 <%if @office.external_office_number.blank? or @office.external_office_number.nil?%>
 <%else%>
     <p>
-      <b>External office number:</b>
+      <b>No Oficio Externo:</b>
       <%= @office.external_office_number %>
     </p>
     <p>
-        <b>Office date:</b>
-        <%= @office.office_date %>
+        <b>Fecha de Oficio:</b>
+        <%= @office.office_date.to_date %>
     </p>
     <p>
-      <b>Office recive date:</b>
-      <%= @office.office_recive_date %>
+      <b>Fecha de Recepcion del Oficio:</b>
+      <%= @office.office_recive_date.to_date %>
+    </p>
+    <p>
+      <b>Oficio originalmente dirigido a:</b>
+      <%= @office.to %>
     </p>
 <%end%>
 <p>
@@ -37,8 +41,8 @@
 </br>
 </br>
 <p>
-  <b>Para:</b></br>
-  <%= User.find(@office.user_id).fullname %>
+  <b><%= User.find(@office.user_id).fullname %></b></br>
+  <i><%= @office.department.name %> </i>
 </p>
 </br>
 </br>
@@ -63,6 +67,20 @@
 </p>
 </br>
 
+
+<%= link_to 'Atender', new_office_office_record_path(@office), :class => "btn" %>
+</br>
+</br>
+<% @office.office_records.each do |c| %>
+    <p>
+      <b>Comentario</b>
+      <%= c.text %></br>
+      <%= time_ago_in_words c.created_at %>
+    </p>
+    </br>
+    <%# link_to "Editar atencion", [@office, c], :method => :edit %>
+    <%# link_to "Borrar atencion", [@office, c], :method => :delete, :confirm => "Esta usted seguro?" %>
+<%end%>
 
 <%= link_to 'Edit', edit_office_path(@office) %> |
 <%= link_to 'Back', offices_path %>

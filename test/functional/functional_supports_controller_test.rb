@@ -8,7 +8,7 @@ class FunctionalSupportsControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:FunctionalSupports)
+    assert_not_nil assigns(:functional_supports)
   end
 
   test "should get new" do
