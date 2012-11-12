@@ -40,7 +40,7 @@ class FunctionalSupportsController < ApplicationController
   # POST /functional_supports
   # POST /functional_supports.json
   def create
-    @functionalsupport = FunctionalSupport.new(params[:functionalsupport])
+    @functionalsupport = FunctionalSupport.new(params[:functional_support])
 
     respond_to do |format|
       if @functionalsupport.save
@@ -59,7 +59,7 @@ class FunctionalSupportsController < ApplicationController
     @functionalsupport = FunctionalSupport.find(params[:id])
 
     respond_to do |format|
-      if @functionalsupport.update_attributes(params[:functionalsupport])
+      if @functionalsupport.update_attributes(params[:functional_support])
         format.html { redirect_to @functionalsupport, notice: 'Funcional support was successfully updated.' }
         format.json { head :no_content }
       else
