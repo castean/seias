@@ -60,6 +60,44 @@ $(document).ready(function(){
             }
         });
 
+
+    $("select#office_direction_id").change(function(){
+        var id_value_string = $(this).val();
+        if (id_value_string == "") {
+            // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
+            $("select#office_department_id option").remove();
+            var row = "<option value=\"" + "" + "\">" + "" + "</option>";
+            $(row).appendTo("select#office_department_id");
+            //alert("Failed to submit : Vacio  c");
+        }
+        else {
+            // Send the request and update sub category dropdown
+
+            $.ajax({
+                dataType: "json",
+                cache: false,
+                url:  application_root_path() + '/departments/for_directionid/' + id_value_string,
+                timeout: 20000,
+                error: function(XMLHttpRequest, errorTextStatus, error){
+                    alert("Failed to submit : "+ errorTextStatus+" ;"+error);
+                },
+                success: function(data){
+                    //alert("Failed to submit : Llenando c");
+                    // Clear all options from sub category select
+                    $("select#office_department_id option").remove();
+                    //put in a empty default line
+                    var row = "<option value=\"" + "0" + "\">" + "-- Seleciona el Departamento --" + "</option>";
+                    $(row).appendTo("select#office_department_id");
+                    // Fill sub category select
+                    $.each(data, function(i, j){
+                        row = "<option value=\"" + j.id + "\">" + j.name + "</option>";
+                        $(row).appendTo("select#office_department_id");
+                    });
+                }
+            });
+        }
+    });
+
      // Ing. César Reyes // ciudades y localidades
 
 
@@ -340,4 +378,45 @@ $(document).ready(function(){
      listBoxTo.add(newOption, null);
      return true;
  } 
+
+
+
+ function moveToRightOrLefttwo(side){
+ var listLeft=document.getElementById('selectLefttwo');
+     var listRight=document.getElementById('selectRighttwo');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las líneas de acción a la derecha');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+    }
+    else if(side==2){
+     if(listRight.options.length==0){
+         alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+        else{
+         var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+             listRight.options[0].selected=true;
+             } 
+        } 
+    } 
+} 
+ function movetwo(listBoxTo,optionValue,optionDisplayText){
+ var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+}
 

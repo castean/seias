@@ -2,9 +2,38 @@ Seias::Application.routes.draw do
 
 
 
-  match '/families/add_family/:person_id' => 'families#add_family'
-  resources :families
+  resources :benefit_types
 
+  resources :benefit_categories
+
+
+  resources :worths
+
+  resources :statuses
+
+  resources :priorities
+
+  match '/offices/end_office/:id' => 'offices#end_office'
+  match '/offices/for_program_id/:program_id' => 'offices#for_program_id'
+  resources :offices do
+    get :autocomplete_person_last_name, :on => :collection
+    resources :office_records
+  end
+
+  resources :type_people
+
+
+  match '/families/add_family/:person_id' => 'families#add_family'
+  match '/families/for_search' => 'families#for_search'
+  #match '/families/add_family/action' => 'families#add_family/:person_id'
+  resources :families   do
+    get :autocomplete_last_name, :on => :collection
+    get :autocomplete_name, :on => :collection
+    get :autocomplete_second_last_name, :on => :collection
+
+  end
+
+  match '/benefits/new/:id' => 'benefits#new'
   resources :benefits
 
   post '/affiliates/new/' => "affiliates#new"
@@ -12,17 +41,15 @@ Seias::Application.routes.draw do
   match '/affiliates/for_program_id/:program_id' => 'affiliates#for_program_id'
   resources :affiliates do
     get :autocomplete_person_name, :on => :collection
+    get :autocomplete_person_last_name, :on => :collection
+    get :autocomplete_person_second_last_name, :on => :collection
     get :autocomplete_institution_name, :on => :collection
   end
+
 
   resources :documentations
 
   resources :functional_supports
-
-  resources :age_ranges
-
-  resources :school_ages
-
 
   resources :age_ranges
 
@@ -37,7 +64,6 @@ Seias::Application.routes.draw do
   resources :grades
 
   resources :relationships
-
 
   resources :medical_services
 

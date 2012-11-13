@@ -1,13 +1,12 @@
 #encoding:utf-8
 class Person < ActiveRecord::Base
-
-
   #has_many :relations
   #has_many :relatives, :through => "relations"
-
+  has_attached_file :avatar, :styles => { :small => "150x150>" }
   belongs_to :town
   belongs_to :ethnic_group
   #belongs_to :sex
+  belongs_to :office
   belongs_to :medical_service
   belongs_to :relationship
   belongs_to :grade
@@ -25,8 +24,10 @@ class Person < ActiveRecord::Base
                   :code_area, :phone, :cel_phone, :emergency_phone, :rfc, :curp, :email, :tutor, :tutor_relationship_id, :tutor_marital_status_id, :medical_service_id,
                   :student, :reader, :schooling, :school_type_id, :worker, :job, :self_employment, :occupation, :job_seeker, :user_id, :discapacity_status, :diagnosis,
                   :diagnosis_description, :discapacity_origin_id, :discapacity_origin_year, :observations, :status_id, :use_functional_support, :selectLeftD,
-                  :selectRightD, :selectLeftFS, :selectRightFS, :avatar, :selectLeftDo, :selectRightDo
-  attr_accessor   :selectLeftD, :selectRightD, :selectLeftFS, :selectRightFS, :avatar, :selectLeftDo, :selectRightDo
+                  :selectRightD, :selectLeftFS, :selectRightFS, :avatar, :selectLeftDo, :selectRightDo, :income, :social_security_number
+  attr_accessor   :selectLeftD, :selectRightD, :selectLeftFS, :selectRightFS, :selectLeftDo, :selectRightDo
+
+  validates_uniqueness_of :name , :scope => [:last_name, :second_last_name, :birthday]
 
   def selectRightD=(options)
 
@@ -64,6 +65,9 @@ class Person < ActiveRecord::Base
     end
   end
   def fullname
+    "#{name} #{last_name} #{second_last_name}"
+  end
+  def funky_method
     "#{name} #{last_name} #{second_last_name}"
   end
 end

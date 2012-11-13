@@ -1,5 +1,12 @@
-<p id="notice" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
-
+<p id="notice" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+</br>
+<div class="btn-group">
+  <% if can? :update, @critical_success_factor %>
+      <%= link_to 'Editar', edit_institution_path(@institution), :class => "btn" %>
+  <% end %>
+  <%= link_to 'Regresar', institutions_path, :class => "btn" %>
+</div>
+</br>
 <table class="table table-striped">
   <thead>
     <h4>Datos Fiscales</h4>
@@ -132,15 +139,66 @@
   </tr>
 </table>
 
-<p>
-  <b>Total de Residentes:</b></br>
-</p>
-
 </br>
 </br>
     <%= link_to 'Escolaridad', new_institution_school_age_path(@institution), :class => "btn" %>
 </br>
 </br>
+<table class="table table-striped">
+  <tr>
+    <th>
+      Datos Generales de la Población
+    </th>
+  </tr>
+</table>
+
+<table class="table table-striped">
+  <thead>
+      <h4>Total de Residentes: </h4>
+  </thead>
+  </br>
+  <tr>
+    <th></th>
+    <th>Tutela Publica</th>
+    <th>Tutela Particular</th>
+    <th>Edad Laboral</th>
+    <th>Edad Escolar</th>
+  </tr>
+    <td>Mujeres</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  <tr>
+    <td>Hombres</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="table table-striped">
+  <thead>
+  <h4>Escolaridad</h4>
+  </thead>
+  <tr>
+    <th>
+      Nivel Escolar
+    </th>
+    <th>
+      Mujeres
+    </th>
+    <th>
+      Hombres
+    </th>
+    <th>
+      Total
+    </th>
+  </tr>
+</table>
+
+
 <% @institution.school_ages.each do |b| %>
     <p>
       <b>Nivel Escolar:</b></br>
@@ -148,6 +206,7 @@
     </p>
     </br>
     <%= link_to "Editar Escolaridad", [@institution, b], :method => :edit %>
+    <%= link_to "Borrar Escolaridad", [@institution, b], :method => :delete, :confirm => "Esta usted seguro?" %>
 <%end%>
 </br>
 </br>
@@ -162,6 +221,7 @@
     </p>
     </br>
     <%= link_to "Editar Población", [@institution, c], :method => :edit %>
+    <%= link_to "Borrar Población", [@institution, c], :method => :delete, :confirm => "Esta usted seguro?" %>
 <%end%>
 </br>
 </br>
@@ -175,7 +235,7 @@
     </p>
     <p>
       <b>Sexo de Beneficiarios:</b></br>
-        <%= a.sex.name%>
+        <%= a.people_sex%>
     </p>
     <p>
       <b>Edad Mínima:</b></br>
@@ -191,25 +251,19 @@
     </p>
     <p>
       <b>Población Objetivo:</b></br>
-      <%= a.public_target.name%>
+      <%= a.public_target_id%>
     </p>
     </br>
-    <%= link_to "Editar Reg-Inst.1/R01", [@institution, a], :method => :edit %>
+    <%= link_to "Editar Reg-Inst.1/R01", [@institution, a], :method => :edit %> |
+    <%= link_to "Borrar Reg-Inst.1/R01", [@institution, a], :method => :delete, :confirm => "Esta usted seguro?" %>
 <%end%>
 </br>
 </br>
-<%= link_to 'Reg_Inst.2/R01', new_institution_one_reg_institution_path(@institution), :class => "btn" %>
+   <%# link_to 'Reg_Inst.2/R01', new_institution_one_reg_institution_path(@institution), :class => "btn" %>
+<!--</br>
 </br>
-</br>
-</br>
+</br> -->
 
 <div class="btn-group">
     <%= gmaps("map_options" =>{:auto_zoom => false, :zoom => 7},"markers" => {"data" => @json}) %>
-</div>
-</br>
-<div class="btn-group">
-  <% if can? :update, @critical_success_factor %>
-      <%= link_to 'Editar', edit_institution_path(@institution), :class => "btn" %>
-  <% end %>
-  <%= link_to 'Regresar', institutions_path, :class => "btn" %>
 </div>

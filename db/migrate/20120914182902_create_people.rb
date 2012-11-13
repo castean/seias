@@ -39,7 +39,7 @@ class CreatePeople < ActiveRecord::Migration
       t.boolean   :diagnosis
       t.text      :diagnosis_description
       t.integer   :discapacity_origin_id
-      t.date      :discapacity_origin_year
+      t.integer   :discapacity_origin_year
       t.text      :observations
       t.integer   :status_id
       t.boolean   :use_functional_support
