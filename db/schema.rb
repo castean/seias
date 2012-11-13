@@ -11,8 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+ActiveRecord::Schema.define(:version => 20121113173151) do
 
-ActiveRecord::Schema.define(:version => 20121112201850) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -186,8 +186,8 @@ ActiveRecord::Schema.define(:version => 20121112201850) do
     t.integer  "qty"
     t.decimal  "unit_price"
     t.integer  "affiliate_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "business_lines", :force => true do |t|
@@ -467,6 +467,18 @@ ActiveRecord::Schema.define(:version => 20121112201850) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "office_allocations", :force => true do |t|
+    t.integer  "office_id"
+    t.text     "infot"
+    t.integer  "user_id"
+    t.string   "to"
+    t.string   "place"
+    t.integer  "location_status"
+    t.integer  "move_by_user_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "office_records", :force => true do |t|

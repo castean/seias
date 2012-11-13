@@ -28,6 +28,7 @@ legend {
   color: $grayDark;
   border: 0;
   border-bottom: 1px solid #eee;
+ // width: 592px;
 
   // Small
   small {
@@ -54,7 +55,7 @@ label {
 // Inputs, Textareas, Selects
 input, textarea, select, .uneditable-input {
   display: inline-block;
-  width: 210px;
+  width: 592px;
   height: $baseLineHeight;
   padding: 4px;
   margin-bottom: 9px;
@@ -114,6 +115,7 @@ select, input[type="file"] {
   height: 28px; /* In IE7, the height of the select element cannot be changed by height, only font-size */
   *margin-top: 4px; /* For IE7, add top margin to align select with labels */
   line-height: 28px;
+  width: 600px;
 }
 
 // Reset line-height for IE
@@ -123,7 +125,7 @@ input[type="file"] {
 
 // Chrome on Linux and Mobile Safari need background-color
 select {
-  width: 220px; // default input width + 10px of padding that doesn't get applied
+  //width: 600px; // default input width + 10px of padding that doesn't get applied
   background-color: $inputBackground;
 }
 
@@ -187,6 +189,7 @@ input[type="hidden"] {
 input, textarea {
   @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
   @include transition(#{border linear .2s, box-shadow linear .2s});
+  width: 200px;
 }
 input:focus, textarea:focus {
   border-color: rgba(82,168,236,.8);
@@ -210,7 +213,7 @@ input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focu
 .input-medium     { width: 150px; }
 .input-large      { width: 210px; }
 .input-xlarge     { width: 270px; }
-.input-xxlarge    { width: 530px; }
+.input-xxlarge    { width: 592px; }
 
 // Grid style input sizes
 input[class*="span"], select[class*="span"], textarea[class*="span"], .uneditable-input[class*="span"],

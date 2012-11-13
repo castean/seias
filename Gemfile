@@ -74,3 +74,5 @@ gem 'rails3-jquery-autocomplete'
 
 #Search
 gem "ransack"
+
+gem "rb-readline"

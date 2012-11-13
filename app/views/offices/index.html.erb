@@ -12,8 +12,7 @@
         <th>Priority</th>
         <th>Status</th>
         <th>Fecha de Creación</th>
-        <th></th>
-        <th></th>
+        <th>Fecha de Revisión</th>
         <th></th>
         <th></th>
       </tr>
@@ -29,12 +28,13 @@
     <td><%= office.user.department.name %></td>
     <td><%= Priority.find(office.priority_id).name %></td>
     <td><%= office.status.name %></td>
-    <td><%= office.created_at %></td>
+    <td><%= office.created_at.to_date %></td>
+    <td><% office.office_records.each do |x| %>
+            <%= x.created_at.to_date%>  <%= x.user.fullname%>
+        <%end%>
+    </td>
     <td><%= link_to 'Ver', office %></td>
     <td><%= link_to 'Editar', edit_office_path(office) %></td>
-    <% if office.status_id == 3%>
-        <td><%= link_to 'Cerrar', "offices/end_office/" + office.id.to_s, confirm: 'Esta Usted Seguro?' %></td>
-    <%end%>
   </tr>
 <% end %>
 </table>

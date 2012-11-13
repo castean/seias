@@ -1,6 +1,7 @@
 class OfficeRecordsController < ApplicationController
   load_and_authorize_resource
   before_filter :find_office
+
   # GET /office_records
   # GET /office_records.json
   def index
@@ -26,7 +27,9 @@ class OfficeRecordsController < ApplicationController
   # GET /office_records/new
   # GET /office_records/new.json
   def new
-    @office_record = OfficeRecord.new
+    current_user = UserSession.find
+    id = current_user && current_user.record.id
+    @office_record = OfficeRecord.new(:user_id => id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +46,7 @@ class OfficeRecordsController < ApplicationController
   # POST /office_records.json
   def create
     @office_record.office_id = @office
-    @one_reg_institution = @office.office_record.build(params[:office_record])
+    @office_record = @office.office_records.build(params[:office_record)
 
     respond_to do |format|
       if @office_record.save
@@ -87,4 +90,5 @@ class OfficeRecordsController < ApplicationController
   def find_office
     @office = Office.find(params[:office_id])
   end
+
 end
