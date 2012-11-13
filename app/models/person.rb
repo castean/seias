@@ -2,7 +2,7 @@
 class Person < ActiveRecord::Base
   #has_many :relations
   #has_many :relatives, :through => "relations"
-  has_attached_file :avatar, :styles => { :small => "150x150>" }
+  has_attached_file :avatar
   belongs_to :town
   belongs_to :ethnic_group
   #belongs_to :sex

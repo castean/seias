@@ -1,10 +1,16 @@
 <p>
-  <%= image_tag @person.avatar(:small) %>
+  <%= image_tag @person.avatar %>
 </p>
 
 <p>
-  <b>Nombre:</b></br>
-  <%= @person.fullname %>
+  <b>Nombre:</b>
+  <%= @person.fullname %></br>
+  <b>Direccion:</b>
+  <%= @person.address %></br>
+  <b>Telefono de Emergencia:</b>
+  <%= @person.emergency_phone %></br>
+  <b>Tutor:</b>
+  <%= @person.tutor %></br>
 </p>
 </br>
 
