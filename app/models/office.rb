@@ -27,4 +27,8 @@ class Office < ActiveRecord::Base
   def update_internal_office_number
     update_attribute :internal_office_number, "#{id}"
   end
+
+  def update_status
+    update_attribute :status_id, 3
+  end
 end

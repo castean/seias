@@ -1,5 +1,6 @@
 <p id="notice" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-   xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+   xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+   xmlns="http://www.w3.org/1999/html"><%= notice %></p>
 
 <p>
   <b>Dirección:</b>
@@ -66,21 +67,34 @@
   <%= Person.find(@office.person_id).fullname  %>
 </p>
 </br>
-
-
-<%= link_to 'Atender', new_office_office_record_path(@office), :class => "btn" %>
+--------------------------------------------------
 </br>
-</br>
-<% @office.office_records.each do |c| %>
-    <p>
-      <b>Comentario</b>
-      <%= c.text %></br>
-      <%= time_ago_in_words c.created_at %>
-    </p>
-    </br>
-    <%# link_to "Editar atencion", [@office, c], :method => :edit %>
-    <%# link_to "Borrar atencion", [@office, c], :method => :delete, :confirm => "Esta usted seguro?" %>
+<%if @office.status_id == 2 %>
+    <%= link_to 'Atender', new_office_office_record_path(@office), :class => "btn" %>
 <%end%>
+<%if @office.status_id == 2 %>
+    <%= link_to 'Reasiganar', new_office_office_allocation_path(@office), :class => "btn" %>
+<%end%>
+<%if @office.status_id == 3 %>
+    <td><%= link_to 'Finalizar', "end_office/" + @office.id.to_s, confirm: 'Esta Usted Seguro?', :class => "btn" %></td>
+<%end%>
+</br>
+</br>
+<% @office.office_records.each do |c|  %>
+    <p>
+      <%= c.user.fullname %><b> Comento:</b> Hace - <%= time_ago_in_words c.created_at %> - </br>
+      <%= c.info %></br> </br>
+
+    </p>
+    <%if @office.status_id > 2 and @office.status_id < 4 %>
+        <%= link_to 'Continuar con Atencion', edit_office_office_record_path(@office, c), :class => "btn" %>
+    <%end%>
+    </br>
+    </br>
+<%end%>
+
+
+
 
 <%= link_to 'Edit', edit_office_path(@office) %> |
 <%= link_to 'Back', offices_path %>
