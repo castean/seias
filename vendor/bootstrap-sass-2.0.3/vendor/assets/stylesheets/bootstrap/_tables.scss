@@ -131,3 +131,12 @@ table {
     .span#{$i} { @include tableColumns($i); }
   }
 }
+
+
+table .span7 {
+    float: none;
+    margin-left: 0;
+    width: 600px;
+}
+
+

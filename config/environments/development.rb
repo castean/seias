@@ -1,6 +1,6 @@
 Seias::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-
+  Paperclip.options[:command_path] = "/usr/local/bin/convert"
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -37,5 +37,5 @@ Seias::Application.configure do
 
   config.ldap_auth = true
 
-  config.authorization_method = :ldap #One of :password, :ldap, etc
+  config.authorization_method = :password #One of :password, :ldap, etc
 end

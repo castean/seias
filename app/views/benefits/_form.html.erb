@@ -50,7 +50,7 @@
     </div>
     <div class="field">
       <%= f.label :worth_id %><br />
-      <%= f.number_field :worth_id, Worth.find_by_direction_id(Department.find(current_user.department_id).direction_id) %>
+      <%= f.collection_select :worth_id, Worth.find_all_by_direction_id(Department.find(current_user.department_id).direction_id).sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona un tipo de ayuda --"} %>
     </div>
     <div class="field">
       <%= f.label :benefit_category_id %><br />
