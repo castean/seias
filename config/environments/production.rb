@@ -1,6 +1,6 @@
 Seias::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-  perclip.options[:command_path] = "/usr/bin/convert"
+  Paperclip.options[:command_path] = "/usr/bin/convert"
   # Code is not reloaded between requests
   config.cache_classes = true
 
