@@ -162,6 +162,7 @@
   input, select, textarea {
     color: $textColor;
     border-color: $borderColor;
+    width: 592px;
     &:focus {
       border-color: darken($borderColor, 10%);
       @include box-shadow(0 0 6px lighten($borderColor, 20%));
@@ -576,6 +577,7 @@
 @mixin gridInput($columnWidth, $gutterWidth) {
   input, textarea, .uneditable-input {
     margin-left: 0; // override margin-left from core grid system
+    //width: 200px;
   }
 
   // generate .spanX
