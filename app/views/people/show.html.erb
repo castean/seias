@@ -1,5 +1,7 @@
 <p>
   <%= image_tag @person.avatar.url %>
+  <%= image_tag @person.avatar.url(:medium) %>
+  <%= image_tag @person.avatar.url(:thumb) %>
 </p>
 
 <p>
