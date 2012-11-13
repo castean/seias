@@ -3,8 +3,8 @@ class Person < ActiveRecord::Base
   #has_many :relations
   #has_many :relatives, :through => "relations"
   has_attached_file :avatar, :styles => { :medium => "100x100>", :thumb => "52x52>" },
-                    :url  => "/lib/assets/people/:id/:style/:basename.:extension",
-                    :path => ":rails_root/lib/assets/people/:id/:style/:basename.:extension"
+                    :url  => "/assets/people/:id/:style/:basename.:extension",
+                    :path => ":rails_root/people/assets/products/:id/:style/:basename.:extension"
   belongs_to :town
   belongs_to :ethnic_group
   #belongs_to :sex
