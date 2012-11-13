@@ -18,7 +18,7 @@ class BenefitsControllerTest < ActionController::TestCase
 
   test "should create benefit" do
     assert_difference('Benefit.count') do
-      post :create, benefit: { affiliate_id: @benefit.affiliate_id, benefit_category_id: @benefit.benefit_category_id, delivery_date: @benefit.delivery_date, period: @benefit.period, qty: @benefit.qty, unit_price: @benefit.unit_price, worth_id: @benefit.worth_id }
+      post :create, benefit: { affiliate_id: @benefit.affiliate_id, benefit_type_id: @benefit.benefit_type_id, delivery_date: @benefit.delivery_date, period: @benefit.period, qty: @benefit.qty, unit_price: @benefit.unit_price, worth_id: @benefit.worth_id }
     end
 
     assert_redirected_to benefit_path(assigns(:benefit))
@@ -35,7 +35,7 @@ class BenefitsControllerTest < ActionController::TestCase
   end
 
   test "should update benefit" do
-    put :update, id: @benefit, benefit: { affiliate_id: @benefit.affiliate_id, benefit_category_id: @benefit.benefit_category_id, delivery_date: @benefit.delivery_date, period: @benefit.period, qty: @benefit.qty, unit_price: @benefit.unit_price, worth_id: @benefit.worth_id }
+    put :update, id: @benefit, benefit: { affiliate_id: @benefit.affiliate_id, benefit_type_id: @benefit.benefit_type_id, delivery_date: @benefit.delivery_date, period: @benefit.period, qty: @benefit.qty, unit_price: @benefit.unit_price, worth_id: @benefit.worth_id }
     assert_redirected_to benefit_path(assigns(:benefit))
   end
 
