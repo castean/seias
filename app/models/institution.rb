@@ -26,7 +26,7 @@ class Institution < ActiveRecord::Base
                           :association_foreign_key => "father_institution_id")
 
   attr_accessible :address, :business_line_id, :county_id, :date_operation_end, :date_operation_start, :email, :external_address_number,
-                  :gmaps, :institution_type_id, :internal_address_number, :latitude, :legal_last_name, :legal_name,
+                  :gmaps, :institutions_type_id, :internal_address_number, :latitude, :legal_last_name, :legal_name,
                   :legal_second_last_name, :link_user_id, :longitude, :name, :phone, :religion_id, :rfc, :second_address, :status_id, :town_id,
                   :type_person, :zip_code,
                   #Para seleccionar multiples Instituciones de apoyo antes de crear una Institución

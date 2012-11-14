@@ -213,7 +213,7 @@
           <%= f.number_field :status_id %>
         </td>
       </tr>
-    </table
+    </table>
   </div>
 
   <div class="field">
@@ -295,15 +295,14 @@
         else if(side==2){
          if(listRight.options.length==0){
              alert('Usted ya movio todas las instituciones a la izquierda');
-             return false;
-         }
+             return false;}
             else{
-             var selectedAL=listRight.options.selectedIndex;
-              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
-             listRight.remove(selectedAL);
-              if(listRight.options.length>0){
-                 listRight.options[0].selected=true;
-             } 
+                 var selectedAL=listRight.options.selectedIndex;
+                  move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+                 listRight.remove(selectedAL);
+                  if(listRight.options.length>0){
+                     listRight.options[0].selected=true;
+                 } 
             } 
         } 
     } 
