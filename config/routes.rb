@@ -2,6 +2,10 @@ Seias::Application.routes.draw do
 
 
 
+  resources :people_by_rooms
+
+  resources :housing_features
+
   resources :benefit_types
 
   resources :benefit_categories

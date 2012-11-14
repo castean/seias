@@ -1,0 +1,25 @@
+<h1>Listing housing_features</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Point</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @housing_features.each do |housing_feature| %>
+  <tr>
+    <td><%= housing_feature.description %></td>
+    <td><%= housing_feature.point %></td>
+    <td><%= link_to 'Show', housing_feature %></td>
+    <td><%= link_to 'Edit', edit_housing_feature_path(housing_feature) %></td>
+    <td><%= link_to 'Destroy', housing_feature, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Housing feature', new_housing_feature_path %>

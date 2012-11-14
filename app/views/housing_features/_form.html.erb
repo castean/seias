@@ -1,0 +1,25 @@
+<%= form_for(@housing_feature) do |f| %>
+  <% if @housing_feature.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@housing_feature.errors.count, "error") %> prohibited this housing_feature from being saved:</h2>
+
+      <ul>
+      <% @housing_feature.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :point %><br />
+    <%= f.number_field :point %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

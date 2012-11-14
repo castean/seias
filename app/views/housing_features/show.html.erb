@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Description:</b>
+  <%= @housing_feature.description %>
+</p>
+
+<p>
+  <b>Point:</b>
+  <%= @housing_feature.point %>
+</p>
+
+
+<%= link_to 'Edit', edit_housing_feature_path(@housing_feature) %> |
+<%= link_to 'Back', housing_features_path %>

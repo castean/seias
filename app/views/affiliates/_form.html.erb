@@ -1,4 +1,5 @@
 <%= form_for :affiliates, :url => {:action => 'new', :controller => 'affiliates', :type => "ben"} do |f| %>
+
     <div class="field">
       Personas<%= radio_button_tag "field", 1, true,{:id => "button1", :class => "show_hide"} %>
       Instituciones<%= radio_button_tag "field", 2, false,{:id => "button2", :class => "show_hide"} %>
