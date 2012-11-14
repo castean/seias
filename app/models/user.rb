@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :activities
   has_many :offices
   has_many :office_records
+  has_many :office_allocations
   has_many :programs , :foreign_key => "responsable_id"
   belongs_to :department
   belongs_to :direction

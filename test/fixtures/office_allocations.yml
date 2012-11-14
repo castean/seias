@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  office_id: 1
+  infot: MyText
+  user_id: 1
+  to: MyString
+  place: MyString
+  location_status: 1
+  move_by_user_id: 1
+
+two:
+  office_id: 1
+  infot: MyText
+  user_id: 1
+  to: MyString
+  place: MyString
+  location_status: 1
+  move_by_user_id: 1

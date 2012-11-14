@@ -35,6 +35,7 @@ class Ability
       can :autocomplete_name, Family
       can :autocomplete_second_last_name, Family
 
+      can :for_category_id, Benefit
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            

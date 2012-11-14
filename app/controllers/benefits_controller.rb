@@ -26,12 +26,17 @@ class BenefitsController < ApplicationController
   def new
     @benefit = Benefit.new
     if params[:id]
-      person_id = params[:id]
-      @affiliate = Affiliate.find_all_by_person_id(person_id)
+      if params[:type] == '1'
+        person_id = params[:id]
+        @affiliate = Affiliate.find_all_by_person_id(person_id)
+      elsif params[:type] == '2'
+        institution_id = params[:id]
+        @affiliate = Affiliate.find_all_by_institution_ben_id(institution_id)
+      end
     end
     if params[:continuos] == '1'
 
-      @benefit_s = Benefit.last.dup
+      @benefit_s = Benefit.find_all_by_affiliate_id(params[:aff])
 
       respond_to do |format|
         format.html # new.html.erb
@@ -59,9 +64,12 @@ class BenefitsController < ApplicationController
     respond_to do |format|
       if @benefit.save
         #format.html { redirect_to @benefit, notice: 'Benefit was successfully created.' }
-        flash[:notice] = 'La actividad se dio de alta satisfactoriamente.'
-        format.html { redirect_to(:action => 'new', :continuos => 1 )}
-
+        flash[:notice] = 'El apoyo se dio de alta satisfactoriamente.'
+        if @benefit.affiliate.institution_ben_id.nil?
+          format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.person_id , :continuos => 1,:type => '1',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}
+        elsif @benefit.affiliate.person_id.nil?
+          format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.institution_ben_id , :continuos => 1,:type => '2',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}
+        end
         #format.json { render json: @benefit, status: :created, location: @benefit }
       else
         format.html { render action: "new" }
@@ -95,6 +103,15 @@ class BenefitsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to benefits_url }
       format.json { head :no_content }
+    end
+  end
+
+  # ISC Christian Ivan Alderete Garcia funcion para cambiar valores con CoffeScript y json
+  def for_category_id
+    @benefit_category = BenefitType.find_all_by_benefit_category_id(params[:benefit_category_id])
+
+    respond_to do |format|
+      format.json  { render :json => @benefit_category.to_json}
     end
   end
 end
