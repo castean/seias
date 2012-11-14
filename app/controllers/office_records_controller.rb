@@ -46,7 +46,7 @@ class OfficeRecordsController < ApplicationController
   # POST /office_records.json
   def create
     @office_record.office_id = @office
-    @office_record = @office.office_records.build(params[:office_record)
+    @office_record = @office.office_records.build(params[:office_record])
 
     respond_to do |format|
       if @office_record.save

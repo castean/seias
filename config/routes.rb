@@ -6,7 +6,6 @@ Seias::Application.routes.draw do
 
   resources :benefit_categories
 
-
   resources :worths
 
   resources :statuses
@@ -35,6 +34,7 @@ Seias::Application.routes.draw do
 
   end
 
+  match '/benefits/for_category_id/:benefit_category_id' => 'benefits#for_category_id'
   match '/benefits/new/:id' => 'benefits#new'
   resources :benefits
 

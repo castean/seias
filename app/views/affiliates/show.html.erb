@@ -30,8 +30,14 @@
   <b>Actividad:</b>
   <%= @affiliate.activity_type.name %>
 </p>
+<% if @affiliate.institution_ben_id.nil? %>
 
+    <%= link_to 'Apoyos', new_benefit_path + '/' + @affiliate.person_id.to_s + '?type=1', :class => "btn" %>
+<% elsif @affiliate.person_id.nil? %>
 
+    <%= link_to 'Apoyos', new_benefit_path + '/' + @affiliate.institution_ben_id.to_s + '?type=2', :class => "btn" %>
+<% end %>
 
+</br>
 <%= link_to 'Edit', edit_affiliate_path(@affiliate) %> |
 <%= link_to 'Back', affiliates_path %>
