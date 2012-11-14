@@ -9,30 +9,42 @@
         </ul>
     </div>
   <% end %>
+  </br>
+    Reasignación Interna <%= radio_button_tag "field", 1, true,{:id => "button1", :class => "show_hide"} %></br>
+    Reasignación Externa <%= radio_button_tag "field", 2, false,{:id => "button2", :class => "show_hide"} %>
+  <div id="div-sh-1" class="toHide"  >
+    <div class="field">
+      <%= f.label :user_id %>
+      <%= f.number_field :user_id %>
+    </div>
+    <div class="field">
+      <%= f.label :user_id %>
+      <%= f.number_field :user_id %>
+    </div>
+    <div class="field">
+      <%= f.label :user_id %>
+      <%= f.number_field :user_id %>
+    </div>
+  </div>
+  <div id="div-sh-2" class="toHide"  >
+      <div class="field">
+        <%= f.label :to, "Para:" %>
+        <%= f.text_field :to %>
+      </div>
+      <div class="field">
+        <%= f.label :place, "Institución:" %>
+        <%= f.text_field :place %>
+      </div>
+  </div>
+  </br>
   <div class="field">
-    <%= f.label :infot %><br />
+    <%= f.label :infot, "Razón para reasiganar?" %>
     <%= f.text_area :infot %>
   </div>
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+    <%= f.hidden_field :move_by_user_id, :value => @office.user_id %>
   </div>
-  <div class="field">
-    <%= f.label :to %><br />
-    <%= f.text_field :to %>
-  </div>
-  <div class="field">
-    <%= f.label :place %><br />
-    <%= f.text_field :place %>
-  </div>
-  <div class="field">
-    <%= f.label :location_status %><br />
-    <%= f.number_field :location_status %>
-  </div>
-  <div class="field">
-    <%= f.label :move_by_user_id %><br />
-    <%= f.number_field :move_by_user_id %>
-  </div>
+  </br>
   <div class="actions">
     <%= f.submit %>
   </div>
