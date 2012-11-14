@@ -290,7 +290,7 @@ $(document).ready(function(){
     // Ing. Antonio // instituciones - giro de la empresa
 
 
-    $("#institution_type_id").change(function(){
+    $("#institutions_type_id").change(function(){
         var id_value_string = $(this).val();
         if (id_value_string == "") {
             // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax

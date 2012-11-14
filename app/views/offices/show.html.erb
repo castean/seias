@@ -67,7 +67,7 @@
   <%= Person.find(@office.person_id).fullname  %>
 </p>
 </br>
---------------------------------------------------
+<p>--------------------------------------------------</p>
 </br>
 <%if @office.status_id == 2 %>
     <%= link_to 'Atender', new_office_office_record_path(@office), :class => "btn" %>

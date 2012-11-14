@@ -16,8 +16,8 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-      <%= f.label :institution_type_id, "Tipo de institución a la que pertenece " %>
-      <%= f.select :institution_type_id, InstitutionsType.order("name").all.collect{ |c| [c.name.to_s, c.id] }, {:include_blank => "-- Selecciona tipo de institución --"} %>
+      <%= f.label :institutions_type_id, "Tipo de institución a la que pertenece " %>
+      <%= f.select :institutions_type_id, InstitutionsType.order("name").all.collect{ |c| [c.name.to_s, c.id] }, {:include_blank => "-- Selecciona tipo de institución --"} %>
     </div>
   <div class="actions">
     <%= f.submit %>
