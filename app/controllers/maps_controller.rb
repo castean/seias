@@ -1,3 +1,4 @@
+#encoding:utf-8
 class MapsController < ApplicationController
   load_and_authorize_resource
   def index

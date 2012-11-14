@@ -1,3 +1,4 @@
+#encoding:utf-8
 class PublicTargetsController < ApplicationController
   load_and_authorize_resource
   # GET /public_targets

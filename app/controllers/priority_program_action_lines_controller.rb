@@ -1,9 +1,10 @@
+#encoding:utf-8
 class PriorityProgramActionLinesController < ApplicationController
   load_and_authorize_resource
   # GET /priority_program_action_lines
   # GET /priority_program_action_lines.json
   def index
-    @priority_program_action_lines = PriorityProgramActionLine.all
+    @priority_program_action_lines = PriorityProgramActionLine.order("hierarchy").all
 
     respond_to do |format|
       format.html # index.html.erb

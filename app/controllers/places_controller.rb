@@ -1,3 +1,4 @@
+#encoding:utf-8
 #require "csv"
 class PlacesController < ApplicationController
   load_and_authorize_resource

@@ -1,9 +1,10 @@
+#encoding:utf-8
 class ProgramsController < ApplicationController
   load_and_authorize_resource
   # GET /programs
   # GET /programs.json
   def index
-    @programs = Program.all
+    @programs = Program.order("name").all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,9 +1,10 @@
+#encoding:utf-8
 class PedSubThemesController < ApplicationController
   load_and_authorize_resource
   # GET /ped_sub_themes
   # GET /ped_sub_themes.json
   def index
-    @ped_sub_themes = PedSubTheme.all
+    @ped_sub_themes = PedSubTheme.order("hierarchy").all
 
     respond_to do |format|
       format.html # index.html.erb

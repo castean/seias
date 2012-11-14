@@ -1,5 +1,11 @@
 Seias::Application.routes.draw do
  
+  resources :ped_program_definitions
+
+  resources :ped_axis_developments
+
+  resources :ped_themes
+
   resources :ped_sub_themes
 
   resources :priority_program_action_lines
@@ -73,12 +79,17 @@ Seias::Application.routes.draw do
   match 'logout', :controller => 'user_sessions', :action => 'destroy'
   
   resource :user_sessions
+<<<<<<< HEAD
   resources :users 
     
 
  
 
   
+=======
+  match '/users/change_password' => 'users#change_password'
+  resources :users
+>>>>>>> d8d741bec4707c8020bb954dad119fc5fd17cf24
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

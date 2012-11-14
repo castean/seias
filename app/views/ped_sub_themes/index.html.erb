@@ -1,4 +1,4 @@
-<h3>Subtemas del Progrma Estatal de Desarrollo</h3>
+<h3>Subtemas del Programa Estatal de Desarrollo</h3>
 
 <table class="table table-striped">
   <thead>
@@ -17,18 +17,23 @@
     <td><%= ped_sub_theme.name %></td>
     <td></td>
     <td><%= link_to 'Objetivos', ped_sub_theme %></td>
-    <td><%= link_to(edit_ped_sub_theme_path(ped_sub_theme)) do %>
-    		<%= image_tag("edit.png") %>
-    	<%end%>
-    </td>
-    <td><%= link_to(ped_sub_theme, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => :true) do %>
-    		<%= image_tag("delete.png") %>
-    	<%end%>
-    </td>
+    <% if can? :update, ped_sub_theme %>
+	    <td><%= link_to(edit_ped_sub_theme_path(ped_sub_theme)) do %>
+	    		<%= image_tag("edit.png") %>
+	    	<%end%>
+	    </td>
+	  <%end%>
+	  <% if can? :destroy, ped_sub_theme %>  
+	    <td><%= link_to(ped_sub_theme, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => :true) do %>
+	    		<%= image_tag("delete.png") %>
+	    	<%end%>
+	    </td>
+    <%end%>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'Agregar subtema al PED', new_ped_sub_theme_path, :class => "btn primary" %>
+<% if can? :create, @ped_sub_themes %>
+	<%= link_to 'Agregar subtema al PED', new_ped_sub_theme_path, :class => "btn primary" %>
+<%end%>

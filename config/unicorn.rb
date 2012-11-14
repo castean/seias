@@ -10,7 +10,7 @@ worker_processes (rails_env == 'production' ? 4 : 6)
 preload_app true
 
 # Restart any workers that haven't responded in 30 seconds
-timeout 120
+timeout 300
 
 # Listen on a Unix data socket
 #listen_socket = rails_env == 'production' ? '/webapps/uniq/current/tmp/unicorn.sock' : RAILS_ROOT+'tmp/unicorn.sock'
@@ -40,14 +40,14 @@ before_fork do |server, worker|
   # Using this method we get 0 downtime deploys.
   ActiveRecord::Base.establish_connection
 
-  #old_pid = RAILS_ROOT + '/tmp/pids/unicorn.pid.oldbin'
-  #if File.exists?(old_pid) && server.pid != old_pid
-  #  begin
-  #    Process.kill("QUIT", File.read(old_pid).to_i)
-  #  rescue Errno::ENOENT, Errno::ESRCH
-  #    # someone else did our job for us
-  #  end
-  #end
+  old_pid = Rails.root + '/tmp/pids/unicorn.pid.oldbin'
+  if File.exists?(old_pid) && server.pid != old_pid
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
+    end
+  end
 end
 
 
@@ -77,7 +77,7 @@ after_fork do |server, worker|
       Process::UID.change_privilege(target_uid)
     end
   rescue => e
-    if RAILS_ENV == 'development'
+    if Rails.env == 'development'
       STDERR.puts "couldn't change user, oh well"
     else
       raise e

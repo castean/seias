@@ -19,10 +19,15 @@
     <%= f.label :description, "Descripción" %>
     <%= f.text_area :description %>
   </div>
-    <div class="field">
-	<%= f.label :ped_id, "PED al que pertenece" %>
-	<%= f.select :ped_id, Ped.all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
+  <div class="field">
+	<%= f.label :ped_theme_id, "Tema del PED al que pertenece" %>
+	<%= f.select :ped_theme_id, PedTheme.order("name").all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Identificador --"} %>
   </div>
+  <div class="field">
+    <%= f.label :hierarchy, "Orden de vista para Reporte" %>
+    <%= f.number_field :hierarchy %>
+  </div>
+  </br>
   <div class="actions">
     <%= f.submit %>
   </div>

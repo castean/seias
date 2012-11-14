@@ -25,6 +25,7 @@
   <%= @priority_program_action_line.ped_action_line_id %>
 </p>
 
-
-<%= link_to 'Edit', edit_priority_program_action_line_path(@priority_program_action_line) %> |
+<% if can? :update, @priority_program_action_line %>
+	<%= link_to 'Edit', edit_priority_program_action_line_path(@priority_program_action_line) %> |
+<% end %>
 <%= link_to 'Back', priority_program_action_lines_path %>

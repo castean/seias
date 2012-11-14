@@ -1,9 +1,10 @@
+#encoding:utf-8
 class ActivityTypesController < ApplicationController
   load_and_authorize_resource
   # GET /activity_types
   # GET /activity_types.json
   def index
-    @activity_types = ActivityType.all
+    @activity_types = ActivityType.order("name").page(params[:page]).per(30)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,9 +15,8 @@ class ActivityTypesController < ApplicationController
   # GET /activity_types/1
   # GET /activity_types/1.json
   def show
-    
-    @activity_type = ActivityType.find(params[:id])
-
+    @activity_type = ActivityType.find(params[:id]) 
+    @activitypage = @activity_type.activities.page(params[:page]).per(20)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @activity_type }

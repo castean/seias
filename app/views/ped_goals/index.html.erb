@@ -16,22 +16,27 @@
 <% @ped_goals.each do |ped_goal| %>
 
   <tr>
-    <td><%= ped_goal.ped.name %></td>
+    <td><%= ped_goal.ped_sub_theme.ped_theme.ped_axis_development.ped.name %></td>
     <td><%= ped_goal.ped_sub_theme.name %></td>
     <td><%= ped_goal.name %>: <%= ped_goal.description %></td>
     <td><%= link_to 'Estrategias', ped_goal %></td>
-    <td><%= link_to(edit_ped_goal_path(ped_goal)) do %>
-    		<%= image_tag("edit.png") %>
-    	<%end%>
-    </td>
-    <td><%= link_to(ped_goal, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => true) do %>
-    		<%= image_tag("delete.png") %>
-    	<%end%>
-    </td>
+    <% if can? :update, ped_goal %>
+	    <td><%= link_to(edit_ped_goal_path(ped_goal)) do %>
+	    		<%= image_tag("edit.png") %>
+	    	<%end%>
+	    </td>
+    <%end%>
+    <% if can? :destroy, ped_goal %>
+	    <td><%= link_to(ped_goal, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => true) do %>
+	    		<%= image_tag("delete.png") %>
+	    	<%end%>
+	    </td>
+    <%end%>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'Agregar Objetivo', new_ped_goal_path, :class => "btn primary" %>
+<% if can? :create, @ped_goals %>
+	<%= link_to 'Agregar Objetivo', new_ped_goal_path, :class => "btn primary" %>
+<%end%>

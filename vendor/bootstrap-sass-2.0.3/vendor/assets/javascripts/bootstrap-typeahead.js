@@ -214,15 +214,15 @@
 
         case 38: // up arrow
           if (e.type != 'keydown') break
-          e.preventDefault()
+          {e.preventDefault()
           this.prev()
-          break
+          break}
 
         case 40: // down arrow
           if (e.type != 'keydown') break
-          e.preventDefault()
+          {e.preventDefault()
           this.next()
-          break
+          break}
       }
 
       e.stopPropagation()

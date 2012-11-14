@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Eje de Desarrollo:</b></br>
+  <%= @ped_axis_development.name %>
+</p>
+</br>
+<p>
+  <b>Tema del PED:</b>
+</p>
+<% @ped_axis_development.ped_themes.each do |theme| %>
+	<ul>
+		<li>
+			<%= link_to theme.name, ped_theme_path(theme.id)%>
+		</li>
+	</ul>
+<%end%>
+</br>
+
+
+<%= link_to 'Edit', edit_ped_axis_development_path(@ped_axis_development) %> |
+<%= link_to 'Back', ped_axis_developments_path %>

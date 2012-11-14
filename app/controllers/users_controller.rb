@@ -1,9 +1,30 @@
+#encoding:utf-8
 class UsersController < ApplicationController
   load_and_authorize_resource
+  
+  def change_password
+
+    @user = current_user
+
+    if request.post?
+      if @user.valid_password? params[:password][:old_password]
+        @user.password = params[:password][:new_password]
+        @user.password_confirmation = params[:password][:new_password_confirmation]
+        if @user.save
+          UserSession.create(:login => @user.login, :password => @user.password)
+          redirect_to root_path , :notice => "Cambio de Contraseña Correcto"
+        else
+          flash[:error] = 'Verifique la Contraseña Nueva'
+        end
+      else
+        flash[:error] = 'Contraseña Actual Invalida'
+      end
+    end
+  end
 
   #GET
   def index
-    @users = User.all
+    @users = User.order("name").order("last_name").order("second_last_name").page(params[:page]).per(20)
   end
 
   def new
@@ -22,8 +43,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.active = true
-    if Seias::Application.config.ldap_auth
-      @user.password = "123pum"
+    unless  authentication_method_requires_password?
+      @user.password = "dif123"
+      @user.password_confirmation = "dif123"
     end
     if @user.save
       redirect_to users_path, notice: 'Usuario registrado correctamente'

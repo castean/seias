@@ -1,0 +1,32 @@
+<h1>Temas PED</h1>
+
+<table class="table table-striped">
+  <thead>
+	  <tr>
+	    <th>Tema del PED</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+  </thead>
+
+<% @ped_themes.each do |ped_theme| %>
+  <tr>
+    <td><%= ped_theme.name %></td>
+    <td><%= link_to 'Sub Tema PED', ped_theme %></td>
+    <td><%= link_to(edit_ped_theme_path(ped_theme)) do %>
+    	<%= image_tag("edit.png") %>
+    	<%end%>
+    </td>
+    <td><%= link_to(ped_theme, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => :true) do %>
+    	<%= image_tag("delete.png") %>
+    	<%end%>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Tema al PED', new_ped_theme_path, :class => "btn primary" %>

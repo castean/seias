@@ -19,18 +19,23 @@
     <td><%= priority_program_action_line.name %></td>
     <td><%= priority_program_action_line.description %></td>
     <td><%= link_to 'Detalles', priority_program_action_line %></td>
-    <td><%= link_to (edit_priority_program_action_line_path(priority_program_action_line)) do %>
-    		<%= image_tag("edit.png") %>
-    	<%end%>
-    </td>
-    <td><%= link_to(priority_program_action_line, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => true) do %>
-    		<%= image_tag("delete.png")%>
-    	<%end%>
-    </td>
+    <% if can? :update, priority_program_action_line %>
+	    <td><%= link_to (edit_priority_program_action_line_path(priority_program_action_line)) do %>
+	    		<%= image_tag("edit.png") %>
+	    	<%end%>
+	    </td>
+    <%end%>
+    <% if can? :destroy, priority_program_action_line %>
+	    <td><%= link_to(priority_program_action_line, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => true) do %>
+	    		<%= image_tag("delete.png")%>
+	    	<%end%>
+	    </td>
+    <%end%>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'Agregar Línea de Acción', new_priority_program_action_line_path, :class => "btn primary" %>
+<% if can? :create, @priority_program_action_lines %>
+	<%= link_to 'Agregar Línea de Acción', new_priority_program_action_line_path, :class => "btn primary" %>
+<%end%>

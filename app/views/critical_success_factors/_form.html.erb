@@ -9,12 +9,11 @@
       </ul>
     </div>
   <% end %>
-
+	</br>
   <div class="field">
-    <%= f.label :critical_success_factor_type_id, "Tipo de Factor Crítico" %>
-    <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.all.collect{ |c| [c.name, c.id] }, {:include_blank => false}, :class => "span7" %>
+    <%= f.label :critical_success_factor_type_id, "Tipo" %>
+    <%= f.select :critical_success_factor_type_id, CriticalSuccessFactorType.order("name").all.collect{ |c| [c.name, c.id] }, {:include_blank => "-- Seleccione un Tipo --"}, :class => "span7" %>
   </div>
-
   <div class="field">
     <%= f.label :title, "Título" %>
     <%= f.text_field :title, :class => "span7" %>
@@ -25,7 +24,7 @@
   </div>
   <div class="field">
     <%= f.label :program_id, "Programa" %>
-    <%= f.select :program_id, Program.all.collect{ |p| [p.name, p.id] }, {:include_blank => false}, :class => "span7" %>
+    <%= f.select :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }, {:include_blank => false}, :class => "span7" %>
   </div>
   <b>Metas</b>
   <div class="field">
@@ -41,7 +40,7 @@
     <%= f.text_field :objective_excelent, :class => "span7" %>
   </div>
   <div class="field">
-    <%= f.label :percentage, "Porcentaje" %>
+    <%= f.label :percentage, "Peso %" %>
     <%= f.text_field :percentage, :class => "span7" %>
   </div>
   <div class="field">

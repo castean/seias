@@ -1,3 +1,4 @@
+#encoding:utf-8
 class CriticalSuccessFactorsController < ApplicationController
   load_and_authorize_resource
   # GET /critical_success_factors

@@ -9,8 +9,6 @@
 <p>
   <b>Objetivos:</b>
 </p>
-
-
 <% @ped_sub_theme.ped_goals.each do |goal| %>
 	<ul>
 		<li>
@@ -19,6 +17,7 @@
 	</ul>
 <%end%>
 </br>
-
-<%= link_to 'Edit', edit_ped_sub_theme_path(@ped_sub_theme) %> |
+<% if can? :update, @ped_sub_theme %>
+	<%= link_to 'Edit', edit_ped_sub_theme_path(@ped_sub_theme) %> |
+<% end %>
 <%= link_to 'Back', ped_sub_themes_path %>

@@ -50,6 +50,7 @@
 
 <%= gmaps("map_options" =>{:auto_zoom => false, :zoom => 7},"markers" => {"data" => @json}) %>
 
-
-<%= link_to 'Editar', edit_activity_path(@activity) %> |
+<% if can? :update, @activity %>
+	<%= link_to 'Editar', edit_activity_path(@activity) %> |
+<%end%>
 <%= link_to 'Regresar', activities_path %>

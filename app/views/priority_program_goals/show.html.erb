@@ -20,6 +20,7 @@
 </br>
 
 
-
-<%= link_to 'Editar Objetivo', edit_priority_program_goal_path(@priority_program_goal) %> |
+<% if can? :update, @priority_program_goal %>
+	<%= link_to 'Editar Objetivo', edit_priority_program_goal_path(@priority_program_goal) %> |
+<% end %>
 <%= link_to 'Listado de Objetivos', priority_program_goals_path %>

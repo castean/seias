@@ -1,9 +1,10 @@
+#encoding:utf-8
 class PriorityProgramGoalsController < ApplicationController
   load_and_authorize_resource
   # GET /priority_program_goals
   # GET /priority_program_goals.json
   def index
-    @priority_program_goals = PriorityProgramGoal.all
+    @priority_program_goals = PriorityProgramGoal.order("hierarchy").all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,9 +1,10 @@
+#encoding:utf-8
 class PedStrategiesController < ApplicationController
   load_and_authorize_resource
   # GET /ped_strategies
   # GET /ped_strategies.json
   def index
-    @ped_strategies = PedStrategy.all
+    @ped_strategies = PedStrategy.order("hierarchy").all
 
     respond_to do |format|
       format.html # index.html.erb

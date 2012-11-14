@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+
   <%= f.hidden_field :user_id %>
   <br />
   <div class="field">
@@ -31,14 +32,107 @@
   <div class="field">
     <%= f.label :measurement_description, "Descripción. Que vamos a medir?" %>
     <%= f.text_area :measurement_description, :size=>"100x5", :class => "span7" %>
+
+
+  <div>
+      <table border="0">
+         <tr>
+           <td colspan="2"><h4>FCE / Indicador Disponibles</h4></td>
+          <td colspan="2"><h4>FCE / Indicador Relacionados a la Acción</h4></td>
+         </tr>
+         <tr>
+           <td rowspan="3" align="right">
+            <label>
+              <%= f.select("selectLeft",options_for_select(CriticalSuccessFactor.order("title").all.collect { |cat| [cat.title, cat.id] }, @activity_type.name { |cat| cat.id}),{},{:multiple=>true, :size => 6, :id=>'selectLeft'})%>
+            </label>
+          </td>
+            <td align="left">&nbsp;</td>
+             <td align="left">&nbsp;</td>
+            <td rowspan="3" align="left">
+              <label>
+                <%= f.select("selectRightActivity",{},{}, :size => 6,:multiple=>true, :id=>'selectRightActivity') %>
+              </label>
+            </td>
+          </td>
+          </tr>
+          <tr>
+             <td align="left">&nbsp;</td>
+             <td align="left">
+               <label>
+                 <input name="btnRight" type="button" id="btnRight" value="&gt;&gt;" onClick="javascript:moveToRightOrLeft(1);">
+                </label>
+          </td> 
+          </tr>
+          <tr>
+             <td align="left">&nbsp;</td>
+             <td align="left">
+               <label>
+                   <input name="btnLeft" type="button" id="btnLeft" value="&lt;&lt;" onClick="javascript:moveToRightOrLeft(2);">
+                </label>
+            </td> 
+          </tr> 
+      </table> 
+       </div>
+  </div>
+
   <div class="actions">
-  <div class="field">
-    <%= f.label :critical_success_factor_id, "Factor Critico" %>
-    <%= f.select :critical_success_factor_id, CriticalSuccessFactor.all.collect{ |c| [c.title, c.id] }, {:include_blank => "-- Seleccione una Medición --"}, :class => "span7" %>
+    <%= f.submit %>
   </div>
-  </div>
-        <div class="form-actions btn-group">
-        <%= f.submit "Crear Tipo de Actividad", :class => "btn" %>
-        <%= link_to 'Atras', activity_types_path, :class => "btn"  %>
-      </div>
 <% end %>
+
+
+<script type="text/javascript">
+     function moveToRightOrLeft(side){
+     var listLeft=document.getElementById('selectLeft');
+     var listRight=document.getElementById('selectRightActivity');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todos los FCE / Indicadores a la derecha');
+             return false;
+         }
+        else{
+         var selectedFCEIND=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedFCEIND].value,listLeft.options[selectedFCEIND].text); listLeft.remove(selectedFCEIND);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+            else{
+             var selectedFCEIND=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedFCEIND].value,listRight.options[selectedFCEIND].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+     function move(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+ } 
+
+    $(document).ready(function(){
+        $('#new_activity_type').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightActivity").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightActivity").val(options);
+        });
+
+        $('form[id*=edit_activity_type]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightActivity").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightActivity").val(options);
+        });
+    });
+
+</script>

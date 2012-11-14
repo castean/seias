@@ -1,9 +1,10 @@
+#encoding:utf-8
 class PedGoalsController < ApplicationController
   load_and_authorize_resource
   # GET /ped_goals
   # GET /ped_goals.json
   def index
-    @ped_goals = PedGoal.all
+    @ped_goals = PedGoal.order("hierarchy").all
 
     respond_to do |format|
       format.html # index.html.erb
