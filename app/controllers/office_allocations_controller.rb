@@ -1,4 +1,6 @@
 class OfficeAllocationsController < ApplicationController
+  load_and_authorize_resource
+  before_filter :find_office
   # GET /office_allocations
   # GET /office_allocations.json
   def index
@@ -40,11 +42,13 @@ class OfficeAllocationsController < ApplicationController
   # POST /office_allocations
   # POST /office_allocations.json
   def create
-    @office_allocation = OfficeAllocation.new(params[:office_allocation])
+    @office_allocation = Office.find_by_id(params[:user_id])
+    @office_allocation.office_id = @office
+    @office_allocation = @office.office_allocation.build(params[:office_allocation])
 
     respond_to do |format|
       if @office_allocation.save
-        format.html { redirect_to @office_allocation, notice: 'Office allocation was successfully created.' }
+        format.html { redirect_to @office, notice: 'Office allocation was successfully created.' }
         format.json { render json: @office_allocation, status: :created, location: @office_allocation }
       else
         format.html { render action: "new" }
@@ -79,5 +83,9 @@ class OfficeAllocationsController < ApplicationController
       format.html { redirect_to office_allocations_url }
       format.json { head :no_content }
     end
+  end
+  protected
+  def find_office
+    @office = Office.find(params[:office_id])
   end
 end
