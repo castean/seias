@@ -76,3 +76,5 @@ gem 'rails3-jquery-autocomplete'
 gem "ransack"
 
 gem "rb-readline"
+
+gem 'cocaine', '0.3.2'

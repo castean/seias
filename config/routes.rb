@@ -1,6 +1,5 @@
 Seias::Application.routes.draw do
 
-
   match '/socioeconomic_studies/new/:id' => 'socioeconomic_studies#new'
   resources :socioeconomic_studies
 
@@ -204,9 +203,18 @@ Seias::Application.routes.draw do
 
   resources :critical_success_factor_types
   match 'logout', :controller => 'user_sessions', :action => 'destroy'
+  
   resource :user_sessions
+
+    
+
+ 
+
+  
+
   match '/users/change_password' => 'users#change_password'
   resources :users
+
 
   match "home/download_manual" => "home#download_manual", :as => :manual
 
