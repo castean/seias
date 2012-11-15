@@ -41,7 +41,6 @@
   <div class="field">
     <%= f.label :department_id, "Para" %>
     <%= f.collection_select :department_id,  Department.order("name").find_all_by_direction_id(@office.direction_id), :id, :name, options ={:prompt => ""} %>
-    <%#f.select :user_id, User.order("name").all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Destinatario --"} %>
   </div>
   <div class="field">
     <%= f.label :name, "Asunto" %>
@@ -64,7 +63,6 @@
     <%= f.label :person_id, "Atentamente," %>
     <%= f.autocomplete_field :person, autocomplete_person_last_name_offices_path, :id_element => '#office_person_id'%>
     <%= f.hidden_field :person_id%>
-    <%# f.select :person_id, Person.order("name").all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Destinatario --"} %>
     <%= f.hidden_field :status_id, :value => 2%>
   </div>
 

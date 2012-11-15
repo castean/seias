@@ -1,6 +1,6 @@
 class OfficeAllocationsController < ApplicationController
   load_and_authorize_resource
-  before_filter :find_office
+  before_filter :find_office_in_allocation
   # GET /office_allocations
   # GET /office_allocations.json
   def index
@@ -42,9 +42,8 @@ class OfficeAllocationsController < ApplicationController
   # POST /office_allocations
   # POST /office_allocations.json
   def create
-    @office_allocation = Office.find_by_id(params[:user_id])
     @office_allocation.office_id = @office
-    @office_allocation = @office.office_allocation.build(params[:office_allocation])
+    @office_allocation = @office.office_allocations.build(params[:office_allocation])
 
     respond_to do |format|
       if @office_allocation.save
@@ -84,8 +83,9 @@ class OfficeAllocationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   protected
-  def find_office
+  def find_office_in_allocation
     @office = Office.find(params[:office_id])
   end
 end

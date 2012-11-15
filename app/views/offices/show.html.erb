@@ -69,32 +69,73 @@
 </br>
 <p>--------------------------------------------------</p>
 </br>
-<%if @office.status_id == 2 %>
+<%if @office.status_id <= 3 %>
     <%= link_to 'Atender', new_office_office_record_path(@office), :class => "btn" %>
-<%end%>
-<%if @office.status_id == 2 %>
     <%= link_to 'Reasiganar', new_office_office_allocation_path(@office), :class => "btn" %>
 <%end%>
 <%if @office.status_id == 3 %>
-    <td><%= link_to 'Finalizar', "end_office/" + @office.id.to_s, confirm: 'Esta Usted Seguro?', :class => "btn" %></td>
+    | <td><%= link_to 'Finalizar', "end_office/" + @office.id.to_s, confirm: 'Esta Usted Seguro?', :class => "btn" %></td>
 <%end%>
 </br>
 </br>
-<% @office.office_records.each do |c|  %>
+<p>
+  <b>Reasignaciones:</b>
+</p>
+<% x = params[:page]  #ISC Christian Alderete
+   #subpaginate for acitivies into activity_types
+   w = 0
+   y = 5
+
+   if x.nil?
+     w = 0
+     y = 4
+   else
+     y = y.to_i * x.to_i
+     w = y.to_i - 5
+   end
+   @office.office_allocations[w..y].each do |reasignacion|
+%>
     <p>
-      <%= c.user.fullname %><b> Comento:</b> Hace - <%= time_ago_in_words c.created_at %> - </br>
-      <%= c.info %></br> </br>
-
+      <b> Se asigno:</b> Hace - <%= time_ago_in_words reasignacion.created_at %> - </br>
+      <%= reasignacion.infot %></br> </br>
     </p>
-    <%if @office.status_id > 2 and @office.status_id < 4 %>
-        <%= link_to 'Continuar con Atencion', edit_office_office_record_path(@office, c), :class => "btn" %>
-    <%end%>
-    </br>
-    </br>
 <%end%>
+<br />
+<div class="pager">
+  <%= paginate @allocationpage %>
+</div>
 
+</br>
+<p>
+  <b>Atenciones:</b>
+</p>
+<% x = params[:page]  #ISC Christian Alderete
+   #subpaginate for acitivies into activity_types
+   w = 0
+   y = 5
 
+   if x.nil?
+     w = 0
+     y = 4
+   else
+     y = y.to_i * x.to_i
+     w = y.to_i - 5
+   end
+   @office.office_records[w..y].each do |atenciones|
+%>
+    <p>
+      <%= atenciones.user.fullname %><b> Comento:</b> Hace - <%= time_ago_in_words atenciones.created_at %> - </br>
+      <%= atenciones.info %></br> </br>
+    </p>
+<%end%>
+<br />
 
+<div class="pager">
+  <%= paginate @recordpage %>
+</div>
+
+</br>
+</br>
 
 <%= link_to 'Edit', edit_office_path(@office) %> |
 <%= link_to 'Back', offices_path %>

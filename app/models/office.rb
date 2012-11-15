@@ -8,6 +8,7 @@ class Office < ActiveRecord::Base
   belongs_to :status
   belongs_to :activity_type
   has_many :office_records
+  has_many :office_allocations
   attr_accessible :activity_type_id, :avatar, :department_id, :external_office_number, :internal_office_number, :name, :observations, :office_date,
                   :office_recive_date, :person_id, :priority_id, :record_no, :status_id, :to, :type_id, :user_id, :direction_id, :program_id, :person
   attr_accessor :program_id, :person
