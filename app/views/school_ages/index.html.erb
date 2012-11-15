@@ -1,0 +1,33 @@
+<h1>Listing school_ages</h1>
+
+<table>
+  <tr>
+    <th>Institution</th>
+    <th>Grade</th>
+    <th>Guardianship</th>
+    <th>Sex</th>
+    <th>Total qty registered</th>
+    <th>Real qty registered</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @school_ages.each do |school_age| %>
+  <tr>
+    <td><%= school_age.institution_id %></td>
+    <td><%= school_age.grade_id %></td>
+    <td><%= school_age.guardianship_id %></td>
+    <td><%= school_age.sex_id %></td>
+    <td><%= school_age.total_qty_registered %></td>
+    <td><%= school_age.real_qty_registered %></td>
+    <td><%= link_to 'Show', school_age %></td>
+    <td><%= link_to 'Edit', edit_school_age_path(school_age) %></td>
+    <td><%= link_to 'Destroy', school_age, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New School age', new_school_age_path %>

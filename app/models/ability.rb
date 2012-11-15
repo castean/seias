@@ -7,21 +7,47 @@ class Ability
       can :create, UserSession
       #puts "Usuario Nulo"
     else
-
       can :read, :all
-      can :for_countyid, Department
+      can :for_countyid, Town
       can :for_directionid, Department
       can :for_activitytypeid, Activity
+      can :for_departmentid, Activity
       can :destroy, UserSession 
       can :change_password, User
-      
+      can :download_manual, Home
+      can :program_search, Program
+      can :program_report, Program
+      can :program_report_all, Program
+      can :program_report, Report
+      can :program_report_all, Report
+      can :program_report_county, Report
+      can :report_town_act, Report
+      can :for_programid, Activity
+
+      can :autocomplete_person_name, Affiliate
+      can :autocomplete_institution_name, Affiliate
+      can :for_program_id, Affiliate
+
+      can :for_program_id, Office
+      can :autocomplete_person_last_name, Office
+
+      can :autocomplete_last_name, Family
+      can :autocomplete_name, Family
+      can :autocomplete_second_last_name, Family
+
+      can :for_category_id, Benefit
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            
       case user.roles.to_s 
       when "admin" then
+        #10.times { print "Hello admin" }
         can :manage, :all
       when "planeacion" then
+         #10.times { print "Hello planeacion" }
+        can :manage, Department
+        can :manage, Direction
+        can :manage, User
         can :manage, PriorityProgram
         can :manage, PriorityProgramGoal
         can :manage, PriorityProgramStrategy
@@ -42,7 +68,11 @@ class Ability
         can :destroy, Activity do |acti|
           acti.try(:user) == user 
         end
-      when "user" then
+        when "user" then
+          can :create, Worth
+        can :create, Affiliate
+        can :create, Office
+        can :create, Benefit
         can :create, Activity
         can :update, Activity do |acti|
           acti.try(:user) == user 

@@ -1,0 +1,146 @@
+<%= form_for(@one_reg_institution, :url => url, :method => method) do |f| %>
+    <% if @one_reg_institution.errors.any? %>
+        <div id="error_explanation">
+          <h2>Imposible registrar informacion</h2>
+
+          <ul>
+            <% @one_reg_institution.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+</br>
+
+  <div class="field">
+    <%= f.label :according_social_purpose, "Objetivo Social Acorde" %>
+    <%= f.check_box :according_social_purpose %>
+  </div>
+  <div class="field">
+    <%= f.label :people_sex, "Sexo de Beneficiarios" %>
+    <%= f.collection_select :people_sex, Sex.order("id").all, :id, :name, options ={:prompt => "-- Selecciona Sexo --"}, :class=>"span2"%>
+  </div>
+  <div class="field">
+    <table class="table table-striped">
+      <thead>
+      <h4>
+        Rango de Edades
+      </h4>
+      </thead>
+      <tr>
+        <td>
+          <%= f.label :min_age, "Edad Mínima" %>
+        </td>
+        <td>
+          <%= f.label :max_age,"Edad Máxima" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.select :min_age, OneRegInstitution::MIN_AGE, {:include_blank => "-- Selecciona Edad Mínima --"} %>
+        </td>
+        <td>
+          <%= f.select :max_age, OneRegInstitution::MAX_AGE, {:include_blank => "-- Selecciona Edad Máxima --"} %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="field">
+    <%= f.label :capacity,"Capacidad del Inmueble (Personas)" %>
+    <%= f.number_field :capacity %>
+  </div>
+  <div class="field">
+    <%= f.label :public_target_id, "Público Objetivo" %>
+    <%= f.collection_select :public_target_id, PublicTarget.order("name").all, :id, :name, options ={:prompt => "-- Selecciona la Poblacion Objetivo --"}, :class=>"span4"%>
+  </div>
+
+  <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div2', this)" /> Atiende a personas con discapacidad?  </br>
+  <div id="div2" style="display:none">
+    <div class="field">
+      <table border="0">
+         <tr>
+         <td><h4>Listado de Discapacidades para Atender</h4></td>
+         </tr>
+         <tr>
+         <td align="left">
+           <%=fillrightleftselectiononereginst(f)%>
+        </td>
+      </tr>
+        <tr>
+          <td>
+            <input name="btnRight" type="button" id="btnRight" value="v" onClick="javascript:moveToRightOrLeft(1);">
+
+            <input name="btnLeft" type="button" id="btnLeft" value="^" onClick="javascript:moveToRightOrLeft(2);">
+          </td>
+        </tr>
+         <tr>
+         <td><h4>Discapacidades en la lista que se Atienden</h4></td>
+         </tr>
+        <td align="left">
+          <%= f.select("selectRight",options_for_select(@one_reg_institution.discapacities.order("name").all.collect { |cat| [cat.name, cat.id] }, @one_reg_institution.id { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRight', :class=>"span7"}) %>
+        </td>
+        </tr>
+      </table>
+    </div>
+   </div>
+  </br>
+
+  <div>
+      <table border="0">
+         <tr>
+         <td><h4>Documentacion Disponible</h4></td>
+         </tr>
+         <tr>
+         <td align="left">
+        <%= filldocrightleftselectiononereginst(f)%>
+      </td>
+      </tr>
+        <tr>
+          <td>
+            <input name="btnRightdo" type="button" id="btnRightdo" value="v" onClick="javascript:moveToRightOrLefttwo(1);">
+
+            <input name="btnLeftdo" type="button" id="btnLeftdo" value="^" onClick="javascript:moveToRightOrLefttwo(2);">
+          </td>
+        </tr>
+         <tr>
+         <td><h4>Documentacion Presentada</h4></td>
+         </tr>
+        <td align="left">
+          <%= f.select("selectRighttwo",options_for_select(@one_reg_institution.documentations.order("name").all.collect { |cat| [cat.name, cat.id] }, @one_reg_institution.id { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRighttwo', :class=>"span7"}) %>
+        </td>
+        </tr>
+      </table>
+   </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#new_one_reg_institution').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+        $("#selectRight").val(options);
+    });
+
+    $('form[id*=edit_one_reg_institution]').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#selectRight").children("option").map(function(){ return $(this).attr('value') })
+        $("#selectRight").val(options);
+    });
+
+    $('#new_one_reg_institution').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#selectRighttwo").children("option").map(function(){ return $(this).attr('value') })
+        $("#selectRightwo").val(options);
+    });
+
+    $('form[id*=edit_one_reg_institution]').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#selectRighttwo").children("option").map(function(){ return $(this).attr('value') })
+        $("#selectRightwo").val(options);
+    });
+});
+</script>

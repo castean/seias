@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :description, "Descripción" %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
     <%= f.label :direction_id, "Dirección" %>
@@ -33,50 +33,68 @@
     <%= f.select :responsable_id, User.order("name").all.collect{ |c| [c.name.to_s + ' ' + c.last_name.to_s + ' ' + c.second_last_name.to_s, c.id] }, {:include_blank => "-- Selecciona un Responsable --"} %>
   </div>
   <div class="field">	
-    <%= f.label :start_date, "Fecha Inicio del Programa" %>
-    <%= f.datepicker :start_date, :dateFormat => "dd-mm-yy" %>
+    <%= f.label :program_start_date, "Fecha Inicio del Programa" %>
+    <%= f.datepicker :program_start_date, :dateFormat => "dd-mm-yy" %>
   </div>
   <div class="field">
     <%= f.label :cut_day, "Día Corte de Captura" %>
     <%= f.select :cut_day, Program::DAYS, {:include_blank => "-- Selecciona un Día --"} %>
   </div>
 
-    <div>
+  <div>
+    <table border="0">
+       <tr>
+       <td><h4>Líneas de Acción Disponibles</h4></td>
+       </tr>
+       <tr>
+       <td align="left">
+      <%= fillrightleftselection(f)%>
+    </td>
+    </tr>
+      <tr>
+        <td>
+          <input name="btnRight" type="button" id="btnRight" value="v" onClick="javascript:moveToRightOrLeft(1);">
+
+          <input name="btnLeft" type="button" id="btnLeft" value="^" onClick="javascript:moveToRightOrLeft(2);">
+        </td>
+      </tr>
+       <tr>
+       <td><h4>Líneas de Acción Relacionadas al Programa</h4></td>
+       </tr>
+      <td align="left">
+        <%= f.select("selectRight",options_for_select(@program.priority_program_action_lines.order("name").all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRight', :class=>"span7"}) %>
+      </td>
+      </tr>
+    </table>
+   </div>
+
+  <div class="field">
       <table border="0">
          <tr>
-         <td colspan="2"><h4>Líneas de Acción Disponibles</h4></td>
-            <td colspan="2"><h4>Líneas de Acción Relacionadas al Programa</h4></td>
+         <td><h4>Usuarios que pueden aportar las actividades del programa</h4></td>
          </tr>
          <tr>
-         <td rowspan="3" align="right">
-        <label>
-          <%= f.select("selectLeft",options_for_select(PriorityProgramActionLine.order("name").all.collect { |cat| [cat.name, cat.id] }, @program.name { |cat| cat.id}),{},{:multiple=>true, :size => 6, :id=>'selectLeft'})%>
-        </label>
+         <td align="left">
+        <%= fillrightleftselectionusers(f) %>
       </td>
-        <td align="left">&nbsp;</td>
-         <td align="left">&nbsp;</td>
-        <td rowspan="3" align="left">
-          <label>
-            <%= f.select("selectRight",{},{}, :size => 6,:multiple=>true, :id=>'selectRight') %>
-          </label>
-        </td>
-         </tr>
-         <tr>
-         <td align="left">&nbsp;</td>
-         <td align="left"><label>
-         <input name="btnRight" type="button" id="btnRight" value="&gt;&gt;" onClick="javascript:moveToRightOrLeft(1);">
-         </label>
-      </td> 
       </tr>
+        <tr>
+          <td>
+            <input name="btnRight" type="button" id="btnRight" value="v" onClick="javascript:moverlusers(1);">
+
+            <input name="btnLeft" type="button" id="btnLeft" value="^" onClick="javascript:moverlusers(2);">
+          </td>
+        </tr>
          <tr>
-         <td align="left">&nbsp;</td>
-         <td align="left"><label>
-         <input name="btnLeft" type="button" id="btnLeft" value="&lt;&lt;" onClick="javascript:moveToRightOrLeft(2);">
-             </label>
-      </td> 
-      </tr> 
-      </table> 
-     </div>
+         <td><h4>Usuarios que ya aportan al programa</h4></td>
+         </tr>
+        <td align="left">
+          <%= selectrightfillusers(f)%>
+        </td>
+        </tr>
+      </table>
+   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
@@ -139,5 +157,57 @@ $(document).ready(function(){
     });
 });
 
+ function moverlusers(side){
+ var listLeft=document.getElementById('sLusers');
+     var listRight=document.getElementById('sRusers');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las líneas de acción a la derecha');
+             return false;
+         }
+        else{
+         var selected=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selected].value,listLeft.options[selected].text); listLeft.remove(selected);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+    }
+    else if(side==2){
+     if(listRight.options.length==0){
+         alert('Usted ya movio todas las lineas de acción a la izquierda');
+             return false;
+         }
+        else{
+         var selected=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selected].value,listRight.options[selected].text);
+             listRight.remove(selected);
+              if(listRight.options.length>0){
+             listRight.options[0].selected=true;
+             } 
+        } 
+    } 
+} 
+ function move(listBoxTo,optionValue,optionDisplayText){
+ var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+ } 
+
+$(document).ready(function(){
+    $('#new_program').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#sRusers").children("option").map(function(){ return $(this).attr('value') })
+        $("#sRusers").val(options);
+    });
+
+    $('form[id*=edit_program]').submit(function(){
+        //SelectRight seleccionar
+        var options = $("#sRusers").children("option").map(function(){ return $(this).attr('value') })
+        $("#sRusers").val(options);
+    });
+});
 </script>
 

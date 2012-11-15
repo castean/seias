@@ -1,0 +1,44 @@
+<h3>Listado de Oficios Dispobibles</h3>
+<div style="OVERFLOW: auto; WIDTH: 100%; HEIGHT: 100%">
+<table class="table table-striped">
+  <thead>
+      <tr>
+
+        <th>No. Oficio</th>
+        <th>De</th>
+        <th>Para</th>
+        <th>Dirección</th>
+        <th>Departamento</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Fecha de Creación</th>
+        <th>Fecha de Revisión</th>
+        <th></th>
+        <th></th>
+      </tr>
+  </thead>
+
+<% @offices.each do |office| %>
+  <tr>
+
+    <td><%= office.internal_office_number %></td>
+    <td><%= Person.find(office.person_id).fullname  %>
+    <td><%= User.find(office.user_id).fullname %></td>
+    <td><%= office.user.department.direction.name %></td>
+    <td><%= office.user.department.name %></td>
+    <td><%= Priority.find(office.priority_id).name %></td>
+    <td><%= office.status.name %></td>
+    <td><%= office.created_at.to_date %></td>
+    <td><% office.office_records.each do |x| %>
+            <%= x.created_at.to_date%>  <%= x.user.fullname%>
+        <%end%>
+    </td>
+    <td><%= link_to 'Ver', office %></td>
+    <td><%= link_to 'Editar', edit_office_path(office) %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+<br />
+
+<%= link_to 'New Office', new_office_path %>

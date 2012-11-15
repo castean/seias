@@ -1,0 +1,34 @@
+<h3>Reporte de Actividades por Localidad</h3>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Programa</th>
+  </tr>
+  </thead>
+  <tr>
+    <td><%= @geoloc.first.pname%></td>
+    <td><%= @geoloc.first.pdescription %></td>
+  </tr>
+</table>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Referencia</th>
+    <th>Localidad</th>
+    <th>Total de Apoyos</th>
+    <th>Total de Beneficiarios</th>
+</tr>
+  </thead>
+
+  <% @geoloc.each do |p| %>
+      <tr>
+        <td><%= p.georef %></td>
+        <td><%= p.tnombre%></td>
+        <td><%= p.totalact %></td>
+        <td><%= p.totalp %></td>
+      </tr>
+  <%end%>
+</table>
+</br>
+<%=  link_to 'Descargar en excel', request.parameters.merge({:format => :xls}), :controller => 'programs', :action => 'report_town_act' %>

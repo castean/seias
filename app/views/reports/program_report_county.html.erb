@@ -1,0 +1,85 @@
+<% if @prog_type == "one"  %>
+    <h3>Lista de Programas con sus Actividades por Municipio</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Municipio</th>
+        </tr>
+      </thead>
+      <tr>
+      <% @c = County.find(:first, :conditions => ["cve_mun = ? and state_id = ?", params[:county_id][:cve_mun], 8]) %>
+
+        <td><%= @c.name %></td>
+      </tr>
+    </table>
+    <div style="width:600px;height:600px;overflow-y:scroll;overflow-x:scroll;">
+    </table>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Programa</th>
+        <th>Descripcion</th>
+        <th>Tipo de Actividad</th>
+        <th>Descripcion Tipo de Actividad</th>
+        <th>Cantidad</th>
+        <th>Personas</th>
+        <th>Mes</th>
+      </tr>
+      </thead>
+
+      <% @program.each do |p| %>
+
+          <tr>
+            <td><%= p.pnombre%></td>
+            <td><%= p.pdescripcion%></td>
+            <td><%= p.anombre %></td>
+            <td><%= p.ndesc%></td>
+            <td><%= p.totalv%></td>
+            <td><%= p.totalp%></td>
+            <td><%= p.mes%></td>
+          </tr>
+      <%end%>
+    </table>
+      </div>
+    <br/>
+
+    <%=  link_to 'Descargar en excel', request.parameters.merge({:format => :xls}), :controller => 'programs', :action => 'program_report_county' %>
+<% elsif @prog_type == "all"  %>
+<h3>Lista de Programas con sus Actividades por Municipio</h3>
+
+
+    <div style="width:600px;height:600px;overflow-y:scroll;overflow-x:scroll;">
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            <th>Municipio</th>
+            <th>Programa</th>
+            <th>Descripcion</th>
+            <th>Tipo de Actividad</th>
+            <th>Descripcion Tipo de Actividad</th>
+            <th>Cantidad</th>
+            <th>Personas</th>
+            <th>Mes</th>
+            </tr>
+        </thead>
+
+    <% @program.each do |p| %>
+
+      <tr>
+        <td><%= p.mun %></td>
+        <td><%= p.pnombre%></td>
+        <td><%= p.pdescripcion%></td>
+        <td><%= p.anombre%></td>
+        <td><%= p.ndesc%></td>
+        <td><%= p.totalv%></td>
+        <td><%= p.totalp%></td>
+        <td><%= p.mes%></td>
+      </tr>
+    <%end%>
+    </table>
+      </div>
+    <br/>
+
+    <%=  link_to 'Descargar en excel', request.parameters.merge({:format => :xls}), :controller => 'programs', :action => 'program_report_county' %>
+<%end %>
+</br>

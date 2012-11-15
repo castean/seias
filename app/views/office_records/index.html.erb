@@ -1,0 +1,27 @@
+<h1>Listing office_records</h1>
+
+<table>
+  <tr>
+    <th>Office</th>
+    <th>Info</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @office_records.each do |office_record| %>
+  <tr>
+    <td><%= office_record.office_id %></td>
+    <td><%= office_record.info %></td>
+    <td><%= office_record.user_id %></td>
+    <td><%= link_to 'Show', office_record %></td>
+    <td><%= link_to 'Edit', edit_office_record_path(office_record) %></td>
+    <td><%= link_to 'Destroy', office_record, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Office record', new_office_record_path %>

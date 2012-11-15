@@ -1,5 +1,6 @@
+#encoding:utf-8
 class CriticalSuccessFactorType < ActiveRecord::Base
-  has_many :critical_success_factors
+  has_many :critical_factors
 
   validates :name, :presence => true
 

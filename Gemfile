@@ -26,10 +26,16 @@ gem 'jquery_datepicker'
 gem 'authlogic'
 gem 'easy_roles'
 gem 'cancan'
+gem "scoped_search"
 
+require 'csv'
+gem "spreadsheet"
+gem "to_xls"
+gem 'composite_primary_keys'
 #Sass
 gem 'sass-rails', '~> 3.1'
 gem 'bootstrap-sass', '2.0.3' , :path => "vendor/bootstrap-sass-2.0.3"
+
 
 #java
 gem 'therubyracer'
@@ -38,6 +44,7 @@ gem 'therubyracer'
 gem "kaminari" #pagination
 gem 'gmaps4rails'
 gem "paperclip", "~> 3.0.3"
+gem "nifty-generators", :group => :development
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -51,7 +58,21 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'capistrano-ext'
 
+# Pedidos por servidor
+gem 'tilt','1.3.3'
+
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem "net-ldap"
+
+#Correo al tener un error en production.
+gem 'exception_notification'
+
+gem 'pivot_table'
+gem 'rails3-jquery-autocomplete'
+
+#Search
+gem "ransack"
+
+gem "rb-readline"

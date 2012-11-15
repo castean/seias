@@ -1,0 +1,93 @@
+<% if params[:finder][:program] == "program"   %>
+    <h3>Lista de Programas</h3>
+
+    <table class="table table-striped">
+      <thead>
+          <tr>
+
+            <th>Programa</th>
+
+          </tr>
+        </thead>
+
+      <tr>
+        <% c = Program.find(params[:program_id][:program_id]) %>
+        <td><%= c.name %></td>
+        <td><%= c.description %></td>
+
+      </tr>
+
+    </table>
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            <th>Tipo de Actividad</th>
+            <th>Descripcion Tipo de Actividad</th>
+            <th>Cantidad</th>
+            <th>Hombres</th>
+            <th>Mujeres</th>
+            <th>Total Personas</th>
+          </tr>
+        </thead>
+
+    <% @program.each do |p| %>
+
+      <tr>
+        <td><%= p.anombre%></td>
+        <td><%= p.ndesc %></td>
+        <td><%= p.totalv%></td>
+        <td><%= p.hombre%></td>
+        <td><%= p.mujer%></td>
+        <td><%= p.totalp%></td>
+      </tr>
+    <%end%>
+    </table>
+    <br/>
+
+    <%=  link_to 'Descargar en excel', request.parameters.merge({:format => :xls}), :controller => 'programs', :action => 'program_report' %>
+
+<% elsif params[:finder][:program] == "pajs" %>
+    <h3>Lista de Programas por Distrito Judicial</h3>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+
+        <th>Programa</th>
+
+      </tr>
+      </thead>
+
+      <tr>
+        <% c = Program.find(params[:program_id][:program_id]) %>
+        <td><%= c.name %></td>
+        <td><%= c.description %></td>
+      </tr>
+
+    </table>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Tipo de Actividad</th>
+        <th>Descripcion Tipo de Actividad</th>
+        <th>Distrito</th>
+        <th>Total Actividades</th>
+      </tr>
+      </thead>
+
+      <% @program.each do |p| %>
+
+          <tr>
+            <td><%= p.anombre %></td>
+            <td><%= p.ndesc %></td>
+            <td><%= p.dnombre %></td>
+            <td><%= p.totalv %></td>
+          </tr>
+      <%end%>
+    </table>
+    <br/>
+
+    <%=  link_to 'Descargar en excel', request.parameters.merge({:format => :xls}), :controller => 'programs', :action => 'program_report' %>
+
+<% end %>
+</br>

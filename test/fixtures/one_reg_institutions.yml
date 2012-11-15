@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  institution_id: 1
+  according_social_purpose: false
+  people_sex: 1
+  min_age: 1
+  max_age: 1
+  capacity: 1
+  public_target_id: 1
+  operation_status: 1
+
+two:
+  institution_id: 1
+  according_social_purpose: false
+  people_sex: 1
+  min_age: 1
+  max_age: 1
+  capacity: 1
+  public_target_id: 1
+  operation_status: 1

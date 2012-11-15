@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713191715) do
+
+ActiveRecord::Schema.define(:version => 20121114182903) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -34,6 +35,25 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
   add_index "activities", ["public_target_id"], :name => "index_activities_on_public_target_id"
   add_index "activities", ["town_id"], :name => "index_activities_on_town_id"
 
+  create_table "activities_bk", :id => false, :force => true do |t|
+    t.integer  "id"
+    t.string   "value"
+    t.text     "description"
+    t.integer  "town_id"
+    t.integer  "group_id"
+    t.integer  "public_target_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "activity_type_id"
+    t.integer  "county_id"
+    t.integer  "user_id"
+    t.datetime "activity_date_start"
+    t.datetime "activity_date_end"
+    t.integer  "qty_men"
+    t.integer  "qty_women"
+    t.integer  "oldid"
+  end
+
   create_table "activity_types", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -48,6 +68,11 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
   create_table "activity_types_critical_success_factors", :id => false, :force => true do |t|
     t.integer "activity_type_id"
     t.integer "critical_success_factor_id"
+  end
+
+  create_table "activity_types_offices", :id => false, :force => true do |t|
+    t.integer "activity_type_id"
+    t.integer "office_id"
   end
 
   create_table "activitygoals", :force => true do |t|
@@ -112,6 +137,81 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.datetime "updated_at",            :null => false
   end
 
+  create_table "affiliates", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "institution_id"
+    t.integer  "activity_type_id"
+    t.integer  "period_time_id"
+    t.integer  "period_number"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "institution_ben_id"
+    t.integer  "office_id"
+  end
+
+  create_table "age_populations", :force => true do |t|
+    t.integer  "institution_id"
+    t.integer  "guardianship_id"
+    t.integer  "sex_id"
+    t.integer  "age_range_id"
+    t.integer  "total_qty_registered"
+    t.integer  "real_qty_registered"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "age_ranges", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "benefit_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "benefit_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "benefit_category_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  create_table "benefits", :force => true do |t|
+    t.string   "period"
+    t.integer  "worth_id"
+    t.integer  "benefit_type_id"
+    t.date     "delivery_date"
+    t.integer  "qty"
+    t.decimal  "unit_price"
+    t.integer  "affiliate_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "business_lines", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "institutions_type_id"
+  end
+
+  create_table "catalog_tables", :force => true do |t|
+    t.string   "name",       :default => "t", :null => false
+    t.string   "model",      :default => "t", :null => false
+    t.string   "table",      :default => "t", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "catalog_tables_critical_factors", :id => false, :force => true do |t|
+    t.integer "catalog_table_id"
+    t.integer "critical_factor_id"
+    t.integer "table_select_field_id"
+  end
+
   create_table "counties", :force => true do |t|
     t.integer  "cve_mun"
     t.string   "name"
@@ -125,6 +225,11 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.integer "judical_district_id"
   end
 
+  create_table "counties_judicial_districts", :id => false, :force => true do |t|
+    t.integer "county_id"
+    t.integer "judicial_district_id"
+  end
+
   create_table "counties_regions", :id => false, :force => true do |t|
     t.integer "county_id"
     t.integer "region_id"
@@ -134,6 +239,33 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "criterion_of_measurements", :force => true do |t|
+    t.string   "name",       :default => "t", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "critical_factors", :force => true do |t|
+    t.integer  "critical_success_factor_type_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description",                                                                      :null => false
+    t.decimal  "percentage",                      :precision => 10, :scale => 5
+    t.float    "objective_minimum"
+    t.float    "objective_satisfying"
+    t.float    "objective_excelent"
+    t.integer  "unit_of_measurement_id",                                                           :null => false
+    t.boolean  "confidential",                                                                     :null => false
+    t.boolean  "active",                                                         :default => true, :null => false
+    t.datetime "created_at",                                                                       :null => false
+    t.datetime "updated_at",                                                                       :null => false
+    t.integer  "criterion_of_measurement_id"
+    t.integer  "catalog_table_id"
+    t.integer  "critical_factor_id"
+    t.integer  "period_time_id"
+    t.integer  "responsable_id"
   end
 
   create_table "critical_success_factor_types", :force => true do |t|
@@ -160,31 +292,114 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.integer  "program_id"
   end
 
+  create_table "critical_success_factors_priority_program_action_lines", :id => false, :force => true do |t|
+    t.integer "priority_program_action_line_id"
+    t.integer "critical_success_factor_id"
+  end
+
   create_table "departments", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "direction_id"
+    t.integer  "user_id"
   end
 
   create_table "directions", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
+
+  create_table "discapacities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "discapacities_one_reg_institutions", :id => false, :force => true do |t|
+    t.integer "one_reg_institution_id"
+    t.integer "discapacity_id"
+  end
+
+  create_table "discapacities_people", :id => false, :force => true do |t|
+    t.integer "discapacity_id"
+    t.integer "person_id"
+  end
+
+  create_table "discapacity_origins", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "documentations", :force => true do |t|
+    t.string   "name"
+    t.integer  "belongs"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "documentations_one_reg_institutions", :id => false, :force => true do |t|
+    t.integer "documentation_id"
+    t.integer "one_reg_institution_id"
+  end
+
+  create_table "documentations_people", :id => false, :force => true do |t|
+    t.integer "documentation_id"
+    t.integer "person_id"
+  end
+
+  create_table "ethnic_groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "families", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "kin_id"
+    t.integer  "relationship_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.decimal  "income"
+  end
+
+  create_table "father_institutions", :id => false, :force => true do |t|
+    t.integer "institution_id"
+    t.integer "father_institution_id"
+  end
+
+  create_table "functional_supports", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "functional_supports_people", :id => false, :force => true do |t|
+    t.integer "functional_support_id"
+    t.integer "person_id"
   end
 
   create_table "goals", :force => true do |t|
-    t.integer  "month",                      :null => false
-    t.integer  "year",                       :null => false
-    t.string   "minimum",                    :null => false
-    t.string   "satisfying",                 :null => false
-    t.string   "excelent",                   :null => false
-    t.integer  "critical_success_factor_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.integer  "month",              :null => false
+    t.integer  "year",               :null => false
+    t.string   "minimum",            :null => false
+    t.string   "satisfying",         :null => false
+    t.string   "excelent",           :null => false
+    t.integer  "critical_factor_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
-  add_index "goals", ["critical_success_factor_id"], :name => "index_goals_on_critical_success_factor_id"
+  add_index "goals", ["critical_factor_id"], :name => "index_goals_on_critical_success_factor_id"
+
+  create_table "grades", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -194,10 +409,132 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "judicial_districts", :force => true do |t|
+  create_table "guardianships", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "housing_features", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "point"
+  end
+
+  create_table "institutions", :force => true do |t|
+    t.integer  "institutions_type_id"
+    t.string   "name"
+    t.integer  "type_person"
+    t.string   "legal_name"
+    t.string   "legal_last_name"
+    t.string   "legal_second_last_name"
+    t.string   "rfc"
+    t.integer  "link_user_id"
+    t.integer  "town_id"
+    t.string   "address"
+    t.integer  "external_address_number"
+    t.integer  "internal_address_number"
+    t.string   "second_address"
+    t.integer  "zip_code"
+    t.datetime "date_operation_start"
+    t.datetime "date_operation_end"
+    t.integer  "religion_id"
+    t.string   "email"
+    t.integer  "business_line_id"
+    t.integer  "status_id"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.boolean  "gmaps"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.integer  "county_id"
+    t.string   "phone"
+  end
+
+  create_table "institutions_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "judicial_districts", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "circunscription"
+  end
+
+  create_table "marital_statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "medical_services", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "office_allocations", :force => true do |t|
+    t.integer  "office_id"
+    t.text     "infot"
+    t.integer  "user_id"
+    t.string   "to"
+    t.string   "place"
+    t.integer  "location_status"
+    t.integer  "move_by_user_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "office_records", :force => true do |t|
+    t.integer  "office_id"
+    t.text     "info"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "offices", :force => true do |t|
+    t.integer  "department_id"
+    t.string   "internal_office_number"
+    t.string   "external_office_number"
+    t.string   "record_no"
+    t.integer  "type_id"
+    t.string   "to"
+    t.datetime "office_date"
+    t.datetime "office_recive_date"
+    t.string   "name"
+    t.text     "observations"
+    t.integer  "person_id"
+    t.integer  "activity_type_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "user_id"
+    t.integer  "priority_id"
+    t.integer  "status_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "direction_id"
+    t.text     "person_info"
+    t.text     "user_info"
+  end
+
+  create_table "one_reg_institutions", :force => true do |t|
+    t.integer  "institution_id"
+    t.boolean  "according_social_purpose"
+    t.integer  "people_sex"
+    t.integer  "min_age"
+    t.integer  "max_age"
+    t.integer  "capacity"
+    t.integer  "public_target_id"
+    t.integer  "operation_status"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "ped_action_lines", :force => true do |t|
@@ -217,6 +554,11 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.integer  "ped_id"
   end
 
+  create_table "ped_axis_developments_ped_program_definitions", :id => false, :force => true do |t|
+    t.integer "ped_axis_development_id"
+    t.integer "ped_program_definition_id"
+  end
+
   create_table "ped_goals", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -228,6 +570,14 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
   end
 
   create_table "ped_program_definitions", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "ped_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "ped_programs", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "ped_id"
@@ -271,6 +621,65 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.text     "ped_program"
   end
 
+  create_table "people", :force => true do |t|
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "name",                    :null => false
+    t.string   "last_name",               :null => false
+    t.string   "second_last_name"
+    t.integer  "marital_status_id"
+    t.integer  "ethnic_group_id",         :null => false
+    t.datetime "birthday",                :null => false
+    t.integer  "born_town_id"
+    t.integer  "town_id"
+    t.string   "address"
+    t.string   "address_two"
+    t.integer  "code_area"
+    t.integer  "phone"
+    t.integer  "cel_phone"
+    t.integer  "emergency_phone"
+    t.string   "rfc"
+    t.string   "curp"
+    t.string   "email"
+    t.string   "tutor"
+    t.integer  "tutor_relationship_id"
+    t.integer  "tutor_marital_status_id"
+    t.integer  "medical_service_id"
+    t.boolean  "student"
+    t.boolean  "reader"
+    t.integer  "schooling"
+    t.integer  "school_type_id"
+    t.boolean  "worker"
+    t.string   "job"
+    t.boolean  "self_employment"
+    t.string   "occupation"
+    t.boolean  "job_seeker"
+    t.integer  "user_id"
+    t.boolean  "discapacity_status"
+    t.boolean  "diagnosis"
+    t.text     "diagnosis_description"
+    t.integer  "discapacity_origin_id"
+    t.text     "observations"
+    t.integer  "status_id"
+    t.boolean  "use_functional_support"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.integer  "county_id"
+    t.integer  "sex"
+    t.integer  "born_county_id"
+    t.float    "income"
+    t.string   "social_security_number"
+    t.integer  "discapacity_origin_year"
+  end
+
+  create_table "period_times", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "place_types", :force => true do |t|
     t.string   "nick"
     t.string   "name"
@@ -290,6 +699,12 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.boolean  "gmaps"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "priorities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "priority_program_action_lines", :force => true do |t|
@@ -339,11 +754,16 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.string   "description"
     t.integer  "department_id"
     t.integer  "responsable_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "direction_id"
     t.integer  "cut_day"
-    t.datetime "start_date"
+    t.datetime "program_start_date"
+  end
+
+  create_table "programs_users", :id => false, :force => true do |t|
+    t.integer "program_id"
+    t.integer "user_id"
   end
 
   create_table "public_targets", :force => true do |t|
@@ -359,11 +779,62 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "relations", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "relative_id"
+    t.integer  "relationship_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "relationships", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "relatives", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "relative_id"
+    t.integer  "relationship_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "religions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "school_ages", :force => true do |t|
+    t.integer  "institution_id"
+    t.integer  "grade_id"
+    t.integer  "guardianship_id"
+    t.integer  "sex_id"
+    t.integer  "total_qty_registered"
+    t.integer  "real_qty_registered"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "school_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "sexennial_state_plan_components", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "sexes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "states", :force => true do |t|
@@ -378,6 +849,12 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "name"
+  end
+
+  create_table "statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "towns", :force => true do |t|
@@ -396,6 +873,12 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.integer  "state_id"
     t.integer  "country_id"
     t.string   "gmaps",       :default => "t"
+  end
+
+  create_table "type_people", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "units_of_measurement", :force => true do |t|
@@ -434,6 +917,13 @@ ActiveRecord::Schema.define(:version => 20120713191715) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "worths", :force => true do |t|
+    t.string   "name"
+    t.integer  "direction_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
 end

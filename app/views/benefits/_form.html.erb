@@ -1,0 +1,107 @@
+<%= form_for(@benefit) do |f| %>
+  <% if @benefit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@benefit.errors.count, "error") %> prohibited this benefit from being saved:</h2>
+
+      <ul>
+      <% @benefit.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <table>
+    <% if params[:type] == '1' %>
+    <tr><th><b>Persona Beneficiada:</b></th></tr>
+    <tr><td><%= Person.find(params[:id]).fullname %></td></tr>
+    <% elsif params[:type] == '2' %>
+      <tr><th><b>Institución Beneficiada:</b></th></tr>
+      <tr><td><%= Institution.find(params[:id]).name %></td></tr>
+    <% end %>
+  </table>
+
+  <% if params[:aff_act_id]%>
+    <% @aff_end = Affiliate.find(params[:aff]) %>
+    <table >
+      <tr>
+        <th><b>Programa Afiliado</b></th>
+        <th>Peridicidad</th>
+        <th>Número de Periodos</th>
+        <th>Institución</th>
+      </tr>
+      <tr>
+        <td><%= @aff_end.activity_type.name %></td>
+        <td><%= @aff_end.period_time.name %></td>
+        <td><%= @aff_end.period_number %></td>
+        <td><%= @aff_end.institution.name %></td>
+      </tr>
+      </table>
+  <% else %>
+    <table>
+      <tr><th><b>Programa Afiliado:</b></th></tr>
+        <% @affiliate.each do |affiliate| %>
+            <tr><td><%= link_to affiliate.activity_type.name, params[:id].to_s + '/?type='+ params[:type] + '&aff=' + affiliate.id.to_s + '&aff_act_id=' + affiliate.activity_type_id.to_s %></td> </tr>
+        <% end %>
+    </table>
+  <% end %>
+
+  <% if params[:aff]%>
+    </br>
+    <div class="field">
+      <%= f.label :period %><br />
+      <%= f.text_field :period %>
+    </div>
+    <div class="field">
+      <%= f.label :worth_id %><br />
+      <%= f.collection_select :worth_id, Worth.find_all_by_direction_id(Department.find(current_user.department_id).direction_id).sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona un tipo de ayuda --"} %>
+    </div>
+    <div class="field">
+      <%= f.label :benefit_category_id %><br />
+      <%= f.collection_select :benefit_category_id, BenefitCategory.all.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona una categoria --"} %>
+    </div>
+    <div class="field">
+      <%= f.label :benefit_type_id %><br />
+      <%= fill_benefit_type_select(f) %>
+    </div>
+    <div class="field">
+      <%= f.label :delivery_date, "Fecha de entrega" %>
+      <%= f.datepicker :delivery_date, :dateFormat => "dd-mm-yy" %>
+    </div>
+    <div class="field">
+      <%= f.label :qty %><br />
+      <%= f.number_field :qty %>
+    </div>
+    <div class="field">
+      <%= f.label :unit_price %><br />
+      <%= f.text_field :unit_price %>
+    </div>
+          <%= f.hidden_field :affiliate_id, :value => params[:aff] %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+   <% end %>
+<% end %>
+
+    </br>
+<% if params[:aff] %>
+<% @benefit_s = Benefit.find_all_by_affiliate_id(params[:aff]) %>
+<table>
+  <tr>
+    <th>Programa</th>
+    <th>Cantidad</th>
+    <th>Precio Unitario</th>
+    <th>Total</th>
+  </tr>
+  <% @benefit_s.each do |benefit_s| %>
+      <tr>
+        <td><%= benefit_s.affiliate.activity_type.name %></td>
+        <td><%= benefit_s.qty %></td>
+        <td><%= benefit_s.unit_price %></td>
+        <td><%= benefit_s.qty * benefit_s.unit_price  %></td>
+      </tr>
+  <% end %>
+</table>
+<% end %>

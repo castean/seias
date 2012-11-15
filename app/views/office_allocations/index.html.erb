@@ -1,0 +1,35 @@
+<h1>Listing office_allocations</h1>
+
+<table>
+  <tr>
+    <th>Office</th>
+    <th>Infot</th>
+    <th>User</th>
+    <th>To</th>
+    <th>Place</th>
+    <th>Location status</th>
+    <th>Move by user</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @office_allocations.each do |office_allocation| %>
+  <tr>
+    <td><%= office_allocation.office_id %></td>
+    <td><%= office_allocation.infot %></td>
+    <td><%= office_allocation.user_id %></td>
+    <td><%= office_allocation.to %></td>
+    <td><%= office_allocation.place %></td>
+    <td><%= office_allocation.location_status %></td>
+    <td><%= office_allocation.move_by_user_id %></td>
+    <td><%= link_to 'Show', office_allocation %></td>
+    <td><%= link_to 'Edit', edit_office_allocation_path(office_allocation) %></td>
+    <td><%= link_to 'Destroy', office_allocation, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Office allocation', new_office_allocation_path %>

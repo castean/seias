@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <h4>Nombre de la Acción:</h4>
+  <h4>Nombre de la Actividad:</h4>
   <%= @activity_type.name %>
 </p>
 <br />
@@ -10,13 +10,23 @@
   <h4>Unidad de Medida:</h4>
   <%= @activity_type.unit_of_measurement.name %> de <%= @activity_type.measurement_description %></br> 	
   	</br>
+    <b><i>Cantidad de actividades de <%= @activity_type.name %> del Mes de <%= @mes %> : </i></b><%= @sumav %></br>
+    </br>
   	<b><i>Cantidad del Mes de <%= @mes %> : </i></b><%= @suma %> personas</br>
+    <b><i>Cantidad de Mujeres Mes de <%= @mes %> : </i></b><%= @sumam %></br>
+    <b><i>Cantidad de Hombres Mes de <%= @mes %> : </i></b><%= @sumah %></br></br>
+
+    <b><i>Cantidad de actividades de <%= @activity_type.name %> Acumuladas Anuales del <%= @annio %> : </i></b><%= @acumuladov %></br>
+    </br>
   	<b><i>Acumulado Anual <%= @annio %> : </i></b><%= @acumulado %> personas</br>
+    <b><i>Acumulado Anual Mujeres <%= @annio %> : </i></b><%= @acumuladom %> personas</br>
+    <b><i>Acumulado Anual Hombres <%= @annio %> : </i></b><%= @acumuladoh %> personas</br>
+
 </p>
 <br />
 
 
-  <b>Factores criticos que Afecta:</b>
+  <b>Acciones a las que Afecta:</b>
 </p>
 <% @activity_type.critical_success_factors.order(:title).each do |fce| %>
     <ul>

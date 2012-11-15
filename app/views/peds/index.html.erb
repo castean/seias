@@ -25,7 +25,7 @@
 	    </td>
 	  <% end %>
 	  <% if can? :destroy, ped %>
-    <td><%= link_to(ped, :confirm => '¿Esta usted seguro?', :method => :delete, :remote => :true) do %>
+    <td><%= link_to(ped, :confirm => '¿Esta usted seguro?', :method => :delete) do %>
     		<%= image_tag("delete.png") %>
     	<%end%>
     </td>
@@ -35,6 +35,6 @@
 </table>
 
 <br />
-<% if can? :create, @peds %>
+<% if can? :create, Ped %>
 	<%= link_to 'Agregar Nuevo PED', new_ped_path, :class => "btn primary" %>
 <% end %>

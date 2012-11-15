@@ -43,12 +43,22 @@ class PriorityProgramActionLinesController < ApplicationController
   # POST /priority_program_action_lines.json
   def create
     @priority_program_action_line = PriorityProgramActionLine.new(params[:priority_program_action_line])
-
+    #<rck> Ing. César Reyes  - Actualiza en Automatico la Jerarquia
+      sql = ActiveRecord::Base.connection()
+      sql.begin_db_transaction
+      hierarchy = "update priority_program_action_lines
+                      set hierarchy = hierarchy + 1
+                    where hierarchy >= #{params[:priority_program_action_line][:hierarchy]}"
+       sql.update hierarchy        
+    #</rck>
+  
     respond_to do |format|
       if @priority_program_action_line.save
+        sql.commit_db_transaction
         format.html { redirect_to @priority_program_action_line, notice: 'Priority program action line was successfully created.' }
         format.json { render json: @priority_program_action_line, status: :created, location: @priority_program_action_line }
       else
+        sql.rollback_db_transaction
         format.html { render action: "new" }
         format.json { render json: @priority_program_action_line.errors, status: :unprocessable_entity }
       end
@@ -75,6 +85,15 @@ class PriorityProgramActionLinesController < ApplicationController
   # DELETE /priority_program_action_lines/1.json
   def destroy
     @priority_program_action_line = PriorityProgramActionLine.find(params[:id])
+    #<rck> Ing. César Reyes  - Actualiza en Automatico la Jerarquia
+      sql = ActiveRecord::Base.connection()
+      sql.begin_db_transaction
+      hierarchy = "update priority_program_action_lines
+                      set hierarchy = hierarchy - 1
+                    where hierarchy > #{@priority_program_action_line.hierarchy}"
+       sql.update hierarchy
+       sql.commit_db_transaction        
+    #</rck>
     @priority_program_action_line.destroy
 
     respond_to do |format|
@@ -82,4 +101,33 @@ class PriorityProgramActionLinesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # GET /priority_program_action_lines
+  # GET /priority_program_action_lines.json
+  def report
+    @priority_program_action_lines = PriorityProgramActionLine.order("hierarchy").all
+
+
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xls {send_data @priority_program_action_lines.to_xls, content_type: 'application/vnd.ms-excel', filename: 'lineas.xls' }
+      format.json { render json: @priority_program_action_lines }
+    end
+  end
+
+  def for_catalog_table_id
+    c = CatalogTable.find(params[:table])
+
+    @sql = "SELECT " + c.table + ".description, " + c.table + ".id as proc_id FROM " +  c.table
+    ppal = ActiveRecord::Base.connection.select_rows(@sql)
+    ppal.map{|proc_id,description|}
+
+    #@t = ActiveRecord::Base.connection.select_rows(@sql)
+
+    respond_to do |format|
+      format.json  { render :json => ppal}
+    end
+  end
+
 end

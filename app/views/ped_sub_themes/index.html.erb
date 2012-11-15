@@ -34,6 +34,6 @@
 </table>
 
 <br />
-<% if can? :create, @ped_sub_themes %>
+<% if can? :create, PedSubTheme %>
 	<%= link_to 'Agregar subtema al PED', new_ped_sub_theme_path, :class => "btn primary" %>
 <%end%>

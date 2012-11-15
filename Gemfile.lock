@@ -55,8 +55,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.1)
+    composite_primary_keys (5.0.8)
+      activerecord (~> 3.2.0)
     easy_roles (1.2.0)
     erubis (2.7.0)
+    exception_notification (2.4.1)
     execjs (1.3.0)
       multi_json (~> 1.0)
     gmaps4rails (1.5.2)
@@ -89,6 +92,7 @@ GEM
     net-ssh (2.3.0)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
+    nifty-generators (0.4.6)
     paperclip (3.0.3)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -96,6 +100,9 @@ GEM
       cocaine (>= 0.0.2)
       mime-types
     pg (0.13.2)
+    pivot_table (0.1.1)
+    polyamorous (0.5.0)
+      activerecord (~> 3.0)
     polyglot (0.3.3)
     quiet_assets (1.0.0)
       rails (~> 3.1)
@@ -114,6 +121,8 @@ GEM
       activesupport (= 3.2.3)
       bundler (~> 1.0)
       railties (= 3.2.3)
+    rails3-jquery-autocomplete (1.0.9)
+      rails (~> 3.0)
     railties (3.2.3)
       actionpack (= 3.2.3)
       activesupport (= 3.2.3)
@@ -123,13 +132,23 @@ GEM
       thor (~> 0.14.6)
     raindrops (0.9.0)
     rake (0.9.2.2)
+    ransack (0.7.0)
+      actionpack (~> 3.0)
+      activerecord (~> 3.0)
+      polyamorous (~> 0.5.0)
+    rb-readline (0.4.2)
     rdoc (3.12)
       json (~> 1.4)
+    ruby-ole (1.2.11.4)
     sass (3.1.16)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    scoped_search (2.4.0)
+      activerecord (>= 2.1.0)
+    spreadsheet (0.7.3)
+      ruby-ole (>= 1.0)
     sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -138,6 +157,8 @@ GEM
       libv8 (~> 3.3.10)
     thor (0.14.6)
     tilt (1.3.3)
+    to_xls (1.5.1)
+      spreadsheet
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
@@ -160,17 +181,28 @@ DEPENDENCIES
   capistrano
   capistrano-ext
   coffee-rails (~> 3.2.1)
+  composite_primary_keys
   easy_roles
+  exception_notification
   gmaps4rails
   jquery-rails
   jquery_datepicker
   kaminari
   net-ldap
+  nifty-generators
   paperclip (~> 3.0.3)
   pg
+  pivot_table
   quiet_assets
   rails (= 3.2.3)
+  rails3-jquery-autocomplete
+  ransack
+  rb-readline
   sass-rails (~> 3.1)
+  scoped_search
+  spreadsheet
   therubyracer
+  tilt (= 1.3.3)
+  to_xls
   uglifier (>= 1.0.3)
   unicorn

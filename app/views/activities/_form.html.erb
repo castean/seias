@@ -13,20 +13,20 @@
   <%= f.hidden_field :user_id %>
   <br />
   <div class="field">
+    <%= f.label :program_id, "Programa" %>
+    <%= fill_programs_select(f)%>
+  </div>
+  <div class="field">
     <%= f.label :activity_type_id, "Tipo de Actividad" %>
-    <%= f.collection_select :activity_type_id, ActivityType.order("name").all, :id, :name, options ={:prompt => "-- Selecciona un Tipo --"} %>
-    
+   <%= fill_activity_type_select(f) %>
   </div>
  
   <div class="field">
-  	
   	<%= f.label :value, "Valor ",{:id=>"typess"} %>
     <%= f.text_field :value %>
     
   </div>
-  <a href="#" class="show_hide">Capturar Detalle de Hombres y Mujeres</a>
-  <div class="slidingDiv">
-	
+  <div class="field">
 		  <div class="field">
 		    <%= f.label :qty_men, "Cantidad de Hombres" %>
 		    <%= f.number_field :qty_men %>
@@ -35,28 +35,25 @@
 		    <%= f.label :qty_women, "Cantidad de Mujeres" %>
 		    <%= f.number_field :qty_women %>
 		  </div>
-		  <a href="#" class="show_hide">Ocultar</a></br>
   </div>
   </br>	
   <div class="field">
     <%= f.label :description, "Descripción" %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
   	
     <%= f.label :activity_date_start, "Fecha Inicio de Actividad" %>
     <%= f.datepicker :activity_date_start, :dateFormat => "dd-mm-yy" %>
-    <!-- <%= f.date_select :activity_date_start %> -->
   </div>
   <div class="field">
   	
     <%= f.label :activity_date_end, "Fecha Fin de Actividad" %>
     <%= f.datepicker :activity_date_end, :dateFormat => "dd-mm-yy" %>
-    <!--<%= f.date_select :activity_date_end %>-->
   </div> 
   <div class="field">
     <%= f.label :county_id, "Municipio" %>
-    <%= f.collection_select :county_id,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
+    <%= f.collection_select :county_id,  County.order("name").where(:state_id => 8).order("substring(name,1,1)"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
   </div>
   
   <div class="field">
@@ -74,8 +71,13 @@
   </div>
 	
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Guardar Actividad" %>
   </div>
+ <% if params[:continuos] == '1' %>	
+   <div class="actions">
+     <%= link_to 'Finalizar', activities_path, :class => "btn primary" %>
+   </div>
+  <% end %>
 <% end %>
 
 

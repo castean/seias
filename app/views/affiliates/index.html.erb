@@ -1,0 +1,44 @@
+<h1>Afiliados</h1>
+
+<table>
+  <tr>
+
+    <th>Personas/Instituciones</th>
+    <th>Periodos</th>
+    <th>Numero de periodos</th>
+    <th>Institucion canalizado</th>
+    <th>Actividad</th>
+
+      </tr>
+
+<% @affiliates.each do |affiliate| %>
+  <tr>
+    <td>
+      <% if affiliate.institution_ben_id.nil? %>
+          <%= affiliate.person.fullname %>
+      <% elsif affiliate.person_id.nil? %>
+          <%= Institution.find(affiliate.institution_ben_id).name %>
+      <% end %>
+    </td>
+    <td><%= affiliate.period_time.name %></td>
+    <td><%= affiliate.period_number %></td>
+    <td><%= affiliate.institution.name %></td>
+    <td><%= affiliate.activity_type.name %></td>
+    <td><%= link_to 'Detalles', affiliate %></td>
+    <td>
+        <%= link_to(edit_affiliate_path(affiliate)) do %>
+            <%= image_tag("edit.png") %>
+        <% end %>
+    </td>
+    <td><%= link_to(affiliate, :confirm => '¿Está seguro?', :method => :delete, :remote => :true) do %>
+          <%= image_tag("delete.png") %>
+      <%end%>
+    </td>
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nueva Afiliación', new_affiliate_path %>

@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-  </br>
+  </br
   <div>
   	<%= f.label :avatar, "Foto" %>
   	<%= f.file_field :avatar %>
@@ -35,7 +35,7 @@
     <%= f.label :email, "Correo Electrónico" %>
     <%= f.text_field :email %>
   </div>
-  <% if authentication_method_requires_password? %>
+
 	  <div class="field">
 	    <%= f.label :password, "Contraseña" %>
 	    <%= f.password_field :password %>
@@ -44,11 +44,19 @@
 	    <%= f.label :password_confirmation, "Confirmar Contraseña" %>
 	    <%= f.password_field :password_confirmation %>
 	  </div>
+
+  <% if User.find(current_user).roles.to_s == "admin" %>
+        <div class="field">
+          <%= f.label :roles, "Rol" %>
+          <%= f.collection_select :roles, User::ROLES, :to_s, :titleize %>
+        </div>
+  <% else %>
+        <div class="field">
+          <%= f.label :roles, "Rol" %>
+          <%= f.collection_select :roles, User::PLANEACION, :to_s, :titleize %>
+        </div>
   <% end %>
-  <div class="field">
-    <%= f.label :roles, "Rol" %>
-    <%= f.collection_select :roles, User::ROLES, :to_s, :titleize %>
-  </div>
+
   <div class="field">
     <%= f.label :department_id, "Departamento" %>
     <%= f.collection_select :department_id,  Department.order("name").all, :id, :name, options ={:prompt => "-- Selecciona el Departamento --"}%>

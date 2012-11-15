@@ -1,0 +1,23 @@
+<h1>Listing medical_services</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @medical_services.each do |medical_service| %>
+  <tr>
+    <td><%= medical_service.name %></td>
+    <td><%= link_to 'Show', medical_service %></td>
+    <td><%= link_to 'Edit', edit_medical_service_path(medical_service) %></td>
+    <td><%= link_to 'Destroy', medical_service, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Medical service', new_medical_service_path %>

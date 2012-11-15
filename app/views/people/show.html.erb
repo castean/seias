@@ -1,0 +1,23 @@
+<h1>Informacion</h1>
+<p>
+  <%= image_tag @person.avatar.url %>
+  <%= image_tag @person.avatar.url(:medium) %>
+  <%= image_tag @person.avatar.url(:thumb) %>
+</p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @person.fullname %></br>
+  <b>Direccion:</b>
+  <%= @person.address %></br>
+  <b>Telefono de Emergencia:</b>
+  <%= @person.emergency_phone %></br>
+  <b>Tutor:</b>
+  <%= @person.tutor %></br>
+</p>
+</br>
+
+<% if can? :update, @person %>
+    <%= link_to 'Editar', edit_person_path(@person) %> |
+<% end %>
+<%= link_to 'Registro de Personas', people_path %>

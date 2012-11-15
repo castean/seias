@@ -1,4 +1,103 @@
 Seias::Application.routes.draw do
+
+
+
+  resources :benefit_types
+
+  resources :benefit_categories
+
+  resources :worths
+
+  resources :statuses
+
+  resources :priorities
+
+  match '/offices/end_office/:id' => 'offices#end_office'
+  match '/offices/for_program_id/:program_id' => 'offices#for_program_id'
+  resources :offices do
+    resources :office_records
+    resources :office_allocations
+    get :autocomplete_person_last_name, :on => :collection
+
+  end
+
+  resources :type_people
+
+
+  match '/families/add_family/:person_id' => 'families#add_family'
+  match '/families/for_search' => 'families#for_search'
+  #match '/families/add_family/action' => 'families#add_family/:person_id'
+  resources :families   do
+    get :autocomplete_last_name, :on => :collection
+    get :autocomplete_name, :on => :collection
+    get :autocomplete_second_last_name, :on => :collection
+
+  end
+
+  match '/benefits/for_category_id/:benefit_category_id' => 'benefits#for_category_id'
+  match '/benefits/new/:id' => 'benefits#new'
+  resources :benefits
+
+  post '/affiliates/new/' => "affiliates#new"
+  match '/affiliates/new/:id' => "affiliates#new"
+  match '/affiliates/for_program_id/:program_id' => 'affiliates#for_program_id'
+  resources :affiliates do
+    get :autocomplete_person_name, :on => :collection
+    get :autocomplete_person_last_name, :on => :collection
+    get :autocomplete_person_second_last_name, :on => :collection
+    get :autocomplete_institution_name, :on => :collection
+  end
+
+
+  resources :documentations
+
+  resources :functional_supports
+
+  resources :age_ranges
+
+  resources :guardianships
+
+  resources :discapacities
+
+  resources :discapacity_origins
+
+  resources :school_types
+
+  resources :grades
+
+  resources :relationships
+
+  resources :medical_services
+
+  resources :religions
+
+  resources :business_lines
+
+  match '/institutions_types/for_institution_type_id/:id' => 'institutions_types#for_institution_type_id'
+  resources :institutions_types
+
+  resources :institutions do
+    resources :age_populations
+    resources :one_reg_institutions
+    resources :school_ages
+  end
+
+  resources :sexes
+
+  resources :ethnic_groups
+
+  resources :marital_statuses
+
+  resources :people
+
+  resources :period_times
+
+  match '/critical_factors/for_catalog_table_id/:table' => 'critical_factors#for_catalog_table_id'
+  resources :critical_factors do
+    resources :goals
+  end
+
+  resources :ped_programs
  
   resources :ped_program_definitions
 
@@ -8,6 +107,8 @@ Seias::Application.routes.draw do
 
   resources :ped_sub_themes
 
+  match '/priority_program_action_lines/for_catalog_table_id/:table' => 'priority_program_action_lines#for_catalog_table_id'
+  get '/priority_program_action_lines/report' => "priority_program_action_lines#report", :as => :report
   resources :priority_program_action_lines
 
   resources :priority_program_strategies
@@ -22,6 +123,7 @@ Seias::Application.routes.draw do
 
   resources :ped_goals
 
+  match '/peds/for_catalog_table_id/:table' => 'peds#for_catalog_table_id'
   resources :peds
 
   match "/maps/index" => "maps#index"
@@ -40,10 +142,11 @@ Seias::Application.routes.draw do
 
 
   match '/departments/for_directionid/:id' => 'departments#for_directionid'
-  match '/departments/for_countyid/:id' => 'departments#for_countyid'
+  match '/towns/for_countyid/:county_id' => 'towns#for_countyid'
   resources :departments
 
   match '/activities/for_activitytypeid/:activity_type_id' => 'activities#for_activitytypeid'
+  match '/activities/for_programid/:program_id' => 'activities#for_programid'
   resources :activities
 
   resources :groups
@@ -59,19 +162,33 @@ Seias::Application.routes.draw do
   post '/states/import' => "states#states_import", :as => :importarestados
   resources :states
 
+  match '/activity_types/for_catalog_table_id/:table' => 'activity_types#for_catalog_table_id'
+  match '/activity_types/search' => 'activity_types#at_search'
   resources :activity_types do
     resource :unit_of_measurements
+    get 'auto_complete_search'
   end
   
   #resources :activitygoals
 
   resources :public_targets
 
+  match '/programs/report' => 'programs#program_search'
+  match '/programs/program_report' => 'programs#program_report'
+  match '/programs/program_report_all' => 'programs#program_report_all'
+  match '/programs/program_report_county' => 'programs#program_report_county'
+  match '/programs/for_catalog_table_id/:table' => 'programs#for_catalog_table_id'
   resources :programs
 
-  resources :critical_success_factors do
-    resources :goals
-  end
+  match '/reports/report_town_act' => 'reports#report_town_act'
+  match '/reports/program_report' => 'reports#program_report'
+  match '/reports/program_report_all' => 'reports#program_report_all'
+  match '/reports/program_report_county' => 'reports#program_report_county'
+  resources :reports
+
+  match '/critical_success_factors/for_catalog_table_id/:table' => 'critical_success_factors#for_catalog_table_id'
+  match '/critical_success_factors/for_program_id/:id' => 'critical_success_factors#for_program_id'
+  resources :critical_success_factors
 
   #resources :sexennial_state_plan_components
 
@@ -79,17 +196,19 @@ Seias::Application.routes.draw do
   match 'logout', :controller => 'user_sessions', :action => 'destroy'
   
   resource :user_sessions
-<<<<<<< HEAD
-  resources :users 
+
     
 
  
 
   
-=======
+
   match '/users/change_password' => 'users#change_password'
   resources :users
->>>>>>> d8d741bec4707c8020bb954dad119fc5fd17cf24
+
+
+  match "home/download_manual" => "home#download_manual", :as => :manual
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

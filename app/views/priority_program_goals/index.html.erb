@@ -33,6 +33,6 @@
 <% end %>
 </table>
 <br />
-<% if can? :create, @priority_program_goals %>
+<% if can? :create, PriorityProgramGoal %>
 	<%= link_to 'Agregar Objetivo', new_priority_program_goal_path, :class => "btn primary" %>
 <% end %>

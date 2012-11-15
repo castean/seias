@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>SEIAS</title>
+  <title>Sistema Integral DIF Estatal</title>
     <%= stylesheet_link_tag    "/assets/css/custom-theme/jquery-ui-1.8.20.custom.css", "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -20,14 +20,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">SEIAS</a>
+          <a class="brand" href="/">Sistema Integral DIF</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"><a href="#">Actividades</a></li>
               <li><a href="#about">Asistencia Social</a></li>
               <li><a href="#contact">Procuraduría</a></li>
             </ul>
-            <div id="user_nav">  
+            <div id="user_nav">
 		      <% if current_user %>  
 		        <%= link_to "Logout", logout_path %>  
 		      <% end %>  
@@ -59,8 +59,9 @@
                     <span class="nombre"><%= current_user.fullname %></span>
                     <span class="depto">DIF Estatal Chihuahua</span>
                     <span class="depto"><%= link_to "Información", user_path(current_user) %></span>    
-
                 </div>
+	                 <span class="depto"><%= link_to "Descarga el Manual", manual_path %></span> 
+	                <br />
                 <h4>Plan Estatal de Desarrollo</h4>
                 <ul>
                     <li class="plan"><span></span><%= link_to "Plan Estatal de Desarrollo", peds_path %></li>
@@ -79,19 +80,39 @@
                 <h4>Planeación</h4>
                 <ul>    
                     <li class="factores"><span></span><%= link_to "Programas", programs_path %></li>
-                    <li class="factores"><span></span><%= link_to "Factores Criticos / Indicadores", critical_success_factors_path %></li>
+                    <li class="factores"><span></span><%= link_to "Acciones", critical_success_factors_path %></li>
                 </ul>
-                <h4>Acciones</h4>
+                <h4>Actividades</h4>
                 <ul>    
-                    <li class="actividades"><span></span><%= link_to "Tipo de Acciones", activity_types_path %></li>
-                    <li class="actividades"><span></span><%= link_to "Actividades", activities_path %></li> 
+                    <li class="actividades"><span></span><%= link_to "Tipo de Actividades", activity_types_path %></li>
+                    <li class="actividades"><span></span><%= link_to "Captura de Actividades", activities_path %></li>
+                    <li class="actividades"><span></span><%= link_to "Reporte de Actividades", programs_report_path %></li>
                 </ul>
-                <h4>Favoritos</h4>
+                <h4>Mediciones</h4>
+                <ul>
+                    <li class="factores"><span></span><%= link_to "Indicadores", critical_factors_path %></li>
+                </ul>
+                <% if can? :create, Direction %>
+                    <h4>Administrativo</h4>
+                      <ul>
+                        <li class="actividades"><span></span><%= link_to "Direcciones", directions_path %></li>
+                        <li class="actividades"><span></span><%= link_to "Departamentos", departments_path %></li>
+                        <li class="actividades"><span></span><%= link_to "Personal", users_path %></li>
+                      </ul>
+                <% end %>
+
+                     <h4>Reportes</h4>
+                      <ul>
+                        <li class="actividades"><span></span><%= link_to "Reportes", reports_path %></li>
+                      </ul>
+
+                <!-- <h4>Favoritos</h4>
                 <ul>
                     <li class="plan"><span></span><%= link_to "Programa Prioritario 2011 - 2016", priority_programs_path %></li>
                     <li class="factores"><span></span><%= link_to "Factores Criticos / Indicadores", critical_success_factors_path %></li>
-                    <li class="actividades"><span></span><%= link_to "Actividades", activity_types_path %></li>
-                </ul>
+                    <li class="actividades"><span></span><%= link_to "Actividades", activities_path %></li>
+                </ul>   -->
+
               <% end %>
             </div><!-- SIDEBAR_LEFT -->
 
@@ -102,13 +123,13 @@
             </div><!-- CONTENT_BODY -->
 
             <div id="SIDEBAR_RIGHT">
-                #SIDEBAR_RIGHT
+
             </div><!-- SIDEBAR_RIGHT -->
 
         </div><!-- CONTENT -->
 
         <div id="FOOTER_IN">
-            #FOOTER_IN
+
         </div><!-- FOOTER_IN -->
 
     </div><!-- STRUCTURE -->
@@ -122,5 +143,19 @@
             var containerheight = $("#CONTENT").height();
             $("#SIDEBAR_LEFT").css("height",containerheight)
     });
+
+    function application_root_path(){
+        var root_path = "<%= root_path %>";
+        if (root_path == "/" )
+        {
+            return "";
+        }
+        else
+        {
+            return root_path;
+        }
+
+
+    }
 </script>
 </html>

@@ -1,0 +1,102 @@
+<%= form_for :affiliates, :url => {:action => 'new', :controller => 'affiliates', :type => "ben"} do |f| %>
+    <div class="field">
+      Personas<%= radio_button_tag "field", 1, true,{:id => "button1", :class => "show_hide"} %>
+      Instituciones<%= radio_button_tag "field", 2, false,{:id => "button2", :class => "show_hide"} %>
+
+    </div>
+    <div id="div-sh-1" class="toHide">
+      <%= f.label :busqueda_de_personas %><br />
+      <%= f.autocomplete_field :person, autocomplete_person_name_affiliates_path %>
+      <%= f.submit "Buscar personas" %>
+    </div>
+    <div id="div-sh-2" class="toHide">
+      <%= f.label :busqueda_de_instituciones %><br />
+      <%= f.autocomplete_field :institution, autocomplete_institution_name_affiliates_path %>
+      <%= f.submit "Buscar instituciones" %>
+    </div>
+<% end %>
+<% if params[:type] == "ben" %>
+  <table>
+    <% if params[:field] == "1" %>
+        <tr>
+          <th>Nombre</th>
+        </tr>
+          <% @affiliate_benefit.each do |affiliate| %>
+        <tr>
+          <td><%= link_to affiliate[1], new_affiliate_path(:ben_aff => affiliate[0], :field => params[:field]) %></td>
+        </tr>
+        <% end %>
+    <% elsif params[:field] == "2" %>
+        <tr>
+          <th>Institución</th>
+        </tr>
+        <% @affiliate_benefit.each do |affiliate| %>
+            <tr>
+              <td><%= link_to affiliate.name, new_affiliate_path(:ben_aff => affiliate.id, :field => params[:field]) %></td>
+            </tr>
+        <% end %>
+    <% end %>
+  </table>
+<% end %>
+
+  <% if params[:ben_aff].to_s != ""   %>
+    <%= form_for(@affiliate) do |f| %>
+      <% if @affiliate.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@affiliate.errors.count, "error") %> prohibited this affiliate from being saved:</h2>
+          <ul>
+            <% @affiliate.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+        <p>
+          <% if params[:field] == "2" %>
+            <b>Institución:</b>
+            <% @institution = Institution.find(params[:ben_aff]) %>
+            <%= @institution.name %>
+              <%= f.hidden_field :institution_ben_id, :value => @institution.id %>
+          <% elsif params[:field] == "1" %>
+              <b>Persona:</b>
+              <% @person = Person.find(params[:ben_aff])%>
+              <%= @person.fullname %>
+              <%= f.hidden_field :person_id, :value => @person.id %>
+          <% end %>
+        </p>
+        <%= f.hidden_field :field, :value => params[:field]%>
+        <%= f.hidden_field :ben_aff, :value => params[:ben_aff]%>
+        <div class="field">
+          <%= f.label :office_id, "Oficio" %>
+          <%= f.collection_select :office_id, Office.all.sort_by{ |k| k['record_no'] }  , :id, :record_no, options ={:prompt => "-- Selecciona un Oficio --"}, :class=>"ddl_width" %>
+        </div>
+        <div class="field">
+          <%= f.label :program_id, "Programa" %>
+          <%= f.collection_select :program_id, Program.find_all_by_department_id( current_user.department_id).sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona un Programa --"}, :class=>"ddl_width" %>
+        </div>
+
+        <div class="field">
+          <%= f.label "Tipo de Actividad" %>
+          <%= fill_activity_type_select_af(f) %>
+        </div>
+        <div class="field">
+          <%= f.label :period_time_id,  "Periodo" %><br />
+          <%= f.collection_select :period_time_id, PeriodTime.all.collect.sort_by{ |k| k['id'] }  , :id, :name, options ={:prompt => "-- Selecciona un Periodo --"}, :class=>"ddl_width" %>
+
+        </div>
+        <div class="field">
+          <%= f.label :period_number %><br />
+          <%= f.number_field :period_number %>
+        </div>
+        <div class="field">
+          <%= f.label :institution_id %><br />
+          <%= f.collection_select :institution_id, Institution.all.collect.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona un Periodo --"},  :class=>"ddl_width" %>
+        </div>
+
+        <div class="actions">
+         <%= f.submit %>
+        </div>
+      <% end %>
+  <% end %>
+

@@ -1,6 +1,6 @@
 <div class="show">
 
-  <%= image_tag @user.avatar.url(:medium) %></br></br>
+  <%= image_tag @user.avatar.url %></br></br>
 <p>
   <b>Nombre:</b></br>
   	<%= @user.fullname%>
@@ -15,5 +15,3 @@
   <b>Departamento:</b> </br> 
   	<%= @user.department.name %>
 </p>
-</br>
-  <span class="Cambio"><%= link_to "Cambio de Contraseña", users_change_password_path %></span>

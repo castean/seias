@@ -1,0 +1,23 @@
+<h1>Listing guardianships</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @guardianships.each do |guardianship| %>
+  <tr>
+    <td><%= guardianship.name %></td>
+    <td><%= link_to 'Show', guardianship %></td>
+    <td><%= link_to 'Edit', edit_guardianship_path(guardianship) %></td>
+    <td><%= link_to 'Destroy', guardianship, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Guardianship', new_guardianship_path %>

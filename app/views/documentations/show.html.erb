@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @documentation.name %>
+</p>
+
+<p>
+  <b>Belongs:</b>
+  <%= @documentation.belongs %>
+</p>
+
+
+<%= link_to 'Edit', edit_documentation_path(@documentation) %> |
+<%= link_to 'Back', documentations_path %>

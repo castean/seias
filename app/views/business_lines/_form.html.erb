@@ -1,0 +1,25 @@
+<%= form_for(@business_line) do |f| %>
+  <% if @business_line.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@business_line.errors.count, "error") %> prohibited this business_line from being saved:</h2>
+
+      <ul>
+      <% @business_line.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+      <%= f.label :institutions_type_id, "Tipo de institución a la que pertenece " %>
+      <%= f.select :institutions_type_id, InstitutionsType.order("name").all.collect{ |c| [c.name.to_s, c.id] }, {:include_blank => "-- Selecciona tipo de institución --"} %>
+    </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

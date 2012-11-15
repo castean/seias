@@ -4,8 +4,9 @@ class CriticalSuccessFactorsController < ApplicationController
   # GET /critical_success_factors
   # GET /critical_success_factors.json
   def index
+
     @critical_success_factors = CriticalSuccessFactor.all
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @critical_success_factors }
@@ -82,6 +83,32 @@ class CriticalSuccessFactorsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to critical_success_factors_url }
       format.json { head :no_content }
+    end
+  end
+
+  def for_program_id
+    @sql = "SELECT priority_program_action_lines.* FROM priority_program_action_lines
+    INNER JOIN priority_program_action_lines_programs ON priority_program_action_lines.id = priority_program_action_lines_programs.priority_program_action_line_id
+    WHERE priority_program_action_lines_programs.program_id = " + params[:id]
+
+    @t = ActiveRecord::Base.connection.select_rows(@sql)
+
+    respond_to do |format|
+      format.json  { render :json => @t}
+    end
+  end
+
+  def for_catalog_table_id
+    c = CatalogTable.find(params[:table])
+
+    @sql = "SELECT " + c.table + ".description, " + c.table + ".id as proc_id FROM " +  c.table
+    ppal = ActiveRecord::Base.connection.select_rows(@sql)
+    ppal.map{|proc_id,description|}
+
+    #@t = ActiveRecord::Base.connection.select_rows(@sql)
+
+    respond_to do |format|
+      format.json  { render :json => ppal}
     end
   end
 end

@@ -1,0 +1,465 @@
+<%= form_for @person, :html => { :multipart => true } do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+      <ul>
+      <% @person.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= f.label :avatar, "Foto" %>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name, "Nombre" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name, "Apellido Paterno" %>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :second_last_name, "Apellido Materno" %>
+    <%= f.text_field :second_last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :marital_status_id, "Estado Civil" %>
+    <%= f.collection_select :marital_status_id,  MaritalStatus.order("name"), :id, :name, options ={:prompt => false} %>
+  </div>
+  <div class="field">
+    <%= f.label :sex, "Sexo" %>
+    <%= f.collection_select :sex,  Sex.order("id limit 2"), :id, :name, options ={:prompt => false} %>
+  </div>
+  <div class="field">
+    <%= f.label :ethnic_group_id, "Grupo Etnico" %>
+    <%= f.collection_select :ethnic_group_id,  EthnicGroup.order("name"), :id, :name, options ={:prompt => false} %>
+  </div>
+  <div class="field">
+    <%= f.label :birthday, "Fecha de Nacimiento" %>
+    <%= f.datepicker :birthday, :dateFormat => "dd-mm-yy" %>
+  </div>
+  <div class="field">
+    <%= f.label :born_county_id, "Municipio de Nacimiento" %>
+    <%= f.collection_select :born_county_id,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "birth_county_id" %>
+  </div>
+   <% if @person.new_record? %>
+        <div class="field">
+          <%= f.label :born_town_id, "Localidad de Nacimiento" %>
+          <%= f.collection_select :born_town_id,  Town.order("name").where(:county_id => @person.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "birth_town_id" %>
+        </div>
+   <% else %>
+        <div class="field">
+          <%= f.label :born_town_id, "Localidad de Nacimiento" %>
+          <%= f.collection_select :born_town_id,  Town.order("name").where(:county_id => Town.find(@person.born_town_id).county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "birth_town_id" %>
+        </div>
+   <% end %>
+  Dirección
+  <div class="field">
+    <%= f.label :county_id, "Municipio" %>
+    <%= f.collection_select :county_id,  County.order("name").where(:state_id => 8).order("name"), :cve_mun, :name, options ={:prompt => "-- Selecciona --"}, :id => "county_id" %>
+  </div>
+  <% if @person.new_record? %>
+      <div class="field">
+        <%= f.label :town_id, "Localidad" %>
+        <%= f.collection_select :town_id,  Town.order("name").where(:county_id => @person.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "town_id" %>
+      </div>
+  <% else %>
+        <div class="field">
+          <%= f.label :town_id, "Localidad" %>
+          <%= f.collection_select :town_id,  Town.order("name").where(:county_id => @person.town.county_id, :state_id => 8), :id, :name, options ={:prompt => ""}, :id => "town_id" %>
+        </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :address, "Dirección" %>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :address_two, "Colonia" %>
+    <%= f.text_field :address_two %>
+  </div>
+  <div class="field">
+    <%= f.label :code_area, "lada" %>
+    <%= f.text_field :code_area %>
+  </div>
+  <div class="field">
+    <%= f.label :phone, "Teléfono" %>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :cel_phone, "Celular" %>
+    <%= f.text_field :cel_phone %>
+  </div>
+  <div class="field">
+    <%= f.label :emergency_phone, "Teléfono de Emergencia" %>
+    <%= f.text_field :emergency_phone %>
+  </div>
+  <div class="field">
+    <%= f.label :email, "Correo Electrónico" %>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :rfc, "RFC" %>
+    <%= f.text_field :rfc %>
+  </div>
+  <div class="field">
+    <%= f.label :curp, "CURP" %>
+    <%= f.text_field :curp %>
+  </div>
+  <div class="field">
+    <%= f.label :medical_service_id, "Servicio Médico" %>
+    <%= f.collection_select :medical_service_id,  MedicalService.order("name"), :id, :name, options ={:prompt => false} %>
+  </div>
+    <div class="field">
+      <%= f.label :social_security_number, "Numero de Afiliacion" %>
+      <%= f.text_field :social_security_number %>
+    </div>
+  <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div3', this)" /> Informacion del Tutor  </br>
+  <div id="div3" style="display:none">
+      <div class="field">
+        <%= f.label :tutor, "Nombre Completo del Tutor" %>
+        <%= f.text_field :tutor %>
+      </div>
+      <div class="field">
+        <%= f.label :tutor_relationship_id, "Parentesco" %>
+        <%= f.collection_select :tutor_relationship_id,  Relationship.order("name"), :id, :name, options ={:prompt => false} %>
+      </div>
+      <div class="field">
+        <%= f.label :tutor_marital_status_id, "Estado Civil" %>
+        <%= f.collection_select :tutor_marital_status_id,  MaritalStatus.order("name"), :id, :name, options ={:prompt => false} %>
+      </div>
+  </div>
+  <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div1', this)" /> Informacion Academica </br>
+  <div id="div1" style="display:none">
+      <div class="field">
+        <%= f.label :reader, "Sabe Leer?" %>
+        <%= f.check_box :reader %>
+      </div>
+      <div class="field">
+        <%= f.label :schooling, "Maximo Grado Escolar" %>
+        <%= f.collection_select :schooling,  Grade.order("name"), :id, :name, options ={:prompt => false} %>
+      </div>
+      <div class="field">
+        <%= f.label :student, "Estudia?" %>
+        <%= f.check_box :student %>
+      </div>
+      <div class="field">
+        <%= f.label :school_type_id, "Tipo de Escuela?" %>
+        <%= f.collection_select :school_type_id,  SchoolType.order("name"), :id, :name, options ={:prompt => false} %>
+      </div>
+  </div>
+    <input type="checkbox" name="modtype"  value="value1" onclick="showMe('divInfLab', this)" /> Informacion Laboral </br>
+    <div id="divInfLab" style="display:none">
+      <div class="field">
+        <%= f.label :worker, "Trabaja?" %>
+        <%= f.check_box :worker %>
+      </div>
+      <div class="field">
+        <%= f.label :job, "Lugar donde trabaja" %>
+        <%= f.text_field :job %>
+      </div>
+      <div class="field">
+        <%= f.label :income, "Ingreso" %><br />
+        <%= f.text_field :income %>
+      </div>
+      <div class="field">
+        <%= f.label :self_employment, "Es Autoempleo?" %>
+        <%= f.check_box :self_employment %>
+      </div>
+      <div class="field">
+        <%= f.label :occupation, "Tiene algún Oficio" %>
+        <%= f.text_field :occupation %>
+      </div>
+      <div class="field">
+        <%= f.label :job_seeker, "Desea pertenecer a la bolsa de trabajo?" %>
+        <%= f.check_box :job_seeker %>
+      </div>
+    </div>
+
+    <input type="checkbox" name="modtype"  value="value1" onclick="showMe('div2', this)" /> Informacion de Discapacidades  </br>
+    <div id="div2" style="display:none">
+      <div class="field">
+        <%= f.label :discapacity_status, "Cuenta con algúna Discapacidad" %>
+        <%= f.check_box :discapacity_status %>
+      </div>
+      <div>
+        <table border="0">
+           <tr>
+           <td><h4>Discapacidades Disponibles</h4></td>
+           </tr>
+           <tr>
+           <td align="left">
+          <%= fill_discapacity_left_select(f)%>
+        </td>
+        </tr>
+          <tr>
+            <td>
+              <input name="btnRightD" type="button" id="btnRightD" value="v" onClick="javascript:moveToRightOrLeft(1);">
+
+              <input name="btnLeftD" type="button" id="btnLeftD" value="^" onClick="javascript:moveToRightOrLeft(2);">
+            </td>
+          </tr>
+           <tr>
+           <td><h4>Discapacidad Asignada</h4></td>
+           </tr>
+          <td align="left">
+            <%= fill_discapacity_right_select(f)%>
+          </td>
+          </tr>
+        </table>
+         </div>
+      <div class="field">
+        <%= f.label :diagnosis, "Cuenta con Diagnóstico" %>
+        <%= f.check_box :diagnosis %>
+      </div>
+      <div class="field">
+        <%= f.label :diagnosis_description, "Diagnóstico" %>
+        <%= f.text_area :diagnosis_description, :class=>"text_area_height_width" %>
+      </div>
+      <div class="field">
+        <%= f.label :discapacity_origin_id, "Origen de la discapacidad" %>
+        <%= f.collection_select :discapacity_origin_id,  DiscapacityOrigin.order("name"), :id, :name, options ={:prompt => false} %>
+      </div>
+      <div class="field">
+        <%= f.label :discapacity_origin_year, "Indique el año de origen" %>
+        <%= f.text_field :discapacity_origin_year %>
+      </div>
+      <div class="field">
+        <%= f.label :observations, "Observaciones" %>
+        <%= f.text_field :observations %>
+      </div>
+      <div class="field">
+        <%= f.label :use_functional_support, "Utiliza apoyos funcionales?" %>
+        <%= f.check_box :use_functional_support %>
+      </div>
+      <div>
+        <table border="0">
+           <tr>
+           <td><h4>Aparatos Funcionales Disponibles</h4></td>
+           </tr>
+           <tr>
+           <td align="left">
+          <%= fill_functional_support_left_select(f)%>
+        </td>
+        </tr>
+          <tr>
+            <td>
+              <input name="btnRightFS" type="button" id="btnRightFS" value="v" onClick="javascript:moveToRightOrLeftFS(1);">
+
+              <input name="btnLeftFS" type="button" id="btnLeftFS" value="^" onClick="javascript:moveToRightOrLeftFS(2);">
+            </td>
+          </tr>
+           <tr>
+           <td><h4>Aparatos Funcionales Asignados</h4></td>
+           </tr>
+          <td align="left">
+            <%= fill_functional_support_right_select(f)%>
+          </td>
+          </tr>
+        </table>
+         </div>
+  </div>
+    <div>
+      <table border="0">
+         <tr>
+         <td><h4>Documentacion Disponible</h4></td>
+         </tr>
+         <tr>
+         <td align="left">
+        <%= fill_documentation_left_select(f)%>
+      </td>
+      </tr>
+        <tr>
+          <td>
+            <input name="btnRightDo" type="button" id="btnRightDo" value="v" onClick="javascript:moveToRightOrLeftDo(1);">
+
+            <input name="btnLeftDo" type="button" id="btnLeftDo" value="^" onClick="javascript:moveToRightOrLeftDo(2);">
+          </td>
+        </tr>
+         <tr>
+         <td><h4>Documentacion Presentada</h4></td>
+         </tr>
+        <td align="left">
+          <%= fill_documentation_right_select(f)%>
+        </td>
+        </tr>
+      </table>
+       </div>
+  </br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<script type="text/javascript">
+    function showMe (it, box) {
+    var vis = (box.checked) ? "block" : "none";
+    document.getElementById(it).style.display = vis;
+    }
+</script>
+<script type="text/javascript">
+     function moveToRightOrLeft(side){
+     var listLeft=document.getElementById('selectLeftD');
+     var listRight=document.getElementById('selectRightD');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las discapacidades abajo');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              move(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas las discapacidades arriba');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              move(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+     function move(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+     } 
+
+    $(document).ready(function(){
+        $('#new_person').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightD").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightD").val(options);
+        });
+
+        $('form[id*=edit_person]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightD").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightD").val(options);
+        });
+    });
+
+     function moveToRightOrLeftFS(side){
+     var listLeft=document.getElementById('selectLeftFS');
+     var listRight=document.getElementById('selectRightFS');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas los Apoyos Funcionales abajo');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              moveFS(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas los Aparatos Funcionales arriba');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              moveFS(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+
+     function moveFS(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+     } 
+
+    $(document).ready(function(){
+        $('#new_person').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightFS").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightFS").val(options);
+        });
+
+        $('form[id*=edit_person]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightFS").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightFS").val(options);
+        });
+    });
+
+     function moveToRightOrLeftDo(side){
+     var listLeft=document.getElementById('selectLeftDo');
+     var listRight=document.getElementById('selectRightDo');
+      if(side==1){ 
+        if(listLeft.options.length==0){
+         alert('Usted ya movio todas las discapacidades abajo');
+             return false;
+         }
+        else{
+         var selectedAL=listLeft.options.selectedIndex;
+              moveDo(listRight,listLeft.options[selectedAL].value,listLeft.options[selectedAL].text); listLeft.remove(selectedAL);
+              if(listLeft.options.length>0){
+             listLeft.options[0].selected=true;
+             } 
+        } 
+        }
+        else if(side==2){
+         if(listRight.options.length==0){
+             alert('Usted ya movio todas las discapacidades arriba');
+             return false;
+         }
+            else{
+             var selectedAL=listRight.options.selectedIndex;
+              moveDo(listLeft,listRight.options[selectedAL].value,listRight.options[selectedAL].text);
+             listRight.remove(selectedAL);
+              if(listRight.options.length>0){
+                 listRight.options[0].selected=true;
+             } 
+            } 
+        } 
+    } 
+     function moveDo(listBoxTo,optionValue,optionDisplayText){
+     var newOption = document.createElement("option");
+     newOption.value = optionValue;
+     newOption.text = optionDisplayText;
+     listBoxTo.add(newOption, null);
+     return true;
+     } 
+
+    $(document).ready(function(){
+        $('#new_person').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightDo").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightDo").val(options);
+        });
+
+        $('form[id*=edit_person]').submit(function(){
+            //SelectRight seleccionar
+            var options = $("#selectRightDo").children("option").map(function(){ return $(this).attr('value') })
+            $("#selectRightDo").val(options);
+        });
+    });
+</script>
+
+
+

@@ -1,0 +1,23 @@
+<h1>Listing period_times</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @period_times.each do |period_time| %>
+  <tr>
+    <td><%= period_time.name %></td>
+    <td><%= link_to 'Show', period_time %></td>
+    <td><%= link_to 'Edit', edit_period_time_path(period_time) %></td>
+    <td><%= link_to 'Destroy', period_time, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Period time', new_period_time_path %>

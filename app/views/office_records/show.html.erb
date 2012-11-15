@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Info:</b>
+  <%= @office_record.info %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @office_record.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_office_record_path(@office_record) %> |
+<%= link_to 'Back', office_records_path %>

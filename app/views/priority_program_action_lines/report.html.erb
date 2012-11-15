@@ -1,0 +1,78 @@
+<h3 xmlns="http://www.w3.org/1999/html">FORMATO DE ALINEACION DEL PLAN ESTATAL DE DESARROLLO 2010-2016</h3>
+</br>
+<b>Dependencia: </b> </br>
+Desarrollo Integral de la Familia del Estado de Chihuahua
+</br>  </br>
+<b>Programa Propuesto: </b> </br>
+<%=Ped.find(1).ped_program%>.
+</br>  </br>
+<b>Definicion del Programa: </b> </br>
+<%=PedProgramDefinition.find(1).description%>.
+
+<div style="width:600px;height:600px;overflow-y:scroll;overflow-x:scroll;">
+  <p style="width:250%;">
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Eje de Desarrollo PED</th>
+    <th>Tema PED</th>
+    <th>Sub Tema PED</th>
+    <th>Objetivo PED</th>
+    <th>Estrategia PED</th>
+    <th>Linea de Acción PED</th>
+    <th>Objetivo PP</th>
+    <th>Estrategia PP</th>
+    <th>Linea de Acción PP</th>
+    <th>Programa &nbsp;&nbsp;&nbsp; Acciones &nbsp;&nbsp;&nbsp;&nbsp; Tipo de Actividad</th>
+  </tr>
+  </thead>
+  <% @priority_program_action_lines.each do |priority_program_action_line| %>
+      <tr>
+        <td><%= priority_program_action_line.ped_action_line.ped_strategy.ped_goal.ped_sub_theme.ped_theme.ped_axis_development.name %></td>
+        <td><%= priority_program_action_line.ped_action_line.ped_strategy.ped_goal.ped_sub_theme.ped_theme.name %></td>
+        <td><%= priority_program_action_line.ped_action_line.ped_strategy.ped_goal.ped_sub_theme.name %></td>
+        <td><%= priority_program_action_line.ped_action_line.ped_strategy.ped_goal.name %></td>
+        <td><%= priority_program_action_line.ped_action_line.ped_strategy.name %></td>
+        <td><%= priority_program_action_line.ped_action_line.name %></td>
+        <td><%= priority_program_action_line.priority_program_strategy.priority_program_goal.name %></td>
+        <td><%= priority_program_action_line.priority_program_strategy.name %></td>
+        <td><%= priority_program_action_line.name %></td>
+        <td><% PriorityProgramActionLine.select('priority_program_action_lines.id, programs.id as programid, programs.description as nombre' ).joins(:programs).where(:id => priority_program_action_line).each do |programa| %>
+            <table>
+                <tr>
+                    <td>
+                        <%= programa.nombre%>
+                    </td>
+                    <td>
+                        <%CriticalSuccessFactor.where(:program_id => programa.programid).each do |accion|%>
+                        <table>
+                          <tr>
+                            <td>
+                                <%= accion.title%>
+                            </td>
+                            <td>
+                              <%ActivityType.select('activity_types.description').joins(:critical_success_factors).where('critical_success_factors.id = :action',:action => accion.id).each do |actividad|%>
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        <%= actividad.description%>
+                                      </td>
+                                    </tr>
+                                  </table>
+                              <%end%>
+                            </td>
+                          </tr>
+                        </table>
+                        <%end%>
+                    </td>
+                </tr>
+            </table>
+            <%end%>
+        </td>
+
+
+      </tr>
+  <% end %>
+</table>
+  </p>
+</div>

@@ -1,0 +1,83 @@
+<div xmlns="http://www.w3.org/1999/html">
+  <h3>Reportes</h3>
+  Programas<%= radio_button_tag "field", 1, true,{:id => "button1", :class => "show_hide"} %>
+  Municipios<%= radio_button_tag "field", 2, false,{:id => "button2", :class => "show_hide"} %>
+  Actividades por localidad<%= radio_button_tag "field", 3, false,{:id => "button3", :class => "show_hide"} %>
+  </br>
+  </br>
+  <div id="div-sh-1" class="toHide"  >
+    <%= form_tag  :action => "program_report", :method => "post" do %>
+        <div class="field">
+          <%= label :finder, "Busqueda por:" %>
+          Programa <%= radio_button("finder", "qty", "one", :checked => true)%>
+          Todos los Programas<%= radio_button("finder", "qty", 'all' ) %>
+          </br>
+          <%= select(:program_id, :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }) %>
+        </div>
+        <div class="field">
+          <%= label :start_date, "Fecha Inicio de Actividad" %>
+          <%= datepicker :start_date, :start_date,  :dateFormat => "yy-mm-dd" %>
+        </div>
+        <div class="field">
+          <%= label :end_date, "Fecha Fin de Actividad" %>
+          <%= datepicker :end_date, :end_date, :dateFormat => "yy-mm-dd"  %>
+        </div>
+        <div class="field">
+          <%= label :finder, "Busqueda por:" %>
+          Programa <%= radio_button("finder", "program", "program", {:id => "button4", :class => "show_hide_n",:checked => true} ) %>
+          Distrito Judicial <%= radio_button("finder", "program", "pajs",{:id => "button5", :class => "show_hide_n"})  %>
+          Regiones <%= radio_button("finder", "program", "reg", {:id => "button6", :class => "show_hide_s"})  %>
+        </div>
+        <div id="div-sh-s" class="toHide_s" class="field" style="border-width: 2px;  border-style: solid; border-color: gray; width:250px;" >
+          Region <%= radio_button("finder", "region", "one", :checked => true) %>
+          Todas las Regiones <%= radio_button("finder", "region", "all")  %>
+
+          <%= select(:region_id, :region_id, Region.order("name").all.collect{ |p| [p.name , p.id] }) %>
+        </div>
+        <%= submit_tag("Buscar") %>
+    <% end %>
+
+  </div>
+  <div id="div-sh-2" class="toHide">
+    <%= form_tag  :action => "program_report_county", :method => "post" do %>
+
+        <div class="field">
+          <%= label :finder, "Busqueda por:" %>
+          Municipio <%= radio_button("finder", "qty", "one", :checked => true)%>
+          Todos los Municipios<%= radio_button("finder", "qty", 'all' ) %>
+          </br>
+
+          <%= select(:county_id, :cve_mun, County.select("counties.name, counties.cve_mun as id").where(:state_id => 8).map{|p| [p.name, p.id]}) %>
+        </div>
+        <div class="field">
+          <%= label :start_date, "Año" %>
+          <%= select_year(Date.today, :start_year => 2012, :end_year => Time.now.year) %>
+        </div>
+        <div class="field">
+          <%= label :start_date, "Trimestre" %>
+          <%= select_tag(:month_part,(options_for_select([['Enero-Marzo', 1], ['Abril-Junio', 2], ['Julio-Septiembre', 3], ['Octubre-Diciembre', 4]]))) %>
+
+        </div>
+        <%= submit_tag("Buscar") %>
+    <% end %>
+  </div>
+  <div id="div-sh-3" class="toHide"  >
+    <%= form_tag  :action => "report_town_act", :method => "post" do %>
+        <div class="field">
+          <%= label :program_id, "Programa" %>
+          <%= select(:program_id, :program_id, Program.order("name").all.collect{ |p| ["Programa No. " + p.name + " - " + p.description, p.id] }) %>
+        </div>
+        <div class="field">
+          <%= label :start_date, "Fecha Inicio de Actividad" %>
+          <%= datepicker :start_datec, :start_datec,  :dateFormat => "yy-mm-dd" %>
+        </div>
+        <div >
+          <%= label :end_date, "Fecha Fin de Actividad" %>
+          <%= datepicker :end_datec, :end_datec, :dateFormat => "yy-mm-dd"  %>
+
+        </div>
+        <%= submit_tag("Buscar") %>
+    <% end %>
+
+  </div>
+</div>

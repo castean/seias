@@ -5,6 +5,8 @@ class ActivityTypesController < ApplicationController
   # GET /activity_types.json
   def index
     @activity_types = ActivityType.order("name").page(params[:page]).per(30)
+    #@activity_types = ActivityType.search(params[:search]).page(params[:page]).per(30)
+    #@activity_types = ActivityType.search_for(params[:search], :order => params[:order]).all(:include => :name)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,6 +84,36 @@ class ActivityTypesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to activity_types_url }
       format.json { head :no_content }
+    end
+  end
+
+  def auto_complete_search
+    begin
+      @items = ActivityType.complete_for(params[:search])
+    rescue ScopedSearch::QueryNotSupported => e
+      @items = [{:error =>e.to_s}]
+    end
+    render :json => @items
+  end
+
+  def at_search
+  @at_sea = ActivityType.search_for(params[:search], :order => params[:order]).all
+  rescue => e
+    flash[:error] = e.to_s
+    @at_sea = ActivityType.search_for ''
+  end
+
+  def for_catalog_table_id
+    c = CatalogTable.find(params[:table])
+
+    @sql = "SELECT " + c.table + ".description, " + c.table + ".id as proc_id FROM " +  c.table
+    ppal = ActiveRecord::Base.connection.select_rows(@sql)
+    ppal.map{|proc_id,description|}
+
+    #@t = ActiveRecord::Base.connection.select_rows(@sql)
+
+    respond_to do |format|
+      format.json  { render :json => ppal}
     end
   end
 end

@@ -18,3 +18,5 @@ $(document).ready ->
         success: (data) ->
           $("#critical_success_factor_objective_minimum").val(id_value_string - (id_value_string * .05)); 
           $("#critical_success_factor_objective_excelent").val(id_value_string * 1.05);
+
+

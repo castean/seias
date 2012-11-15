@@ -1,7 +1,7 @@
 class PedProgramDefinition < ActiveRecord::Base
   attr_accessible :description, :name, :ped_id
   belongs_to :ped
-  has_many :ped_axis_developments
+  has_and_belongs_to_many :ped_axis_developments
   before_destroy :check_for_dependencias
   validates :name, :presence => true
   validates :description, :presence => true

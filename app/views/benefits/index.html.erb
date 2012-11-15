@@ -1,0 +1,35 @@
+<h1>Listing benefits</h1>
+
+<table>
+  <tr>
+    <th>Period</th>
+    <th>Worth</th>
+    <th>Benefit category</th>
+    <th>Delivery date</th>
+    <th>Qty</th>
+    <th>Unit price</th>
+    <th>Affiliate</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @benefits.each do |benefit| %>
+  <tr>
+    <td><%= benefit.period %></td>
+    <td><%= benefit.worth_id %></td>
+    <td><%= benefit.benefit_type_id %></td>
+    <td><%= benefit.delivery_date %></td>
+    <td><%= benefit.qty %></td>
+    <td><%= benefit.unit_price %></td>
+    <td><%= benefit.affiliate_id %></td>
+    <td><%= link_to 'Show', benefit %></td>
+    <td><%= link_to 'Edit', edit_benefit_path(benefit) %></td>
+    <td><%= link_to 'Destroy', benefit, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Benefit', new_benefit_path %>

@@ -1,0 +1,25 @@
+<p id="notice" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+</br>
+<p>
+  <b>Tipo de Indicador:</b></br>
+  <%= @critical_factor.critical_success_factor_type.name %>
+</p>
+</br>
+<p>
+  <b>Nombre:</b></br>
+  <%= @critical_factor.name %>
+</p>
+</br>
+<p>
+  <b>Descripción:</b></br>
+  <%= @critical_factor.description %>
+</p>
+</br>
+
+<div class="btn-group">
+  <% if can? :update, @critical_success_factor %>
+      <%= link_to 'Editar', edit_critical_factor_path(@critical_factor), :class => "btn" %>
+      <%= link_to 'Metas', new_critical_factor_goal_path(@critical_factor), :class => "btn" %>
+  <% end %>
+  <%= link_to 'Regresar', critical_factors_path, :class => "btn" %>
+</div>

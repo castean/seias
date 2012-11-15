@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Office:</b>
+  <%= @office_allocation.office_id %>
+</p>
+
+<p>
+  <b>Infot:</b>
+  <%= @office_allocation.infot %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @office_allocation.user_id %>
+</p>
+
+<p>
+  <b>To:</b>
+  <%= @office_allocation.to %>
+</p>
+
+<p>
+  <b>Place:</b>
+  <%= @office_allocation.place %>
+</p>
+
+<p>
+  <b>Location status:</b>
+  <%= @office_allocation.location_status %>
+</p>
+
+<p>
+  <b>Move by user:</b>
+  <%= @office_allocation.move_by_user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_office_allocation_path(@office_allocation) %> |
+<%= link_to 'Back', office_allocations_path %>
