@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Description:</b>
+  <%= @people_by_room.description %>
+</p>
+
+<p>
+  <b>Point:</b>
+  <%= @people_by_room.point %>
+</p>
+
+
+<%= link_to 'Edit', edit_people_by_room_path(@people_by_room) %> |
+<%= link_to 'Back', people_by_rooms_path %>

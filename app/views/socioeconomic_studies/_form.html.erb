@@ -1,0 +1,208 @@
+<%= form_for(@socioeconomic_study) do |f| %>
+  <% if @socioeconomic_study.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@socioeconomic_study.errors.count, "error") %> prohibited this socioeconomic_study from being saved:</h2>
+
+      <ul>
+      <% @socioeconomic_study.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% @person = Person.find(params[:id]) %>
+    <table>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Fecha de nacimiento</th>
+      </tr>
+      <tr>
+       <td><%= @person.fullname %></td>
+       <td><%= @person.age %></td>
+       <td><%= @person.birthday.to_date %></td>
+      </tr>
+      <tr>
+        <th>Domicilio Local</th>
+        <th>Ocupación</th>
+      </tr>
+      <tr>
+        <td><%= @person.address %></td>
+        <td><%= @person.job %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="field">
+    <%= f.label :family_history %><br />
+    <%= f.text_area :family_history %>
+  </div>
+  <div class="field">
+    <%= f.label :labor_company %><br />
+    <%= f.text_field :labor_company %>
+  </div>
+  <div class="field">
+    <%= f.label :labor_work_seniority %><br />
+    <%= f.text_field :labor_work_seniority %>
+  </div>
+  <div class="field">
+    <%= f.label :labor_time %><br />
+    <%= f.text_field :labor_time %>
+  </div>
+  <div class="field">
+    <%= f.label :spending_food %><br />
+    <%= f.text_field :spending_food %>
+  </div>
+  <div class="field">
+    <%= f.label :spending_auto %><br />
+    <%= f.text_field :spending_auto %>
+  </div>
+  <div class="field">
+    <%= f.label :spending_rent %><br />
+    <%= f.text_field :spending_rent %>
+  </div>
+  <div class="field">
+    <%= f.label :spending_monthly_payment %><br />
+    <%= f.text_field :spending_monthly_payment %>
+  </div>
+  <div class="field">
+    <%= f.label :spending_education %><br />
+    <%= f.text_field :spending_education %>
+  </div>
+  <div class="field">
+    <%= f.label :spending_payment %><br />
+    <%= f.text_field :spending_payment %>
+  </div>
+  <div class="field">
+    <%= f.label :spending_other %><br />
+    <%= f.text_field :spending_other %>
+  </div>
+  <div class="field">
+    <%= f.label :service_water %><br />
+    <%= f.text_field :service_water %>
+  </div>
+  <div class="field">
+    <%= f.label :service_electricity %><br />
+    <%= f.text_field :service_electricity %>
+  </div>
+  <div class="field">
+    <%= f.label :service_drainage %><br />
+    <%= f.text_field :service_drainage %>
+  </div>
+  <div class="field">
+    <%= f.label :service_phone %><br />
+    <%= f.text_field :service_phone %>
+  </div>
+  <div class="field">
+    <%= f.label :service_paving %><br />
+    <%= f.text_field :service_paving %>
+  </div>
+  <div class="field">
+    <%= f.label :service_transportation %><br />
+    <%= f.text_field :service_transportation %>
+  </div>
+  <div class="field">
+    <%= f.label :service_gas %><br />
+    <%= f.text_field :service_gas %>
+  </div>
+  <div class="field">
+    <%= f.label :housing_feature_id %><br />
+    <%= f.collection_select :housing_feature_id, HousingFeature.all.sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona una caracteristica --"} %>
+  </div>
+  <div class="field">
+    <%= f.label :construction_material_wall %><br />
+    <%= f.text_field :construction_material_wall %>
+  </div>
+  <div class="field">
+    <%= f.label :construction_material_roof %><br />
+    <%= f.text_field :construction_material_roof %>
+  </div>
+  <div class="field">
+    <%= f.label :construction_material_floor %><br />
+    <%= f.text_field :construction_material_floor %>
+  </div>
+  <div class="field">
+    <%= f.label :number_of_room_id %><br />
+    <%= f.collection_select :number_of_room_id, NumberOfRoom.all.sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona numero de habitaciones --"} %>
+  </div>
+  <div class="field">
+    <%= f.label :people_by_room_id %><br />
+    <%= f.collection_select :people_by_room_id, PeopleByRoom.all.sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona numero de personas por habitaciones --"} %>
+  </div>
+  <div class="field">
+    <%= f.label :condition_id %><br />
+    <%= f.collection_select :condition_id, Condition.all.sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona en que condiciones se encuentra --"} %>
+  </div>
+  <div class="field">
+    <%= f.label :stove %><br />
+    <%= f.check_box :stove %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.check_box :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :dvd %><br />
+    <%= f.check_box :dvd %>
+  </div>
+  <div class="field">
+    <%= f.label :fridge %><br />
+    <%= f.check_box :fridge %>
+  </div>
+  <div class="field">
+    <%= f.label :microweave %><br />
+    <%= f.check_box :microweave %>
+  </div>
+  <div class="field">
+    <%= f.label :air_conditioning %><br />
+    <%= f.check_box :air_conditioning %>
+  </div>
+  <div class="field">
+    <%= f.label :health %><br />
+    <%= f.number_field :health %>
+  </div>
+  <div class="field">
+    <%= f.label :family_dinamyc %><br />
+    <%= f.text_area :family_dinamyc %>
+  </div>
+  <div class="field">
+    <%= f.label :environment %><br />
+    <%= f.text_area :environment %>
+  </div>
+  <div class="field">
+    <%= f.label :children_education %><br />
+    <%= f.text_area :children_education %>
+  </div>
+  <div class="field">
+    <%= f.label :neighbor_references %><br />
+    <%= f.text_area :neighbor_references %>
+  </div>
+  <div class="field">
+    <%= f.label :heritage_assets %><br />
+    <%= f.text_area :heritage_assets %>
+  </div>
+  <div class="field">
+    <%= f.label :study_person_name %><br />
+    <%= f.text_field :study_person_name %>
+  </div>
+  <div class="field">
+    <%= f.label :study_place %><br />
+    <%= f.text_field :study_place %>
+  </div>
+  <div class="field">
+    <%= f.label :relationship_id %><br />
+    <%= f.collection_select :relationship_id, Relationship.all.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona una relacion --"} %>
+  </div>
+  <div class="field">
+    <%= f.label :total_point %><br />
+    <%= f.number_field :total_point %>
+  </div>
+  <div class="field">
+    <%= f.label :description_evaluation_general %><br />
+    <%= f.text_area :description_evaluation_general %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

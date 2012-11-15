@@ -1,0 +1,2 @@
+module NumberOfRoomsHelper
+end

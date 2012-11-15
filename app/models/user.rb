@@ -22,6 +22,11 @@ class User < ActiveRecord::Base
   belongs_to :direction
   has_and_belongs_to_many :programs
 
+
+
+  has_many :user_sessions
+
+
   attr_accessible :login, :email, :name, :last_name, :second_last_name, :password, :password_confirmation, :department_id, :roles, :avatar 
 
   before_destroy :check_for_dependencias
@@ -36,7 +41,9 @@ class User < ActiveRecord::Base
   end
 
   ROLES = %w[admin moderator user planeacion]
+
   PLANEACION = %w[user planeacion]
+
  
   serialize :roles
  
