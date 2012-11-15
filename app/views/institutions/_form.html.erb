@@ -13,7 +13,7 @@
   </br>
   <div class="field">
     <h4>Identificador Tipo</h4>
-    <%= f.collection_select :institutions_type_id, InstitutionsType .order("name"),:id, :name, options= {:prompt => "-- Selecciona un Identificador --"}, :id => "institutions_type_id" %>
+    <%= f.collection_select :institutions_type_id, InstitutionsType.order("name"),:id, :name, options= {:prompt => "-- Selecciona un Identificador --"}, :id => "institutions_type_id" %>
   </div>
   </br>
   <div>
@@ -35,7 +35,7 @@
     <table class="table table-striped">
       <tr>
         <td>
-          <%= f.label :type_person,"Tipo de Persona" %>
+          <%= f.label :type_person_id,"Tipo de Persona" %>
         </td>
         <td>
           <%= f.label :rfc,"RFC" %>
@@ -46,7 +46,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.collection_select :type_person, TypePerson.order("name").all, :id, :name, options ={:prompt => "-- Seleccione Tipo de Persona --"} ,:class=>"span3"%>
+          <%= f.collection_select :type_person_id, TypePerson.order("name").all, :id, :name, options ={:prompt => "-- Seleccione Tipo de Persona --"}, :class=>"span3"%>
         </td>
         <td>
           <%= f.text_field :rfc, :class=>"span2" %>
