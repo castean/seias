@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  initial_value: 1
+  final_value: 1
+
+two:
+  description: MyString
+  initial_value: 1
+  final_value: 1

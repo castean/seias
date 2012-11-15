@@ -1,8 +1,9 @@
-class CreateHousingFeatures < ActiveRecord::Migration
+class CreateNumberOfRooms < ActiveRecord::Migration
   def change
-    create_table :housing_features do |t|
+    create_table :number_of_rooms do |t|
       t.string :description
       t.integer :point
+
       t.timestamps
     end
   end

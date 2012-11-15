@@ -13,7 +13,7 @@
   </br>
   <div class="field">
     <h4>Identificador Tipo</h4>
-    <%= f.collection_select :institution_type_id, InstitutionsType .order("name"),:id, :name, options= {:prompt => "-- Selecciona un Identificador --"}, :id => "institution_type_id" %>
+    <%= f.collection_select :institutions_type_id, InstitutionsType .order("name"),:id, :name, options= {:prompt => "-- Selecciona un Identificador --"}, :id => "institutions_type_id" %>
   </div>
   </br>
   <div>
@@ -52,7 +52,7 @@
           <%= f.text_field :rfc, :class=>"span2" %>
         </td>
         <td>
-          <%= f.collection_select :business_line_id,  BusinessLine.order("name").where(:institution_type_id => @institution.institution_type_id), :id, :name, options ={:prompt => "-- Seleccione el giro --"}, :id => "business_line_id", :class=>"span3" %>
+          <%= f.collection_select :business_line_id,  BusinessLine.order("name").where(:institutions_type_id => @institution.institutions_type_id), :id, :name, options ={:prompt => "-- Seleccione el giro --"}, :id => "business_line_id", :class=>"span3" %>
 
         </td>
       </tr>

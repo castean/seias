@@ -83,7 +83,7 @@ class InstitutionsTypesController < ApplicationController
   def for_institution_type_id
     c = InstitutionsType.find(params[:id])
 
-    @sql = "SELECT name, id as proc_id FROM business_lines where business_lines.institution_type_id = " +  c.id.to_s
+    @sql = "SELECT name, id as proc_id FROM business_lines where business_lines.institutions_type_id = " +  c.id.to_s
     ppal = ActiveRecord::Base.connection.select_rows(@sql)
     ppal.map{|proc_id,name|}
 

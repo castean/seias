@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114181850) do
+ActiveRecord::Schema.define(:version => 20121115192341) do
 
   create_table "activities", :force => true do |t|
     t.string   "value"
@@ -209,6 +209,14 @@ ActiveRecord::Schema.define(:version => 20121114181850) do
     t.integer "catalog_table_id"
     t.integer "critical_factor_id"
     t.integer "table_select_field_id"
+  end
+
+  create_table "conditions", :force => true do |t|
+    t.string   "description"
+    t.integer  "initial_value"
+    t.integer  "final_value"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "counties", :force => true do |t|
@@ -418,12 +426,13 @@ ActiveRecord::Schema.define(:version => 20121114181850) do
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "point"
   end
 
   create_table "institutions", :force => true do |t|
     t.integer  "institutions_type_id"
     t.string   "name"
-    t.integer  "type_person"
+    t.integer  "type_person_id"
     t.string   "legal_name"
     t.string   "legal_last_name"
     t.string   "legal_second_last_name"
@@ -473,6 +482,13 @@ ActiveRecord::Schema.define(:version => 20121114181850) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "number_of_rooms", :force => true do |t|
+    t.string   "description"
+    t.integer  "point"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "office_allocations", :force => true do |t|
@@ -672,6 +688,13 @@ ActiveRecord::Schema.define(:version => 20121114181850) do
     t.integer  "discapacity_origin_year"
   end
 
+  create_table "people_by_rooms", :force => true do |t|
+    t.string   "description"
+    t.integer  "point"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "period_times", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -833,6 +856,54 @@ ActiveRecord::Schema.define(:version => 20121114181850) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "socioeconomic_studies", :force => true do |t|
+    t.integer  "person_id"
+    t.text     "family_history"
+    t.string   "labor_company"
+    t.string   "labor_work_seniority"
+    t.string   "labor_time"
+    t.decimal  "spending_food"
+    t.decimal  "spending_auto"
+    t.decimal  "spending_rent"
+    t.decimal  "spending_monthly_payment"
+    t.decimal  "spending_education"
+    t.decimal  "spending_payment"
+    t.decimal  "spending_other"
+    t.decimal  "service_water"
+    t.decimal  "service_electricity"
+    t.decimal  "service_drainage"
+    t.decimal  "service_phone"
+    t.decimal  "service_paving"
+    t.decimal  "service_transportation"
+    t.decimal  "service_gas"
+    t.integer  "housing_feature_id"
+    t.string   "construction_material_wall"
+    t.string   "construction_material_roof"
+    t.string   "construction_material_floor"
+    t.integer  "number_of_room_id"
+    t.integer  "people_by_room_id"
+    t.integer  "condition_id"
+    t.boolean  "stove"
+    t.boolean  "phone"
+    t.boolean  "dvd"
+    t.boolean  "fridge"
+    t.boolean  "microweave"
+    t.boolean  "air_conditioning"
+    t.integer  "health"
+    t.text     "family_dinamyc"
+    t.text     "environment"
+    t.text     "children_education"
+    t.text     "neighbor_references"
+    t.text     "heritage_assets"
+    t.string   "study_person_name"
+    t.string   "study_place"
+    t.integer  "relationship_id"
+    t.integer  "total_point"
+    t.text     "description_evaluation_general"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "states", :force => true do |t|

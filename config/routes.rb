@@ -1,6 +1,12 @@
 Seias::Application.routes.draw do
 
 
+  match '/socioeconomic_studies/new/:id' => 'socioeconomic_studies#new'
+  resources :socioeconomic_studies
+
+  resources :conditions
+
+  resources :number_of_rooms
 
   resources :people_by_rooms
 
