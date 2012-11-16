@@ -1,5 +1,5 @@
 class Worth < ActiveRecord::Base
   belongs_to :direction
-  belongs_to :benefit
+  has_many :benefits
   attr_accessible :direction_id, :name
 end
