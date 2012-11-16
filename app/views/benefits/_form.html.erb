@@ -51,19 +51,19 @@
   <% if params[:aff]%>
     </br>
     <div class="field">
-      <%= f.label :period %><br />
+      <%= f.label :period, "Periodo" %><br />
       <%= f.text_field :period %>
     </div>
     <div class="field">
-      <%= f.label :worth_id %><br />
+      <%= f.label :worth_id, "Tipo de vale" %><br />
       <%= f.collection_select :worth_id, Worth.find_all_by_direction_id(Department.find(current_user.department_id).direction_id).sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona un tipo de ayuda --"} %>
     </div>
     <div class="field">
-      <%= f.label :benefit_category_id %><br />
+      <%= f.label :benefit_category_id, "Categoria de Apoyo" %><br />
       <%= f.collection_select :benefit_category_id, BenefitCategory.all.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona una categoria --"} %>
     </div>
     <div class="field">
-      <%= f.label :benefit_type_id %><br />
+      <%= f.label :benefit_type_id, "Tipo de Apoyo" %><br />
       <%= fill_benefit_type_select(f) %>
     </div>
     <div class="field">
@@ -71,16 +71,16 @@
       <%= f.datepicker :delivery_date, :dateFormat => "dd-mm-yy" %>
     </div>
     <div class="field">
-      <%= f.label :qty %><br />
+      <%= f.label :qty, "Cantidad" %><br />
       <%= f.number_field :qty %>
     </div>
     <div class="field">
-      <%= f.label :unit_price %><br />
+      <%= f.label :unit_price, "Precio Unitario" %><br />
       <%= f.text_field :unit_price %>
     </div>
           <%= f.hidden_field :affiliate_id, :value => params[:aff] %>
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit "Crear Apoyo"%>
     </div>
    <% end %>
 <% end %>

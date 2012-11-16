@@ -2,49 +2,8 @@
 
 <table>
   <tr>
-    <th>Person</th>
-    <th>Family history</th>
-    <th>Labor company</th>
-    <th>Labor work seniority</th>
-    <th>Labor time</th>
-    <th>Spending food</th>
-    <th>Spending auto</th>
-    <th>Spending rent</th>
-    <th>Spending monthly payment</th>
-    <th>Spending education</th>
-    <th>Spending payment</th>
-    <th>Spending other</th>
-    <th>Service water</th>
-    <th>Service electricity</th>
-    <th>Service drainage</th>
-    <th>Service phone</th>
-    <th>Service paving</th>
-    <th>Service transportation</th>
-    <th>Service gas</th>
-    <th>Housing feature</th>
-    <th>Construction material wall</th>
-    <th>Construction material roof</th>
-    <th>Construction material floor</th>
-    <th>Number of room</th>
-    <th>People by room</th>
-    <th>Condition</th>
-    <th>Stove</th>
-    <th>Phone</th>
-    <th>Dvd</th>
-    <th>Fridge</th>
-    <th>Microweave</th>
-    <th>Air conditioning</th>
-    <th>Health</th>
-    <th>Family dinamyc</th>
-    <th>Environment</th>
-    <th>Children education</th>
-    <th>Neighbor references</th>
-    <th>Heritage assets</th>
-    <th>Study person name</th>
-    <th>Study place</th>
-    <th>Relationship</th>
-    <th>Total point</th>
-    <th>Description evaluation general</th>
+    <th>Nombre</th>
+
     <th></th>
     <th></th>
     <th></th>
@@ -52,56 +11,15 @@
 
 <% @socioeconomic_studies.each do |socioeconomic_study| %>
   <tr>
-    <td><%= socioeconomic_study.person_id %></td>
-    <td><%= socioeconomic_study.family_history %></td>
-    <td><%= socioeconomic_study.labor_company %></td>
-    <td><%= socioeconomic_study.labor_work_seniority %></td>
-    <td><%= socioeconomic_study.labor_time %></td>
-    <td><%= socioeconomic_study.spending_food %></td>
-    <td><%= socioeconomic_study.spending_auto %></td>
-    <td><%= socioeconomic_study.spending_rent %></td>
-    <td><%= socioeconomic_study.spending_monthly_payment %></td>
-    <td><%= socioeconomic_study.spending_education %></td>
-    <td><%= socioeconomic_study.spending_payment %></td>
-    <td><%= socioeconomic_study.spending_other %></td>
-    <td><%= socioeconomic_study.service_water %></td>
-    <td><%= socioeconomic_study.service_electricity %></td>
-    <td><%= socioeconomic_study.service_drainage %></td>
-    <td><%= socioeconomic_study.service_phone %></td>
-    <td><%= socioeconomic_study.service_paving %></td>
-    <td><%= socioeconomic_study.service_transportation %></td>
-    <td><%= socioeconomic_study.service_gas %></td>
-    <td><%= socioeconomic_study.housing_feature_id %></td>
-    <td><%= socioeconomic_study.construction_material_wall %></td>
-    <td><%= socioeconomic_study.construction_material_roof %></td>
-    <td><%= socioeconomic_study.construction_material_floor %></td>
-    <td><%= socioeconomic_study.number_of_room_id %></td>
-    <td><%= socioeconomic_study.people_by_room_id %></td>
-    <td><%= socioeconomic_study.condition_id %></td>
-    <td><%= socioeconomic_study.stove %></td>
-    <td><%= socioeconomic_study.phone %></td>
-    <td><%= socioeconomic_study.dvd %></td>
-    <td><%= socioeconomic_study.fridge %></td>
-    <td><%= socioeconomic_study.microweave %></td>
-    <td><%= socioeconomic_study.air_conditioning %></td>
-    <td><%= socioeconomic_study.health %></td>
-    <td><%= socioeconomic_study.family_dinamyc %></td>
-    <td><%= socioeconomic_study.environment %></td>
-    <td><%= socioeconomic_study.children_education %></td>
-    <td><%= socioeconomic_study.neighbor_references %></td>
-    <td><%= socioeconomic_study.heritage_assets %></td>
-    <td><%= socioeconomic_study.study_person_name %></td>
-    <td><%= socioeconomic_study.study_place %></td>
-    <td><%= socioeconomic_study.relationship_id %></td>
-    <td><%= socioeconomic_study.total_point %></td>
-    <td><%= socioeconomic_study.description_evaluation_general %></td>
-    <td><%= link_to 'Show', socioeconomic_study %></td>
-    <td><%= link_to 'Edit', edit_socioeconomic_study_path(socioeconomic_study) %></td>
-    <td><%= link_to 'Destroy', socioeconomic_study, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= Person.find(socioeconomic_study.person_id).fullname %></td>
+
+    <td><%= link_to 'Mostrar', socioeconomic_study %></td>
+    <td><%= link_to 'Editar', edit_socioeconomic_study_path(socioeconomic_study) %></td>
+    <td><%= link_to 'Eliminar', socioeconomic_study, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Socioeconomic study', new_socioeconomic_study_path %>
+<%= link_to 'Nuevo Estudio Socioeconomico', new_socioeconomic_study_path %>
