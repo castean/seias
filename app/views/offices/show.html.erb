@@ -84,20 +84,25 @@
 <% x = params[:page]  #ISC Christian Alderete
    #subpaginate for acitivies into activity_types
    w = 0
-   y = 5
+   y = 20
 
    if x.nil?
      w = 0
-     y = 4
+     y = 19
    else
      y = y.to_i * x.to_i
-     w = y.to_i - 5
+     w = y.to_i - 20
    end
    @office.office_allocations[w..y].each do |reasignacion|
 %>
     <p>
-      <b> Se asigno:</b> Hace - <%= time_ago_in_words reasignacion.created_at %> - </br>
-      <%= reasignacion.infot %></br> </br>
+      <%if reasignacion.location_status == 1 %>
+        <b> <%=User.find(reasignacion.move_by_user_id).fullname%></b> asigno a: <b><%= reasignacion.user.fullname%></b> el oficio hace - <%= time_ago_in_words reasignacion.created_at %> - </br>
+        <%= reasignacion.infot %></br> </br>
+      <%else %>
+          <b> <%=User.find(reasignacion.move_by_user_id).fullname%></b> asigno a: <b><%= reasignacion.to%></b> de <b><%= reasignacion.place%></b> el oficio hace - <%= time_ago_in_words reasignacion.created_at %> - </br>
+          <%= reasignacion.infot %></br> </br>
+      <%end%>
     </p>
 <%end%>
 <br />
@@ -112,19 +117,19 @@
 <% x = params[:page]  #ISC Christian Alderete
    #subpaginate for acitivies into activity_types
    w = 0
-   y = 5
+   y = 20
 
    if x.nil?
      w = 0
-     y = 4
+     y = 19
    else
      y = y.to_i * x.to_i
-     w = y.to_i - 5
+     w = y.to_i - 20
    end
    @office.office_records[w..y].each do |atenciones|
 %>
     <p>
-      <%= atenciones.user.fullname %><b> Comento:</b> Hace - <%= time_ago_in_words atenciones.created_at %> - </br>
+      <b><%= atenciones.user.fullname %></b> Comento hace - <%= time_ago_in_words atenciones.created_at %> - </br>
       <%= atenciones.info %></br> </br>
     </p>
 <%end%>

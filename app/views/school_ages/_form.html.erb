@@ -11,25 +11,22 @@
     <% end %>
   </br>
   <div class="field">
-    <%= f.label :grade_id %>
+    <%= f.label :grade_id, "Grado Escolar" %>
     <%= f.collection_select :grade_id, Grade.order("name").all, :id, :name, options ={:prompt => "-- Seleccione Grado --"}, :class=>"span3"%>
   </div>
   <div class="field">
-    <%= f.label :guardianship_id %>
+    <%= f.label :guardianship_id, "Tipo de Tutela" %>
     <%= f.collection_select :guardianship_id, Guardianship.order("name").all, :id, :name, options ={:prompt => "-- Seleccione Tutela --"}, :class=>"span3"%>
   </div>
   <div class="field">
-    <%= f.label :sex_id %>
+    <%= f.label :sex_id, "Sexo" %>
     <%= f.collection_select :sex_id, Sex.order("id").limit(2).all, :id, :name, options ={:prompt => "-- Seleccione Sexo --"} ,:class=>"span3"%>
   </div>
   <div class="field">
-    <%= f.label :total_qty_registered %>
+    <%= f.label :total_qty_registered, "Total Registrado" %>
     <%= f.number_field :total_qty_registered %>
   </div>
-  <div class="field">
-    <%= f.label :real_qty_registered %>
-    <%= f.number_field :real_qty_registered %>
-  </div>
+    </br>
   <div class="actions">
     <%= f.submit %>
   </div>
