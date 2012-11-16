@@ -89,9 +89,9 @@ class AffiliatesController < ApplicationController
 
     respond_to do |format|
       if @affiliate.save
-        if @affiliate.field = '1'
+        if @affiliate.field == '1'
           ben_id = @affiliate.person_id
-        elsif @affiliate.field = '2'
+        elsif @affiliate.field == '2'
           ben_id = @affiliate.institution_ben_id
         end
         format.html { redirect_to new_benefit_path + '/' + ben_id.to_s + '?type=' + @affiliate.field, notice: 'Affiliate was successfully created.' }
