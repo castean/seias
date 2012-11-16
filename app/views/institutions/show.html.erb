@@ -154,7 +154,7 @@
 
 <table class="table table-striped">
   <thead>
-      <h4>Total de Residentes: </h4>
+      <h4>Total de Residentes: </h4> <%= %>
   </thead>
   </br>
   <tr>
@@ -205,8 +205,8 @@
         <%= b.grade.name %>
     </p>
     </br>
-    <%= link_to "Editar Escolaridad", [@institution, b], :method => :edit %>
-    <%= link_to "Borrar Escolaridad", [@institution, b], :method => :delete, :confirm => "Esta usted seguro?" %>
+    <%#= link_to "Editar Escolaridad", [@institution, b], :method => :edit %>
+    <%#= link_to "Borrar Escolaridad", [@institution, b], :method => :delete, :confirm => "Esta usted seguro?" %>
 <%end%>
 </br>
 </br>
@@ -216,12 +216,12 @@
 </br>
 <% @institution.age_populations.each do |c| %>
     <p>
-      <b>Nivel Escolar:</b>
+      <b>Rango de Edad:</b>
       <%= c.age_range.name %></br>
     </p>
     </br>
-    <%= link_to "Editar Población", [@institution, c], :method => :edit %>
-    <%= link_to "Borrar Población", [@institution, c], :method => :delete, :confirm => "Esta usted seguro?" %>
+    <%#= link_to "Editar Población", [@institution, c], :method => :edit %>
+    <%#= link_to "Borrar Población", [@institution, c], :method => :delete, :confirm => "Esta usted seguro?" %>
 <%end%>
 </br>
 </br>
@@ -231,11 +231,15 @@
 <% @institution.one_reg_institutions.each do |a| %>
     <p>
       <b>Objetivo Social Acorde:</b></br>
-        <%= a.according_social_purpose%>
+        <% if a.according_social_purpose == TRUE%>
+            Sí
+        <%else%>
+            No
+        <%end%>
     </p>
     <p>
       <b>Sexo de Beneficiarios:</b></br>
-        <%= a.people_sex%>
+        <%= Sex.find(a.people_sex).name%>
     </p>
     <p>
       <b>Edad Mínima:</b></br>
@@ -251,11 +255,11 @@
     </p>
     <p>
       <b>Población Objetivo:</b></br>
-      <%= a.public_target_id%>
+      <%= PublicTarget.find(a.public_target_id).name%>
     </p>
     </br>
-    <%= link_to "Editar Reg-Inst.1/R01", [@institution, a], :method => :edit %> |
-    <%= link_to "Borrar Reg-Inst.1/R01", [@institution, a], :method => :delete, :confirm => "Esta usted seguro?" %>
+    <%#= link_to "Editar Reg-Inst.1/R01", [@institution, a], :method => :edit %> |
+    <%#= link_to "Borrar Reg-Inst.1/R01", [@institution, a], :method => :delete, :confirm => "Esta usted seguro?" %>
 <%end%>
 </br>
 </br>
