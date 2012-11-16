@@ -87,16 +87,16 @@
 
         </div>
         <div class="field">
-          <%= f.label :period_number %><br />
+          <%= f.label :period_number, "Número de periodos" %><br />
           <%= f.number_field :period_number %>
         </div>
         <div class="field">
-          <%= f.label :institution_id %><br />
-          <%= f.collection_select :institution_id, Institution.all.collect.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona un Periodo --"},  :class=>"ddl_width" %>
+          <%= f.label :institution_id, "Institución que dara el apoyo" %><br />
+          <%= f.collection_select :institution_id, Institution.all.collect.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona una Institución --"},  :class=>"ddl_width" %>
         </div>
 
         <div class="actions">
-         <%= f.submit %>
+         <%= f.submit "Crear Institución" %>
         </div>
       <% end %>
   <% end %>

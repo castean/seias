@@ -26,15 +26,15 @@
     <th><%= person.name %></th>
     <th><%= person.last_name %></th>
     <th><%= person.second_last_name %></th>
-    <th><%= link_to "Familiares", "/families/add_family/#{person.id}" %></th>
-    <th><%= link_to "Estudio Socioeconomico", "/socioeconomic_studies/new/#{person.id}" %></th>
-    <td><%= link_to 'Show', person %></td>
-    <td><%= link_to 'Edit', edit_person_path(person) %></td>
-    <td><%= link_to 'Destroy', person, confirm: 'Are you sure?', method: :delete %></td>
+    <th><%= link_to "Familiares",  "/seias/families/add_family/#{person.id}" %></th>
+    <th><%= link_to "Estudio Socioeconomico", "/seias/socioeconomic_studies/new/#{person.id}" %></th>
+    <td><%= link_to 'Mostrar', person %></td>
+    <td><%= link_to 'Regresar', edit_person_path(person) %></td>
+    <td><%= link_to 'Eliminar', person, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Person', new_person_path %>
+<%= link_to 'Neva Persona', new_person_path %>
