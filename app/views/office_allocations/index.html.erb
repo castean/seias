@@ -2,13 +2,13 @@
 
 <table>
   <tr>
-    <th>Office</th>
-    <th>Infot</th>
-    <th>User</th>
-    <th>To</th>
-    <th>Place</th>
+    <th>Oficio</th>
+    <th>Detalle</th>
+    <th>Usuario</th>
+    <th>Para</th>
+    <th>Lugar</th>
     <th>Location status</th>
-    <th>Move by user</th>
+    <th>Reasiganado por</th>
     <th></th>
     <th></th>
     <th></th>
@@ -23,13 +23,13 @@
     <td><%= office_allocation.place %></td>
     <td><%= office_allocation.location_status %></td>
     <td><%= office_allocation.move_by_user_id %></td>
-    <td><%= link_to 'Show', office_allocation %></td>
-    <td><%= link_to 'Edit', edit_office_allocation_path(office_allocation) %></td>
-    <td><%= link_to 'Destroy', office_allocation, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Ver', office_allocation %></td>
+    <td><%= link_to 'Editar', edit_office_allocation_path(office_allocation) %></td>
+    <td><%= link_to 'Eliminar', office_allocation, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Office allocation', new_office_allocation_path %>
+<%= link_to 'Nueva Reasiganacion', new_office_allocation_path %>
