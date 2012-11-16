@@ -16,8 +16,8 @@ class OfficesController < ApplicationController
   # GET /offices/1.json
   def show
     @office = Office.find(params[:id])
-    @allocationpage = @office.office_allocations.order("id DESC").page(params[:page]).per(5)
-    @recordpage = @office.office_records.order("id DESC").page(params[:page]).per(5)
+    @allocationpage = @office.office_allocations.order("id DESC").page(params[:page]).per(20)
+    @recordpage = @office.office_records.order("id DESC").page(params[:page]).per(20)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @office }
