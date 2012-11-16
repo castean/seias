@@ -62,6 +62,7 @@
                 </div>
 	                 <span class="depto"><%= link_to "Descarga el Manual", manual_path %></span> 
 	                <br />
+                <% if current_user.roles.to_s == "planeacion"  %>
                 <h4>Plan Estatal de Desarrollo</h4>
                 <ul>
                     <li class="plan"><span></span><%= link_to "Plan Estatal de Desarrollo", peds_path %></li>
@@ -82,17 +83,24 @@
                     <li class="factores"><span></span><%= link_to "Programas", programs_path %></li>
                     <li class="factores"><span></span><%= link_to "Acciones", critical_success_factors_path %></li>
                 </ul>
+                  <% end %>
+                <h4>Modulo Asistencia Social</h4>
+                  <ul>
+                    <li class="actividades"><span></span><%= link_to "Registro de Personas", people_path %></li>
+                    <li class="actividades"><span></span><%= link_to "Registro de Instituciones", institutions_path %></li>
+                    <li class="actividades"><span></span><%= link_to "Regitro de Apoyos", affiliates_path %></li>
+                  </ul>
+                  <h4>Modulo Oficios</h4>
+                  <ul>
+                    <li class="actividades"><span></span><%= link_to "Oficios", offices_path %></li>
+                  </ul>
                 <h4>Actividades</h4>
                 <ul>    
                     <li class="actividades"><span></span><%= link_to "Tipo de Actividades", activity_types_path %></li>
                     <li class="actividades"><span></span><%= link_to "Captura de Actividades", activities_path %></li>
                     <li class="actividades"><span></span><%= link_to "Reporte de Actividades", programs_report_path %></li>
                 </ul>
-                <h4>Mediciones</h4>
-                <ul>
-                    <li class="factores"><span></span><%= link_to "Indicadores", critical_factors_path %></li>
-                </ul>
-                <% if can? :create, Direction %>
+                <% if current_user.roles.to_s == "planeacion" %>
                     <h4>Administrativo</h4>
                       <ul>
                         <li class="actividades"><span></span><%= link_to "Direcciones", directions_path %></li>

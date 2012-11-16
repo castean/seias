@@ -80,4 +80,12 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: 'Usuario eliminado correctamente'
   end
 
+
+  def for_departmentid
+    #@departments = SubSection.find( :all, :conditions => [" section_id = ?", params[:id]]  ).sort_by{ |k| k['name'] }
+    @users = User.find_all_by_department_id( params[:id]).sort_by{ |k| k['name'] }
+    respond_to do |format|
+      format.json  { render :json => @users }
+    end
+  end
 end

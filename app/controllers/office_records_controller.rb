@@ -17,7 +17,6 @@ class OfficeRecordsController < ApplicationController
   # GET /office_records/1.json
   def show
     @office_record = OfficeRecord.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @office_record }

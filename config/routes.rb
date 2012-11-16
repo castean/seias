@@ -206,12 +206,7 @@ Seias::Application.routes.draw do
   
   resource :user_sessions
 
-    
-
- 
-
-  
-
+  match '/users/for_departmentid/:id' => 'users#for_departmentid'
   match '/users/change_password' => 'users#change_password'
   resources :users
 

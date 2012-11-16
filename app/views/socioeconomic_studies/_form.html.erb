@@ -36,7 +36,25 @@
   </div>
   <div class="field">
     <%= f.label :family_history %><br />
-    <%= f.text_area :family_history %>
+    <table>
+      <tr>
+        <th></th>
+      </tr>
+
+      <% @person.families.each do |family| %>
+          <tr>
+            <td>
+              <%= family.kin.fullname %>
+            </td>
+            <td>
+              <%= family.relationship.name %>
+            </td>
+            <td>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+    <%= f.text_area :family_history, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
     <%= f.label :labor_company %><br />
@@ -164,23 +182,23 @@
   </div>
   <div class="field">
     <%= f.label :family_dinamyc %><br />
-    <%= f.text_area :family_dinamyc %>
+    <%= f.text_area :family_dinamyc, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
     <%= f.label :environment %><br />
-    <%= f.text_area :environment %>
+    <%= f.text_area :environment, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
     <%= f.label :children_education %><br />
-    <%= f.text_area :children_education %>
+    <%= f.text_area :children_education, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
     <%= f.label :neighbor_references %><br />
-    <%= f.text_area :neighbor_references %>
+    <%= f.text_area :neighbor_references, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
     <%= f.label :heritage_assets %><br />
-    <%= f.text_area :heritage_assets %>
+    <%= f.text_area :heritage_assets, :class=>"text_area_height_width" %>
   </div>
   <div class="field">
     <%= f.label :study_person_name %><br />
@@ -200,7 +218,7 @@
   </div>
   <div class="field">
     <%= f.label :description_evaluation_general %><br />
-    <%= f.text_area :description_evaluation_general %>
+    <%= f.text_area :description_evaluation_general, :class=>"text_area_height_width" %>
   </div>
   <div class="actions">
     <%= f.submit %>
