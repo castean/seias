@@ -4,7 +4,7 @@ class OfficesController < ApplicationController
   # GET /offices
   # GET /offices.json
   def index
-    @offices = Office.all
+    @offices = Office.order("id DESC").all
 
     respond_to do |format|
       format.html # index.html.erb
