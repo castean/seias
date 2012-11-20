@@ -1,7 +1,7 @@
 <h1>Listado de Personas</h1><p><%= link_to 'Limpiar Busqueda', people_path %> </p>
 <%= search_form_for @q do |f| %>
     <p>
-      Nombre(s) <%= f.autocomplete_field :name_cont, autocomplete_name_families_path%>
+      Nombre(s)<%= f.autocomplete_field :name_cont, autocomplete_name_families_path%>
       <br/>
       Apellido Paterno <%= f.autocomplete_field :last_name_cont, autocomplete_last_name_families_path %>
       <br/>
@@ -10,6 +10,8 @@
     <div class="actions"><%= f.submit "Buscar" %></div>
     </p>
 <% end %>
+<%= link_to 'Nueva Persona', new_person_path %>
+<br/>
 <table>
   <tr>
     <th><%= sort_link(@q, :name, "Nombre") %></th>
@@ -26,8 +28,8 @@
     <th><%= person.name %></th>
     <th><%= person.last_name %></th>
     <th><%= person.second_last_name %></th>
-    <th><%= link_to "Familiares",  "/seias/families/add_family/#{person.id}" %></th>
-    <th><%= link_to "Estudio Socioeconomico", "/seias/socioeconomic_studies/new/#{person.id}" %></th>
+    <th><%= link_to "Familiares",  (root_path + "families/add_family/#{person.id}") %></th>
+    <th><%= link_to "Estudio Socioeconomico", (root_path + "socioeconomic_studies/new/#{person.id}") %></th>
     <td><%= link_to 'Mostrar', person %></td>
     <td><%= link_to 'Regresar', edit_person_path(person) %></td>
     <td><%= link_to 'Eliminar', person, confirm: 'Are you sure?', method: :delete %></td>
@@ -37,4 +39,3 @@
 
 <br />
 
-<%= link_to 'Neva Persona', new_person_path %>
