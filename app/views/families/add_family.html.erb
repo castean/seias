@@ -64,7 +64,7 @@
         $.ajax({
             dataType: "json",
             cache: false,
-            url:  application_root_path() + '/seias/families/for_search?kin_name=' + kname + '&kin_last_name=' + klastname + '&kin_second_last_name=' + ksecondlastname,
+            url:  application_root_path() + 'families/for_search?kin_name=' + kname + '&kin_last_name=' + klastname + '&kin_second_last_name=' + ksecondlastname,
             timeout: 20000,
             error: function(XMLHttpRequest, errorTextStatus, error){
                 alert("Failed to submit : "+ errorTextStatus+" ;"+error);
