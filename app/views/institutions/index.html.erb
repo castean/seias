@@ -1,5 +1,5 @@
 <h1>Listing institutions</h1>  </br>
-<%= link_to 'New Institution', new_institution_path %>
+<%= link_to 'Nueva Institución', new_institution_path, :class => "btn" %>
 <br>
 <table>
   <tr>
@@ -21,9 +21,9 @@
     <td><%= institution.zip_code %></td>
     <td><%= institution.phone %></td>
     <th><%= link_to "Apoyos", "/affiliates/new/#{institution.id}?type=ins" %></th>
-    <td><%= link_to 'Show', institution %></td>
-    <td><%= link_to 'Edit', edit_institution_path(institution) %></td>
-    <td><%= link_to 'Destroy', institution, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Ver', institution %></td>
+    <td><%= link_to 'Editar', edit_institution_path(institution) %></td>
+    <td><%= link_to 'Eliminar', institution, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

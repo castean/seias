@@ -12,12 +12,12 @@
   </br>
 
   <div class="field">
-    <%= f.label :info %><br />
+    <%= f.label :info, "Especifique Atención" %>
     <%= f.text_area :info %>
     <%= f.hidden_field :user_id, :value => current_user.id %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Guardar" %>
   </div>
 <% end %>

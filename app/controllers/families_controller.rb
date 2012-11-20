@@ -19,7 +19,7 @@ class FamiliesController < ApplicationController
 
     respond_to do |format|
       if @family.save
-        format.html { redirect_to "/families/add_family/#{params[:family][:person_id]}", notice: 'El familiar se agrego satisfactoriamente' }
+        format.html { redirect_to (root_path + "families/add_family/#{params[:family][:person_id]}"), notice: 'El familiar se agrego satisfactoriamente' }
         format.json { render json: @family, status: :created, location: "/families/add_family/#{params[:family][:person_id]}" }
       else
         format.html { render action: "new" }
@@ -33,7 +33,7 @@ class FamiliesController < ApplicationController
     @family.destroy
 
     respond_to do |format|
-      format.html { redirect_to "/families/add_family/#{@family.person_id}", notice: 'Se quito la relacion familiar satisfactoriamente' }
+      format.html { redirect_to (root_path + "families/add_family/#{@family.person_id}"), notice: 'Se quito la relacion familiar satisfactoriamente' }
       format.json { head :no_content }
     end
   end
