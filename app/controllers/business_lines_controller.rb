@@ -1,4 +1,5 @@
 class BusinessLinesController < ApplicationController
+  load_and_authorize_resource
   # GET /business_lines
   # GET /business_lines.json
   def index

@@ -1,4 +1,5 @@
 class DocumentationsController < ApplicationController
+  load_and_authorize_resource
   # GET /documentations
   # GET /documentations.json
   def index

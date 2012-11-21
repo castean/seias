@@ -1,4 +1,5 @@
 class CriticalFactorsController < ApplicationController
+  load_and_authorize_resource
   # GET /critical_factors
   # GET /critical_factors.json
   def index

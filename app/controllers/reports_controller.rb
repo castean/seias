@@ -1,5 +1,6 @@
 #encoding:utf-8
 class ReportsController < ApplicationController
+  load_and_authorize_resource
 
   def program_report
     #@program = Program.find(params[:id])

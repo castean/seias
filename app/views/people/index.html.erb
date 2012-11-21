@@ -31,6 +31,7 @@
     <th><%= link_to "Familiares",  "/families/add_family/#{person.id}" %></th>
     <th><%= link_to "Estudio Socioeconomico", (root_path + "socioeconomic_studies/new/#{person.id}") %></th>
     <th><%= link_to "Apoyos", "/affiliates/new/#{person.id}?type=per" %></th>
+    <th><%= link_to "Oficios", "/offices/new/#{person.id}?type=per" %></th>
     <td><%= link_to 'Mostrar', person %></td>
     <td><%= link_to 'Regresar', edit_person_path(person) %></td>
     <td><%= link_to 'Eliminar', person, confirm: 'Are you sure?', method: :delete %></td>

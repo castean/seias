@@ -1,4 +1,5 @@
 class WorthsController < ApplicationController
+  load_and_authorize_resource
   # GET /worths
   # GET /worths.json
   def index

@@ -1,4 +1,5 @@
 class HousingFeaturesController < ApplicationController
+  load_and_authorize_resource
   # GET /housing_features
   # GET /housing_features.json
   def index

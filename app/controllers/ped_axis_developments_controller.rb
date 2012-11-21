@@ -1,4 +1,5 @@
 class PedAxisDevelopmentsController < ApplicationController
+  load_and_authorize_resource
   # GET /ped_axis_developments
   # GET /ped_axis_developments.json
   def index

@@ -1,4 +1,5 @@
 class PeopleByRoomsController < ApplicationController
+  load_and_authorize_resource
   # GET /people_by_rooms
   # GET /people_by_rooms.json
   def index

@@ -1,10 +1,11 @@
 class OfficesController < ApplicationController
+  load_and_authorize_resource
   autocomplete :person, :last_name, :extra_data => [:name, :second_last_name],:display_value => :fullname
 
   # GET /offices
   # GET /offices.json
   def index
-    @offices = Office.all
+    @offices = Office.order("id DESC").all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,10 +44,15 @@ class OfficesController < ApplicationController
   # POST /offices
   # POST /offices.json
   def create
+    #if @office.field == "1"
+    #  @office.type_id = 1
+    #elsif @office.field == "2"
+      @office.type_id = 2
+    #end
     @office = Office.new(params[:office])
-
     respond_to do |format|
       if @office.save
+        UserMailer.send_new_office(@office).deliver
         format.html { redirect_to @office, notice: 'Office was successfully created.'  }
         format.json { render json: @office, status: :created, location: @office }
       else

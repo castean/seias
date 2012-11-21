@@ -18,6 +18,7 @@ class Institution < ActiveRecord::Base
   has_many :grades
   has_many :sex
   has_many :guardianships
+  has_many :offices
   has_and_belongs_to_many :discapacities
 
   has_and_belongs_to_many(:institutions,
@@ -76,5 +77,9 @@ class Institution < ActiveRecord::Base
   def gmaps4rails_address
      #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
     "#{self.address}, #{self.external_address_number}, #{self.town_id}"
+  end
+
+  def fullname
+    "#{legal_name} #{legal_last_name} #{legal_second_last_name}"
   end
 end

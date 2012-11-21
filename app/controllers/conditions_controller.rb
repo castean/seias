@@ -1,4 +1,5 @@
 class ConditionsController < ApplicationController
+  load_and_authorize_resource
   # GET /conditions
   # GET /conditions.json
   def index
