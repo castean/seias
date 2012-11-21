@@ -61,8 +61,27 @@
 
   <div class="field">
     <%= f.label :person_id, "Atentamente," %>
-    <%= f.autocomplete_field :person, autocomplete_person_last_name_offices_path, :id_element => '#office_person_id'%>
-    <%= f.hidden_field :person_id%>
+    <%case params[:type]%>
+        <%when "ins"%>
+          <% @institution = Institution.find(params[:id]) %>
+          <%= f.autocomplete_field :person, autocomplete_person_last_name_offices_path, :id_element => '#office_person_id', :value => @institution.name,  :class => "span5"%>
+          <%= f.hidden_field :institution_id, :value => @institution.id %>
+          <%= f.hidden_field :type_id, :value => 2 %>
+        <%when "per"%>
+          <% @person = Person.find(params[:id])%>
+          <%= f.autocomplete_field :person, autocomplete_person_last_name_offices_path, :id_element => '#office_person_id', :value => @person.fullname%>
+          <%= f.hidden_field :person_id, :value => @person.id %>
+          <%= f.hidden_field :type_id, :value => 1 %>
+        <%else%>
+        Beneficiario <%= f.radio_button :type_id, "1", {:id => "button1", :class => "show_hide"} %>
+        Institución <%= f.radio_button :type_id, "2", {:id => "button2", :class => "show_hide"} %>
+        <div id="div-sh-1" class="toHide"  >
+            <%= f.autocomplete_field :person, autocomplete_person_last_name_offices_path, :id_element => '#office_person_id'%>
+            <%= f.hidden_field :person_id%>
+        </div>
+        <div id="div-sh-2" class="toHide"  >
+        </div>
+    <%end%>
     <%= f.hidden_field :status_id, :value => 2%>
   </div>
 

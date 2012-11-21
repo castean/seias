@@ -43,6 +43,11 @@ class OfficesController < ApplicationController
   # POST /offices
   # POST /offices.json
   def create
+    #if @office.field == "1"
+    #  @office.type_id = 1
+    #elsif @office.field == "2"
+      @office.type_id = 2
+    #end
     @office = Office.new(params[:office])
 
     respond_to do |format|

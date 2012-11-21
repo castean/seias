@@ -1,6 +1,6 @@
 <p id="notice" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
    xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-   xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+   xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
 
 <p>
   <b>Dirección:</b>
@@ -64,7 +64,12 @@
 </br></br>
 <p>
   <b>Atentamente:</b></br>
-  <%= Person.find(@office.person_id).fullname  %>
+  <%if @office.type_id == 1%>
+    <%= Person.find(@office.person_id).fullname  %>
+  <%else%>
+    <%= Institution.find(@office.institution_id).legal_name  %> <%= Institution.find(@office.institution_id).legal_last_name%> <%= Institution.find(@office.institution_id).legal_second_last_name%></br>
+    <%= Institution.find(@office.institution_id).name  %>
+  <%end%>
 </p>
 </br>
 <p>--------------------------------------------------</p>

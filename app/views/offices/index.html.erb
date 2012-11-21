@@ -25,7 +25,13 @@
   <tr>
 
     <td><%= office.internal_office_number %></td>
-    <td><%= Person.find(office.person_id).fullname  %>
+    <td>
+      <%if office.type_id == 1%>
+          <%= Person.find(office.person_id).fullname  %>
+      <%elsif office.type_id == 2%>
+          <%= Institution.find(office.institution_id).fullname%>
+      <%end%>
+    </td>
     <td><%= User.find(office.user_id).fullname %></td>
     <td><%= office.user.department.direction.name %></td>
     <td><%= office.user.department.name %></td>
