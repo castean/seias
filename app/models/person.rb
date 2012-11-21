@@ -21,6 +21,7 @@ class Person < ActiveRecord::Base
   has_many :inverse_families, :class_name => "Family", :foreign_key => "kin_id"
   has_many :inverse_kins, :through => :inverse_families, :source => :person
   has_many :affiliates
+  has_many :offices
   attr_accessible :name, :last_name, :second_last_name, :marital_status_id, :sex, :ethnic_group_id, :birthday, :born_town_id, :born_county_id, :county_id, :town_id, :address, :address_two,
                   :code_area, :phone, :cel_phone, :emergency_phone, :rfc, :curp, :email, :tutor, :tutor_relationship_id, :tutor_marital_status_id, :medical_service_id,
                   :student, :reader, :schooling, :school_type_id, :worker, :job, :self_employment, :occupation, :job_seeker, :user_id, :discapacity_status, :diagnosis,

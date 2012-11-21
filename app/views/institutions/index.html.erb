@@ -20,6 +20,8 @@
     <td><%= institution.second_address %></td>
     <td><%= institution.zip_code %></td>
     <td><%= institution.phone %></td>
+    <th><%= link_to "Apoyos", "/affiliates/new/#{institution.id}?type=ins" %></th>
+    <th><%= link_to "Oficios", "/offices/new/#{institution.id}?type=ins" %></th>
     <td><%= link_to 'Ver', institution %></td>
     <td><%= link_to 'Editar', edit_institution_path(institution) %></td>
     <td><%= link_to 'Eliminar', institution, confirm: 'Are you sure?', method: :delete %></td>

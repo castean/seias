@@ -89,16 +89,16 @@ class AffiliatesController < ApplicationController
 
     respond_to do |format|
       if @affiliate.save
-        if @affiliate.field == '1'
+        if @affiliate.type == 'per'
           ben_id = @affiliate.person_id
-        elsif @affiliate.field == '2'
+        elsif @affiliate.type == 'ins'
           ben_id = @affiliate.institution_ben_id
         end
-        format.html { redirect_to new_benefit_path + '/' + ben_id.to_s + '?type=' + @affiliate.field, notice: 'Affiliate was successfully created.' }
+        format.html { redirect_to new_benefit_path + '/' + ben_id.to_s + '?type=' + @affiliate.type, notice: 'Affiliate was successfully created.' }
 
         format.json { render json: @affiliate, status: :created, location: @affiliate }
       else
-        format.html { redirect_to  new_affiliate_path(@affiliate, :ben_aff => @affiliate.ben_aff, :field => @affiliate.field), notice: 'Llena todos los campos'}
+        format.html { redirect_to  new_affiliate_path(@affiliate, :id => @affiliate.person_id, :type => @affiliate.type), notice: 'Llena todos los campos'}
         format.json { render json: @affiliate.errors, status: :unprocessable_entity }
       end
     end

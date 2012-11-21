@@ -5,15 +5,17 @@ class Office < ActiveRecord::Base
   belongs_to :direction
   belongs_to :person
   belongs_to :user
+  belongs_to :institution
   belongs_to :status
   belongs_to :activity_type
+  belongs_to :office
   has_many :office_records
   has_many :office_allocations
   attr_accessible :activity_type_id, :avatar, :department_id, :external_office_number, :internal_office_number, :name, :observations, :office_date,
-                  :office_recive_date, :person_id, :priority_id, :record_no, :status_id, :to, :type_id, :user_id, :direction_id, :program_id, :person
+                  :office_recive_date, :person_id, :priority_id, :record_no, :status_id, :to, :type_id, :user_id, :direction_id, :program_id, :person, :institution_id
   attr_accessor :program_id, :person
 
-  validates :person_id, :presence => true
+  #validates :person_id, :presence => true
 
   #validates :activity_type_id, :presence => true
 

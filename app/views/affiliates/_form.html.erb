@@ -1,46 +1,3 @@
-<%= form_for :affiliates, :url => {:action => 'new', :controller => 'affiliates', :type => "ben"} do |f| %>
-
-    <div class="field">
-      Personas<%= radio_button_tag "field", 1, true,{:id => "button1", :class => "show_hide"} %>
-      Instituciones<%= radio_button_tag "field", 2, false,{:id => "button2", :class => "show_hide"} %>
-
-    </div>
-    <div id="div-sh-1" class="toHide">
-      <%= f.label :busqueda_de_personas %><br />
-      <%= f.autocomplete_field :person, autocomplete_person_name_affiliates_path %>
-      <%= f.submit "Buscar personas" %>
-    </div>
-    <div id="div-sh-2" class="toHide">
-      <%= f.label :busqueda_de_instituciones %><br />
-      <%= f.autocomplete_field :institution, autocomplete_institution_name_affiliates_path %>
-      <%= f.submit "Buscar instituciones" %>
-    </div>
-<% end %>
-<% if params[:type] == "ben" %>
-  <table>
-    <% if params[:field] == "1" %>
-        <tr>
-          <th>Nombre</th>
-        </tr>
-          <% @affiliate_benefit.each do |affiliate| %>
-        <tr>
-          <td><%= link_to affiliate[1], new_affiliate_path(:ben_aff => affiliate[0], :field => params[:field]) %></td>
-        </tr>
-        <% end %>
-    <% elsif params[:field] == "2" %>
-        <tr>
-          <th>Institución</th>
-        </tr>
-        <% @affiliate_benefit.each do |affiliate| %>
-            <tr>
-              <td><%= link_to affiliate.name, new_affiliate_path(:ben_aff => affiliate.id, :field => params[:field]) %></td>
-            </tr>
-        <% end %>
-    <% end %>
-  </table>
-<% end %>
-
-  <% if params[:ben_aff].to_s != ""   %>
     <%= form_for(@affiliate) do |f| %>
       <% if @affiliate.errors.any? %>
         <div id="error_explanation">
@@ -52,22 +9,23 @@
           </ul>
         </div>
       <% end %>
-
+        </br>
         <p>
-          <% if params[:field] == "2" %>
+          <% if params[:type] == "ins" %>
             <b>Institución:</b>
-            <% @institution = Institution.find(params[:ben_aff]) %>
+            <% @institution = Institution.find(params[:id]) %>
             <%= @institution.name %>
               <%= f.hidden_field :institution_ben_id, :value => @institution.id %>
-          <% elsif params[:field] == "1" %>
+          <% elsif params[:type] == "per" %>
               <b>Persona:</b>
-              <% @person = Person.find(params[:ben_aff])%>
+              <% @person = Person.find(params[:id])%>
               <%= @person.fullname %>
               <%= f.hidden_field :person_id, :value => @person.id %>
           <% end %>
         </p>
-        <%= f.hidden_field :field, :value => params[:field]%>
-        <%= f.hidden_field :ben_aff, :value => params[:ben_aff]%>
+        </br>
+        <%= f.hidden_field :type, :value => params[:type]%>
+
         <div class="field">
           <%= f.label :office_id, "Oficio" %>
           <%= f.collection_select :office_id, Office.all.sort_by{ |k| k['record_no'] }  , :id, :record_no, options ={:prompt => "-- Selecciona un Oficio --"}, :class=>"ddl_width" %>
@@ -96,8 +54,8 @@
         </div>
 
         <div class="actions">
-         <%= f.submit "Crear Institución" %>
+         <%= f.submit "Crear Afiliación" %>
         </div>
       <% end %>
-  <% end %>
+
 

@@ -27,10 +27,10 @@ class BenefitsController < ApplicationController
   def new
     @benefit = Benefit.new
     if params[:id]
-      if params[:type] == '1'
+      if params[:type] == 'per'
         person_id = params[:id]
         @affiliate = Affiliate.find_all_by_person_id(person_id)
-      elsif params[:type] == '2'
+      elsif params[:type] == 'ins'
         institution_id = params[:id]
         @affiliate = Affiliate.find_all_by_institution_ben_id(institution_id)
       end
