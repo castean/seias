@@ -1,4 +1,5 @@
 class MedicalServicesController < ApplicationController
+  load_and_authorize_resource
   # GET /medical_services
   # GET /medical_services.json
   def index

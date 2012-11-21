@@ -288,6 +288,32 @@
         </tr>
       </table>
        </div>
+    <div><h4>Datos de Georeferenciación</h4>
+      <table class="table table-striped">
+        <tr>
+          <td>
+            <%= f.label :latitude, "Latitud" %>
+          </td>
+          <td>
+            <%= f.label :longitude, "Longitud" %>
+          </td>
+          <td>
+            <%= f.label :gmaps %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.text_field :latitude %>
+          </td>
+          <td>
+            <%= f.text_field :longitude %>
+          </td>
+          <td>
+            <%= f.check_box :gmaps %>
+          </td>
+        </tr>
+      </table>
+    </div>
   </br>
   <div class="actions">
     <%= f.submit "Guardar" %>

@@ -1,5 +1,5 @@
 class AffiliatesController < ApplicationController
-
+  load_and_authorize_resource
   autocomplete :person, :name, :extra_data => [:last_name, :second_last_name],:display_value => :fullname
 
   autocomplete :institution, :name, :full => :false

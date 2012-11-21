@@ -1,5 +1,6 @@
 #encoding:utf-8
 class Person < ActiveRecord::Base
+  acts_as_gmappable
   #has_many :relations
   #has_many :relatives, :through => "relations"
   has_attached_file :avatar, :styles => { :medium => "100x100>", :thumb => "52x52>" }
@@ -24,7 +25,8 @@ class Person < ActiveRecord::Base
                   :code_area, :phone, :cel_phone, :emergency_phone, :rfc, :curp, :email, :tutor, :tutor_relationship_id, :tutor_marital_status_id, :medical_service_id,
                   :student, :reader, :schooling, :school_type_id, :worker, :job, :self_employment, :occupation, :job_seeker, :user_id, :discapacity_status, :diagnosis,
                   :diagnosis_description, :discapacity_origin_id, :discapacity_origin_year, :observations, :status_id, :use_functional_support, :selectLeftD,
-                  :selectRightD, :selectLeftFS, :selectRightFS, :avatar, :selectLeftDo, :selectRightDo, :income, :social_security_number
+                  :selectRightD, :selectLeftFS, :selectRightFS, :avatar, :selectLeftDo, :selectRightDo, :income, :social_security_number,
+                  :latitude, :longitude, :gmaps
   attr_accessor   :selectLeftD, :selectRightD, :selectLeftFS, :selectRightFS, :selectLeftDo, :selectRightDo
 
   validates_uniqueness_of :name , :scope => [:last_name, :second_last_name, :birthday]
@@ -73,5 +75,12 @@ class Person < ActiveRecord::Base
   def age
     now = Time.now.utc.to_date
     now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0)
+  end
+  def gmaps4rails_address
+    #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
+    "#{address}, #{town.name}, #{town.county.name}"
+  end
+  def gmaps4rails_infowindow
+  "<h4>#{name}</h4>" << "<h4>#{address}</h4>"
   end
 end

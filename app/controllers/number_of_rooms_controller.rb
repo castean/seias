@@ -1,4 +1,5 @@
 class NumberOfRoomsController < ApplicationController
+  load_and_authorize_resource
   # GET /number_of_rooms
   # GET /number_of_rooms.json
   def index

@@ -1,4 +1,5 @@
 class EthnicGroupsController < ApplicationController
+  load_and_authorize_resource
   # GET /ethnic_groups
   # GET /ethnic_groups.json
   def index

@@ -1,4 +1,5 @@
 class DiscapacityOriginsController < ApplicationController
+  load_and_authorize_resource
   # GET /discapacity_origins
   # GET /discapacity_origins.json
   def index

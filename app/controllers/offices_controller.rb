@@ -1,4 +1,5 @@
 class OfficesController < ApplicationController
+  load_and_authorize_resource
   autocomplete :person, :last_name, :extra_data => [:name, :second_last_name],:display_value => :fullname
 
   # GET /offices
@@ -44,9 +45,9 @@ class OfficesController < ApplicationController
   # POST /offices.json
   def create
     @office = Office.new(params[:office])
-
     respond_to do |format|
       if @office.save
+        UserMailer.send_new_office(@office).deliver
         format.html { redirect_to @office, notice: 'Office was successfully created.'  }
         format.json { render json: @office, status: :created, location: @office }
       else

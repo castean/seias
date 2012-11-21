@@ -1,4 +1,5 @@
 class FunctionalSupportsController < ApplicationController
+  load_and_authorize_resource
   # GET /functional_supports
   # GET /functional_supports.json
   def index

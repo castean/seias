@@ -1,11 +1,14 @@
 class Department < ActiveRecord::Base
   belongs_to :direction
-  has_many :users
   has_many :programs
   has_many :offices
   has_many :critical_success_factors
+  belongs_to :user
+
+
   attr_accessible :name, :direction_id
-  has_many :users
+
+
 
   before_destroy :check_for_dependencias
   

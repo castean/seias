@@ -1,4 +1,5 @@
 class SexesController < ApplicationController
+  load_and_authorize_resource
   # GET /sexes
   # GET /sexes.json
   def index

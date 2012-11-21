@@ -32,7 +32,8 @@ class Activity < ActiveRecord::Base
   validate :validar_town_id
   validate :validar_activity_type_id
   validate :validar_program_start_date , :unless => Proc.new{ |activity| activity.activity_type.nil? || activity.activity_type == 0 }
-  
+  validates :value, :numericality => {:only_integer => true}
+
   def validar_nulos
     if self.qty_men.nil?
       self.qty_men = 0

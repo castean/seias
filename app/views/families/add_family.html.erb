@@ -22,11 +22,11 @@
     <h3>Agregar Familiar</h3>
     <div class="field">
       <%= f.label :kin_id, "Familiar" %><br />
-      <%= f.collection_select :kin_id,  Person.all, :id, :fullname, options ={:prompt => "-- Selecciona un Familiar --",  :id=>"kin_id"}%>
+      <%= f.collection_select :kin_id,  Person.all, :id, :fullname, options ={:prompt => false,  :id=>"kin_id"}%>
     </div>
     <div class="field">
       <%= f.label :relationship_id, "Parentesco" %><br />
-      <%= f.collection_select :relationship_id,  Relationship.order("name"), :id, :name, options ={:prompt => "-- Selecciona el Parentesco --"}%>
+      <%= f.collection_select :relationship_id,  Relationship.order("name"), :id, :name, options ={:prompt => false}%>
     </div>
     <div class="actions">
       <%= f.submit "Crear relacion familiar"%>
@@ -64,7 +64,7 @@
         $.ajax({
             dataType: "json",
             cache: false,
-            url:  application_root_path() + 'families/for_search?kin_name=' + kname + '&kin_last_name=' + klastname + '&kin_second_last_name=' + ksecondlastname,
+            url:  application_root_path() + '/families/for_search?kin_name=' + kname + '&kin_last_name=' + klastname + '&kin_second_last_name=' + ksecondlastname,
             timeout: 20000,
             error: function(XMLHttpRequest, errorTextStatus, error){
                 alert("Failed to submit : "+ errorTextStatus+" ;"+error);
@@ -74,7 +74,7 @@
                 // Clear all options from sub category select
                 $("select#family_kin_id option").remove();
                 //put in a empty default line
-                var row = "<option value=\"" + "0" + "\">" + "-- Seleciona el Familiar --" + "</option>";
+                var row //= "<option value=\"" + "0" + "\">" + "-- Seleciona el Familiar --" + "</option>";
                 $(row).appendTo("select#family_kin_id");
                 // Fill sub category select
                 $.each(data, function(i, j){
