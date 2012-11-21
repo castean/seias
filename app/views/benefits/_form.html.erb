@@ -14,10 +14,10 @@
 
 
   <table>
-    <% if params[:type] == '1' %>
+    <% if params[:type] == 'per' %>
     <tr><th><b>Persona Beneficiada:</b></th></tr>
     <tr><td><%= Person.find(params[:id]).fullname %></td></tr>
-    <% elsif params[:type] == '2' %>
+    <% elsif params[:type] == 'inst' %>
       <tr><th><b>Institución Beneficiada:</b></th></tr>
       <tr><td><%= Institution.find(params[:id]).name %></td></tr>
     <% end %>
@@ -31,12 +31,14 @@
         <th>Peridicidad</th>
         <th>Número de Periodos</th>
         <th>Institución</th>
+
       </tr>
       <tr>
         <td><%= @aff_end.activity_type.name %></td>
         <td><%= @aff_end.period_time.name %></td>
         <td><%= @aff_end.period_number %></td>
         <td><%= @aff_end.institution.name %></td>
+
       </tr>
       </table>
   <% else %>
@@ -94,6 +96,7 @@
     <th>Cantidad</th>
     <th>Precio Unitario</th>
     <th>Total</th>
+    <th></th>
   </tr>
   <% @benefit_s.each do |benefit_s| %>
       <tr>
@@ -101,6 +104,7 @@
         <td><%= benefit_s.qty %></td>
         <td><%= benefit_s.unit_price %></td>
         <td><%= benefit_s.qty * benefit_s.unit_price  %></td>
+        <td><%= link_to 'Destroy', benefit_s, confirm: 'Are you sure?', method: :delete %></td>
       </tr>
   <% end %>
 </table>

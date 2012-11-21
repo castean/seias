@@ -70,16 +70,18 @@ class Ability
         end
         when "user" then
           can :create, Worth
-        can :create, Affiliate
-        can :create, Office
-        can :create, Benefit
-        can :create, Activity
-        can :update, Activity do |acti|
-          acti.try(:user) == user 
-        end  
-        can :destroy, Activity do |acti|
-          acti.try(:user) == user 
-        end
+          can :create, Affiliate
+          can :update, Affiliate
+          can :create, Office
+          can :create, Benefit
+          can :destroy, Benefit
+          can :create, Activity
+          can :update, Activity do |acti|
+            acti.try(:user) == user
+          end
+          can :destroy, Activity do |acti|
+            acti.try(:user) == user
+          end
       end
 
       # If you assigned 'variable =' before the case,
