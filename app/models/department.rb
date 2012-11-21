@@ -5,7 +5,6 @@ class Department < ActiveRecord::Base
   has_many :offices
   has_many :critical_success_factors
   attr_accessible :name, :direction_id
-  has_many :users
 
   before_destroy :check_for_dependencias
   

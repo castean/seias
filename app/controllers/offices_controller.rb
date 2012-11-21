@@ -1,5 +1,6 @@
 class OfficesController < ApplicationController
   autocomplete :person, :last_name, :extra_data => [:name, :second_last_name],:display_value => :fullname
+  autocomplete :institution, :name, :full => :false
 
   # GET /offices
   # GET /offices.json
