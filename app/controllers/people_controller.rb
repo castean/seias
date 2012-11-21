@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+  load_and_authorize_resource
   # GET /people
   # GET /people.json
   def index
@@ -15,7 +16,7 @@ class PeopleController < ApplicationController
   # GET /people/1.json
   def show
     @person = Person.find(params[:id])
-
+    @json = Person.find(@person.id).to_gmaps4rails
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }

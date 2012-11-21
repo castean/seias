@@ -1,4 +1,5 @@
 class PedProgramDefinitionsController < ApplicationController
+  load_and_authorize_resource
   # GET /ped_program_definitions
   # GET /ped_program_definitions.json
   def index

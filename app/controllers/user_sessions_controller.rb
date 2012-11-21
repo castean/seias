@@ -1,5 +1,6 @@
 #encoding:utf-8
 class UserSessionsController < ApplicationController
+  load_and_authorize_resource
   # This class has methods for manage user sessions.
   before_filter :authenticate, :only => :destroy
 

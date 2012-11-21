@@ -1,4 +1,5 @@
 class SocioeconomicStudiesController < ApplicationController
+  load_and_authorize_resource
   # GET /socioeconomic_studies
   # GET /socioeconomic_studies.json
   def index

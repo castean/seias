@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h4>Estimado(a) <%= @office.department.user.fullname  %></h4>
+<p>
+  Tienes un Oficio Nuevo # <%= @office.id  %>,
+  Puedes verlo desde este link: <a href="sistema.difchihuahua.gob.mx/offices/#{<%= @office.id  %>}" target="_blank">sistema.difchihuahua.gob.mx/offices/<%= @office.id  %></a> <br/>
+</p>
+
+<p>No responda este correo</p>
+</body>
+</html>

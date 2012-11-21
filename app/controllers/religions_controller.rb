@@ -1,4 +1,5 @@
 class ReligionsController < ApplicationController
+  load_and_authorize_resource
   # GET /religions
   # GET /religions.json
   def index

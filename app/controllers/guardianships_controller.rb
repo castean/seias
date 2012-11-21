@@ -1,4 +1,5 @@
 class GuardianshipsController < ApplicationController
+  load_and_authorize_resource
   # GET /guardianships
   # GET /guardianships.json
   def index

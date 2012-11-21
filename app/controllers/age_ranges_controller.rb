@@ -1,4 +1,5 @@
 class AgeRangesController < ApplicationController
+  load_and_authorize_resource
   # GET /age_ranges
   # GET /age_ranges.json
   def index

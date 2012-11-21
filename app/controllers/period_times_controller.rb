@@ -1,4 +1,5 @@
 class PeriodTimesController < ApplicationController
+  load_and_authorize_resource
   # GET /period_times
   # GET /period_times.json
   def index

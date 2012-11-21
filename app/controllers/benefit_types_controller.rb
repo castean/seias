@@ -1,4 +1,5 @@
 class BenefitTypesController < ApplicationController
+  load_and_authorize_resource
   # GET /benefit_types
   # GET /benefit_types.json
   def index

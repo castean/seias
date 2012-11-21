@@ -12,8 +12,42 @@
   <%= @person.emergency_phone %></br>
   <b>Tutor:</b>
   <%= @person.tutor %></br>
+  <b> Discapacidad: <%= "Niguna" unless @person.discapacities.count>0  %></b>
+  <ul>
+    <% @person.discapacities.each do |discapacity| %>
+    <li>
+      <%= discapacity.name %>
+    </li>
+    <% end %>
+  </ul>
+    <b> Aparatos Funcionales: <%= "Niguno" unless @person.functional_supports.count>0  %></b>
+    <ul>
+      <% @person.functional_supports.each do |functional_support| %>
+          <li>
+            <%= functional_support.name %>
+          </li>
+      <% end %>
+    </ul>
 </p>
-<h3> Familiares de <%= @person.fullname %>: </h3>
+<% percentage = (@person.documentations.count * 100) / Documentation.where("belongs = 1 or belongs = 3").count %>
+<h3> Documentos Presentados: <%= percentage %>%</h3>
+<table>
+  <tr>
+    <th></th>
+  </tr>
+
+  <% @person.documentations.each do |document| %>
+      <tr>
+        <td>
+          <%= document.name %>
+        </td>
+        <td>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+<h3> Familiares </h3>
 <table>
   <tr>
     <th></th>
@@ -33,6 +67,10 @@
   <% end %>
 </table>
 </br>
+
+<div class="btn-group">
+  <%= gmaps("map_options" =>{:auto_zoom => false, :zoom => 7},"markers" => {"data" => @json}) %>
+</div>
 
 <% if can? :update, @person %>
     <%= link_to 'Editar', edit_person_path(@person) %> |
