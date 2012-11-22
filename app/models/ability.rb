@@ -30,6 +30,7 @@ class Ability
 
       can :for_program_id, Office
       can :autocomplete_person_last_name, Office
+      can :autocomplete_institution_name, Office
 
       can :autocomplete_last_name, Family
       can :autocomplete_name, Family

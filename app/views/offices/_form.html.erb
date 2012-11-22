@@ -80,6 +80,8 @@
             <%= f.hidden_field :person_id%>
         </div>
         <div id="div-sh-2" class="toHide"  >
+          <%= f.autocomplete_field :institution, autocomplete_institution_name_offices_path, :id_element => '#office_institution_id'%>
+          <%= f.hidden_field :institution_id%>
         </div>
     <%end%>
     <%= f.hidden_field :status_id, :value => 2%>

@@ -8,8 +8,6 @@ class Department < ActiveRecord::Base
 
   attr_accessible :name, :direction_id
 
-
-
   before_destroy :check_for_dependencias
   
   def check_for_dependencias

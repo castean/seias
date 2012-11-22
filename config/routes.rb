@@ -28,7 +28,7 @@ Seias::Application.routes.draw do
     resources :office_records
     resources :office_allocations
     get :autocomplete_person_last_name, :on => :collection
-
+    get :autocomplete_institution_name, :on => :collection
   end
 
   resources :type_people
