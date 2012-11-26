@@ -33,3 +33,4 @@ $(document).ready ->
           $.each data, (i, j) ->
             row = "<option value=\"" + j[1] + "\">" + j[0] + "</option>"
             $(row).appendTo "#aff_type";
+

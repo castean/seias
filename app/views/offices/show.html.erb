@@ -42,8 +42,7 @@
 </br>
 </br>
 <p>
-  <b><%#= User.find(@office.department.user_id).fullname %></b>
-  <%=User.find(@office.department.user_id).fullname%>
+  <b><%= User.find(@office.department.user_id).fullname %></b>
   </br>
   <i><%= @office.department.name %> </i>
 </p>
@@ -61,7 +60,28 @@
 </br>
 <p>
   <b>Apoyos Solicitados:</b></br>
-  <%= @office.activity_type.name %>
+  <%#= @office.activity_type.name %>
+  <% for benefit_request in @office.office_benefit_requesteds %>
+     <table class="table table-striped">
+       <tr>
+         <th>
+            <b>Descripción</b>
+         </th>
+         <th>
+            <b>Cantidad</b>
+         </th>
+       </tr>
+       <tr>
+         <td>
+           <%= h BenefitType.find(benefit_request.benefit_type_id).name %>
+         </td>
+         <td>
+           <%= h benefit_request.qty_requested %>
+         </td>
+       </tr>
+     </table>
+
+<% end %>
 </p>
 </br></br>
 <p>

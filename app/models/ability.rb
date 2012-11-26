@@ -28,6 +28,7 @@ class Ability
       can :autocomplete_institution_name, Affiliate
       can :for_program_id, Affiliate
 
+      can :for_benefitcategoryid, Office
       can :for_program_id, Office
       can :autocomplete_person_last_name, Office
       can :autocomplete_institution_name, Office

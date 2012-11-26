@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  office_id: 1
+  benefit_type_id: 1
+  qty_requested: 1
+
+two:
+  office_id: 1
+  benefit_type_id: 1
+  qty_requested: 1

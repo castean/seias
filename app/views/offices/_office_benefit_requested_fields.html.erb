@@ -1,0 +1,19 @@
+<div class="fields" >
+    <table class="table table-striped">
+      <tr>
+          <td>
+            <%#= f.collection_select :benefit_category_id,  BenefitCategory.order("name").all, :id, :name, options ={:prompt => "-- Selecciona Tipo Apoyo --"}, :class => "span3"%>
+          </td>
+          <td>
+            <%= f.collection_select :benefit_type_id,  BenefitType.order("name").all, :id, :name, options ={:prompt => "-- Selecciona Apoyo --"}, :class => "span3"%>
+            <%#= f.collection_select :benefit_type_id,  BenefitType.order("name").find_all_by_benefit_category_id(@office.benefit_category_id), :id, :name, options ={:prompt => ""}, :class => "span3" %>
+          </td>
+          <td>
+            <%= f.number_field :qty_requested, :class => "span1"%></br>
+          </td>
+          <td>
+            <%= link_to_remove_fields "remove", f %>
+          </td>
+        </tr>
+    </table>
+</div>

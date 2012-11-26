@@ -10,14 +10,22 @@ class Office < ActiveRecord::Base
   belongs_to :activity_type
   belongs_to :office
   belongs_to :priority
+  belongs_to :benefit_type
+  has_many :office_benefit_requesteds, :dependent => :destroy
   has_many :office_records
   has_many :office_allocations
+  accepts_nested_attributes_for :office_benefit_requesteds, :reject_if => lambda { |a| a[:benefit_type_id].blank? }, :allow_destroy => true
   attr_accessible :activity_type_id, :avatar, :department_id, :external_office_number, :internal_office_number, :name, :observations, :office_date,
-                  :office_recive_date, :person_id, :priority_id, :record_no, :status_id, :to, :type_id, :user_id, :direction_id, :program_id, :person, :institution_id, :institution
-  attr_accessor :program_id, :person, :institution
+                  :office_recive_date, :person_id, :priority_id, :record_no, :status_id, :to, :type_id, :user_id, :direction_id, :program_id, :person, :institution_id,
+                  :institution, :office_benefit_requesteds_attributes, :benefit_category_id
+  attr_accessor :program_id, :person, :institution, :benefit_category_id
+
 
   before_save :get_user_id
   validate :validar_department_id
+  #validate :validar_activity_type_id
+  validates :observations, :presence => true
+  validates :name, :presence => true
 
   def validar_department_id
     t = self.department_id
@@ -26,12 +34,12 @@ class Office < ActiveRecord::Base
     end
   end
 
-  validates :observations, :presence => true
-  validates :name, :presence => true
-
-  #validates :activity_type_id, :presence => true
-
-
+  def validar_activity_type_id
+    t = self.activity_type_id
+    if t == 0  or t.nil? or t == " "  or t.blank?
+      errors.add('Tipo de Actividad: ', "Seleccione por favor un tipo de actividad")
+    end
+  end
 
   after_create :update_internal_office_number
 
