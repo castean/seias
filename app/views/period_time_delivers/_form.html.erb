@@ -1,0 +1,37 @@
+<%= form_for(@period_time_deliver) do |f| %>
+  <% if @period_time_deliver.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@period_time_deliver.errors.count, "error") %> prohibited this period_time_deliver from being saved:</h2>
+
+      <ul>
+      <% @period_time_deliver.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :period_time_id %><br />
+    <%= f.number_field :period_time_id %>
+  </div>
+  <div class="field">
+    <%= f.label :period_number %><br />
+    <%= f.number_field :period_number %>
+  </div>
+  <div class="field">
+    <%= f.label :affiliate_id %><br />
+    <%= f.number_field :affiliate_id %>
+  </div>
+  <div class="field">
+    <%= f.label :benefit_id %><br />
+    <%= f.text_field :benefit_id %>
+  </div>
+  <div class="field">
+    <%= f.label :delivered %><br />
+    <%= f.check_box :delivered %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

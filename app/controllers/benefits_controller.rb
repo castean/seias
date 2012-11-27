@@ -65,6 +65,7 @@ class BenefitsController < ApplicationController
     respond_to do |format|
       if @benefit.save
         #format.html { redirect_to @benefit, notice: 'Benefit was successfully created.' }
+
         flash[:notice] = 'El apoyo se dio de alta satisfactoriamente.'
         if @benefit.affiliate.institution_ben_id.nil?
           format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.person_id , :continuos => 1,:type => 'per',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}

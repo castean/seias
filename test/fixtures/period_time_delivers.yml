@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  period_time_id: 1
+  period_number: 1
+  affiliate_id: 1
+  benefit_id: MyString
+  delivered: false
+
+two:
+  period_time_id: 1
+  period_number: 1
+  affiliate_id: 1
+  benefit_id: MyString
+  delivered: false

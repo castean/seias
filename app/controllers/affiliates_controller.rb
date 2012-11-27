@@ -101,6 +101,10 @@ class AffiliatesController < ApplicationController
     else
     respond_to do |format|
       if @affiliate.save
+        for i in 1..@affiliate.period_number
+          @period_time_deliver = PeriodTimeDeliver.new(:affiliate_id => @affiliate.id, :period_time_id => @affiliate.period_time_id, :period_number => i, :delivered => false)
+          @period_time_deliver.save
+        end
           format.html { redirect_to new_benefit_path + '/' + @ben_id.to_s + '?type=' + @affiliate.type, notice: 'Affiliate was successfully created.' }
           format.json { render json: @affiliate, status: :created, location: @affiliate }
       else
