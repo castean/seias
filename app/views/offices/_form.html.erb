@@ -44,21 +44,41 @@
   </div>
   <div class="field">
     <%= f.label :name, "Asunto" %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => "span7" %>
   </div>
   <div class="field">
     <%= f.label :observations, "Detalle" %>
-    <%= f.text_area :observations %>
-  </div>
-  <div class="field">
-    <%= f.label :program_id, "Programa" %>
-    <%= f.collection_select :program_id, Program.find_all_by_department_id( current_user.department_id).sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona un Programa --"}, :class=>"ddl_width" %>
-  </div>
-  <div class="field">
-    <%= f.label "Apoyo Solicitado" %>
-    <%= fill_activity_type_select_of(f) %>
-  </div>
+    <%= f.text_area :observations, :class => "span7" %>
+  </div> </br>
+  <div>
+    <table class="table table-striped">
+      <tr>
+        <th>
+          <%#= f.label :benefit_category_id, "Tipo de Apoyo", :class => "span3" %>
+        </th>
+        <th>
+          <%= f.label :benefit_type_id, "Apoyo Solicitado", :class => "span3" %>
+        </th>
+        <th>
+          <%= f.label :qty_requested, "Cantidad Solicitada", :class => "span1"%>
+        </th>
+        <th>
 
+        </th>
+        <th>
+          <%= f.label :qty_requested, "Acción", :class => "span1"%>
+        </th>
+      </tr>
+    </table>
+  </div>
+  <div class="field">
+    <%= f.fields_for :office_benefit_requesteds do |builder| %>
+            <%= render 'office_benefit_requested_fields', :f => builder %>
+    <% end %>
+    <%= link_to_add_fields "Agregar Apoyo", f, :office_benefit_requesteds %>
+  </div>
+  </br>
+  </br>
   <div class="field">
     <%= f.label :person_id, "Atentamente," %>
     <%case params[:type]%>
@@ -80,6 +100,8 @@
             <%= f.hidden_field :person_id%>
         </div>
         <div id="div-sh-2" class="toHide"  >
+          <%= f.autocomplete_field :institution, autocomplete_institution_name_offices_path, :id_element => '#office_institution_id'%>
+          <%= f.hidden_field :institution_id%>
         </div>
     <%end%>
     <%= f.hidden_field :status_id, :value => 2%>

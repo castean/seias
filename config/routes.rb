@@ -23,6 +23,7 @@ Seias::Application.routes.draw do
 
   resources :priorities
 
+  match '/offices/for_benefitcategoryid/:benefit_category_id' => 'offices#for_benefitcategoryid'
   match '/offices/new/:id' => 'offices#new'
   match '/offices/end_office/:id' => 'offices#end_office'
   match '/offices/for_program_id/:program_id' => 'offices#for_program_id'
@@ -30,7 +31,7 @@ Seias::Application.routes.draw do
     resources :office_records
     resources :office_allocations
     get :autocomplete_person_last_name, :on => :collection
-
+    get :autocomplete_institution_name, :on => :collection
   end
 
   resources :type_people

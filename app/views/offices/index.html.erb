@@ -32,9 +32,9 @@
           <%= Institution.find(office.institution_id).fullname%>
       <%end%>
     </td>
-    <td><%= User.find(office.user_id).fullname %></td>
-    <td><%= office.user.department.direction.name %></td>
-    <td><%= office.user.department.name %></td>
+    <td><%= User.find(office.department.user_id).fullname %></td>
+    <td><%= office.department.direction.name %></td>
+    <td><%= office.department.name %></td>
     <td><%= Priority.find(office.priority_id).name %></td>
     <td><%= office.status.name %></td>
     <td><%= office.created_at.to_date %></td>

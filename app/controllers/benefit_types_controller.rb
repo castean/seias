@@ -81,4 +81,11 @@ class BenefitTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def for_benefitcategoryid
+    @benefit_types = BenefitType.find_all_by_benefit_category_id( params[:id]).sort_by{ |k| k['name'] }
+    respond_to do |format|
+      format.json  { render :json => @benefit_types }
+    end
+  end
 end

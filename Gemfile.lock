@@ -56,6 +56,10 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     composite_primary_keys (5.0.10)
+<<<<<<< HEAD
+=======
+      activerecord (~> 3.2.0, >= 3.2.9)
+>>>>>>> fb0a9e1d41d48749731ae7fc491396f56f19af3e
     easy_roles (1.2.0)
     erubis (2.7.0)
     eventmachine (1.0.0)

@@ -6,6 +6,11 @@
 </p>
 </br>
 <p>
+  <b>Nombre del Director:</b></br>
+  <%= @direction.user.fullname %>
+</p>
+</br>
+<p>
   <b>Departamentos:</b></br>
 	<% @direction.departments.each do |department| %>
 		<ul>

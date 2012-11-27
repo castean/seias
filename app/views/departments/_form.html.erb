@@ -14,10 +14,17 @@
     <%= f.label :name, "Nombre" %>
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :direction_id, "Dirección" %>
     <%= f.collection_select :direction_id,  Direction.order("id").all, :id, :name, options ={:prompt => "-- Selecciona la Direccion --"}%>
   </div>
+
+  <div class="field">
+    <%= f.label :user_id, "Nombre del Jefe del Departamento" %>
+    <%= f.collection_select :user_id,  User.order("name").all, :id, :fullname, options ={:prompt => "-- Seleccione Usuario --"}, :class => "span5"%>
+  </div>
+    </br>
   <div class="actions">
     <%= f.submit %>
   </div>

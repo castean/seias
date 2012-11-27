@@ -1,6 +1,6 @@
 <p id="notice" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
    xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-   xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+   xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
 
 <p>
   <b>Dirección:</b>
@@ -42,7 +42,8 @@
 </br>
 </br>
 <p>
-  <b><%= User.find(@office.user_id).fullname %></b></br>
+  <b><%= User.find(@office.department.user_id).fullname %></b>
+  </br>
   <i><%= @office.department.name %> </i>
 </p>
 </br>
@@ -59,7 +60,28 @@
 </br>
 <p>
   <b>Apoyos Solicitados:</b></br>
-  <%= @office.activity_type.name %>
+  <%#= @office.activity_type.name %>
+  <% for benefit_request in @office.office_benefit_requesteds %>
+     <table class="table table-striped">
+       <tr>
+         <th>
+            <b>Descripción</b>
+         </th>
+         <th>
+            <b>Cantidad</b>
+         </th>
+       </tr>
+       <tr>
+         <td>
+           <%= h BenefitType.find(benefit_request.benefit_type_id).name %>
+         </td>
+         <td>
+           <%= h benefit_request.qty_requested %>
+         </td>
+       </tr>
+     </table>
+
+<% end %>
 </p>
 </br></br>
 <p>
@@ -67,8 +89,8 @@
   <%if @office.type_id == 1%>
     <%= Person.find(@office.person_id).fullname  %>
   <%else%>
-    <%= Institution.find(@office.institution_id).legal_name  %> <%= Institution.find(@office.institution_id).legal_last_name%> <%= Institution.find(@office.institution_id).legal_second_last_name%></br>
-    <%= Institution.find(@office.institution_id).name  %>
+    <%= Institution.find(@office.institution_id).fullname%></br>
+    <i><%= Institution.find(@office.institution_id).name  %></i>
   <%end%>
 </p>
 </br>

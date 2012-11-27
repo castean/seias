@@ -1,11 +1,13 @@
 class OfficesController < ApplicationController
   load_and_authorize_resource
   autocomplete :person, :last_name, :extra_data => [:name, :second_last_name],:display_value => :fullname
+  autocomplete :institution, :name, :full => :false
 
   # GET /offices
   # GET /offices.json
   def index
-    @offices = Office.order("id DESC").all
+    @offices = Office.where("department_id"=>"#{current_user.department_id}").order("id DESC")
+    #@offices = Office.order("id DESC").all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,6 +31,7 @@ class OfficesController < ApplicationController
   # GET /offices/new.json
   def new
     @office = Office.new
+    1.times { @office.office_benefit_requesteds.build }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,11 +47,6 @@ class OfficesController < ApplicationController
   # POST /offices
   # POST /offices.json
   def create
-    #if @office.field == "1"
-    #  @office.type_id = 1
-    #elsif @office.field == "2"
-      @office.type_id = 2
-    #end
     @office = Office.new(params[:office])
     respond_to do |format|
       if @office.save
@@ -113,4 +111,12 @@ class OfficesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def for_benefitcategoryid
+    @benefit_types = BenefitType.find_all_by_benefit_category_id( params[:benefit_category_id]).sort_by{ |k| k['name'] }
+    respond_to do |format|
+      format.json  { render :json => @benefit_types }
+    end
+  end
+
 end

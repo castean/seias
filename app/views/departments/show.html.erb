@@ -9,12 +9,17 @@
   <%= @department.name %>
 </p>
 </br>
+<p>
+  <b>Jefe del Departamento:</b></br>
+  <%= @department.user.fullname %>
+</p>
+</br>
   <b>Usuarios:</b>
 </p>
-<% @department.users.each do |user| %>
+<% @department.users.each do |usuarios| %>
 	<ul>
 		<li>
-			<%= user.name %> <%= user.last_name%> <%= user.second_last_name%>
+			<%= usuarios.fullname %>
 		</li>
 	</ul>
 <%end%>

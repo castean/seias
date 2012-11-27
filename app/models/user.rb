@@ -1,7 +1,6 @@
 #encoding:utf-8
 class User < ActiveRecord::Base
 
-
   acts_as_authentic do |config|
     config.crypto_provider = Authlogic::CryptoProviders::MD5
     config.validate_password_field #= false if [:ldap].include?(Seias::Application.config.authorization_method)
@@ -20,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :programs , :foreign_key => "responsable_id"
   has_many :departments
   belongs_to :direction
+  belongs_to :department
   has_and_belongs_to_many :programs
 
 

@@ -10,10 +10,17 @@
       </ul>
     </div>
   <% end %>
+    </br>
   <div class="field">
-    <%= f.label :name, "Nombre" %><br />
+    <%= f.label :name, "Nombre de la Dirección" %>
     <%= f.text_field :name %>
   </div>
+
+  <div class="field">
+    <%= f.label :user_id, "Nombre del Director" %>
+    <%= f.collection_select :user_id,  User.order("name").all, :id, :fullname, options ={:prompt => "-- Seleccione Usuario --"}, :class => "span5"%>
+  </div>
+    </br>
   <div class="actions">
     <%= f.submit %>
   </div>
