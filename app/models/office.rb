@@ -9,8 +9,8 @@ class Office < ActiveRecord::Base
   belongs_to :status
   belongs_to :activity_type
   belongs_to :office
+  belongs_to :priority
   belongs_to :benefit_type
-
   has_many :office_benefit_requesteds, :dependent => :destroy
   has_many :office_records
   has_many :office_allocations
