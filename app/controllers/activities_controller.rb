@@ -4,10 +4,6 @@ class ActivitiesController < ApplicationController
   # GET /activities
   # GET /activities.json
   def index
-    #current_user = UserSession.find
-    #id = current_user && current_user.record.id
-    #@activities = Activity.where("user_id = #{ id }")
-
   if params[:q].nil?
     @search = Activity.search("user_id_eq"=>"#{current_user.id}")
     @activities = @search.result.order("id DESC").page(params[:page]).per(25)
@@ -17,9 +13,6 @@ class ActivitiesController < ApplicationController
     @search = Activity.search(condition)
     @activities = @search.result.order("id DESC").page(params[:page]).per(25)
   end
-
-    #@activities = Activity.where(:user_id => current_user).order("id DESC").page(params[:page]).per(25)
-    #@activities = Activity.order("description").page(params[:page]).per(25)
     
     respond_to do |format|
       format.html # index.html.erb
