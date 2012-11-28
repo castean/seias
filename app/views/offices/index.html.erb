@@ -1,27 +1,35 @@
 <h3>Listado de Oficios Dispobibles</h3>
 </br>
+<input type="checkbox" name="modtype"  value="value1" onclick="showMe('div1', this)" /> Buscar  </br>
+<div id="div1" style="display:none">
+  <%= search_form_for @search do |f| %>
+    <div class="field">
+      <%= f.label :internal_office_number_cont, "Buscar Oficio No" %>
+      <%= f.text_field :internal_office_number_cont %>
+    </div>
+    <div class="actions"><%= f.submit "Buscar" %></div>
+  <% end %>
+</div>
+</br>
 <%= link_to 'Nuevo Oficio', new_office_path, :class => "btn" %>
 </br>
 <div style="OVERFLOW: auto; WIDTH: 100%; HEIGHT: 100%">
 <table class="table table-striped">
   <thead>
       <tr>
-
-        <th>No. Oficio</th>
+        <th><%= sort_link(@search, :internal_office_number, "No. Oficio")%></th>
         <th>De</th>
         <th>Para</th>
         <th>Dirección</th>
-        <th>Departamento</th>
-        <th>Priority</th>
-        <th>Status</th>
-        <th>Fecha de Creación</th>
+        <th><%= sort_link @search, :department_id, "Departamento" %></th>
+        <th><%= sort_link @search, :priority_id, "Prioridad" %></th>
+        <th><%= sort_link @search, :status_id, "Estatus" %></th>
+        <th><%= sort_link @search, :created_at, "Fecha de Creación" %></th>
         <th>Fecha de Revisión</th>
-        <th></th>
-        <th></th>
       </tr>
   </thead>
 
-<% @offices.each do |office| %>
+  <% @offices.each do |office| %>
   <tr>
 
     <td><%= office.internal_office_number %></td>
@@ -47,7 +55,10 @@
   </tr>
 <% end %>
 </table>
+  <div class="pager">
+    <%= paginate @offices %>
+  </div>
 </div>
-<br />
+
 
 

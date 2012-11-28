@@ -6,8 +6,15 @@ class OfficesController < ApplicationController
   # GET /offices
   # GET /offices.json
   def index
-    @offices = Office.where("department_id"=>"#{current_user.department_id}").order("id DESC")
-    #@offices = Office.order("id DESC").all
+    if params[:q].nil?
+      @search = Office.search("department_id_eq"=>"#{current_user.department_id}")
+      @offices = @search.result.order("internal_office_number DESC").page(params[:page]).per(25)
+    else
+      condition  = params[:q]
+      condition.merge("department_id_eq"=>"#{current_user.department_id}")
+      @search = Office.search(condition)
+      @offices = @search.result.order("internal_office_number DESC").page(params[:page]).per(25)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

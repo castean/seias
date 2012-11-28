@@ -10,6 +10,7 @@ class Office < ActiveRecord::Base
   belongs_to :activity_type
   belongs_to :office
   belongs_to :benefit_type
+  belongs_to :user_mailer
 
   has_many :office_benefit_requesteds, :dependent => :destroy
   has_many :office_records
@@ -53,5 +54,14 @@ class Office < ActiveRecord::Base
 
   def update_status
     update_attribute :status_id, 3
+  end
+
+  def send_email
+    @office.each do |of|
+      if of.status_id < "4"
+          para = of.department.user.email
+          UsersMailer.weekly_mail(para).deliver
+      end
+    end
   end
 end

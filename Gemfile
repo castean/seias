@@ -61,6 +61,9 @@ gem 'capistrano-ext'
 # Pedidos por servidor
 gem 'tilt','1.3.3'
 
+# Oficios - mandar correos programados
+gem 'whenever', :require => false
+
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
