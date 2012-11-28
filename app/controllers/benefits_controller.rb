@@ -104,13 +104,14 @@ class BenefitsController < ApplicationController
   def destroy
     @benefit = Benefit.find(params[:id])
 
+    del_ben = @benefit.id
     @benefit.destroy
 
     respond_to do |format|
       #format.html { redirect_to benefits_url }
       if @benefit.affiliate.institution_ben_id.nil?
-
-
+        @unpaid_delivers = PeriodTimeDeliver.find_by_benefit_id(del_ben)
+        @unpaid_delivers.update_attributes(:benefit_id => '' ,:delivered => false)
         format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.person_id , :continuos => 1,:type => 'per',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}
       elsif @benefit.affiliate.person_id.nil?
         format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.institution_ben_id , :continuos => 1,:type => 'ins',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}
