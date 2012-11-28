@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Period time:</b>
+  <%= @period_time_deliver.period_time_id %>
+</p>
+
+<p>
+  <b>Period number:</b>
+  <%= @period_time_deliver.period_number %>
+</p>
+
+<p>
+  <b>Affiliate:</b>
+  <%= @period_time_deliver.affiliate_id %>
+</p>
+
+<p>
+  <b>Benefit:</b>
+  <%= @period_time_deliver.benefit_id %>
+</p>
+
+<p>
+  <b>Delivered:</b>
+  <%= @period_time_deliver.delivered %>
+</p>
+
+
+<%= link_to 'Edit', edit_period_time_deliver_path(@period_time_deliver) %> |
+<%= link_to 'Back', period_time_delivers_path %>

@@ -86,21 +86,32 @@ class AffiliatesController < ApplicationController
   # POST /affiliates.json
   def create
     @affiliate = Affiliate.new(params[:affiliate])
-
-    respond_to do |format|
-      if @affiliate.save
-        if @affiliate.type == 'per'
-          ben_id = @affiliate.person_id
-        elsif @affiliate.type == 'ins'
-          ben_id = @affiliate.institution_ben_id
-        end
-        format.html { redirect_to new_benefit_path + '/' + ben_id.to_s + '?type=' + @affiliate.type, notice: 'Affiliate was successfully created.' }
-
-        format.json { render json: @affiliate, status: :created, location: @affiliate }
-      else
-        format.html { redirect_to  new_affiliate_path(@affiliate, :id => @affiliate.person_id, :type => @affiliate.type), notice: 'Llena todos los campos'}
+    if @affiliate.type == 'per'
+      @aff = Affiliate.find_all_by_person_id_and_activity_type_id(@affiliate.person_id, @affiliate.activity_type_id)
+      @ben_id = @affiliate.person_id
+    elsif @affiliate.type == 'ins'
+      @aff = Affiliate.find_all_by_person_id_and_activity_type_id(@affiliate.institution_ben_id, @affiliate.activity_type_id)
+      @ben_id = @affiliate.institution_ben_id
+    end
+    if @aff.count >= 1
+      respond_to do |format|
+        format.html { redirect_to  new_affiliate_path(@affiliate, :id => @ben_id, :type => @affiliate.type), notice: 'Ya esta afiliado a este programa'}
         format.json { render json: @affiliate.errors, status: :unprocessable_entity }
       end
+    else
+    respond_to do |format|
+      if @affiliate.save
+        for i in 1..@affiliate.period_number
+          @period_time_deliver = PeriodTimeDeliver.new(:affiliate_id => @affiliate.id, :period_time_id => @affiliate.period_time_id, :period_number => i, :delivered => false)
+          @period_time_deliver.save
+        end
+          format.html { redirect_to new_benefit_path + '/' + @ben_id.to_s + '?type=' + @affiliate.type, notice: 'Affiliate was successfully created.' }
+          format.json { render json: @affiliate, status: :created, location: @affiliate }
+      else
+        format.html { redirect_to  new_affiliate_path(@affiliate, :id => @ben_id, :type => @affiliate.type), notice: 'Llena todos los campos'}
+        format.json { render json: @affiliate.errors, status: :unprocessable_entity }
+      end
+    end
     end
   end
 

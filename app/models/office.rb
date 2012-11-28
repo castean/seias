@@ -9,13 +9,19 @@ class Office < ActiveRecord::Base
   belongs_to :status
   belongs_to :activity_type
   belongs_to :office
+  belongs_to :priority
   belongs_to :benefit_type
+
   belongs_to :user_mailer
 
   has_many :office_benefit_requesteds, :dependent => :destroy
   has_many :office_records
   has_many :office_allocations
+
+  belongs_to :affiliates
+
   accepts_nested_attributes_for :office_benefit_requesteds, :reject_if => lambda { |a| a[:benefit_type_id].blank? }, :allow_destroy => true
+
   attr_accessible :activity_type_id, :avatar, :department_id, :external_office_number, :internal_office_number, :name, :observations, :office_date,
                   :office_recive_date, :person_id, :priority_id, :record_no, :status_id, :to, :type_id, :user_id, :direction_id, :program_id, :person, :institution_id,
                   :institution, :office_benefit_requesteds_attributes, :benefit_category_id

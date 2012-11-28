@@ -1,0 +1,31 @@
+<h1>Listing period_time_delivers</h1>
+
+<table>
+  <tr>
+    <th>Period time</th>
+    <th>Period number</th>
+    <th>Affiliate</th>
+    <th>Benefit</th>
+    <th>Delivered</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @period_time_delivers.each do |period_time_deliver| %>
+  <tr>
+    <td><%= period_time_deliver.period_time_id %></td>
+    <td><%= period_time_deliver.period_number %></td>
+    <td><%= period_time_deliver.affiliate_id %></td>
+    <td><%= period_time_deliver.benefit_id %></td>
+    <td><%= period_time_deliver.delivered %></td>
+    <td><%= link_to 'Show', period_time_deliver %></td>
+    <td><%= link_to 'Edit', edit_period_time_deliver_path(period_time_deliver) %></td>
+    <td><%= link_to 'Destroy', period_time_deliver, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Period time deliver', new_period_time_deliver_path %>

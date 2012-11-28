@@ -65,11 +65,14 @@ class BenefitsController < ApplicationController
     respond_to do |format|
       if @benefit.save
         #format.html { redirect_to @benefit, notice: 'Benefit was successfully created.' }
+
+
+
         flash[:notice] = 'El apoyo se dio de alta satisfactoriamente.'
         if @benefit.affiliate.institution_ben_id.nil?
-          format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.person_id , :continuos => 1,:type => '1',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}
+          format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.person_id , :continuos => 1,:type => 'per',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}
         elsif @benefit.affiliate.person_id.nil?
-          format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.institution_ben_id , :continuos => 1,:type => '2',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}
+          format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.institution_ben_id , :continuos => 1,:type => 'ins',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}
         end
         #format.json { render json: @benefit, status: :created, location: @benefit }
       else
@@ -99,10 +102,17 @@ class BenefitsController < ApplicationController
   # DELETE /benefits/1.json
   def destroy
     @benefit = Benefit.find(params[:id])
+
     @benefit.destroy
 
     respond_to do |format|
-      format.html { redirect_to benefits_url }
+      #format.html { redirect_to benefits_url }
+      if @benefit.affiliate.institution_ben_id.nil?
+        format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.person_id , :continuos => 1,:type => 'per',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}
+      elsif @benefit.affiliate.person_id.nil?
+        format.html { redirect_to(:action => 'new', :id => @benefit.affiliate.institution_ben_id , :continuos => 1,:type => 'ins',:aff=>@benefit.affiliate_id, :aff_act_id=>@benefit.affiliate.activity_type_id )}
+      end
+
       format.json { head :no_content }
     end
   end

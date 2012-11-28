@@ -32,10 +32,10 @@
 </p>
 <% if @affiliate.institution_ben_id.nil? %>
 
-    <%= link_to 'Apoyos', new_benefit_path + '/' + @affiliate.person_id.to_s + '?type=1', :class => "btn" %>
+    <%= link_to 'Apoyos', new_benefit_path + '/' + @affiliate.person_id.to_s + '?type=per', :class => "btn" %>
 <% elsif @affiliate.person_id.nil? %>
 
-    <%= link_to 'Apoyos', new_benefit_path + '/' + @affiliate.institution_ben_id.to_s + '?type=2', :class => "btn" %>
+    <%= link_to 'Apoyos', new_benefit_path + '/' + @affiliate.institution_ben_id.to_s + '?type=ins', :class => "btn" %>
 <% end %>
 
 </br>

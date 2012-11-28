@@ -11,8 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122182925) do
 
+ActiveRecord::Schema.define(:version => 20121122194758) do
   create_table "activities", :force => true do |t|
     t.string   "value"
     t.text     "description"
@@ -705,6 +705,17 @@ ActiveRecord::Schema.define(:version => 20121122182925) do
     t.integer  "point"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+
+  create_table "period_time_delivers", :force => true do |t|
+    t.integer  "period_time_id"
+    t.integer  "period_number"
+    t.integer  "affiliate_id"
+    t.string   "benefit_id"
+    t.boolean  "delivered"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "period_times", :force => true do |t|

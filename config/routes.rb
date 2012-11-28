@@ -1,5 +1,7 @@
 Seias::Application.routes.draw do
 
+  resources :period_time_delivers
+
   match '/socioeconomic_studies/new/:id' => 'socioeconomic_studies#new'
   resources :socioeconomic_studies
 

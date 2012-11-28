@@ -66,8 +66,8 @@ Seias::Application.configure do
   # Enable threaded mode
   # config.threadsafe!
   config.middleware.use ExceptionNotifier,
-                        :email_prefix => "SEIAS Error",
-                        :sender_address => %{"SEIAS" <seias@difchihuahua.gob.mx>},
+                        :email_prefix => "SIDIF Error",
+                        :sender_address => %{"Sistema Integral DIF Estatal" <sistema.integral@difchihuahua.gob.mx>},
                         :exception_recipients => %w{rgonzalez@uach.mx rivazquez@uach.mx cfgarcia@uach.mx cdelrazo@uach.mx dif.acastellanos@gmail.com dif.creyes@gmail.com dif.ialderete@gmail.com}
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
