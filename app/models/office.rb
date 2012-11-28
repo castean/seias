@@ -66,7 +66,7 @@ class Office < ActiveRecord::Base
     @office.each do |of|
       if of.status_id < "4"
           para = of.department.user.email
-          UsersMailer.weekly_mail(para).deliver
+          mail(:to => para, :subject => "Tiene un Oficio Pendiente")
       end
     end
   end
