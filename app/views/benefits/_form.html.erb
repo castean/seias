@@ -102,7 +102,10 @@
   <% @benefit_s.each do |benefit_s| %>
       <tr>
         <td><%= benefit_s.affiliate.activity_type.name %></td>
-        <td><%= benefit_s.period_time_delivers %> </td>
+        <td><% a = PeriodTimeDeliver.find_by_benefit_id(benefit_s.id) %>
+        <% if a %>
+              <%= a.period_number %>
+         <% end %>     </td>
         <td><%= benefit_s.qty %></td>
         <td><%= benefit_s.unit_price %></td>
         <td><%= benefit_s.qty * benefit_s.unit_price  %></td>
