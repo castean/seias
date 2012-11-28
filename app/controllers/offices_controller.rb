@@ -6,7 +6,8 @@ class OfficesController < ApplicationController
   # GET /offices
   # GET /offices.json
   def index
-    @offices = Office.order("id DESC").all
+    @offices = Office.where("department_id"=>"#{current_user.department_id}").order("id DESC")
+    #@offices = Office.order("id DESC").all
 
     respond_to do |format|
       format.html # index.html.erb
