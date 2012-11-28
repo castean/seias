@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h3>Sistema Integral DIF Estatal</h3>
+
+<h4>Estimado(a) <%= @office.department.user.fullname  %></h4>
+<p>
+  Tienes un Oficio Nuevo # <%= @office.id  %>, con fecha <%= @office.created_at  %>,
+  Puede darle seguimiento desde este link: <a href="http://sistema.difchihuahua.gob.mx/offices/<%= @office.id  %>" target="_blank">sistema.difchihuahua.gob.mx/offices/<%= @office.id  %></a> <br/>
+</p>
+
+<p style="color:#8b0000;">Este correo se genera automaticamente por lo cual No es necesario que lo responda.</p>
+</body>
+</html>

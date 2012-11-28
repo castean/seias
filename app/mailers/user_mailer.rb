@@ -6,4 +6,10 @@ class UserMailer < ActionMailer::Base
     mail(to: "#{office.department.user.login}@difchihuahua.gob.mx",
          subject: "Tiene un Oficio Nuevo: #{office.id}, (Prioridad: #{office.priority.name})")
   end
+
+  def send_notification(office)
+    @office = office
+    mail(to: "#{office.department.user.login}@difchihuahua.gob.mx",
+         subject: "Tiene un Oficio Nuevo: #{office.id}, (Prioridad: #{office.priority.name})")
+  end
 end
