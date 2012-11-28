@@ -1,5 +1,5 @@
 class OfficesController < ApplicationController
-  load_and_authorize_resource
+  #load_and_authorize_resource
   autocomplete :person, :last_name, :extra_data => [:name, :second_last_name],:display_value => :fullname
   autocomplete :institution, :name, :full => :false
 
@@ -124,6 +124,10 @@ class OfficesController < ApplicationController
     respond_to do |format|
       format.json  { render :json => @benefit_types }
     end
+  end
+  def notification
+    @office = Office.last
+        UserMailer.send_notification(@office).deliver
   end
 
 end

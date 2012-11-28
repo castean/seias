@@ -20,6 +20,16 @@
 # Learn more: http://github.com/javan/whenever
 
 
-every 1.day , :at => '12:08 pm' do
+every 1.day , :at => '1:50 pm' do
     runner "Office.send_email"
+end
+
+every 1.day , :at => '1:08pm' do
+  runner "Office.notification"
+end
+every 1.day , :at => '2:08pm' do
+  runner "Office.notification"
+end
+every 1.day , :at => '3:08pm' do
+  runner "Office.notification"
 end
