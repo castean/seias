@@ -74,6 +74,7 @@ class Ability
           can :create, Worth
           can :create, Affiliate
           can :update, Affiliate
+          can :update, PeriodTimeDeliver
           can :create, Office
           can :create, Benefit
           can :destroy, Benefit

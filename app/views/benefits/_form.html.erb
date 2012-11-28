@@ -51,8 +51,9 @@
   <% if params[:aff]%>
     </br>
     <div class="field">
-      <%= f.label :period_number, "Periodo " +  PeriodTime.find(PeriodTimeDeliver.find_by_affiliate_id(params[:aff]).period_time_id).name %><br />
-
+      <% if @aff_end.period_time.name == "Mensual" %>
+      <%= f.label :period_number, "Periodo: Mes" %><br />
+      <% end %>
       <%= f.collection_select :period_number, PeriodTimeDeliver.find_all_by_affiliate_id(params[:aff], :conditions => {:delivered => false}).sort_by{ |k| k['period_number'] }  , :id, :period_number, options ={:prompt => "-- Selecciona un periodo --"} %>
     </div>
     <div class="field">
@@ -101,7 +102,7 @@
   <% @benefit_s.each do |benefit_s| %>
       <tr>
         <td><%= benefit_s.affiliate.activity_type.name %></td>
-        <td><%=   PeriodTimeDeliver.find_by_benefit_id(benefit_s.id, :conditions => {:delivered => true}).period_number %></td>
+        <td><%= benefit_s.period_time_delivers %> </td>
         <td><%= benefit_s.qty %></td>
         <td><%= benefit_s.unit_price %></td>
         <td><%= benefit_s.qty * benefit_s.unit_price  %></td>

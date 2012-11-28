@@ -3,4 +3,5 @@ class PeriodTime < ActiveRecord::Base
   has_many :critical_factors
   has_many :affiliates
   has_many :period_time_delivers
+  has_many :benefits
 end
