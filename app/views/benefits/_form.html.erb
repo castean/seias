@@ -44,18 +44,16 @@
   <% else %>
     <table>
       <tr><th><b>Programa Afiliado:</b></th></tr>
-        <% @affiliate.each do |affiliate| %>
-            <tr><td><%= link_to affiliate.activity_type.name, params[:id].to_s + '/?type='+ params[:type] + '&aff=' + affiliate.id.to_s + '&aff_act_id=' + affiliate.activity_type_id.to_s %></td> </tr>
-        <% end %>
+
     </table>
   <% end %>
 
   <% if params[:aff]%>
     </br>
     <div class="field">
-      <%= f.label :period_number, "Periodo " +  PeriodTime.find(PeriodTimeDeliver.find(params[:aff].period_time_id).name) %><br />
+      <%= f.label :period_number, "Periodo " +  PeriodTime.find(PeriodTimeDeliver.find_by_affiliate_id(params[:aff]).period_time_id).name %><br />
 
-      <%= f.collection_select :period_number, PeriodTimeDeliver.find_all_by_affiliate_id(params[:aff]).sort_by{ |k| k['period_number'] }  , :id, :period_number, options ={:prompt => "-- Selecciona un periodo --"} %>
+      <%= f.collection_select :period_number, PeriodTimeDeliver.find_all_by_affiliate_id(params[:aff], :conditions => {:delivered => false}).sort_by{ |k| k['period_number'] }  , :id, :period_number, options ={:prompt => "-- Selecciona un periodo --"} %>
     </div>
     <div class="field">
       <%= f.label :worth_id, "Tipo de vale" %><br />
@@ -94,6 +92,7 @@
 <table>
   <tr>
     <th>Programa</th>
+    <th>Periodo</th>
     <th>Cantidad</th>
     <th>Precio Unitario</th>
     <th>Total</th>
@@ -102,6 +101,7 @@
   <% @benefit_s.each do |benefit_s| %>
       <tr>
         <td><%= benefit_s.affiliate.activity_type.name %></td>
+        <td><%=   PeriodTimeDeliver.find_by_benefit_id(benefit_s.id, :conditions => {:delivered => true}).period_number %></td>
         <td><%= benefit_s.qty %></td>
         <td><%= benefit_s.unit_price %></td>
         <td><%= benefit_s.qty * benefit_s.unit_price  %></td>
