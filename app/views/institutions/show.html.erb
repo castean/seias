@@ -138,11 +138,6 @@
     </td>
   </tr>
 </table>
-
-</br>
-</br>
-    <%= link_to 'Escolaridad', new_institution_school_age_path(@institution), :class => "btn" %>
-</br>
 </br>
 <table class="table table-striped">
   <tr>
@@ -153,8 +148,9 @@
 </table>
 
 <table class="table table-striped">
+  <%obtenerdatosgenerales%>
   <thead>
-      <h4>Total de Residentes: </h4> <%= %>
+      <h4>Total de Residentes:  <%= @totales%></h4>
   </thead>
   </br>
   <tr>
@@ -164,50 +160,127 @@
     <th>Edad Laboral</th>
     <th>Edad Escolar</th>
   </tr>
-    <td>Mujeres</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td><b>Mujeres</b></td>
+    <td><%= @sumtpubm%></td>
+    <td><%= @sumtprivm%></td>
+    <td><%= @sumelabm%></td>
+    <td><%= @sumeescolm%></td>
   <tr>
-    <td>Hombres</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td><b>Hombres</b></td>
+    <td><%= @sumtpubh%></td>
+    <td><%= @sumtprivh%></td>
+    <td><%= @sumelabh%></td>
+    <td><%= @sumeescolh%></td>
   </tr>
 </table>
-
+</br>
+</br>
+<%= link_to 'Escolaridad', new_institution_school_age_path(@institution), :class => "btn" %>
+</br>
+</br>
 <table class="table table-striped">
+  <%obtenerdatosescolar%>
   <thead>
   <h4>Escolaridad</h4>
   </thead>
   <tr>
-    <th>
-      Nivel Escolar
-    </th>
-    <th>
-      Mujeres
-    </th>
-    <th>
-      Hombres
-    </th>
-    <th>
-      Total
-    </th>
+    <th>Nivel Escolar</th>
+    <th>Total</th>
+    <th>Mujeres</th>
+    <th>Hombres</th>
+  </tr>
+  <tr>
+    <td>Preescolar</td>
+    <td><%= @esumat1 %></td>
+    <td><%= @esumam1 %></td>
+    <td><%= @esumah1 %></td>
+  </tr>
+  <tr>
+    <td>Primaria</td>
+    <td><%= @esumat2 %></td>
+    <td><%= @esumam2 %></td>
+    <td><%= @esumah2 %></td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td><%= @esumat3 %></td>
+    <td><%= @esumam3 %></td>
+    <td><%= @esumah3 %></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><%= @esumat4 %></td>
+    <td><%= @esumam4 %></td>
+    <td><%= @esumah4 %></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><%= @esumat5 %></td>
+    <td><%= @esumam5 %></td>
+    <td><%= @esumah5 %></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td><%= @esumat6 %></td>
+    <td><%= @esumam6 %></td>
+    <td><%= @esumah6 %></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><%= @esumat7 %></td>
+    <td><%= @esumam7 %></td>
+    <td><%= @esumah7 %></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td><%= @esumat8 %></td>
+    <td><%= @esumam8 %></td>
+    <td><%= @esumah8 %></td>
+  </tr>
+  <tr>
+    <td>Secunadaria</td>
+    <td><%= @esumat9 %></td>
+    <td><%= @esumam9 %></td>
+    <td><%= @esumah9 %></td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td><%= @esumat10 %></td>
+    <td><%= @esumam10 %></td>
+    <td><%= @esumah10 %></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><%= @esumat11 %></td>
+    <td><%= @esumam11 %></td>
+    <td><%= @esumah11 %></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><%= @esumat12 %></td>
+    <td><%= @esumam12 %></td>
+    <td><%= @esumah12 %></td>
+  </tr>
+  <tr>
+    <td>Preparatoria</td>
+    <td><%= @esumat13 %></td>
+    <td><%= @esumam13 %></td>
+    <td><%= @esumah13 %></td>
+  </tr>
+  <tr>
+    <td>Licenciatura</td>
+    <td><%= @esumat14 %></td>
+    <td><%= @esumam14 %></td>
+    <td><%= @esumah14 %></td>
+  </tr>
+  <tr>
+    <td>Posgrado</td>
+    <td><%= @esumat15 %></td>
+    <td><%= @esumam15 %></td>
+    <td><%= @esumah15 %></td>
   </tr>
 </table>
 
-
-<% @institution.school_ages.each do |b| %>
-    <p>
-      <b>Nivel Escolar:</b></br>
-        <%= b.grade.name %>
-    </p>
-    </br>
-    <%#= link_to "Editar Escolaridad", [@institution, b], :method => :edit %>
-    <%#= link_to "Borrar Escolaridad", [@institution, b], :method => :delete, :confirm => "Esta usted seguro?" %>
-<%end%>
 </br>
 </br>
 

@@ -183,10 +183,10 @@
       </thead>
       <tr>
         <td>
-          <%= f.label :date_operation_start, "Fecha de Inicio de Operaciones" %>
+          <%= f.label :date_operation_start, "Fecha de Inicio de Operaciones", :class=>"span3" %>
         </td>
         <td>
-          <%= f.label :date_operation_end, "Fecha de Fin de Operaciones" %>
+          <%= f.label :date_operation_end, "Fecha de Fin de Operaciones", :class=>"span3" %>
         </td>
       </tr>
       <tr>
@@ -199,18 +199,18 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :religion_id,"Religion" %>
+          <%= f.label :religion_id,"Religion", :class=>"span3" %>
         </td>
         <td>
-          <%= f.label :status_id, "Estatus" %>
+          <%= f.label :status_id, "Estatus", :class=>"span3" %>
         </td>
       </tr>
       <tr>
         <td>
-          <%= f.select :religion_id, Religion.order("substring(name,1,1)").all.collect{ |c| [c.name.to_s, c.id]}, {:include_blank => "-- Selecciona una Religion --"} %>
+          <%= f.select :religion_id, Religion.order("substring(name,1,1)").all.collect{ |c| [c.name.to_s, c.id]}, {:include_blank => "-- Selecciona una Religion --"}, :class=>"span3" %>
         </td>
         <td>
-          <%= f.number_field :status_id %>
+          <%= f.number_field :status_id, :class=>"span3" %>
         </td>
       </tr>
     </table>
