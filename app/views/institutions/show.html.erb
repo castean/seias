@@ -138,11 +138,6 @@
     </td>
   </tr>
 </table>
-
-</br>
-</br>
-    <%= link_to 'Escolaridad', new_institution_school_age_path(@institution), :class => "btn" %>
-</br>
 </br>
 <table class="table table-striped">
   <tr>
@@ -153,8 +148,9 @@
 </table>
 
 <table class="table table-striped">
+  <%obtenerdatosgenerales%>
   <thead>
-      <h4>Total de Residentes: </h4> <%= %>
+      <h4>Total de Residentes:  <%= @totales%></h4>
   </thead>
   </br>
   <tr>
@@ -164,159 +160,31 @@
     <th>Edad Laboral</th>
     <th>Edad Escolar</th>
   </tr>
-    <td>Mujeres</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td><b>Mujeres</b></td>
+    <td><%= @sumtpubm%></td>
+    <td><%= @sumtprivm%></td>
+    <td><%= @sumelabm%></td>
+    <td><%= @sumeescolm%></td>
   <tr>
-    <td>Hombres</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td><b>Hombres</b></td>
+    <td><%= @sumtpubh%></td>
+    <td><%= @sumtprivh%></td>
+    <td><%= @sumelabh%></td>
+    <td><%= @sumeescolh%></td>
   </tr>
 </table>
-
-<table class="table table-striped">
-  <thead>
-  <h4>Escolaridad</h4>
-  </thead>
-  <tr>
-    <th>
-      Nivel Escolar
-    </th>
-    <th>
-      Mujeres
-    </th>
-    <th>
-      Hombres
-    </th>
-    <th>
-      Total
-    </th>
-  </tr>
-</table>
-
-
-<% @institution.school_ages.each do |b| %>
-    <p>
-      <b>Nivel Escolar:</b></br>
-        <%= b.grade.name %>
-    </p>
-    </br>
-    <%#= link_to "Editar Escolaridad", [@institution, b], :method => :edit %>
-    <%#= link_to "Borrar Escolaridad", [@institution, b], :method => :delete, :confirm => "Esta usted seguro?" %>
-<%end%>
 </br>
 </br>
-
+<%= link_to 'Escolaridad', new_institution_school_age_path(@institution), :class => "btn" %>
+</br>
+</br>
+<%= render 'schoolarship_fields' %>
+</br>
+</br>
 <%= link_to 'Población', new_institution_age_population_path(@institution), :class => "btn" %>
 </br>
 </br>
-<%obtenerdatos%>
-<table class="table table-striped">
-  <thead>
-  <h4>Población por Edad y Sexo </h4> <%= %>
-  </thead>
-  </br>
-  <tr>
-    <th>Rango</th>
-    <th>Total</th>
-    <th>Mujeres</th>
-    <th>Hombres</th>
-  </tr>
-  <tr>
-    <td>0 - 4</td>
-    <td><%= @sumat1 %></td>
-    <td><%= @sumam1 %></td>
-    <td><%= @sumah1 %></td>
-  </tr>
-  <tr>
-    <td>5 - 9</td>
-    <td><%= @sumat2 %></td>
-    <td><%= @sumam2 %></td>
-    <td><%= @sumah2 %></td>
-  </tr>
-  <tr>
-    <td>10 - 14</td>
-    <td><%= @sumat3 %></td>
-    <td><%= @sumam3 %></td>
-    <td><%= @sumah3 %></td>
-  </tr>
-  <tr>
-    <td>15 - 19</td>
-    <td><%= @sumat4 %></td>
-    <td><%= @sumam4 %></td>
-    <td><%= @sumah4 %></td>
-  </tr>
-  <tr>
-    <td>20 - 24</td>
-    <td><%= @sumat5 %></td>
-    <td><%= @sumam5 %></td>
-    <td><%= @sumah5 %></td>
-  </tr>
-  <tr>
-    <td>25 - 29</td>
-    <td><%= @sumat6 %></td>
-    <td><%= @sumam6 %></td>
-    <td><%= @sumah6 %></td>
-  </tr>
-  <tr>
-    <td>30 - 34</td>
-    <td><%= @sumat7 %></td>
-    <td><%= @sumam7 %></td>
-    <td><%= @sumah7 %></td>
-  </tr>
-  <tr>
-    <td>35 - 39</td>
-    <td><%= @sumat8 %></td>
-    <td><%= @sumam8 %></td>
-    <td><%= @sumah8 %></td>
-  </tr>
-  <tr>
-    <td>40 - 44</td>
-    <td><%= @sumat9 %></td>
-    <td><%= @sumam9 %></td>
-    <td><%= @sumah9 %></td>
-  </tr>
-  <tr>
-    <td>45 - 49</td>
-    <td><%= @sumat10 %></td>
-    <td><%= @sumam10 %></td>
-    <td><%= @sumah10 %></td>
-  </tr>
-  <tr>
-    <td>50 - 54</td>
-    <td><%= @sumat11 %></td>
-    <td><%= @sumam11 %></td>
-    <td><%= @sumah11 %></td>
-  </tr>
-  <tr>
-    <td>55 - 59</td>
-    <td><%= @sumat12 %></td>
-    <td><%= @sumam12 %></td>
-    <td><%= @sumah12 %></td>
-  </tr>
-  <tr>
-    <td>60 - 64</td>
-    <td><%= @sumat13 %></td>
-    <td><%= @sumam13 %></td>
-    <td><%= @sumah13 %></td>
-  </tr>
-  <tr>
-    <td>65 - 69</td>
-    <td><%= @sumat14 %></td>
-    <td><%= @sumam14 %></td>
-    <td><%= @sumah14 %></td>
-  </tr>
-  <tr>
-    <td>70 - Más</td>
-    <td><%= @sumat15 %></td>
-    <td><%= @sumam15 %></td>
-    <td><%= @sumah15 %></td>
-  </tr>
-</table>
+<%= render 'population_fields' %>
 </br>
 </br>
     <%= link_to 'Reg_Inst.1/R01', new_institution_one_reg_institution_path(@institution), :class => "btn" %>

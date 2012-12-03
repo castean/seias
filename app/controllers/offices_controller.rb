@@ -53,6 +53,7 @@ class OfficesController < ApplicationController
 
   # POST /offices
   # POST /offices.json
+
   def create
     @office = Office.new(params[:office])
     respond_to do |format|
