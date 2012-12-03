@@ -66,8 +66,8 @@ class BenefitsController < ApplicationController
       if @benefit.save
         #format.html { redirect_to @benefit, notice: 'Benefit was successfully created.' }
 
-        unpaid_delivers = PeriodTimeDeliver.find_by_affiliate_id_and_period_number(@benefit.affiliate_id,@benefit.period_number) # I'm assuming Payment belongs_to User
-        unpaid_delivers.update_attributes(:benefit_id => @benefit.id ,:delivered => true)
+        delivers = PeriodTimeDeliver.find_by_affiliate_id_and_period_number(@benefit.affiliate_id,@benefit.period_number) # I'm assuming Payment belongs_to User
+        delivers.update_attributes(:benefit_id => @benefit.id ,:delivered => true)
 
         flash[:notice] = 'El apoyo se dio de alta satisfactoriamente.'
         if @benefit.affiliate.institution_ben_id.nil?
