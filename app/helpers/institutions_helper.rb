@@ -25,6 +25,41 @@ module InstitutionsHelper
     end
   end
 
+  def obtenerdatosgenerales
+
+    @sumtpubh = 0
+    @sumtpubm = 0
+
+    @sumtprivh = 0
+    @sumtprivm = 0
+
+    @sumelabh = 0
+    @sumelabm = 0
+
+    @sumeescolh = 0
+    @sumeescolm = 0
+
+    @totales = 0
+
+    @totales = @institution.age_populations.sum(:total_qty_registered)
+
+    @sumtpubh = @institution.age_populations.sum(:total_qty_registered, :conditions => {:guardianship_id => 1,:sex_id => 1})
+    @sumtpubm = @institution.age_populations.sum(:total_qty_registered, :conditions => {:guardianship_id => 1,:sex_id => 2})
+
+    @sumtprivh = @institution.age_populations.sum(:total_qty_registered, :conditions => {:guardianship_id => 2,:sex_id => 1})
+    @sumtprivm = @institution.age_populations.sum(:total_qty_registered, :conditions => {:guardianship_id => 2,:sex_id => 2})
+
+    @sumelabh = @institution.age_populations.sum(:total_qty_registered, :conditions => [ "(sex_id = ?) AND (age_range_id BETWEEN ? AND ?)", 1, 4, 13 ])
+    @sumelabm = @institution.age_populations.sum(:total_qty_registered, :conditions => [ "(sex_id = ?) AND (age_range_id BETWEEN ? AND ?)", 2, 4, 13 ])
+
+    #@sumeescolh = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 2, :sex_id => 1})
+    @sumeescolh = @institution.age_populations.sum(:total_qty_registered, :conditions => [ "(sex_id = ?) AND (age_range_id BETWEEN ? AND ?)", 1, 2, 6 ])
+    @sumeescolm = @institution.age_populations.sum(:total_qty_registered, :conditions => [ "(sex_id = ?) AND (age_range_id BETWEEN ? AND ?)", 2, 2, 6 ])
+    #@sumeescolm = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 1,:sex_id => 2})
+
+
+  end
+
   def obtenerdatos
 
     @sumah1 =0
@@ -131,6 +166,124 @@ module InstitutionsHelper
     @sumah15 = @institution.age_populations.sum(:total_qty_registered, :conditions => {:age_range_id => 15,:sex_id => 1})
     @sumam15 = @institution.age_populations.sum(:total_qty_registered, :conditions => {:age_range_id => 15,:sex_id => 2})
     @sumat15 = @sumah15 + @sumam15
+  end
+
+  def obtenerdatosescolar
+
+    @esumah1 =0
+    @esumam1 =0
+    @esumat1 =0
+    @esumah1 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 1,:sex_id => 1})
+    @esumam1 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 1,:sex_id => 2})
+    @esumat1 = @esumah1 + @esumam1
+
+    @esumah2 =0
+    @esumam2 =0
+    @esumat2 =0
+    @esumah3 =0
+    @esumam3 =0
+    @esumat3 =0
+    @esumah4 =0
+    @esumam4 =0
+    @esumat4 =0
+    @esumah5 =0
+    @esumam5 =0
+    @esumat5 =0
+    @esumah6 =0
+    @esumam6 =0
+    @esumat6 =0
+    @esumah7 =0
+    @esumam7 =0
+    @esumat7 =0
+    @esumah8 =0
+    @esumam8 =0
+    @esumat8 =0
+    @esumah2 = @esumah3 + @esumah4 + @esumah5 + @esumah6 + @esumah7 + @esumah8
+    @esumam2 = @esumam3 + @esumam4 + @esumam5 + @esumam6 + @esumam7 + @esumam8
+    @esumat2 = @esumah2 + @esumam2
+
+
+    @esumah3 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 3,:sex_id => 1})
+    @esumam3 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 3,:sex_id => 2})
+    @esumat3 = @esumah3 + @esumam3
+
+
+    @esumah4 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 4,:sex_id => 1})
+    @esumam4 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 4,:sex_id => 2})
+    @esumat4 = @esumah4 + @esumam4
+
+
+    @esumah5 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 5,:sex_id => 1})
+    @esumam5 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 5,:sex_id => 2})
+    @esumat5 = @esumah5 + @esumam5
+
+
+    @esumah6 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 6,:sex_id => 1})
+    @esumam6 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 6,:sex_id => 2})
+    @esumat6 = @esumah6 + @esumam6
+
+
+    @esumah7 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 7,:sex_id => 1})
+    @esumam7 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 7,:sex_id => 2})
+    @esumat7 = @esumah7 + @esumam7
+
+
+    @esumah8 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 8,:sex_id => 1})
+    @esumam8 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 8,:sex_id => 2})
+    @esumat8 = @esumah8 + @esumam8
+
+    @esumah9 =0
+    @esumam9 =0
+    @esumat9 =0
+    @esumah10 =0
+    @esumam10 =0
+    @esumat10 =0
+    @esumah11 =0
+    @esumam11 =0
+    @esumat11 =0
+    @esumah12 =0
+    @esumam12 =0
+    @esumat12 =0
+
+    @esumah9 = @esumah10 + @esumah11 + @esumah12
+    @esumam9 = @esumam10 + @esumam11 + @esumam12
+    @esumat9 = @esumah9 + @esumam9
+
+
+    @esumah10 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 10,:sex_id => 1})
+    @esumam10 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 10,:sex_id => 2})
+    @esumat10 = @esumah10 + @esumam10
+
+
+    @esumah11 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 11,:sex_id => 1})
+    @esumam11 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 11,:sex_id => 2})
+    @esumat11 = @esumah11 + @esumam11
+
+
+    @esumah12 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 12,:sex_id => 1})
+    @esumam12 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 12,:sex_id => 2})
+    @esumat12 = @esumah12 + @esumam12
+
+    @esumah13 =0
+    @esumam13 =0
+    @esumat13 =0
+    @esumah13 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 13,:sex_id => 1})
+    @esumam13 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 13,:sex_id => 2})
+    @esumat13 = @esumah13 + @esumam13
+
+    @esumah14 =0
+    @esumam14 =0
+    @esumat14 =0
+    @esumah14 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 14,:sex_id => 1})
+    @esumam14 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 14,:sex_id => 2})
+    @esumat14 = @esumah14 + @esumam14
+
+    @esumah15 =0
+    @esumam15 =0
+    @esumat15 =0
+    @esumah15 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 15,:sex_id => 1})
+    @esumam15 = @institution.school_ages.sum(:total_qty_registered, :conditions => {:grade_id => 15,:sex_id => 2})
+    @esumat15 = @esumah15 + @esumam15
   end
 
 
