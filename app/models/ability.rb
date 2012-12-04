@@ -25,6 +25,8 @@ class Ability
       can :for_programid, Activity
 
       can :autocomplete_person_name, Affiliate
+      can :autocomplete_person_last_name, Affiliate
+      can :autocomplete_person_second_last_name, Affiliate
       can :autocomplete_institution_name, Affiliate
       can :for_program_id, Affiliate
 
@@ -38,6 +40,7 @@ class Ability
       can :autocomplete_second_last_name, Family
 
       can :for_category_id, Benefit
+      can :show_benefit, Benefit
       # Basically if/elsif/else (notice there's nothing
       # after the word "case"):
            

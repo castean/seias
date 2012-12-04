@@ -49,15 +49,16 @@ Seias::Application.routes.draw do
 
   match '/benefits/for_category_id/:benefit_category_id' => 'benefits#for_category_id'
   match '/benefits/new/:id' => 'benefits#new'
+  match '/benefits/show_benefit/:per' => 'benefits#show_benefit'
   resources :benefits
 
   post '/affiliates/new/' => "affiliates#new"
   match '/affiliates/new/:id' => "affiliates#new"
   match '/affiliates/for_program_id/:program_id' => 'affiliates#for_program_id'
   resources :affiliates do
-    get :autocomplete_person_name, :on => :collection
-    get :autocomplete_person_last_name, :on => :collection
-    get :autocomplete_person_second_last_name, :on => :collection
+    get :autocomplete_name, :on => :collection
+    get :autocomplete_last_name, :on => :collection
+    get :autocomplete_second_last_name, :on => :collection
     get :autocomplete_institution_name, :on => :collection
   end
 

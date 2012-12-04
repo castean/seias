@@ -149,12 +149,12 @@
     <%= f.collection_select :number_of_room_id, NumberOfRoom.all.sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona numero de habitaciones --"} %>
   </div>
   <div class="field">
-    <%= f.label :people_by_room_id %><br />
+    <%= f.label :people_by_room_id,"Número de personas por dormitorio" %><br />
     <%= f.collection_select :people_by_room_id, PeopleByRoom.all.sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona numero de personas por habitaciones --"} %>
   </div>
   <h4>Condiciones</h4>
   <div class="field">
-    <%= f.label :condition_id,"Número de personas por dormitorio" %><br />
+    <%= f.label :condition_id %><br />
     <%= f.collection_select :condition_id, Condition.all.sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona en que condiciones se encuentra --"} %>
   </div>
   <h4>Aparatos y bienes de la familia</h4>

@@ -1,0 +1,32 @@
+<p >
+
+<% if params[:type] == "per" %>
+  <b><%= @affiliate.person.fullname %></b>
+<% elsif params[:type] == "ins" %>
+  <b><%= @affiliate.institution.name %></b>
+<% end %>
+</p>
+    <% @benefit_s = Benefit.order(:affiliate_id).find_all_by_affiliate_id(@affiliate.id) %>
+    <table>
+      <tr>
+        <th>Programa</th>
+        <th>Periodo</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+      <% @benefit_s.each do |benefit_s| %>
+          <tr>
+            <td><%= benefit_s.affiliate.activity_type.name %></td>
+            <td><% a = PeriodTimeDeliver.find_by_benefit_id(benefit_s.id) %>
+              <% if a %>
+                  <%= a.period_number %>
+              <% end %>     </td>
+            <td><%= benefit_s.qty %></td>
+            <td><%= benefit_s.unit_price %></td>
+            <td><%= benefit_s.qty * benefit_s.unit_price  %></td>
+            <td><%= link_to 'Destroy', benefit_s, confirm: 'Are you sure?', method: :delete %></td>
+          </tr>
+      <% end %>
+    </table>
