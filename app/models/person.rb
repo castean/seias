@@ -10,7 +10,7 @@ class Person < ActiveRecord::Base
   belongs_to :office
   belongs_to :medical_service
   belongs_to :relationship
-  belongs_to :grade
+  belongs_to :grade, :foreign_key => "schooling"
   belongs_to :school_type
   belongs_to :discapacity_origin
   has_and_belongs_to_many :discapacities
@@ -18,6 +18,8 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :documentations
   has_many :families
   has_many :kins, :through => :families
+  belongs_to :marital_status
+
   has_many :inverse_families, :class_name => "Family", :foreign_key => "kin_id"
   has_many :inverse_kins, :through => :inverse_families, :source => :person
   has_many :affiliates
