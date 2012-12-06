@@ -311,7 +311,7 @@
       </tr>
       <tr>
         <td><%= f.label :relationship_id, "Parentesco con el solicitante" %><br /></td>
-        <td><%= f.collection_select :relationship_id, Relationship.all.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona una relacion --"} %></td>
+        <td><%= f.collection_select :relationship_id, Relationship.all.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona el parentesco --"} %></td>
       </tr>
     </table>
   </div>

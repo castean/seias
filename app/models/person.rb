@@ -19,6 +19,7 @@ class Person < ActiveRecord::Base
   has_many :families
   has_many :kins, :through => :families
   belongs_to :marital_status
+  belongs_to :SocioeconomicStudy
 
   has_many :inverse_families, :class_name => "Family", :foreign_key => "kin_id"
   has_many :inverse_kins, :through => :inverse_families, :source => :person
