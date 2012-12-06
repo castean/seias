@@ -108,78 +108,77 @@
 
    <h4>Egreso Familiar</h4>
   <div class="field">
-    <%= f.label :spending_food, "Alimentación" %><br />
-    <%= f.text_field :spending_food %>
-  </div>
-  <div class="field">
-    <%= f.label :spending_auto, "Automovil" %><br />
-    <%= f.text_field :spending_auto %>
-  </div>
-  <div class="field">
-    <%= f.label :spending_rent, "Renta" %><br />
-    <%= f.text_field :spending_rent %>
-  </div>
-  <div class="field">
-    <%= f.label :spending_monthly_payment,"Mensualidad" %><br />
-    <%= f.text_field :spending_monthly_payment %>
-  </div>
-  <div class="field">
-    <%= f.label :spending_education, "Educación" %><br />
-    <%= f.text_field :spending_education %>
-  </div>
-  <div class="field">
-    <%= f.label :spending_payment, "Abonos" %><br />
-    <%= f.text_field :spending_payment %>
-  </div>
-  <div class="field">
-    <%= f.label :spending_other, "Otros" %><br />
-    <%= f.text_field :spending_other %>
-  </div>
-  <div class="field">
-    <%= f.label :service_water,"Agua potable" %><br />
-    <%= f.text_field :service_water %>
-  </div>
-  <div class="field">
-    <%= f.label :service_electricity, "Electricidad" %><br />
-    <%= f.text_field :service_electricity %>
-  </div>
-  <div class="field">
-    <%= f.label :service_drainage, "Drenaje" %><br />
-    <%= f.text_field :service_drainage %>
-  </div>
-  <div class="field">
-    <%= f.label :service_phone, "Telefono" %><br />
-    <%= f.text_field :service_phone %>
-  </div>
-  <div class="field">
-    <%= f.label :service_paving,"Pavimentación" %><br />
-    <%= f.text_field :service_paving %>
-  </div>
-  <div class="field">
-    <%= f.label :service_transportation, "Transporte" %><br />
-    <%= f.text_field :service_transportation %>
-  </div>
-  <div class="field">
-    <%= f.label :service_gas, "Gas" %><br />
-    <%= f.text_field :service_gas %>
+    <table>
+    <tr>
+      <th>Concepto</th>
+      <th>Monto</th>
+      <th>Concepto</th>
+      <th>Monto</th>
+    </tr>
+    <tr>
+      <td><%= f.label :spending_food, "Alimentación" %></td>
+      <td><%= f.text_field :spending_food %></td>
+      <td><%= f.label :service_electricity, "Electricidad" %></td>
+      <td><%= f.text_field :service_electricity %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :spending_auto, "Automovil" %></td>
+      <td><%= f.text_field :spending_auto %></td>
+      <td><%= f.label :service_drainage, "Drenaje" %></td>
+      <td><%= f.text_field :service_drainage %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :spending_rent, "Renta" %></td>
+      <td><%= f.text_field :spending_rent %></td>
+      <td><%= f.label :service_phone, "Telefono" %></td>
+      <td><%= f.text_field :service_phone %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :spending_monthly_payment,"Mensualidad" %></td>
+      <td><%= f.text_field :spending_monthly_payment %></td>
+      <td><%= f.label :service_paving,"Pavimentación" %></td>
+      <td><%= f.text_field :service_paving %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :spending_education, "Educación" %></td>
+      <td><%= f.text_field :spending_education %></td>
+      <td><%= f.label :service_transportation, "Transporte" %></td>
+      <td><%= f.text_field :service_transportation %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :spending_payment, "Abonos" %></td>
+      <td><%= f.text_field :spending_payment %></td>
+      <td><%= f.label :service_gas, "Gas" %></td>
+      <td><%= f.text_field :service_water %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :spending_other, "Otros" %></td>
+      <td><%= f.text_field :spending_other %></td>
+      <td>Agua potable</td>
+      <td><%= f.text_field :service_gas %></td>
+    </tr>
+  </table>
   </div>
   <h4>Caracteristicas de la vivienda</h4>
   <div class="field">
-
     <%= f.collection_select :housing_feature_id, HousingFeature.all.sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona una caracteristica --"} %>
   </div>
   <h4>Material de construcción</h4>
-  <div class="field">
-    <%= f.label :construction_material_wall, "Muro" %><br />
-    <%= f.text_field :construction_material_wall %>
-  </div>
-  <div class="field">
-    <%= f.label :construction_material_roof,"Techo" %><br />
-    <%= f.text_field :construction_material_roof %>
-  </div>
-  <div class="field">
-    <%= f.label :construction_material_floor,"Piso" %><br />
-    <%= f.text_field :construction_material_floor %>
+    <div class="field">
+    <table>
+      <tr>
+        <td><%= f.label :construction_material_wall, "Muro" %></td>
+        <td><%= f.text_field :construction_material_wall %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :construction_material_roof,"Techo" %></td>
+        <td><%= f.text_field :construction_material_roof %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :construction_material_floor,"Piso" %></td>
+        <td><%= f.text_field :construction_material_floor %></td>
+      </tr>
+    </table>
   </div>
   <div class="field">
     <%= f.label :number_of_room_id,"Número de Cuartos" %><br />
@@ -189,85 +188,71 @@
     <%= f.label :people_by_room_id,"Número de personas por dormitorio" %><br />
     <%= f.collection_select :people_by_room_id, PeopleByRoom.all.sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona numero de personas por habitaciones --"} %>
   </div>
-  <h4>Condiciones</h4>
+
   <div class="field">
-    <%= f.label :condition_id %><br />
+    <%= f.label :condition_id, "Condiciones" %><br />
     <%= f.collection_select :condition_id, Condition.all.sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona en que condiciones se encuentra --"} %>
   </div>
+  </br>
   <h4>Aparatos y bienes de la familia</h4>
-  <div class="field">
-    <%= f.label :stove, "Estufa" %>
-    <%= f.check_box :stove %>
-  </div>
-  <div class="field">
-    <%= f.label :phone, "Telefono/Cel" %>
-    <%= f.check_box :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :dvd, "DVD" %>
-    <%= f.check_box :dvd %>
-  </div>
-  <div class="field">
-    <%= f.label :fridge,"Refrigerador" %>
-    <%= f.check_box :fridge %>
-  </div>
-  <div class="field">
-    <%= f.label :microweave,"Horno de microondas" %>
-    <%= f.check_box :microweave %>
-  </div>
-  <div class="field">
-    <%= f.label :air_conditioning,"Aire acondicionado" %>
-    <%= f.check_box :air_conditioning %>
-  </div>
+  <table>
+    <tr>
+      <td><%= f.label :stove, "Estufa" %></td>
+      <td><%= f.check_box :stove %></td>
+      <td><%= f.label :phone, "Telefono/Cel" %></td>
+      <td><%= f.check_box :phone %></td>
+      <td><%= f.label :dvd, "DVD" %></td>
+      <td><%= f.check_box :dvd %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :fridge,"Refrigerador" %></td>
+      <td><%= f.check_box :fridge %></td>
+      <td><%= f.label :microweave,"Horno de microondas" %></td>
+      <td><%= f.check_box :microweave %></td>
+      <td><%= f.label :air_conditioning,"Aire acondicionado" %></td>
+      <td><%= f.check_box :air_conditioning %></td>
+    </tr>
+  </table>
+  </br>
   <h4>Aspecto de salud</h4>
   <div class="field">
     <table>
       <tr>
-        <th>Servicio medico</th>
-        <th>Discapacidad</th>
-        <th>F. de Nac.</th>
-        <th>Edo. Civil</th>
-        <th>F. de Matrimonio</th>
-        <th>Escolaridad</th>
-        <th>Ocupación</th>
-        <th>Parentesco</th>
-        <th>Ingresos</th>
+        <td>
+          Servicio medico  <%= @person.medical_service.name  %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Discapacidad  <% @person.discapacities do |discapacity| %>
+                          <%= discapacity.name %>
+                        <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Enfermedad <%= f.number_field :health %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Tipo de apoyo solicitado
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Justificación
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Apoyo qu recibe algun miembro de la familia de alguna institucion
+        </td>
       </tr>
 
-      <% @person.each do |family| %>
-          <tr>
-            <td>
-              <%= family.kin.fullname %>
-            </td>
-            <td>
-              <%= family.kin.age %>
-            </td>
-            <td>
-              <%= family.kin.birthday.to_date %>
-            </td>
-            <td>
-              <%= family.kin.marital_status.name %>
-            </td>
-            <td>
-
-            </td>
-            <td>
-              <%= family.kin.grade.name %>
-            </td>
-            <td>
-              <%= family.kin.occupation %>
-            </td>
-            <td>
-              <%= family.relationship.name %>
-            </td>
-            <td>
-            </td>
-          </tr>
-      <% end %>
-    </table>
-    <%= f.label :health %><br />
-    <%= f.number_field :health %>
+     </table>
   </div>
+    </br>
   <% if current_user.department.name == "Procuraduria" %>
   <div class="field">
     <%= f.label :family_dinamyc,"Dinamica familiar" %><br />
@@ -290,19 +275,48 @@
     <%= f.text_area :heritage_assets, :class=>"text_area_height_width" %>
   </div>
   <% end %>
+  </br>
+  <h4>Quien realizo el estudio</h4>
+  <div class="field">
+    <table>
+      <tr>
+        <td>Nombre</td>
+        <td><%= current_user.fullname %></td>
+      </tr>
+      <tr>
+        <td>Puesto</td>
+        <td><%= current_user.department.name %></td>
+      </tr>
+      <tr>
+        <td>Institución</td>
+        <td>Desarrollo Integral de la Familia del Estado de Chihuahua</td>
+      </tr>
+      <tr>
+        <td>Municipio</td>
+        <td>Chihuahua</td>
+      </tr>
+    </table>
+  </div>
+    </br>
   <h4>Persona que contesto el estudio</h4>
   <div class="field">
-    <%= f.label :study_person_name,"Nombre" %><br />
-    <%= f.text_field :study_person_name %>
+    <table>
+      <tr>
+        <td><%= f.label :study_person_name,"Nombre" %></td>
+        <td><%= f.text_field :study_person_name %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :study_place,"Lugar" %><br /></td>
+        <td><%= f.text_field :study_place %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :relationship_id, "Parentesco con el solicitante" %><br /></td>
+        <td><%= f.collection_select :relationship_id, Relationship.all.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona una relacion --"} %></td>
+      </tr>
+    </table>
   </div>
-  <div class="field">
-    <%= f.label :study_place,"Lugar" %><br />
-    <%= f.text_field :study_place %>
-  </div>
-  <div class="field">
-    <%= f.label :relationship_id, "Parentesco con el solicitante" %><br />
-    <%= f.collection_select :relationship_id, Relationship.all.sort_by{ |k| k['name'] }  , :id, :name, options ={:prompt => "-- Selecciona una relacion --"} %>
-  </div>
+  <br />
+
   <div class="field">
     <%= f.label :total_point, "Total General de Puntos" %><br />
     <%= f.number_field :total_point %>
