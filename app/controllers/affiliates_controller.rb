@@ -1,13 +1,15 @@
+#encoding:utf-8
 class AffiliatesController < ApplicationController
   load_and_authorize_resource
-  autocomplete :person, :name, :extra_data => [:last_name, :second_last_name],:display_value => :fullname
 
-  autocomplete :institution, :name, :full => :false
   #autocomplete_last_name
   # GET /affiliates
   # GET /affiliates.json
   def index
-    @affiliates = Affiliate.all
+
+    @affiliates =  Affiliate.order(:id).page(params[:page]).per(25)
+
+    #@affiliates = Affiliate.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @affiliates }
@@ -156,6 +158,40 @@ class AffiliatesController < ApplicationController
       format.html # new.html.erb
       format.json  { render :json => @filter_activity_types}
     end
+  end
+
+  def autocomplete_name
+    term = params[:term]
+    if term && !term.empty?
+      items = Person.select("distinct name").
+          where("LOWER(name) like  '%#{term.downcase}%'").
+          limit(10).order(:name)
+    else
+      items = {}
+    end
+    render :json => json_for_autocomplete(items, :name)
+  end
+  def autocomplete_last_name
+    term = params[:term]
+    if term && !term.empty?
+      items = Person.select("distinct last_name").
+          where("LOWER(last_name) like  '%#{term.downcase}%'").
+          limit(10).order(:last_name)
+    else
+      items = {}
+    end
+    render :json => json_for_autocomplete(items, :last_name)
+  end
+  def autocomplete_second_last_name
+    term = params[:term]
+    if term && !term.empty?
+      items = Person.select("distinct second_last_name").
+          where("LOWER(second_last_name) like '%#{term.downcase}%'").
+          limit(10).order(:second_last_name)
+    else
+      items = {}
+    end
+    render :json => json_for_autocomplete(items, :second_last_name)
   end
 end
 

@@ -27,11 +27,13 @@ gem 'authlogic'
 gem 'easy_roles'
 gem 'cancan'
 gem "scoped_search"
-
+#Data convertions
 require 'csv'
 gem "spreadsheet"
 gem "to_xls"
 gem 'composite_primary_keys'
+
+gem 'prawn'
 #Sass
 gem 'sass-rails', '~> 3.1'
 gem 'bootstrap-sass', '2.0.3' , :path => "vendor/bootstrap-sass-2.0.3"

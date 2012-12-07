@@ -129,4 +129,18 @@ class BenefitsController < ApplicationController
       format.json  { render :json => @benefit_category.to_json}
     end
   end
+  def show_benefit
+    if params[:type] == "per"
+      @affiliate = Affiliate.find_by_person_id(params[:per])
+    elsif params[:type] == "ins"
+      @affiliate = Affiliate.find_by_institution_ben_id(params[:per])
+    end
+
+
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @affiliate }
+    end
+  end
 end
