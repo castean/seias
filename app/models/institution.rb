@@ -16,6 +16,8 @@ class Institution < ActiveRecord::Base
   has_many :guardianships
   has_many :offices
   has_many :affiliates
+  has_many :institution_bens, :through => :affiliates
+
 
   has_and_belongs_to_many :discapacities
 

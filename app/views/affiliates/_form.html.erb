@@ -28,11 +28,11 @@
 
         <div class="field">
           <%= f.label :office_id, "Oficio" %>
-          <%= f.collection_select :office_id, Office.all.sort_by{ |k| k['record_no'] }  , :id, :record_no, options ={:prompt => "-- Selecciona un Oficio --"}, :class=>"ddl_width" %>
+          <%= f.collection_select :office_id, Office.all.sort_by{ |k| k['id'] }  , :id, :id, options ={:prompt => "-- Selecciona un Oficio --"}, :class=>"ddl_width" %>
         </div>
         <div class="field">
           <%= f.label :program_id, "Programa" %>
-          <%= f.collection_select :program_id, Program.find_all_by_department_id( current_user.department_id).sort_by{ |k| k['description'] }  , :id, :description, options ={:prompt => "-- Selecciona un Programa --"}, :class=>"ddl_width" %>
+          <%= fill_programs_select_af(f) %>
         </div>
 
         <div class="field">

@@ -19,11 +19,11 @@ Seias::Application.configure do
   #config.action_mailer.default_options = {from: 'seias@difchihuahua.gob.mx'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :address              => "salida2.uach.mx",
-      :port                 => 25,
-      :domain               => 'uach.mx',
-      :user_name            => 'uniq',
-      :password             => 'cgtisei',
+      :address              => "smtp.difchihuahua.gob.mx",
+      :port                 => 587,
+      :domain               => 'difchihuahua.gob.mx',
+      :user_name            => 'sistema.integral',
+      :password             => 'dif2012',
       :authentication       => 'plain',
       :enable_starttls_auto => false
   }
@@ -56,5 +56,5 @@ Seias::Application.configure do
 
   config.ldap_auth = true
 
-  config.authorization_method = :ldap #One of :password, :ldap, etc
+  config.authorization_method = :password #One of :password, :ldap, etc
 end

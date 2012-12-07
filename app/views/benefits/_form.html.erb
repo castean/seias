@@ -44,7 +44,9 @@
   <% else %>
     <table>
       <tr><th><b>Programa Afiliado:</b></th></tr>
-
+      <% @affiliate.each do |affiliate| %>
+          <tr><td><%= link_to affiliate.activity_type.name, params[:id].to_s + '/?type='+ params[:type] + '&aff=' + affiliate.id.to_s + '&aff_act_id=' + affiliate.activity_type_id.to_s %></td> </tr>
+      <% end %>
     </table>
   <% end %>
 
@@ -54,7 +56,8 @@
       <% if @aff_end.period_time.name == "Mensual" %>
       <%= f.label :period_number, "Periodo: Mes" %><br />
       <% end %>
-      <%= f.collection_select :period_number, PeriodTimeDeliver.find_all_by_affiliate_id(params[:aff], :conditions => {:delivered => false}).sort_by{ |k| k['period_number'] }  , :id, :period_number, options ={:prompt => "-- Selecciona un periodo --"} %>
+      <%= f.collection_select :period_number, PeriodTimeDeliver.find_all_by_affiliate_id(params[:aff], :conditions => {:delivered => false}).sort_by{ |k| k['period_number'] }  , :period_number, :period_number, options ={:prompt => "-- Selecciona un periodo --"} %>
+      <%=  %>
     </div>
     <div class="field">
       <%= f.label :worth_id, "Tipo de vale" %><br />
