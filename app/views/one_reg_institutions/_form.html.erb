@@ -29,18 +29,18 @@
       </thead>
       <tr>
         <td>
-          <%= f.label :min_age, "Edad Mínima" %>
+          <%= f.label :min_age, "Edad Mínima", :class=>"span3" %>
         </td>
         <td>
-          <%= f.label :max_age,"Edad Máxima" %>
+          <%= f.label :max_age,"Edad Máxima", :class=>"span3" %>
         </td>
       </tr>
       <tr>
         <td>
-          <%= f.select :min_age, OneRegInstitution::MIN_AGE, {:include_blank => "-- Selecciona Edad Mínima --"} %>
+          <%= f.select :min_age, OneRegInstitution::MIN_AGE, {:include_blank => "-- Selecciona Edad Mínima --"}, :class=>"span3" %>
         </td>
         <td>
-          <%= f.select :max_age, OneRegInstitution::MAX_AGE, {:include_blank => "-- Selecciona Edad Máxima --"} %>
+          <%= f.select :max_age, OneRegInstitution::MAX_AGE, {:include_blank => "-- Selecciona Edad Máxima --"}, :class=>"span3" %>
         </td>
       </tr>
     </table>
@@ -85,6 +85,13 @@
    </div>
   </br>
 
+  <div class="field">
+    <%= f.fields_for :document_by_institutions do |builder| %>
+          <%= render 'one_reg_institutions/institution_documents_requested_fields', :f => builder %>
+    <% end %>
+    <%#= link_to_add_fields "Agregar Documento", f, :document_by_institutions %>
+  </div>
+
   <div>
       <table border="0">
          <tr>
@@ -111,6 +118,8 @@
         </tr>
       </table>
    </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -7,7 +7,12 @@ class OneRegInstitution < ActiveRecord::Base
   belongs_to :sex, :foreign_key => "people_sex"
   has_and_belongs_to_many :discapacities
   has_and_belongs_to_many :documentations
-  attr_accessible :according_social_purpose, :capacity, :institution_id, :max_age, :min_age, :operation_status, :people_sex, :public_target_id, :selectLeft, :selectRight,:selectRighttwo, :selectLefttwo
+
+  has_many :document_by_institutions, :dependent => :destroy
+  accepts_nested_attributes_for :document_by_institutions
+
+  attr_accessible :according_social_purpose, :capacity, :institution_id, :max_age, :min_age, :operation_status, :people_sex, :public_target_id,
+                  :selectLeft, :selectRight,:selectRighttwo, :selectLefttwo, :document_by_institutions_attributes
 
   attr_accessor :selectRight, :selectLeft,:selectRighttwo, :selectLefttwo
 

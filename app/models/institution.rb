@@ -5,10 +5,6 @@ class Institution < ActiveRecord::Base
   belongs_to :town
   belongs_to :user
   belongs_to :religion
-
-
-  has_many :affiliates
-
   belongs_to :business_line
   belongs_to :type_person, :foreign_key => "type_person_id"
   has_many :one_reg_institutions
@@ -19,6 +15,8 @@ class Institution < ActiveRecord::Base
   has_many :sex
   has_many :guardianships
   has_many :offices
+  has_many :affiliates
+
   has_and_belongs_to_many :discapacities
 
   has_and_belongs_to_many(:institutions,
@@ -29,7 +27,7 @@ class Institution < ActiveRecord::Base
   attr_accessible :address, :business_line_id, :county_id, :date_operation_end, :date_operation_start, :email, :external_address_number,
                   :gmaps, :internal_address_number, :latitude, :legal_last_name, :legal_name, :institutions_type_id,
                   :legal_second_last_name, :link_user_id, :longitude, :name, :phone, :religion_id, :rfc, :second_address, :status_id, :town_id,
-                  :type_person_id, :zip_code,
+                  :type_person_id, :zip_cod,
                   #Para seleccionar multiples Instituciones de apoyo antes de crear una Institución
                   :selectRight, :selectLeft
   attr_accessor :selectRight, :selectLeft, :institutions_type_id

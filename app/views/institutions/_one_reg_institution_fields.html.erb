@@ -1,0 +1,72 @@
+<% @institution.one_reg_institutions.each do |a| %>
+    <table class="table table-striped">
+      <thead>
+      <h4>Información Adicional</h4>
+      </thead>
+      <tr>
+        <th>
+          Objetivo Social Acorde
+        </th>
+        <th>
+          Sexo de Beneficiarios
+        </th>
+        <th>
+          Edad Mínima
+        </th>
+        <th>
+          Edad Máxima
+        </th>
+        <th>
+          Capacidad
+        </th>
+        <th>
+          Población Objetivo
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <% if a.according_social_purpose == TRUE%>
+              Sí
+          <%else%>
+              No
+          <%end%>
+        </td>
+        <td>
+          <%= Sex.find(a.people_sex).name%>
+        </td>
+        <td>
+          <%= a.min_age%>
+        </td>
+        <td>
+          <%= a.max_age%>
+        </td>
+        <td>
+          <%= a.capacity%>
+        </td>
+        <td>
+          <%= PublicTarget.find(a.public_target_id).name%>
+        </td>
+      </tr>
+    </table>
+    <table class="table table-striped">
+      <% a.document_by_institutions.each do |documento| %>
+          <tr>
+            <th>
+              Documento
+            </th>
+            <th>
+              Documento Adjunto
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <%=documento.documentation.name%>
+            </th>
+            <td>
+              <%=link_to documento.attach_file_name, documento.attach.url%>
+            </td>
+          </tr>
+      <%end%>
+    </table>
+<%end%>
+

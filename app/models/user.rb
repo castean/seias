@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  ROLES = %w[admin moderator user planeacion]
+  ROLES = %w[admin moderator user planeacion asocial oficios]
 
   PLANEACION = %w[user planeacion]
 

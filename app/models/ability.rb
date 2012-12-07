@@ -45,6 +45,21 @@ class Ability
       when "admin" then
         #10.times { print "Hello admin" }
         can :manage, :all
+      when "oficios" then
+        can :manage, Office
+        can :manage, OfficeAllocation
+        can :manage, OfficeBenefitRequested
+        can :manage, OfficeRecord
+      when "asocial" then
+        can :manage, Institution
+        can :manage, OneRegInstitution
+        can :manage, SchoolAge
+        can :manage, AgePopulation
+        can :manage, Person
+        can :manage, Family
+        can :manage, Benefit
+        can :manage, Affiliate
+        can :manage, SocioeconomicStudy
       when "planeacion" then
          #10.times { print "Hello planeacion" }
         can :manage, Department

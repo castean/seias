@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  docuementation_id: 1
+  one_reg_institution_id: 1
+  institution_id: 1
+  avatar: 
+
+two:
+  docuementation_id: 1
+  one_reg_institution_id: 1
+  institution_id: 1
+  avatar: 

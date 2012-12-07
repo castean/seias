@@ -139,18 +139,23 @@
   </tr>
 </table>
 </br>
+<%= link_to 'Reg_Inst.1/R01', new_institution_one_reg_institution_path(@institution), :class => "btn" %>
+</br>
+</br>
+<div>
+  <%=  render 'one_reg_institution_fields'%>
+</div>
+</br>
 <table class="table table-striped">
-  <tr>
-    <th>
-      Datos Generales de la Población
-    </th>
-  </tr>
+  <thead>
+      <h4>Datos Generales de la Población</h4>
+  </thead>
 </table>
 
 <table class="table table-striped">
   <%obtenerdatosgenerales%>
   <thead>
-      <h4>Total de Residentes:  <%= @totales%></h4>
+      <h5><i>Total de Residentes:  <%= @totales%></i></h5>
   </thead>
   </br>
   <tr>
@@ -187,48 +192,6 @@
 <%= render 'population_fields' %>
 </br>
 </br>
-    <%= link_to 'Reg_Inst.1/R01', new_institution_one_reg_institution_path(@institution), :class => "btn" %>
-</br>
-</br>
-<% @institution.one_reg_institutions.each do |a| %>
-    <p>
-      <b>Objetivo Social Acorde:</b></br>
-        <% if a.according_social_purpose == TRUE%>
-            Sí
-        <%else%>
-            No
-        <%end%>
-    </p>
-    <p>
-      <b>Sexo de Beneficiarios:</b></br>
-        <%= Sex.find(a.people_sex).name%>
-    </p>
-    <p>
-      <b>Edad Mínima:</b></br>
-        <%= a.min_age%>
-    </p>
-    <p>
-      <b>Edad Máxima:</b></br>
-        <%= a.max_age%>
-    </p>
-    <p>
-      <b>Capacidad:</b></br>
-        <%= a.capacity%>
-    </p>
-    <p>
-      <b>Población Objetivo:</b></br>
-      <%= PublicTarget.find(a.public_target_id).name%>
-    </p>
-    </br>
-    <%#= link_to "Editar Reg-Inst.1/R01", [@institution, a], :method => :edit %>
-    <%#= link_to "Borrar Reg-Inst.1/R01", [@institution, a], :method => :delete, :confirm => "Esta usted seguro?" %>
-<%end%>
-</br>
-</br>
-   <%# link_to 'Reg_Inst.2/R01', new_institution_one_reg_institution_path(@institution), :class => "btn" %>
-<!--</br>
-</br>
-</br> -->
 
 <div class="btn-group">
     <%= gmaps("map_options" =>{:auto_zoom => false, :zoom => 7},"markers" => {"data" => @json}) %>

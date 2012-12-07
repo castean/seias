@@ -11,8 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+ActiveRecord::Schema.define(:version => 20121207180459) do
 
-ActiveRecord::Schema.define(:version => 20121122194758) do
   create_table "activities", :force => true do |t|
     t.string   "value"
     t.text     "description"
@@ -179,7 +179,6 @@ ActiveRecord::Schema.define(:version => 20121122194758) do
   end
 
   create_table "benefits", :force => true do |t|
-    t.string   "period"
     t.integer  "worth_id"
     t.integer  "benefit_type_id"
     t.date     "delivery_date"
@@ -188,6 +187,7 @@ ActiveRecord::Schema.define(:version => 20121122194758) do
     t.integer  "affiliate_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "period_number"
   end
 
   create_table "business_lines", :force => true do |t|
@@ -339,6 +339,22 @@ ActiveRecord::Schema.define(:version => 20121122194758) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "document_by_institutions", :force => true do |t|
+    t.integer  "documentation_id"
+    t.integer  "one_reg_institution_id"
+    t.integer  "institution_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.string   "attach_file_name"
+    t.string   "attach_content_type"
+    t.integer  "attach_file_size"
+    t.datetime "attach_updated_at"
   end
 
   create_table "documentations", :force => true do |t|
@@ -707,15 +723,14 @@ ActiveRecord::Schema.define(:version => 20121122194758) do
     t.datetime "updated_at",  :null => false
   end
 
-
   create_table "period_time_delivers", :force => true do |t|
     t.integer  "period_time_id"
     t.integer  "period_number"
     t.integer  "affiliate_id"
-    t.string   "benefit_id"
     t.boolean  "delivered"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "benefit_id"
   end
 
   create_table "period_times", :force => true do |t|

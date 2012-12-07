@@ -27,7 +27,9 @@ class OneRegInstitutionsController < ApplicationController
   # GET /one_reg_institutions/new
   # GET /one_reg_institutions/new.json
   def new
+    @one_reg_institution.institution_id = @institution
     @one_reg_institution = OneRegInstitution.new
+    1.times {@one_reg_institution.document_by_institutions.build }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,6 +47,7 @@ class OneRegInstitutionsController < ApplicationController
   def create
     @one_reg_institution.institution_id = @institution
     @one_reg_institution = @institution.one_reg_institutions.build(params[:one_reg_institution])
+
 
     respond_to do |format|
       if @one_reg_institution.save
