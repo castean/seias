@@ -32,6 +32,13 @@ class User < ActiveRecord::Base
   before_destroy :check_for_dependencias
 
 
+  before_create :upcase_full_name
+
+  def upcase_full_name
+    self.name.upcase! if self.name
+    self.last_name.upcase! if self.last_name
+    self.second_last_name.upcase! if self.second_last_name
+  end
 
   def check_for_dependencias
     if activity.count > 0 and critical_success_factors.count > 0 and programs.count > 0
