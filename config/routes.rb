@@ -90,6 +90,7 @@ Seias::Application.routes.draw do
   match '/institutions_types/for_institution_type_id/:id' => 'institutions_types#for_institution_type_id'
   resources :institutions_types
 
+
   resources :institutions do
     resources :age_populations
     resources :one_reg_institutions

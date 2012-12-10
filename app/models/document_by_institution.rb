@@ -9,5 +9,4 @@ class DocumentByInstitution < ActiveRecord::Base
   attr_accessible :avatar, :documentation_id, :institution_id, :one_reg_institution_id, :attach
 
 
-
 end

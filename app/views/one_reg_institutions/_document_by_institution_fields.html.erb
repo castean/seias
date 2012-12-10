@@ -1,11 +1,8 @@
 <div class="fields" >
   <table class="table table-striped">
-    <thead>
-        <h4>Documentos Disponibles</h4>
-    </thead>
     <tr>
       <td>
-        <%= link_to_remove_fields "remove", f %>
+        <%= link_to_remove_documents "remove", f %>
       </td>
       <td>
         <%= f.collection_select :documentation_id,  Documentation.order("name").all, :id, :name, options ={:prompt => "-- Selecciona Documento --"}, :class => "span3"%>

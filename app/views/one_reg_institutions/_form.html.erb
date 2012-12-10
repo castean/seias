@@ -1,7 +1,7 @@
 <%= form_for(@one_reg_institution, :url => url, :method => method) do |f| %>
     <% if @one_reg_institution.errors.any? %>
         <div id="error_explanation">
-          <h2>Imposible registrar informacion</h2>
+          <h2>Imposible registrar información</h2>
 
           <ul>
             <% @one_reg_institution.errors.full_messages.each do |msg| %>
@@ -84,41 +84,15 @@
     </div>
    </div>
   </br>
-
-  <div class="field">
-    <%= f.fields_for :document_by_institutions do |builder| %>
-          <%= render 'one_reg_institutions/institution_documents_requested_fields', :f => builder %>
-    <% end %>
-    <%#= link_to_add_fields "Agregar Documento", f, :document_by_institutions %>
-  </div>
-
+  <h4>Documentos Disponibles</h4>
+  </br>
   <div>
-      <table border="0">
-         <tr>
-         <td><h4>Documentacion Disponible</h4></td>
-         </tr>
-         <tr>
-         <td align="left">
-        <%= filldocrightleftselectiononereginst(f)%>
-      </td>
-      </tr>
-        <tr>
-          <td>
-            <input name="btnRightdo" type="button" id="btnRightdo" value="v" onClick="javascript:moveToRightOrLefttwo(1);">
-
-            <input name="btnLeftdo" type="button" id="btnLeftdo" value="^" onClick="javascript:moveToRightOrLefttwo(2);">
-          </td>
-        </tr>
-         <tr>
-         <td><h4>Documentacion Presentada</h4></td>
-         </tr>
-        <td align="left">
-          <%= f.select("selectRighttwo",options_for_select(@one_reg_institution.documentations.order("name").all.collect { |cat| [cat.name, cat.id] }, @one_reg_institution.id { |cat| cat.id}),{}, {:size => 6,:multiple=>true, :id=>'selectRighttwo', :class=>"span7"}) %>
-        </td>
-        </tr>
-      </table>
-   </div>
-
+    <%= f.fields_for :document_by_institutions do |builder| %>
+          <%= render 'document_by_institution_fields', :f => builder %>
+    <% end %>
+    <%= link_to_add_documents "Agregar Documento", f, :document_by_institutions %>
+  </div>
+  </br>
 
   <div class="actions">
     <%= f.submit %>
